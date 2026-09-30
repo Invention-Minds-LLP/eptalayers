@@ -1,0 +1,180 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-30T00:00:00Z",
+  "title": "Design System: Epta Layers",
+  "extensions": {
+    "colorMeta": {
+      "graphite-950": { "role": "neutral", "displayName": "Graphite 950", "canonical": "#101316", "tonalRamp": ["#090b0e", "#101316", "#212428", "#3d4044", "#5a5e62", "#7a7e82", "#c0c5c9", "#edeef0"] },
+      "graphite-900": { "role": "neutral", "displayName": "Graphite 900", "canonical": "oklch(21.2% 0.008 248)", "tonalRamp": ["#090b0e", "#212428", "#3d4044", "#5a5e62", "#7a7e82", "#9b9fa3", "#c0c5c9", "#edeef0"] },
+      "graphite-800": { "role": "neutral", "displayName": "Graphite 800", "canonical": "#1b1f23", "tonalRamp": ["#101316", "#16191c", "#1b1f23", "#252a30", "#343b43", "#3d454e", "#a9b3b0", "#eef1f0"] },
+      "graphite-700": { "role": "neutral", "displayName": "Graphite 700", "canonical": "#252a30" },
+      "graphite-600": { "role": "neutral", "displayName": "Graphite 600", "canonical": "#343b43" },
+      "graphite-line": { "role": "neutral", "displayName": "Graphite Line", "canonical": "#3d454e" },
+      "on-graphite": { "role": "neutral", "displayName": "On-Graphite", "canonical": "#eef1f0" },
+      "on-graphite-2": { "role": "neutral", "displayName": "On-Graphite 2", "canonical": "#a9b3b0" },
+      "ground": { "role": "neutral", "displayName": "Desk Ground", "canonical": "#e1e6e4" },
+      "sheet": { "role": "neutral", "displayName": "Report White", "canonical": "oklch(95.6% 0.003 174)", "tonalRamp": ["#0a0c0b", "#222524", "#3e403f", "#5c5e5d", "#7b7e7d", "#9c9f9e", "#c2c5c4", "#eeefee"] },
+      "sheet-under": { "role": "neutral", "displayName": "Sheet Under", "canonical": "#e6eae8" },
+      "sheet-deep": { "role": "neutral", "displayName": "Sheet Deep", "canonical": "#cfd7d4" },
+      "rule": { "role": "neutral", "displayName": "Rule", "canonical": "oklch(83.7% 0.011 174)", "tonalRamp": ["#070d0b", "#1f2624", "#3a423f", "#58605d", "#777f7d", "#98a19e", "#bdc6c3", "#ecefee"] },
+      "rule-strong": { "role": "neutral", "displayName": "Rule Strong", "canonical": "#9aa5a2" },
+      "ink": { "role": "neutral", "displayName": "Ink", "canonical": "#16191c" },
+      "ink-2": { "role": "neutral", "displayName": "Ink 2", "canonical": "oklch(42.3% 0.021 248)", "tonalRamp": ["#050c14", "#1c252e", "#37414b", "#555f69", "#747f8a", "#95a0ab", "#bac6d1", "#ebeff3"] },
+      "ink-3": { "role": "neutral", "displayName": "Ink 3", "canonical": "#505a64" },
+      "pass": { "role": "secondary", "displayName": "Pass Green", "canonical": "oklch(62.2% 0.133 162)", "tonalRamp": ["#001700", "#00350d", "#005329", "#007346", "#009565", "#3ab885", "#67dfaa", "#d8f7e6"] },
+      "pass-ink": { "role": "secondary", "displayName": "Pass Ink", "canonical": "#0a7552" },
+      "pass-lit": { "role": "secondary", "displayName": "Pass Lit", "canonical": "#2fd39a" },
+      "limit": { "role": "tertiary", "displayName": "Limit Red", "canonical": "oklch(57.1% 0.209 21)", "tonalRamp": ["#410000", "#680000", "#8f0000", "#b60022", "#de2f43", "#ff5963", "#ff8287", "#ffdfdc"] },
+      "limit-ink": { "role": "tertiary", "displayName": "Limit Ink", "canonical": "#b01d31" },
+      "cable": { "role": "primary", "displayName": "Cat6 Cable Blue", "canonical": "oklch(47.3% 0.139 256)", "tonalRamp": ["#000044", "#001b65", "#003c87", "#205caa", "#427dce", "#63a0f4", "#88c6ff", "#ddf0ff"] },
+      "cable-deep": { "role": "primary", "displayName": "Cable Deep", "canonical": "#174a8b" },
+      "cable-lit": { "role": "primary", "displayName": "Cable Lit", "canonical": "#7fb0ee" },
+      "on-cable": { "role": "primary", "displayName": "On Cable", "canonical": "#ffffff" }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "The page H1 in the graphite report header. Width 108%. 2.25rem at 640px and below." },
+      "headline": { "displayName": "Headline", "purpose": "Section H2s, wide (110%) and heavy. Closing continuity statement may run to 4.5rem at 112%." },
+      "title": { "displayName": "Title", "purpose": "Sheet titles, strength heads, form sheet heads." },
+      "row-title": { "displayName": "Row Title", "purpose": "The name in a report log row." },
+      "lede": { "displayName": "Lede", "purpose": "One paragraph under a Display or closing Headline, max 40-52ch." },
+      "body": { "displayName": "Body", "purpose": "Running text, 44-58ch measure." },
+      "body-sm": { "displayName": "Body Small", "purpose": "Table cells, verifications, addresses, captions." },
+      "label": { "displayName": "Label", "purpose": "Condensed (75%) uppercase column heads, field labels, strip keys, folio names, axis names. Rendered uppercase." },
+      "data": { "displayName": "Data", "purpose": "Martian Mono for measured values, IDs, codes, timestamps, phone numbers, verdict text and readouts only." }
+    },
+    "shadows": [
+      { "name": "probe-foot", "value": "inset 0 -2px 0 var(--cable)", "purpose": "Not light: a hard 2px rule along the foot of the row under test, paired with a rgb(30 90 168 / 0.09) band. The system has no drop shadows." }
+    ],
+    "motion": [
+      { "name": "ease-out", "value": "cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "The only easing. Values settle exponentially." },
+      { "name": "state", "value": "0.2s-0.25s", "purpose": "Color, fill and border changes on hover." },
+      { "name": "nudge", "value": "0.35s", "purpose": "Arrow nudges and the nav underline draw." },
+      { "name": "settle", "value": "0.5s", "purpose": "Verdict chip settling in (scale 0.8 + blur 3px to none) and case-file sheet sliding up 10px." },
+      { "name": "sheet-stagger", "value": "0.8s + 60ms per sheet", "purpose": "Stacked sheets sliding into their offsets on entering view." },
+      { "name": "wire-draw", "value": "0.9s + 70ms per wire", "purpose": "Wiremap wires extending from pin to pin." },
+      { "name": "line-draw", "value": "1.8s-2.4s", "purpose": "Traces and service lines draw once via clip-path when in view." }
+    ],
+    "breakpoints": [
+      { "name": "sheet-columns", "value": "1180px" },
+      { "name": "stack-hero", "value": "1080px" },
+      { "name": "footer-2col", "value": "960px" },
+      { "name": "stack-grids", "value": "860px" },
+      { "name": "reflow-tables", "value": "640px" },
+      { "name": "narrow", "value": "560px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Cable-blue action key with a trailing arrow; the one call to act.",
+      "html": "<a class=\"ds-btn\" href=\"#\">Talk to an engineer <svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"square\"><path d=\"M4 12h15M13 6l6 6-6 6\"/></svg></a>",
+      "css": ".ds-btn { display: inline-flex; align-items: center; gap: 0.6em; min-height: 48px; padding: 0 1.25rem; border: 1px solid var(--cable, #1e5aa8); border-radius: 3px; background: var(--cable, #1e5aa8); color: #fff; font-family: 'Archivo Variable', 'Archivo', system-ui, sans-serif; font-weight: 650; font-stretch: 90%; font-size: 1rem; text-decoration: none; cursor: pointer; transition: background-color 0.25s cubic-bezier(0.16,1,0.3,1), border-color 0.25s cubic-bezier(0.16,1,0.3,1); } .ds-btn svg { width: 18px; height: 18px; transition: transform 0.35s cubic-bezier(0.16,1,0.3,1); } .ds-btn:hover { background: var(--cable-deep, #174a8b); border-color: var(--cable-deep, #174a8b); } .ds-btn:hover svg { transform: translateX(3px); } .ds-btn:focus-visible { outline: 2px solid var(--cable, #1e5aa8); outline-offset: 3px; }"
+    },
+    {
+      "name": "Ghost Button",
+      "kind": "button",
+      "refersTo": "button-ghost",
+      "description": "Secondary action on paper.",
+      "html": "<a class=\"ds-btn-ghost\" href=\"#\">Read the full report</a>",
+      "css": ".ds-btn-ghost { display: inline-flex; align-items: center; min-height: 48px; padding: 0 1.25rem; border: 1px solid var(--rule-strong, #9aa5a2); border-radius: 3px; background: transparent; color: var(--ink, #16191c); font-family: 'Archivo Variable', 'Archivo', system-ui, sans-serif; font-weight: 650; font-stretch: 90%; font-size: 1rem; text-decoration: none; transition: background-color 0.25s cubic-bezier(0.16,1,0.3,1), border-color 0.25s cubic-bezier(0.16,1,0.3,1); } .ds-btn-ghost:hover { background: var(--sheet-under, #e6eae8); border-color: var(--ink, #16191c); } .ds-btn-ghost:focus-visible { outline: 2px solid var(--cable, #1e5aa8); outline-offset: 3px; }"
+    },
+    {
+      "name": "Ghost Button (graphite)",
+      "kind": "button",
+      "refersTo": "button-ghost-dark",
+      "description": "Secondary action on a graphite panel.",
+      "html": "<div class=\"ds-panel\"><a class=\"ds-btn-ghost-dark\" href=\"#\">See the seven solutions</a></div>",
+      "css": ".ds-panel { background: var(--graphite-900, #16191c); padding: 24px; } .ds-btn-ghost-dark { display: inline-flex; align-items: center; min-height: 48px; padding: 0 1.25rem; border: 1px solid var(--graphite-line, #3d454e); border-radius: 3px; background: transparent; color: var(--on-graphite, #eef1f0); font-family: 'Archivo Variable', 'Archivo', system-ui, sans-serif; font-weight: 650; font-stretch: 90%; font-size: 1rem; text-decoration: none; transition: background-color 0.25s cubic-bezier(0.16,1,0.3,1), border-color 0.25s cubic-bezier(0.16,1,0.3,1); } .ds-btn-ghost-dark:hover { background: var(--graphite-700, #252a30); border-color: var(--on-graphite-2, #a9b3b0); } .ds-btn-ghost-dark:focus-visible { outline: 2px solid var(--cable-lit, #7fb0ee); outline-offset: 3px; }"
+    },
+    {
+      "name": "Verdict Chip",
+      "kind": "chip",
+      "refersTo": "verdict-chip",
+      "description": "The only badge: a recorded result (PASS, SIGNED OFF, READY TO SEND).",
+      "html": "<span class=\"ds-verdict\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.4\" stroke-linecap=\"square\"><path d=\"M4.5 12.5l4.5 4.5L19.5 6.5\"/></svg>PASS</span>",
+      "css": ".ds-verdict { display: inline-flex; align-items: center; gap: 0.4em; padding: 0.2em 0.55em 0.2em 0.45em; border-radius: 2px; background: var(--pass, #0e9f6e); color: var(--graphite-950, #101316); font-family: 'Martian Mono Variable', 'Martian Mono', ui-monospace, monospace; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.04em; } .ds-verdict svg { width: 13px; height: 13px; }"
+    },
+    {
+      "name": "Field",
+      "kind": "input",
+      "refersTo": "field-input",
+      "description": "An underline on the sheet with a condensed label above.",
+      "html": "<label class=\"ds-field\"><span class=\"ds-field-label\">Work email</span><input type=\"email\" placeholder=\"name@company.com\" /></label>",
+      "css": ".ds-field { display: flex; flex-direction: column; gap: 6px; font-family: 'Archivo Variable', 'Archivo', system-ui, sans-serif; } .ds-field-label { color: var(--ink-3, #505a64); font-size: 0.6875rem; font-weight: 600; font-stretch: 75%; letter-spacing: 0.06em; text-transform: uppercase; } .ds-field input { min-height: 48px; padding: 10px 0; border: 0; border-bottom: 1px solid var(--rule-strong, #9aa5a2); border-radius: 0; background: transparent; color: var(--ink, #16191c); font: inherit; font-size: 1.0625rem; transition: border-color 0.2s cubic-bezier(0.16,1,0.3,1); } .ds-field input::placeholder { color: var(--ink-3, #505a64); } .ds-field input:hover { border-bottom-color: var(--ink, #16191c); } .ds-field input:focus-visible { outline: none; border-bottom: 2px solid var(--cable, #1e5aa8); } .ds-field input[aria-invalid='true'] { border-bottom: 2px solid var(--limit, #d7263d); }"
+    },
+    {
+      "name": "Header Navigation",
+      "kind": "nav",
+      "refersTo": "nav-link",
+      "description": "Graphite bar; links draw a pass-lit underline on hover and when active.",
+      "html": "<nav class=\"ds-nav\"><a href=\"#\" class=\"is-active\">Solutions</a><a href=\"#\">Case studies</a><a href=\"#\">Epta story</a><a href=\"#\">Careers</a></nav>",
+      "css": ".ds-nav { display: flex; gap: 4px; padding: 12px 16px; background: var(--graphite-900, #16191c); border-bottom: 1px solid var(--graphite-line, #3d454e); } .ds-nav a { position: relative; padding: 8px 12px; color: var(--on-graphite-2, #a9b3b0); text-decoration: none; font-family: 'Archivo Variable', 'Archivo', system-ui, sans-serif; font-size: 0.95rem; font-weight: 500; font-stretch: 92%; transition: color 0.2s cubic-bezier(0.16,1,0.3,1); } .ds-nav a::after { content: ''; position: absolute; left: 12px; right: 12px; bottom: 2px; height: 2px; background: var(--pass-lit, #2fd39a); transform: scaleX(0); transform-origin: left; transition: transform 0.35s cubic-bezier(0.16,1,0.3,1); } .ds-nav a:hover, .ds-nav a.is-active { color: var(--on-graphite, #eef1f0); } .ds-nav a:hover::after, .ds-nav a.is-active::after { transform: scaleX(1); } .ds-nav a:focus-visible { outline: 2px solid var(--cable-lit, #7fb0ee); outline-offset: 3px; }"
+    },
+    {
+      "name": "Report Sheet",
+      "kind": "card",
+      "refersTo": "report-sheet",
+      "description": "Title block over a 2px ink rule, hairline-ruled rows, 2px ink sign-off foot.",
+      "html": "<article class=\"ds-sheet\"><header class=\"ds-sheet-head\"><div><h3>Coverage check</h3><p>Tested against the OSI reference model, layers 1-7</p></div><dl><dt>Report</dt><dd class=\"ds-data\">EL-OSI-07</dd></dl></header><div class=\"ds-sheet-row\"><span class=\"ds-data\">L1</span><strong>Physical</strong><span class=\"ds-verdict-mini\">PASS</span></div><div class=\"ds-sheet-row\"><span class=\"ds-data\">L2</span><strong>Data Link</strong><span class=\"ds-verdict-mini\">PASS</span></div><footer class=\"ds-sheet-foot\"><strong class=\"ds-data\">7/7</strong> layers in scope &middot; one accountable partner</footer></article>",
+      "css": ".ds-sheet { background: var(--sheet, #eef1f0); color: var(--ink, #16191c); border-radius: 2px; padding: 24px 28px 20px; font-family: 'Archivo Variable', 'Archivo', system-ui, sans-serif; } .ds-sheet-head { display: flex; justify-content: space-between; gap: 24px; padding-bottom: 18px; border-bottom: 2px solid var(--ink, #16191c); } .ds-sheet-head h3 { margin: 0; font-size: 1.5rem; font-weight: 800; font-stretch: 112%; letter-spacing: -0.02em; } .ds-sheet-head p { margin: 4px 0 0; color: var(--ink-2, #454f59); font-size: 0.875rem; } .ds-sheet-head dl { margin: 0; text-align: right; } .ds-sheet-head dt { color: var(--ink-3, #505a64); font-size: 0.6875rem; font-weight: 600; font-stretch: 75%; letter-spacing: 0.06em; text-transform: uppercase; } .ds-sheet-head dd { margin: 2px 0 0; } .ds-data { font-family: 'Martian Mono Variable', 'Martian Mono', ui-monospace, monospace; font-variant-numeric: tabular-nums slashed-zero; font-stretch: 87.5%; font-size: 0.75rem; } .ds-sheet-row { display: grid; grid-template-columns: 2.4em 1fr auto; align-items: baseline; gap: 8px; padding: 10px 0; border-bottom: 1px solid var(--rule, #c3ccc9); transition: background-color 0.25s cubic-bezier(0.16,1,0.3,1); } .ds-sheet-row:hover { background: var(--sheet-under, #e6eae8); } .ds-sheet-row .ds-data { color: var(--pass-ink, #0a7552); font-weight: 700; } .ds-verdict-mini { padding: 0.2em 0.5em; border-radius: 2px; background: var(--pass, #0e9f6e); color: var(--graphite-950, #101316); font-family: 'Martian Mono Variable', 'Martian Mono', ui-monospace, monospace; font-size: 0.75rem; font-weight: 700; } .ds-sheet-foot { margin-top: 4px; padding-top: 14px; border-top: 2px solid var(--ink, #16191c); font-size: 0.875rem; color: var(--ink-2, #454f59); } .ds-sheet-foot strong { font-size: 1.125rem; color: var(--pass-ink, #0a7552); }"
+    },
+    {
+      "name": "File Tabs",
+      "kind": "custom",
+      "refersTo": "file-tab",
+      "description": "Folder tabs behind a case-file sheet; the selected tab joins its sheet.",
+      "html": "<div class=\"ds-tabs\" role=\"tablist\"><button role=\"tab\" aria-selected=\"true\"><span class=\"ds-tab-id\">CS-01</span><span>IT/ITeS</span></button><button role=\"tab\" aria-selected=\"false\"><span class=\"ds-tab-id\">CS-02</span><span>Engineering</span></button></div><div class=\"ds-file\">Case file</div>",
+      "css": ".ds-tabs { display: flex; gap: 4px; padding-left: 20px; } .ds-tabs [role='tab'] { display: flex; flex-direction: column; align-items: flex-start; gap: 2px; min-width: 150px; padding: 10px 16px 12px; border: 0; border-radius: 3px 3px 0 0; background: var(--sheet-deep, #cfd7d4); color: var(--ink-2, #454f59); font-family: 'Archivo Variable', 'Archivo', system-ui, sans-serif; font-weight: 700; font-stretch: 92%; text-align: left; cursor: pointer; transition: background-color 0.25s cubic-bezier(0.16,1,0.3,1); } .ds-tabs [role='tab']:hover { background: var(--sheet-under, #e6eae8); color: var(--ink, #16191c); } .ds-tabs [role='tab'][aria-selected='true'] { background: var(--sheet, #eef1f0); color: var(--ink, #16191c); } .ds-tabs [role='tab']:focus-visible { outline: 2px solid var(--cable, #1e5aa8); outline-offset: 3px; } .ds-tab-id { font-family: 'Martian Mono Variable', 'Martian Mono', ui-monospace, monospace; font-size: 0.625rem; font-weight: 400; } .ds-file { background: var(--sheet, #eef1f0); border: 1px solid var(--rule, #c3ccc9); border-radius: 0 2px 2px 2px; padding: 36px 40px 28px; }"
+    },
+    {
+      "name": "Folio",
+      "kind": "custom",
+      "refersTo": "folio",
+      "description": "The running foot that closes every section: report ID, hairline, section name, sheet n / total.",
+      "html": "<div class=\"ds-folio\"><span class=\"ds-folio-data\">EL-OSI-07</span><span class=\"ds-folio-rule\"></span><span class=\"ds-folio-name\">Solutions log</span><span class=\"ds-folio-data\">03 / 08</span></div>",
+      "css": ".ds-folio { display: flex; align-items: center; gap: 14px; font-family: 'Archivo Variable', 'Archivo', system-ui, sans-serif; font-size: 0.6875rem; color: var(--ink-3, #505a64); } .ds-folio-data { font-family: 'Martian Mono Variable', 'Martian Mono', ui-monospace, monospace; font-size: 0.625rem; } .ds-folio-rule { flex: 1; height: 1px; background: currentColor; opacity: 0.35; } .ds-folio-name { font-stretch: 80%; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Signed Test Report",
+    "overview": "Every surface is a page from one continuous field certification report: a cool report-white sheet laid on a desk ground, or a graphite instrument panel that frames the report and closes it. Content is not \"presented\", it is measured, ruled and signed. Headings behave like report titles, supporting facts sit in hairline-ruled rows, measured values and IDs are set in a monospace, and every readout carries a short plain-language summary beside it. A verdict chip (PASS, SIGNED OFF) is the only badge the world knows.\n\nThe system is flat. Depth comes only from sheets overlapping sheets and from the contrast between the graphite panel and the paper. There are no soft shadows, no gradient washes and no photography; diagrams native to cable certification (wiremaps, limit-line plots, scope traces, layer bars, leader lines to limits) do the illustrative work. Density is report-like: tight ruled rows inside generous section air.\n\nThe world extends beyond the homepage. Each of the other site pages (solutions, case studies, story, careers, contact, blog, legal) is another report in the same binder, with its own subject-specific scenario (a solution's test log, a case file's recorded results, a careers requisition sheet) drawn from the same materials: sheet, rule, label, data value, verdict, folio. The report ID and folio sequence are per-page; the materials are fixed.",
+    "keyCharacteristics": [
+      "Graphite instrument panel (header, hero, NOC, continuity, footer) framing cool report-white sheets on a desk ground.",
+      "Archivo across its width axis: wide heavy heads, condensed uppercase labels. Martian Mono only for measured values, IDs and codes.",
+      "Hairline-ruled tables with heavy 2px ink rules at a sheet's head and sign-off foot.",
+      "Three semantic colors (pass green, limit red, Cat6 cable blue) and no decorative color.",
+      "Flat depth: sheets overlap, never float.",
+      "Every section ends in a folio: report ID, a hairline, section name, sheet n / total."
+    ],
+    "rules": [
+      { "name": "The Meaning-Only Color Rule", "body": "Saturated color states a result or an action: green passed, red is the limit, blue is what you can act on. If a color cannot be read as one of those three, it does not belong on the page.", "section": "colors" },
+      { "name": "The Wire-Colors-Are-Data Rule", "body": "The wiremap's pair colors (orange, green, blue, brown, solid and white-striped) are the physical T568 cable code, scoped to cable diagrams. They are data, not palette, and never appear on buttons, text or section surfaces.", "section": "colors" },
+      { "name": "The Darkest-At-The-Close Rule", "body": "Graphite 950 is reserved for where the report ends: the continuity band and the footer. Opening panels use 900; mid-page instrument panels use 800.", "section": "colors" },
+      { "name": "The Measured-Only Mono Rule", "body": "Martian Mono is for things a meter could print: IDs, codes, counts, timestamps, phone numbers, readouts. Sentences, headings and labels stay in Archivo.", "section": "typography" },
+      { "name": "The Width-Axis Rule", "body": "Hierarchy is carried by width as much as size: heads at 105–112% width, body at 100%, labels at 75%. Don't reach for a second family.", "section": "typography" },
+      { "name": "The Folio Rule", "body": "Every section of a report page ends with the folio: report ID, a 35%-opacity hairline, the section name in label type, and \"nn / nn\" sheet numbering. It is the running foot of the document and the page's only section marker; there are no numbered eyebrows above headings.", "section": "layout" },
+      { "name": "The No-Soft-Light Rule", "body": "No drop shadows, no blurred shadows, no gradient washes or glows. Hard-edged devices that belong to the instrument world are allowed because they are rules, not light: an inset 2px rule at a probe's foot, a 1px scope graticule, white-striped wire pairs.", "section": "elevation" },
+      { "name": "The Overlap Rule", "body": "When something must sit \"above\" something else, offset it as another sheet: shift it, change its tone one step (sheet, sheet-under, sheet-deep), give it a hairline. Never lift it.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do build every new page as another report in the binder: its own subject-specific scenario (test log, case file, requisition, sign-off) built from sheet, rule, label, data value, verdict and folio.",
+      "Do set every measured value, ID, code, timestamp and phone number in Martian Mono with tabular, slashed-zero numerals.",
+      "Do put a two-second plain-language summary beside every readout, gauge or diagram.",
+      "Do use hairline rules (1px rule) between rows and 2px ink rules to open and sign off a sheet.",
+      "Do close every section with the folio.",
+      "Do keep form fields as underlines on the sheet, 48px tall, with a 2px cable underline on focus.",
+      "Do mark empty content slots (OEM logos, testimonials) with dashed rule-strong placeholders that say what is awaited, rather than filling them."
+    ],
+    "donts": [
+      "Don't use drop shadows, blurred shadows, glows or gradient washes; depth is sheets overlapping.",
+      "Don't introduce a second accent. Cable blue is the only interface accent; green and red mean pass and limit.",
+      "Don't use wire pair colors outside cable diagrams.",
+      "Don't use a navy gradient hero, data-center photography, or a grid of icon service cards.",
+      "Don't put numbered or uppercase eyebrow kickers above headings; section position lives in the folio.",
+      "Don't set sentences or headings in the monospace.",
+      "Don't round corners beyond 3px or box form fields."
+    ]
+  }
+}

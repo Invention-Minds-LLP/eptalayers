@@ -1,0 +1,252 @@
+<!-- Hero: the report header and the coverage check -->
+<section class="hero on-dark" aria-labelledby="hero-title">
+  <div class="wrap strip">
+    <span><span class="k">Report</span> <span class="data">EL-OSI-07</span></span>
+    <span><span class="k">Subject</span> Your enterprise network, layers 1–7</span>
+    <span class="strip-far"><span class="k">Engineer</span> Epta Layers, Bangalore</span>
+  </div>
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <h1 id="hero-title">A single-point enterprise solutions provider.</h1>
+      <p class="lede">
+        We work with IT world leaders to deliver tailor-made solutions, from the cabling in your walls to the
+        applications your business runs on.
+      </p>
+      <div class="ctas">
+        <a class="btn" routerLink="/contact">Talk to an engineer <app-icon name="arrow" /></a>
+        <a class="btn btn--ghost-dark" href="#solutions">See the seven solutions</a>
+      </div>
+    </div>
+    <app-layer-test class="hero-sheet" />
+    <dl class="findings">
+      @for (f of findings; track f.id) {
+        <div>
+          <dt class="data">{{ f.id }}</dt>
+          <dd>{{ f.text }}</dd>
+          <dd class="ok"><app-icon name="check" /><span class="sr-only">Confirmed</span></dd>
+        </div>
+      }
+    </dl>
+  </div>
+  <div class="wrap"><app-folio [sheet]="1" name="Coverage check" /></div>
+</section>
+
+<!-- The name: seven sheets, one per layer -->
+<section class="name" aria-labelledby="name-title">
+  <div class="wrap">
+    <div class="name-grid">
+      <div class="name-copy">
+        <p class="greek" lang="el" aria-hidden="true">επτά</p>
+        <h2 id="name-title">Epta is Greek for seven.</h2>
+        <p>
+          It names our vision: to focus on the seven layers of networking in the OSI model. Our service framework
+          lets us understand your needs based on your line of business before we design a customised networking
+          solution, focusing on the problem areas without losing sight of your business KPIs.
+        </p>
+        <p class="aside">
+          Epta assists in visualising and communicating how IT networks operate, with a keen focus on network
+          architecture.
+        </p>
+      </div>
+      <ol class="sheets" appInView aria-label="The seven OSI layers">
+        @for (l of stack; track l.n; let i = $index) {
+          <li [style.--i]="i" [style.--dot]="'var(--brand-' + (i + 1) + ')'">
+            <span class="data">{{ l.n }}</span>
+            <strong>{{ l.name }}</strong>
+          </li>
+        }
+      </ol>
+    </div>
+    <app-folio [sheet]="2" name="The name" />
+  </div>
+</section>
+
+<!-- Solutions as a test log -->
+<section id="solutions" class="log" aria-labelledby="log-title">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 id="log-title">Tailored IT infrastructure, mapped to the layers it touches.</h2>
+      <p>
+        Seven solution areas, one accountable partner. Each row shows where in the stack the work happens.
+      </p>
+    </div>
+
+    <div class="log-table" role="table" aria-label="Epta solutions and the OSI layers they cover">
+      <div class="log-row log-headrow" role="row">
+        <span class="label" role="columnheader">Solution</span>
+        <span class="label col-offer" role="columnheader">Core offerings</span>
+        <span class="layer-scale" role="columnheader">
+          <span class="sr-only">OSI layers covered</span>
+          @for (c of layerCols; track c) {
+            <span class="data" aria-hidden="true">L{{ c }}</span>
+          }
+        </span>
+        <span aria-hidden="true"></span>
+      </div>
+      @for (s of solutions; track s.slug) {
+        <div class="log-row" role="row">
+          <span class="sol" role="cell">
+            <span class="code data">{{ s.code }}</span>
+            <span>
+              <a class="sol-name" [routerLink]="['/solutions', s.slug]">{{ s.name }}</a>
+              <span class="sol-line">{{ s.line }}</span>
+            </span>
+          </span>
+          <span class="col-offer" role="cell">{{ s.offerings.join(' · ') }}</span>
+          <span class="bar" role="cell">
+            <span class="sr-only">Layers {{ s.layers.join(', ') }}</span>
+            @for (c of layerCols; track c) {
+              <i [class.on]="s.layers.includes($any(c))" aria-hidden="true"></i>
+            }
+          </span>
+          <span class="go" aria-hidden="true"><app-icon name="arrow" /></span>
+        </div>
+      }
+    </div>
+    <app-folio [sheet]="3" name="Solutions log" />
+  </div>
+</section>
+
+<!-- Strengths: OEM wiremap + LAER plot -->
+<section class="strengths" aria-labelledby="strengths-title">
+  <div class="wrap">
+    <div class="strengths-grid">
+      <h2 id="strengths-title" class="strengths-title">OEM depth on the way in. Your KPIs on the way out.</h2>
+      <div class="strength">
+        <h3>Extended arm of OEMs</h3>
+        <p>
+          Epta works with world-leading OEMs. We specialise in implementing their unique solutions and offering
+          long-term support, so nothing is lost between the technology and your enterprise.
+        </p>
+        <app-wiremap />
+        <div class="roster" aria-label="OEM partners">
+          <span class="label">OEM partners</span>
+          <ul>
+            @for (slot of oemSlots; track slot) {
+              <li>Logo to be supplied</li>
+            }
+          </ul>
+        </div>
+      </div>
+      <div class="strength">
+        <h3>The LAER delivery model</h3>
+        <p>
+          Land, Adopt, Expand, Renew: our framework for customer success. It lets us track KPIs for implementing,
+          training and maximising the value of your investments.
+        </p>
+        <app-laer-plot />
+      </div>
+    </div>
+    <app-folio [sheet]="4" name="Strengths" />
+  </div>
+</section>
+
+<!-- NOC -->
+<section class="noc on-dark" aria-labelledby="noc-title">
+  <div class="wrap">
+    <div class="noc-grid">
+      <div class="noc-copy">
+        <h2 id="noc-title">Your 24x7 network sentinel.</h2>
+        <p>
+          Proactive monitoring and incident resolution: real-time monitoring, KPI tracking, threat response and
+          performance optimisation, reported through custom dashboards and driven by the LAER model.
+        </p>
+        <figure class="quote">
+          <blockquote>“Epta’s NOC became our first line of defense against downtime.”</blockquote>
+          <figcaption>IT/ITeS client</figcaption>
+        </figure>
+        <a class="btn" routerLink="/contact" [queryParams]="{ service: 'NOC' }">
+          Send a NOC service inquiry <app-icon name="arrow" />
+        </a>
+      </div>
+      <app-noc-console />
+    </div>
+    <app-folio [sheet]="5" name="Network operation center" />
+  </div>
+</section>
+
+<!-- Case studies -->
+<section class="cases" aria-labelledby="cases-title">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 id="cases-title">Signed off in the field.</h2>
+      <p>Three engagements across three industries. Client names are withheld; results are as recorded.</p>
+    </div>
+    <app-case-files />
+    <app-folio [sheet]="6" name="Field reports" />
+  </div>
+</section>
+
+<!-- Continuity -->
+<section class="continuity on-dark" aria-labelledby="continuity-title">
+  <div class="wrap">
+    <div class="continuity-grid">
+      <h2 id="continuity-title">Business continuity is at our core.</h2>
+      <p>
+        Think of Epta Layers as the chief engineer of a communications satellite. We don’t just draft the technical
+        specs: we integrate every complex sub-system and stay at the controls 24x7, so your signal, and your
+        business, never goes dark.
+      </p>
+    </div>
+
+    <figure class="failover" appInView>
+      <svg viewBox="0 0 1200 150" preserveAspectRatio="none" aria-hidden="true">
+        <path class="primary" d="M0 40 H520" vector-effect="non-scaling-stroke" />
+        <path class="primary" d="M600 40 H1200" vector-effect="non-scaling-stroke" />
+        <path class="fault" d="M540 26 L580 54 M580 26 L540 54" vector-effect="non-scaling-stroke" />
+        <path class="backup" d="M0 110 H1200" vector-effect="non-scaling-stroke" />
+        <path class="switch" d="M470 40 V110 M650 110 V40" vector-effect="non-scaling-stroke" />
+        <path class="service" d="M0 75 H1200" vector-effect="non-scaling-stroke" />
+      </svg>
+      <div class="lanes" aria-hidden="true">
+        <span class="lane-a label">Primary path</span>
+        <span class="lane-fault label">Fault</span>
+        <span class="lane-s label">Your business: uninterrupted</span>
+        <span class="lane-b label">Redundant path</span>
+      </div>
+      <figcaption>Illustrative: when a path fails, traffic moves to the redundant path and the service line never breaks.</figcaption>
+    </figure>
+    <app-folio [sheet]="7" name="Continuity" />
+  </div>
+</section>
+
+<!-- Contact sign-off -->
+<section class="contact" aria-labelledby="contact-title">
+  <div class="wrap">
+    <div class="contact-grid">
+      <div class="contact-copy">
+        <h2 id="contact-title">Let’s build a connected future together.</h2>
+        <p>Tell us what’s failing, slowing or about to grow. An Epta engineer will reply.</p>
+        <ul class="lines">
+          <li>
+            <app-icon name="phone" />
+            <a class="data" [href]="contact.phoneHref">{{ contact.phoneDisplay }}</a>
+          </li>
+          <li>
+            <app-icon name="mail" />
+            <a [href]="'mailto:' + contact.info">{{ contact.info }}</a>
+          </li>
+        </ul>
+        <div class="offices">
+          @for (o of contact.offices; track o.name) {
+            <address>
+              <strong><app-icon name="pin" />{{ o.name }}</strong>
+              @for (l of o.lines; track l) {
+                <span>{{ l }}</span>
+              }
+              <span class="note">{{ o.note }}</span>
+            </address>
+          }
+        </div>
+      </div>
+      <div class="sheet">
+        <div class="sheet-head">
+          <h3>Request for review</h3>
+          <span class="to">To: Epta engineering</span>
+        </div>
+        <app-sign-off-form />
+      </div>
+    </div>
+    <app-folio [sheet]="8" name="Sign-off" />
+  </div>
+</section>

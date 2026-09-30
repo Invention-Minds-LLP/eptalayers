@@ -1,0 +1,349 @@
+:host {
+  position: relative;
+  display: block;
+  color: var(--ink);
+}
+
+.sheet {
+  position: relative;
+  background: var(--sheet);
+  border-radius: 2px;
+  padding: 24px 28px 20px;
+}
+
+.head {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  padding-bottom: 18px;
+  border-bottom: 2px solid var(--ink);
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: 800;
+  font-stretch: 112%;
+  letter-spacing: -0.02em;
+}
+
+.ref {
+  margin-top: 4px;
+  color: var(--ink-2);
+  font-size: 0.875rem;
+}
+
+.meta {
+  display: flex;
+  gap: 24px;
+  margin: 0;
+  text-align: right;
+
+  dt {
+    color: var(--ink-3);
+    font-size: 0.6875rem;
+  }
+
+  dd {
+    margin: 2px 0 0;
+    font-size: 0.8125rem;
+    font-weight: 600;
+  }
+
+  dd.data {
+    font-size: 0.75rem;
+    font-weight: 400;
+  }
+}
+
+.rows {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  margin-top: 6px;
+
+  thead th {
+    padding: 10px 16px 8px 0;
+    text-align: left;
+    color: var(--ink-3);
+    font-size: 0.6875rem;
+    border-bottom: 1px solid var(--rule-strong);
+  }
+
+  thead th:first-child {
+    width: 150px;
+  }
+
+  thead th.col-covered {
+    width: 30%;
+  }
+
+  tbody tr {
+    border-bottom: 1px solid var(--rule);
+    transition: background-color 0.3s var(--ease-out);
+  }
+
+  tbody tr:last-child {
+    border-bottom: 0;
+  }
+
+  td,
+  tbody th {
+    padding: 10px 16px 10px 0;
+    vertical-align: baseline;
+    text-align: left;
+    font-weight: 400;
+    line-height: 1.35;
+  }
+}
+
+.layer {
+  white-space: nowrap;
+}
+
+.n {
+  display: inline-block;
+  min-width: 2.4em;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--ink-3);
+  transition: color 0.4s var(--ease-out);
+}
+
+.name {
+  font-weight: 700;
+  font-stretch: 88%;
+  font-size: 1rem;
+}
+
+.verify {
+  color: var(--ink-2);
+  font-size: 0.9375rem;
+}
+
+/* ink, not pink: in a test report, red-family text reads as a failure */
+.col-covered a {
+  color: var(--ink);
+  font-size: 0.875rem;
+  font-weight: 550;
+  text-decoration: underline;
+  text-decoration-color: var(--brand-1);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.3em;
+  transition: color 0.2s var(--ease-out);
+
+  &:hover {
+    color: var(--accent);
+  }
+}
+
+.col-result {
+  width: 84px;
+  padding-right: 0 !important;
+  text-align: right !important;
+}
+
+.dash {
+  color: var(--rule-strong);
+  font-size: 0.75rem;
+}
+
+.testing {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  color: var(--ink);
+  letter-spacing: 0.04em;
+}
+
+tr[data-state='pending'] {
+  .name,
+  .verify,
+  .col-covered {
+    opacity: 0.42;
+  }
+}
+
+/* the probe: a hard-edged band with a rule along its foot, no soft light */
+tr[data-state='testing'] {
+  background: rgb(255 95 39 / 0.1);
+  box-shadow: inset 0 -2px 0 var(--brand-1);
+}
+
+tr[data-state='pass'] {
+  .n {
+    color: var(--pass-ink);
+  }
+
+  .verdict {
+    animation: settle 0.5s var(--ease-out);
+  }
+}
+
+@keyframes settle {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+    filter: blur(3px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+}
+
+.sign {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 12px 24px;
+  margin-top: 4px;
+  padding-top: 14px;
+  border-top: 2px solid var(--ink);
+}
+
+.summary {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  font-size: 0.875rem;
+  color: var(--ink-2);
+
+  strong {
+    font-size: 1.125rem;
+    color: var(--ink);
+    transition: color 0.4s var(--ease-out);
+  }
+
+  span {
+    white-space: nowrap;
+  }
+}
+
+.is-signed .summary strong {
+  color: var(--pass-ink);
+}
+
+.sign-right {
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+}
+
+.signature {
+  display: flex;
+  flex-direction: column;
+  min-width: 190px;
+  padding: 0 10px 4px;
+  border-bottom: 1px solid var(--ink);
+
+  .label {
+    font-size: 0.625rem;
+    color: var(--ink-3);
+  }
+}
+
+.stamp {
+  font-size: 0.6875rem;
+  color: var(--ink);
+  white-space: nowrap;
+}
+
+.replay {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 36px;
+  padding: 0 10px;
+  border: 1px solid var(--rule-strong);
+  border-radius: 3px;
+  background: transparent;
+  font-size: 0.8125rem;
+  font-weight: 550;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    background-color 0.2s var(--ease-out),
+    border-color 0.2s var(--ease-out);
+
+  app-icon {
+    width: 15px;
+  }
+
+  &:hover:not(:disabled) {
+    background: var(--sheet-under);
+    border-color: var(--ink);
+  }
+
+  &:disabled {
+    opacity: 0.45;
+    cursor: progress;
+  }
+}
+
+@media (max-width: 1180px) {
+  .col-covered {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .sheet {
+    padding: 18px 16px 16px;
+  }
+
+  .head {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .meta {
+    text-align: left;
+  }
+
+  .rows thead {
+    display: none;
+  }
+
+  .rows tbody tr {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-areas:
+      'layer result'
+      'verify verify';
+    padding: 9px 0;
+  }
+
+  .rows tbody th,
+  .rows td {
+    padding: 0;
+  }
+
+  .layer {
+    grid-area: layer;
+  }
+
+  .verify {
+    grid-area: verify;
+    display: block;
+    padding-top: 2px !important;
+    padding-left: calc(2.4em * 0.75) !important;
+    font-size: 0.8125rem;
+  }
+
+  .col-result {
+    grid-area: result;
+    width: auto;
+  }
+
+  .sign-right {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .signature {
+    min-width: 0;
+    flex: 1;
+    padding-left: 0;
+  }
+}

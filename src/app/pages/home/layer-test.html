@@ -1,0 +1,82 @@
+<article class="sheet" aria-labelledby="coverage-title">
+  <header class="head">
+    <div>
+      <h2 id="coverage-title" class="title">Coverage check</h2>
+      <p class="ref">Tested against the OSI reference model, layers 1–7</p>
+    </div>
+    <dl class="meta">
+      <div>
+        <dt class="label">Report</dt>
+        <dd class="data">EL-OSI-07</dd>
+      </div>
+      <div>
+        <dt class="label">Engineer</dt>
+        <dd>Epta Layers</dd>
+      </div>
+    </dl>
+  </header>
+
+  <table class="rows">
+    <caption class="sr-only">
+      Which Epta solution covers each OSI layer
+    </caption>
+    <thead>
+      <tr>
+        <th scope="col" class="label">Layer</th>
+        <th scope="col" class="label">What we verify</th>
+        <th scope="col" class="label col-covered">Covered by</th>
+        <th scope="col" class="label col-result">Result</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (l of layers; track l.n) {
+        <tr [attr.data-state]="state(l.n)">
+          <th scope="row" class="layer">
+            <span class="n data">L{{ l.n }}</span>
+            <span class="name">{{ l.name }}</span>
+          </th>
+          <td class="verify">{{ l.verify }}</td>
+          <td class="col-covered">
+            <a [routerLink]="['/solutions', l.slug]">{{ l.covered }}</a>
+          </td>
+          <td class="col-result">
+            @switch (state(l.n)) {
+              @case ('pass') {
+                <span class="verdict"><app-icon name="check" />PASS</span>
+              }
+              @case ('testing') {
+                <span class="testing data">TESTING</span>
+              }
+              @default {
+                <span class="dash data" aria-label="Not yet tested">——</span>
+              }
+            }
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+
+  <footer class="sign" [class.is-signed]="complete()">
+    <p class="summary">
+      <strong class="data">{{ passed() }}/7</strong>
+      <span>layers in scope &middot; one accountable partner</span>
+    </p>
+    <div class="sign-right">
+      <div class="signature">
+        <span class="label">Signed off</span>
+        <span class="stamp" [class.data]="complete()" aria-live="polite">
+          @if (complete()) {
+            {{ stamp() }}
+          } @else {
+            Running from the cable up…
+          }
+        </span>
+      </div>
+      <button type="button" class="replay" (click)="run()" [disabled]="running()">
+        <app-icon name="replay" />
+        <span>Run again</span>
+      </button>
+    </div>
+  </footer>
+</article>
