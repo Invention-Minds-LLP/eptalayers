@@ -56,6 +56,12 @@ import { Wordmark } from '../ui/wordmark';
         <a routerLink="/privacy">Privacy policy</a>
         <a routerLink="/terms">Terms &amp; conditions</a>
       </span>
+      <span class="credit">
+        Designed and developed by
+        <a href="https://inventionminds.com/" target="_blank" rel="noopener">
+          Invention Minds LLP<span class="sr-only"> (opens in a new tab)</span>
+        </a>
+      </span>
     </div>
   `,
   styles: `
@@ -133,6 +139,18 @@ import { Wordmark } from '../ui/wordmark';
     .links a {
       font-size: 0.875rem;
       color: var(--ink-2);
+    }
+    .credit {
+      flex-basis: 100%;
+      color: var(--ink-3);
+    }
+    .credit a {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--ink-2);
+      text-decoration: underline;
+      text-decoration-color: var(--brand-1);
+      text-underline-offset: 0.25em;
     }
     @media (max-width: 960px) {
       .grid {
