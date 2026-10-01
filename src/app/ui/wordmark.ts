@@ -1,12 +1,12 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 
-/** Client-supplied lockup (orange-to-pink seven-layer mark + white wordmark). Dark grounds only. */
+/** Client lockup: seven-step orange-to-pink mark + wordmark. `light` = ink wordmark (derived), `dark` = white original. */
 @Component({
   selector: 'app-wordmark',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <img
-      src="brand/epta-layers-logo-dark.png"
+      [src]="ground() === 'dark' ? 'brand/epta-layers-logo-dark.png' : 'brand/epta-layers-logo-light.png'"
       alt="Epta Layers"
       width="850"
       height="204"
@@ -27,4 +27,5 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 })
 export class Wordmark {
   readonly height = input(34);
+  readonly ground = input<'light' | 'dark'>('light');
 }

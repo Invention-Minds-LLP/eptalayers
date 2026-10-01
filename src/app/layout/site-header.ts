@@ -8,7 +8,7 @@ import { Wordmark } from '../ui/wordmark';
   selector: 'app-site-header',
   imports: [RouterLink, RouterLinkActive, Icon, Wordmark],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  host: { class: 'on-dark', '(document:keydown.escape)': 'open.set(false)' },
+  host: { '(document:keydown.escape)': 'open.set(false)' },
   template: `
     <a class="skip" href="#main">Skip to content</a>
     <div class="wrap bar">
@@ -65,9 +65,9 @@ import { Wordmark } from '../ui/wordmark';
       top: 0;
       z-index: 40;
       display: block;
-      background: var(--graphite-900);
-      color: var(--on-graphite);
-      border-bottom: 1px solid var(--graphite-line);
+      background: var(--sheet);
+      color: var(--ink);
+      border-bottom: 1px solid var(--rule);
     }
     .skip {
       position: absolute;
@@ -102,9 +102,9 @@ import { Wordmark } from '../ui/wordmark';
     .nav a {
       position: relative;
       padding: 8px 12px;
-      color: var(--on-graphite-2);
+      color: var(--ink-2);
       text-decoration: none;
-      font-size: 0.95rem;
+      font-size: 0.9375rem;
       font-weight: 500;
       font-stretch: 92%;
       transition: color 0.2s var(--ease-out);
@@ -123,7 +123,7 @@ import { Wordmark } from '../ui/wordmark';
     }
     .nav a:hover,
     .nav a.is-active {
-      color: var(--on-graphite);
+      color: var(--ink);
     }
     .nav a:hover::after,
     .nav a.is-active::after {
@@ -135,12 +135,12 @@ import { Wordmark } from '../ui/wordmark';
       gap: 20px;
     }
     .phone {
-      font-size: 0.8rem;
-      color: var(--on-graphite-2);
+      font-size: 0.8125rem;
+      color: var(--ink-2);
       text-decoration: none;
     }
     .phone:hover {
-      color: var(--on-graphite);
+      color: var(--ink);
     }
     .toggle {
       display: none;
@@ -148,7 +148,7 @@ import { Wordmark } from '../ui/wordmark';
       height: 48px;
       place-items: center;
       background: transparent;
-      border: 1px solid var(--graphite-line);
+      border: 1px solid var(--rule-strong);
       border-radius: 3px;
       cursor: pointer;
     }
@@ -156,7 +156,7 @@ import { Wordmark } from '../ui/wordmark';
       width: 22px;
     }
     .drawer {
-      border-top: 1px solid var(--graphite-line);
+      border-top: 1px solid var(--rule);
       padding: 8px 0 24px;
     }
     .drawer a {
@@ -164,8 +164,8 @@ import { Wordmark } from '../ui/wordmark';
       justify-content: space-between;
       align-items: center;
       min-height: 56px;
-      border-bottom: 1px solid var(--graphite-700);
-      color: var(--on-graphite);
+      border-bottom: 1px solid var(--rule);
+      color: var(--ink);
       text-decoration: none;
       font-size: 1.25rem;
       font-weight: 650;
@@ -173,7 +173,7 @@ import { Wordmark } from '../ui/wordmark';
     }
     .drawer app-icon {
       width: 20px;
-      color: var(--on-graphite-2);
+      color: var(--ink-3);
     }
     .drawer .drawer-phone {
       justify-content: flex-start;
@@ -181,7 +181,7 @@ import { Wordmark } from '../ui/wordmark';
       border: 0;
       font-size: 0.95rem;
       font-weight: 500;
-      color: var(--on-graphite-2);
+      color: var(--ink-2);
     }
     @media (max-width: 1080px) {
       .nav,

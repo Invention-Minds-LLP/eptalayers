@@ -7,7 +7,8 @@
 .sheet {
   position: relative;
   background: var(--sheet);
-  border-radius: 2px;
+  border: 1px solid var(--rule);
+  border-top: 6px solid var(--ink);
   padding: 24px 28px 20px;
 }
 

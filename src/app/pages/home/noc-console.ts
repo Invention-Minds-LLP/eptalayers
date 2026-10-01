@@ -92,8 +92,8 @@ function trace(
       display: block;
     }
     .console {
-      border: 1px solid var(--graphite-line);
-      background: var(--graphite-950);
+      border: 1px solid var(--rule-strong);
+      background: var(--sheet);
       border-radius: 3px;
     }
     .top {
@@ -101,8 +101,8 @@ function trace(
       justify-content: space-between;
       align-items: center;
       padding: 12px 16px;
-      border-bottom: 1px solid var(--graphite-line);
-      color: var(--on-graphite-2);
+      border-bottom: 1px solid var(--rule-strong);
+      color: var(--ink-3);
       font-size: 0.6875rem;
     }
     .live {
@@ -115,7 +115,7 @@ function trace(
       width: 7px;
       height: 7px;
       border-radius: 50%;
-      background: var(--pass-lit);
+      background: var(--pass-ink);
       animation: blink 2s steps(2, jump-none) infinite;
     }
     .ch {
@@ -124,7 +124,7 @@ function trace(
       align-items: center;
       gap: 16px;
       padding: 14px 16px;
-      border-bottom: 1px solid var(--graphite-700);
+      border-bottom: 1px solid var(--rule);
     }
     .ch:last-child {
       border-bottom: 0;
@@ -136,7 +136,7 @@ function trace(
     }
     .id {
       font-size: 0.625rem;
-      color: var(--on-graphite-2);
+      color: var(--ink-3);
     }
     .name {
       font-size: 0.875rem;
@@ -147,7 +147,7 @@ function trace(
     .scope {
       height: 40px;
       overflow: hidden;
-      background-image: linear-gradient(var(--graphite-700) 1px, transparent 1px);
+      background-image: linear-gradient(var(--rule) 1px, transparent 1px);
       background-size: 100% 10px;
     }
     .roll {
@@ -172,12 +172,12 @@ function trace(
     }
     .line {
       fill: none;
-      stroke: var(--pass-lit);
+      stroke: var(--pass-ink);
       stroke-width: 1.5;
       vector-effect: non-scaling-stroke;
     }
     .target {
-      stroke: var(--accent-lit);
+      stroke: var(--accent);
       stroke-width: 1;
       stroke-dasharray: 5 4;
       vector-effect: non-scaling-stroke;
@@ -192,7 +192,7 @@ function trace(
     .lead {
       position: relative;
       flex: 1;
-      border-top: 1px dashed var(--accent-lit);
+      border-top: 1px dashed var(--accent);
     }
     .lead::before {
       content: '';
@@ -200,17 +200,17 @@ function trace(
       right: 100%;
       top: -1px;
       width: 16px;
-      border-top: 1px dashed var(--accent-lit);
+      border-top: 1px dashed var(--accent);
     }
     .tgt {
       display: block;
       font-size: 0.5625rem;
-      color: var(--accent-lit);
+      color: var(--accent);
       text-align: right;
     }
     .alert {
       fill: none;
-      stroke: var(--fault);
+      stroke: var(--fault-ink);
       stroke-width: 2;
       vector-effect: non-scaling-stroke;
     }
@@ -219,7 +219,7 @@ function trace(
       text-align: right;
       font-size: 0.6875rem;
       font-weight: 700;
-      color: var(--pass-lit);
+      color: var(--pass-ink);
     }
     @keyframes roll {
       to {

@@ -1,0 +1,473 @@
+:host {
+  --t: 0;
+  display: block;
+  font-family: 'Barlow Condensed', 'Barlow', sans-serif;
+}
+
+svg {
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+}
+
+.world {
+  transition: transform 0.9s var(--ease-out);
+}
+
+/* building */
+.floor {
+  fill: #fff;
+}
+
+.wall {
+  fill: transparent;
+  stroke: var(--ink);
+  stroke-width: 2.5;
+  transition:
+    fill 0.5s var(--ease-out),
+    opacity 0.5s var(--ease-out);
+}
+
+.room.is-focus .wall {
+  fill: rgb(255 95 39 / 0.07);
+}
+
+.room.is-dim {
+  opacity: 0.45;
+}
+
+.core {
+  stroke: var(--ink);
+  stroke-width: 2.5;
+}
+
+.hatch-line {
+  stroke: var(--rule-strong);
+  stroke-width: 1;
+}
+
+.core-tag,
+.tag-id {
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  fill: var(--ink-3);
+}
+
+.core-tag {
+  font-size: 13px;
+  fill: var(--ink-3);
+}
+
+.tag-name {
+  font-size: 18px;
+  font-weight: 700;
+  fill: var(--ink);
+}
+
+.furn {
+  fill: none;
+  stroke: #b9c2bf;
+  stroke-width: 1.2;
+}
+
+.cloud {
+  fill: #fff;
+  stroke: var(--ink);
+  stroke-width: 2;
+}
+
+/* the seven CAD layers, in the logo's seven steps */
+.l1 { --c: var(--brand-7); }
+.l2 { --c: var(--brand-6); }
+.l3 { --c: var(--brand-5); }
+.l4 { --c: var(--brand-4); }
+.l5 { --c: var(--brand-3); }
+.l6 { --c: var(--brand-2); }
+.l7 { --c: var(--brand-1); }
+
+.lyr {
+  fill: none;
+  stroke: var(--c);
+  stroke-width: 3;
+  stroke-linecap: round;
+  opacity: 0;
+  transition: opacity 0.25s var(--ease-out);
+
+  &.on {
+    opacity: 1;
+  }
+
+  /* solid strokes draw along their own path */
+  .dr {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+  }
+
+  &.on .dr {
+    stroke-dashoffset: 0;
+    animation: draw 1.3s var(--ease-out) both;
+  }
+
+  /* dashed strokes keep their real dash pattern and are revealed by a drawn mask */
+  .mdraw {
+    fill: none;
+    stroke: #fff;
+    stroke-width: 16;
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+  }
+
+  &.on .mdraw {
+    stroke-dashoffset: 0;
+    animation: draw 1.3s var(--ease-out) both;
+  }
+
+  .lock path {
+    stroke-width: 2;
+  }
+
+  .fill {
+    fill: var(--c);
+    stroke: none;
+    opacity: 0;
+    transition: opacity 0.4s var(--ease-out) 0.7s;
+  }
+
+  &.on .fill {
+    opacity: 1;
+  }
+
+  .ring {
+    stroke-width: 1.5;
+    stroke-dasharray: 2 5;
+  }
+
+  .wan {
+    stroke-width: 4;
+    stroke-dasharray: 10 6;
+  }
+
+  .call {
+    stroke-width: 2;
+    stroke-dasharray: 2 7;
+  }
+
+  .perimeter {
+    stroke-width: 2;
+    stroke-dasharray: 14 8;
+  }
+
+  /* the layer is named where it is drawn */
+  .ltag {
+    opacity: 0;
+    transition: opacity 0.4s var(--ease-out) 0.9s;
+
+    rect {
+      fill: var(--c);
+      stroke: var(--ink);
+      stroke-width: 1;
+      stroke-dasharray: none;
+      stroke-dashoffset: 0;
+    }
+
+    text {
+      fill: var(--ink);
+      stroke: none;
+      font-size: 16px;
+      font-weight: 700;
+      text-anchor: middle;
+    }
+  }
+
+  &.on .ltag {
+    opacity: 1;
+  }
+}
+
+/* design intent: dotted, faint, not yet built */
+:host(.drafted) .lyr.on {
+  opacity: 0.5;
+
+  .dr {
+    stroke-dasharray: 0.006 0.008;
+    stroke-width: 1.8;
+  }
+
+  .ring,
+  .wan,
+  .call,
+  .perimeter {
+    stroke-dasharray: 4 6;
+    stroke-width: 1.8;
+  }
+
+  .fill {
+    fill: none;
+    stroke: var(--c);
+    stroke-width: 1.5;
+  }
+}
+
+/* supply: the design recedes so the equipment reads */
+:host(.drafted.supplying) .lyr.on {
+  opacity: 0.2;
+}
+
+/* OEM callouts */
+.callouts {
+  animation: tag-in 0.5s var(--ease-out) 0.6s both;
+
+  path {
+    fill: none;
+    stroke: var(--ink);
+    stroke-width: 1;
+  }
+
+  circle {
+    fill: var(--ink);
+  }
+
+  text {
+    fill: var(--ink);
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+  }
+}
+
+/* OEM equipment dropping into place */
+.devices {
+  .dev {
+    opacity: 0;
+    transform: translateY(-14px);
+    transition:
+      opacity 0.45s var(--ease-out) calc(var(--i) * 60ms),
+      transform 0.6s var(--ease-out) calc(var(--i) * 60ms);
+  }
+
+  &.on .dev {
+    opacity: 1;
+    transform: none;
+  }
+
+  .ap {
+    fill: #fff;
+    stroke: var(--ink);
+    stroke-width: 2;
+  }
+
+  .ap-dot,
+  .sw,
+  .rtr,
+  .ph {
+    fill: var(--ink);
+  }
+}
+
+/* survey */
+.survey {
+  opacity: 0;
+  transition: opacity 0.5s var(--ease-out);
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 1.5;
+
+  &.on {
+    opacity: 1;
+  }
+
+  .ft {
+    fill: var(--ink);
+    stroke: none;
+    font-size: 13px;
+    font-weight: 700;
+  }
+}
+
+/* coverage */
+.heat .before {
+  opacity: calc(1 - var(--t));
+  transition: opacity 0.4s;
+}
+
+.heat .after {
+  opacity: var(--t);
+  transition: opacity 0.4s;
+}
+
+.dead-line {
+  stroke: var(--fault);
+  stroke-width: 2;
+}
+
+.dead {
+  stroke: var(--fault-ink);
+  stroke-width: 1;
+  stroke-dasharray: 3 3;
+}
+
+.dead-tag {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  fill: var(--fault-ink);
+}
+
+/* before (fault pin) and with Epta (resolved stamp) */
+.pin {
+  opacity: calc(1 - var(--t));
+  transform: scale(calc(1 - var(--t) * 0.4));
+
+  circle {
+    fill: var(--fault);
+    stroke: var(--ink);
+    stroke-width: 1.5;
+  }
+
+  path {
+    stroke: var(--ink);
+    stroke-width: 3;
+    stroke-linecap: round;
+  }
+}
+
+.stamp {
+  opacity: var(--t);
+  transform: scale(calc(0.6 + var(--t) * 0.4));
+
+  circle {
+    fill: var(--pass);
+    stroke: var(--ink);
+    stroke-width: 1.5;
+  }
+
+  path {
+    fill: none;
+    stroke: var(--ink);
+    stroke-width: 3;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+}
+
+.pin,
+.stamp {
+  transition:
+    opacity 0.45s var(--ease-out),
+    transform 0.45s var(--ease-out);
+}
+
+/* live traffic and an incident caught by the NOC */
+.traffic circle {
+  fill: var(--brand-1);
+  stroke: #fff;
+  stroke-width: 2;
+}
+
+.incident {
+  .core-dot {
+    animation: incident 5s infinite;
+    stroke: var(--ink);
+    stroke-width: 1.5;
+  }
+
+  .ring-out {
+    fill: none;
+    stroke: var(--fault-ink);
+    stroke-width: 1.5;
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: ring 5s infinite;
+  }
+
+  .inc-tag {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    fill: var(--ink);
+  }
+}
+
+@keyframes draw {
+  from {
+    stroke-dashoffset: 1;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes incident {
+  0%,
+  40% {
+    fill: var(--fault);
+  }
+  55%,
+  100% {
+    fill: var(--pass);
+  }
+}
+
+@keyframes ring {
+  0% {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+  15% {
+    opacity: 1;
+  }
+  45% {
+    opacity: 0;
+    transform: scale(1.8);
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.renew {
+  rect {
+    fill: var(--ink);
+  }
+
+  text {
+    fill: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+  }
+
+  g {
+    animation: tag-in 0.6s var(--ease-out) both;
+  }
+
+  g:nth-child(2) {
+    animation-delay: 0.15s;
+  }
+
+  g:nth-child(3) {
+    animation-delay: 0.3s;
+  }
+}
+
+@keyframes tag-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lyr .dr,
+  .lyr .mdraw {
+    stroke-dashoffset: 0 !important;
+    animation: none !important;
+  }
+
+  .incident .core-dot,
+  .incident .ring-out {
+    animation: none;
+    fill: var(--pass);
+  }
+}

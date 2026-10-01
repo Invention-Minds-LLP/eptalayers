@@ -1,0 +1,20 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "design-system-font",
+        "value": "barlow condensed",
+        "createdAt": "2026-10-01T06:06:35.421Z",
+        "reason": "builder: homepage B direction (seed 57e9e68a) uses Barlow; DESIGN.md to be updated at finish"
+      },
+      {
+        "rule": "design-system-font",
+        "value": "barlow",
+        "createdAt": "2026-10-01T06:06:35.583Z",
+        "reason": "builder: homepage B direction (seed 57e9e68a) uses Barlow; DESIGN.md to be updated at finish"
+      }
+    ]
+  }
+}

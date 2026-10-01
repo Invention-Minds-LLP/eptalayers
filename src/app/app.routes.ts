@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { Home } from './pages/home/home';
+import { HomeB } from './pages/home-b/home-b';
 import { StatusPage } from './pages/status/status-page';
 
 const pending = (path: string, title: string) => ({
@@ -14,6 +15,11 @@ export const routes: Routes = [
     path: '',
     component: Home,
     title: 'Epta Layers · Single-point enterprise solutions provider, Bangalore',
+  },
+  {
+    path: 'home-b',
+    component: HomeB,
+    title: 'Epta Layers · Surveyed layer by layer, run 24x7',
   },
   pending('solutions', 'Solutions'),
   pending('solutions/:slug', 'This solution page'),

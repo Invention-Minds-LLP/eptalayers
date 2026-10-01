@@ -1,0 +1,274 @@
+<!-- Hero: the seven layers draw onto the floor -->
+<section class="hero" aria-labelledby="b-hero-title">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <h1 id="b-hero-title">We survey your network layer by layer, then keep it running.</h1>
+      <p class="lede">One partner, all seven layers, 24x7.</p>
+      <div class="ctas">
+        <a class="btn" routerLink="/contact">Request an assessment <app-icon name="arrow" /></a>
+        <a class="text-link" href="#how">See how an engagement works</a>
+      </div>
+
+      <fieldset class="layers">
+        <legend>Layers on this plan</legend>
+        @for (r of layerRows; track r.n) {
+          <button
+            type="button"
+            role="switch"
+            class="layer-row"
+            [attr.aria-checked]="heroLayers().includes(r.n)"
+            [style.--c]="'var(--brand-' + (8 - r.n) + ')'"
+            (click)="toggle(r.n)"
+          >
+            <span class="box" aria-hidden="true"><app-icon name="check" /></span>
+            <span class="swatch" aria-hidden="true"></span>
+            <span class="ln">L{{ r.n }}</span>
+            <span class="lname">{{ r.name }}</span>
+          </button>
+        }
+      </fieldset>
+    </div>
+
+    <figure class="sheet hero-sheet" #heroPlanEl>
+      <app-floor-plan [layers]="heroLayers()" [devices]="true" label="Office floor plan with the OSI layers Epta covers" />
+      <figcaption class="sheet-foot">
+        <dl class="legend" aria-label="Legend">
+          @for (k of legend; track k.label) {
+            <div>
+              <dt aria-hidden="true">
+                <svg viewBox="0 0 28 20">
+                  @switch (k.icon) {
+                    @case ('ap') { <circle cx="14" cy="10" r="6" class="lg-ap" /><circle cx="14" cy="10" r="2" class="lg-ink" /> }
+                    @case ('sw') { <rect x="5" y="6" width="18" height="8" class="lg-ink" /> }
+                    @case ('ft') { <circle cx="14" cy="10" r="5" class="lg-line" /><path d="M 3 10 H 25 M 14 0 V 20" class="lg-line" /> }
+                    @case ('pin') { <circle cx="14" cy="10" r="7" class="lg-pin" /> }
+                    @case ('ok') { <circle cx="14" cy="10" r="7" class="lg-ok" /> }
+                    @case ('lyr') { <rect x="1" y="1" width="26" height="18" rx="9" class="lg-tag" /> }
+                  }
+                </svg>
+              </dt>
+              <dd>{{ k.label }}</dd>
+            </div>
+          }
+        </dl>
+        <div class="title-block">
+          <div class="tb-row"><span>Sheet</span><b>A · Office floor plan</b></div>
+          <div class="tb-row"><span>Layers</span><b>{{ heroLayers().length }} of 7 shown</b></div>
+          <div class="tb-row"><span>Scale</span><b>Not to scale</b></div>
+          <div class="tb-row tb-note">Illustrative plan, not a client site</div>
+        </div>
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- Story: one engagement, six steps -->
+<section id="how" class="story" aria-labelledby="b-story-title">
+  <div class="wrap">
+    <h2 id="b-story-title" class="section-title">How an engagement unfolds.</h2>
+    <div class="story-grid">
+      <div class="story-plan">
+        <ol class="rail" aria-label="Engagement steps">
+          @for (c of chapters; track c.key; let i = $index) {
+            <li [class.is-on]="i === chapter()" [class.is-done]="i < chapter()">
+              <span class="rail-n">{{ pad(i + 1) }}</span>
+              <span class="rail-k">{{ c.key }}</span>
+            </li>
+          }
+        </ol>
+        <div class="sheet">
+          <app-floor-plan
+            [layers]="storyLayers()"
+            [drafted]="!!storyState().drafted"
+            [devices]="!!storyState().devices"
+            [callouts]="!!storyState().callouts"
+            [survey]="!!storyState().survey"
+            [heat]="!!storyState().heat"
+            [branch]="storyState().branch !== false"
+            [pulses]="!!storyState().pulses"
+            [incident]="!!storyState().incident"
+            [renew]="!!storyState().renew"
+            [showStates]="true"
+            [t]="storyState().t"
+            [label]="'Floor plan at the ' + chapters[chapter()].key + ' step'"
+          />
+          <p class="plan-cap" aria-live="polite">
+            <b>Rev {{ revs[chapter()] }} · {{ chapters[chapter()].key }}</b>
+            <span>{{ chapters[chapter()].get }}</span>
+          </p>
+        </div>
+      </div>
+
+      <div class="chapters">
+        @for (c of chapters; track c.key; let i = $index) {
+          <article #chapterEl class="chapter" [attr.data-i]="i" [class.is-on]="i === chapter()">
+            <span class="ch-n" aria-hidden="true">{{ pad(i + 1) }}</span>
+            <div>
+              <h3>
+                <span class="sr-only">Step {{ i + 1 }}, {{ c.key }}:</span>
+                {{ c.title }}
+              </h3>
+              <p>{{ c.body }}</p>
+              @if (c.key === 'Support & run') {
+                <blockquote>
+                  “Epta’s NOC became our first line of defense against downtime.”
+                  <cite>IT/ITeS client</cite>
+                </blockquote>
+              }
+              <p class="get"><app-icon name="check" />{{ c.get }}</p>
+            </div>
+          </article>
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Benefits: room by room -->
+<section class="benefits" aria-labelledby="b-benefits-title" #benefitsEl>
+  <div class="wrap">
+    <div class="benefits-head">
+      <h2 id="b-benefits-title" class="section-title">Room by room: before, and with Epta.</h2>
+      <label class="scrubber">
+        <span class="end" [class.is-on]="!withEpta()">Before Epta</span>
+        <input
+          type="range"
+          min="0"
+          max="100"
+          step="1"
+          [value]="t() * 100"
+          (input)="scrub($event)"
+          aria-label="Scrub from before Epta to with Epta"
+          [attr.aria-valuetext]="withEpta() ? 'With Epta' : 'Before Epta'"
+          [style.--p]="t() * 100 + '%'"
+        />
+        <span class="end" [class.is-on]="withEpta()">With Epta</span>
+      </label>
+    </div>
+
+    <div class="benefits-grid">
+      <div class="sheet benefits-plan">
+        <app-floor-plan
+          [layers]="withEpta() ? [1, 2, 3, 4, 5, 6, 7] : []"
+          [devices]="true"
+          [heat]="true"
+          [showStates]="true"
+          [t]="t()"
+          [focus]="focusRoom()"
+          label="Floor plan comparing each room before and with Epta"
+        />
+      </div>
+
+      <ul class="rooms">
+        @for (r of rooms; track r.id) {
+          <li [id]="r.id" [class.is-focus]="focusRoom() === r.id">
+            <button
+              type="button"
+              class="room-btn"
+              [attr.aria-pressed]="focusRoom() === r.id"
+              (click)="focusRoom.set(focusRoom() === r.id ? null : r.id)"
+            >
+              <span class="rid">{{ r.id }}</span>
+              <span class="rname">{{ r.name }}</span>
+              <span class="rlayer">{{ r.layer }}</span>
+            </button>
+            <div class="states">
+              <p class="before" [attr.aria-hidden]="withEpta()">
+                <span class="dot fault" aria-hidden="true"></span>{{ r.before }}
+              </p>
+              <p class="after" [attr.aria-hidden]="!withEpta()">
+                <span class="dot ok" aria-hidden="true"></span>{{ r.after }}
+              </p>
+            </div>
+            @if (r.measured) {
+              <p class="measured"><b>Recorded</b> {{ r.measured }}</p>
+            }
+          </li>
+        }
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- Your setup: a schedule, today and with Epta -->
+<section class="numbers" aria-labelledby="b-numbers-title">
+  <div class="wrap numbers-grid">
+    <div>
+      <h2 id="b-numbers-title" class="section-title">Your setup, today and with Epta.</h2>
+      <p class="intro">Set your own estate. The schedule counts what changes; it is not a quote and not a promised saving.</p>
+
+      <div class="inputs">
+        <label>
+          <span class="in-label">Sites <b>{{ sites() }}</b></span>
+          <input type="range" min="1" max="25" [value]="sites()" [style.--p]="((sites() - 1) / 24) * 100 + '%'" (input)="sites.set(num($event))" />
+        </label>
+        <label>
+          <span class="in-label">IT vendors you coordinate today <b>{{ vendors() }}</b></span>
+          <input type="range" min="1" max="15" [value]="vendors()" [style.--p]="((vendors() - 1) / 14) * 100 + '%'" (input)="vendors.set(num($event))" />
+        </label>
+      </div>
+    </div>
+
+    <table class="schedule">
+      <caption class="sr-only">Your setup today compared with Epta</caption>
+      <thead>
+        <tr>
+          <th scope="col">Item</th>
+          <th scope="col">Today</th>
+          <th scope="col">With Epta</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">IT vendors to coordinate</th>
+          <td>{{ vendors() }}</td>
+          <td><b>1</b> accountable partner</td>
+        </tr>
+        <tr>
+          <th scope="row">Escalation paths when something breaks</th>
+          <td>{{ vendors() }}</td>
+          <td><b>1</b> NOC, 24x7</td>
+        </tr>
+        <tr>
+          <th scope="row">Layer checks in the first survey</th>
+          <td class="none">—</td>
+          <td><b>{{ checks() }}</b> 7 layers × {{ sites() }} {{ sites() === 1 ? 'site' : 'sites' }}</td>
+        </tr>
+        <tr>
+          <th scope="row">Sites under round-the-clock monitoring</th>
+          <td class="none">—</td>
+          <td><b>{{ sites() }}</b> of {{ sites() }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="wrap field">
+    <h3>On record from the field</h3>
+    <ul>
+      <li><span class="tag">Recorded</span><b>90–95% Wi-Fi connectivity accuracy</b><span>1,500+ users, three-office IT/ITeS campus, Bangalore</span></li>
+      <li><span class="tag">Recorded</span><b>Network, workstations and servers rebuilt in phases</b><span>Engineering client operating in 40+ countries</span></li>
+      <li><span class="tag">Recorded</span><b>Phases 2 and 3 greenlit after Phase 1</b><span>Manufacturer across Bangalore, Hosur, Anekal and Mumbai</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- Contact -->
+<section class="contact" aria-labelledby="b-contact-title">
+  <div class="wrap contact-grid">
+    <div>
+      <h2 id="b-contact-title" class="section-title">Start with a survey of your own floor.</h2>
+      <p class="intro">Tell us about your sites and what isn’t working. An Epta engineer will reply.</p>
+      <ul class="lines">
+        <li><app-icon name="phone" /><a [href]="contact.phoneHref">{{ contact.phoneDisplay }}</a></li>
+        <li><app-icon name="mail" /><a [href]="'mailto:' + contact.info">{{ contact.info }}</a></li>
+        @for (o of contact.offices; track o.name) {
+          <li><app-icon name="pin" /><span><b>{{ o.name }}</b> {{ o.lines.join(', ') }}</span></li>
+        }
+      </ul>
+    </div>
+    <div class="sheet form-sheet">
+      <app-sign-off-form />
+    </div>
+  </div>
+</section>

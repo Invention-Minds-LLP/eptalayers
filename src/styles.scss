@@ -1,5 +1,13 @@
 @use '@fontsource-variable/archivo/wdth.css' as archivo;
 @use '@fontsource-variable/martian-mono/wdth.css' as martian;
+@use '@fontsource/barlow/400.css' as barlow400;
+@use '@fontsource/barlow/500.css' as barlow500;
+@use '@fontsource/barlow/600.css' as barlow600;
+@use '@fontsource/barlow/700.css' as barlow700;
+@use '@fontsource/barlow/800.css' as barlow800;
+@use '@fontsource/barlow-condensed/500.css' as bcond500;
+@use '@fontsource/barlow-condensed/600.css' as bcond600;
+@use '@fontsource/barlow-condensed/700.css' as bcond700;
 
 :root {
   /* instrument panel */
@@ -14,6 +22,8 @@
 
   /* report sheets */
   --ground: #e1e6e4;
+  /* homepage B: drafting-white survey sheet */
+  --paper-b: #f7f8f6;
   --sheet: #eef1f0;
   --sheet-under: #e6eae8;
   --sheet-deep: #cfd7d4;
@@ -32,6 +42,7 @@
   --limit-ink: #b3261e;
   /* alarms on instruments: amber, never brand-coloured */
   --fault: #f5b301;
+  --fault-ink: #8a6100;
 
   /* brand: the logo's seven bars, L7 orange at the top to L1 pink at the foot */
   --brand-1: #ff5f27;
@@ -130,6 +141,13 @@ h4 {
 p {
   margin: 0;
   text-wrap: pretty;
+}
+
+/* homepage B: Barlow and drafting white carry into the shared shell */
+body.theme-b {
+  --font-sans: 'Barlow', system-ui, sans-serif;
+  --ground: var(--paper-b);
+  background: var(--paper-b);
 }
 
 a {

@@ -2,10 +2,6 @@
   display: block;
 }
 
-.on-dark app-folio {
-  --folio: var(--on-graphite-2);
-}
-
 .section-head {
   display: grid;
   grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
@@ -26,8 +22,8 @@
 
 /* ---------- hero ---------- */
 .hero {
-  background: var(--graphite-900);
-  color: var(--on-graphite);
+  background: var(--ground);
+  color: var(--ink);
   padding-bottom: 32px;
 
   app-folio {
@@ -40,13 +36,13 @@
   flex-wrap: wrap;
   gap: 8px 32px;
   padding-block: 12px;
-  border-bottom: 1px solid var(--graphite-700);
+  border-bottom: 1px solid var(--rule-strong);
   font-size: 0.8125rem;
-  color: var(--on-graphite);
+  color: var(--ink);
 
   .k {
     margin-right: 6px;
-    color: var(--on-graphite-2);
+    color: var(--ink-3);
     font-size: 0.6875rem;
     font-weight: 600;
     font-stretch: 75%;
@@ -97,7 +93,7 @@ h1 {
   margin-top: 24px;
   max-width: 40ch;
   font-size: 1.1875rem;
-  color: var(--on-graphite-2);
+  color: var(--ink-2);
 }
 
 .ctas {
@@ -112,7 +108,7 @@ h1 {
   grid-area: find;
   align-self: start;
   margin: 44px 0 0;
-  border-top: 1px solid var(--graphite-line);
+  border-top: 1px solid var(--rule-strong);
 
   > div {
     display: grid;
@@ -120,23 +116,23 @@ h1 {
     align-items: baseline;
     gap: 12px;
     padding: 11px 0;
-    border-bottom: 1px solid var(--graphite-700);
+    border-bottom: 1px solid var(--rule);
   }
 
   dt {
     font-size: 0.6875rem;
-    color: var(--on-graphite-2);
+    color: var(--ink-3);
   }
 
   dd {
     margin: 0;
     font-size: 0.9375rem;
-    color: var(--on-graphite);
+    color: var(--ink);
   }
 
   .ok {
     align-self: center;
-    color: var(--pass-lit);
+    color: var(--pass-ink);
 
     app-icon {
       width: 16px;
@@ -208,8 +204,8 @@ h1 {
     }
 
     &:hover {
-      background: var(--graphite-800);
-      color: var(--on-graphite);
+      background: var(--sheet-under);
+      box-shadow: inset 0 -2px 0 var(--dot);
     }
 
     .data {
@@ -229,7 +225,7 @@ h1 {
     }
 
     &:hover .data {
-      color: var(--on-graphite);
+      color: var(--ink);
     }
 
     strong {
@@ -437,8 +433,8 @@ h1 {
 
 /* ---------- NOC ---------- */
 .noc {
-  background: var(--graphite-800);
-  color: var(--on-graphite);
+  background: var(--ground);
+  color: var(--ink);
   padding-block: 120px 40px;
 }
 
@@ -457,7 +453,7 @@ h1 {
 
   > p {
     margin-top: 20px;
-    color: var(--on-graphite-2);
+    color: var(--ink-2);
     max-width: 46ch;
   }
 }
@@ -477,7 +473,7 @@ h1 {
 
   figcaption {
     margin-top: 12px;
-    color: var(--on-graphite-2);
+    color: var(--ink-3);
     font-size: 0.875rem;
   }
 }
@@ -489,8 +485,9 @@ h1 {
 
 /* ---------- continuity ---------- */
 .continuity {
-  background: var(--graphite-950);
-  color: var(--on-graphite);
+  background: var(--sheet);
+  color: var(--ink);
+  border-top: 1px solid var(--rule);
   padding-block: 112px 40px;
 }
 
@@ -509,7 +506,7 @@ h1 {
   p {
     max-width: 52ch;
     font-size: 1.1875rem;
-    color: var(--on-graphite-2);
+    color: var(--ink-2);
   }
 }
 
@@ -528,26 +525,26 @@ h1 {
   }
 
   .primary {
-    stroke: var(--on-graphite-2);
+    stroke: var(--ink-3);
   }
 
   .fault {
-    stroke: var(--fault);
+    stroke: var(--fault-ink);
     stroke-width: 2.5;
   }
 
   .backup {
-    stroke: var(--graphite-line);
+    stroke: var(--rule-strong);
     stroke-dasharray: 8 6;
   }
 
   .switch {
-    stroke: var(--graphite-line);
+    stroke: var(--rule-strong);
     stroke-width: 1;
   }
 
   .service {
-    stroke: var(--pass-lit);
+    stroke: var(--pass);
     stroke-width: 3;
     clip-path: inset(-10px 0 -10px 0);
     transition: clip-path 2.4s var(--ease-out);
@@ -560,7 +557,7 @@ h1 {
   figcaption {
     margin-top: 20px;
     font-size: 0.875rem;
-    color: var(--on-graphite-2);
+    color: var(--ink-3);
   }
 }
 
@@ -573,7 +570,7 @@ h1 {
   span {
     position: absolute;
     font-size: 0.6875rem;
-    background: var(--graphite-950);
+    background: var(--sheet);
     padding: 0 8px;
   }
 
@@ -581,27 +578,27 @@ h1 {
     top: 12px;
     left: 0;
     padding-left: 0;
-    color: var(--on-graphite-2);
+    color: var(--ink-3);
   }
 
   .lane-fault {
     top: 12px;
     left: 47%;
-    color: var(--fault);
+    color: var(--fault-ink);
   }
 
   .lane-s {
     top: 48px;
     right: 0;
     padding-right: 0;
-    color: var(--pass-lit);
+    color: var(--pass-ink);
   }
 
   .lane-b {
     top: 82px;
     left: 0;
     padding-left: 0;
-    color: var(--on-graphite-2);
+    color: var(--ink-3);
   }
 }
 

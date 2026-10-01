@@ -7,7 +7,6 @@ import { Wordmark } from '../ui/wordmark';
   selector: 'app-site-footer',
   imports: [RouterLink, Wordmark],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  host: { class: 'on-dark' },
   template: `
     <div class="wrap grid">
       <div class="brand">
@@ -62,8 +61,9 @@ import { Wordmark } from '../ui/wordmark';
   styles: `
     :host {
       display: block;
-      background: var(--graphite-950);
-      color: var(--on-graphite);
+      background: var(--sheet);
+      color: var(--ink);
+      border-top: 6px solid var(--ink);
       padding-top: 72px;
     }
     .grid {
@@ -75,11 +75,11 @@ import { Wordmark } from '../ui/wordmark';
     .brand p {
       margin-top: 20px;
       max-width: 34ch;
-      color: var(--on-graphite-2);
-      font-size: 0.95rem;
+      color: var(--ink-2);
+      font-size: 0.9375rem;
     }
     h2 {
-      color: var(--on-graphite-2);
+      color: var(--ink-3);
       margin-bottom: 16px;
       font-size: 0.75rem;
     }
@@ -91,16 +91,17 @@ import { Wordmark } from '../ui/wordmark';
       gap: 10px;
     }
     a {
-      color: var(--on-graphite);
+      color: var(--ink);
       text-decoration: none;
-      font-size: 0.95rem;
+      font-size: 0.9375rem;
     }
     a:hover {
+      color: var(--accent);
       text-decoration: underline;
-      text-decoration-color: var(--accent-lit);
+      text-decoration-color: var(--brand-1);
     }
     .reach .data {
-      font-size: 0.85rem;
+      font-size: 0.875rem;
     }
     address {
       display: flex;
@@ -109,10 +110,10 @@ import { Wordmark } from '../ui/wordmark';
       font-style: normal;
       font-size: 0.875rem;
       line-height: 1.5;
-      color: var(--on-graphite-2);
+      color: var(--ink-2);
     }
     address strong {
-      color: var(--on-graphite);
+      color: var(--ink);
       font-weight: 600;
     }
     .legal {
@@ -121,17 +122,17 @@ import { Wordmark } from '../ui/wordmark';
       flex-wrap: wrap;
       gap: 16px;
       padding-block: 24px 32px;
-      border-top: 1px solid var(--graphite-700);
-      color: var(--on-graphite-2);
-      font-size: 0.85rem;
+      border-top: 1px solid var(--rule);
+      color: var(--ink-3);
+      font-size: 0.875rem;
     }
     .links {
       display: flex;
       gap: 24px;
     }
     .links a {
-      font-size: 0.85rem;
-      color: var(--on-graphite-2);
+      font-size: 0.875rem;
+      color: var(--ink-2);
     }
     @media (max-width: 960px) {
       .grid {

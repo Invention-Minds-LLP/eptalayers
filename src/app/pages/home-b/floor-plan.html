@@ -1,0 +1,255 @@
+<svg viewBox="0 0 1160 600" role="img" [attr.aria-label]="label()">
+  <defs>
+    <radialGradient id="fp-cover">
+      <stop offset="0" stop-color="#0e9f6e" stop-opacity="0.38" />
+      <stop offset="1" stop-color="#0e9f6e" stop-opacity="0" />
+    </radialGradient>
+    <pattern id="fp-hatch" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <line x1="0" y1="0" x2="0" y2="10" class="hatch-line" />
+    </pattern>
+    <pattern id="fp-dead" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(-45)">
+      <line x1="0" y1="0" x2="0" y2="8" class="dead-line" />
+    </pattern>
+  </defs>
+
+  <g class="world" [style.transform]="zoom()">
+    <!-- paper of the building, under the coverage survey -->
+    <rect x="40" y="40" width="900" height="520" class="floor" />
+    @if (branch()) {
+      <rect x="990" y="380" width="150" height="160" class="floor" />
+    }
+
+    <!-- Wi-Fi coverage survey: patchy before, even with Epta -->
+    @if (heat()) {
+      <g class="heat">
+        <g class="before">
+          <circle cx="330" cy="120" r="95" fill="url(#fp-cover)" />
+          <circle cx="560" cy="320" r="85" fill="url(#fp-cover)" />
+          <circle cx="150" cy="480" r="80" fill="url(#fp-cover)" />
+          <circle cx="480" cy="190" r="58" fill="url(#fp-dead)" class="dead" />
+          <circle cx="150" cy="150" r="52" fill="url(#fp-dead)" class="dead" />
+          <text x="480" y="194" class="dead-tag" text-anchor="middle">DEAD ZONE</text>
+        </g>
+        <g class="after">
+          @for (c of [[150, 150], [150, 420], [350, 120], [580, 120], [360, 300], [600, 300], [480, 480], [820, 130], [820, 310]]; track $index) {
+            <circle [attr.cx]="c[0]" [attr.cy]="c[1]" r="135" fill="url(#fp-cover)" />
+          }
+        </g>
+      </g>
+    }
+
+    <!-- building -->
+    <rect x="700" y="400" width="240" height="160" fill="url(#fp-hatch)" class="core" />
+    <text x="820" y="486" class="core-tag" text-anchor="middle">LIFT &amp; STAIRS</text>
+
+    @for (r of rooms; track r.id) {
+      @if (r.id !== 'A-106' || branch()) {
+        <g class="room" [class.is-focus]="focus() === r.id" [class.is-dim]="focus() && focus() !== r.id">
+          <rect [attr.x]="r.x" [attr.y]="r.y" [attr.width]="r.w" [attr.height]="r.h" class="wall" />
+          <text [attr.x]="r.x + 14" [attr.y]="r.y + 26" class="tag-id">{{ r.id }}</text>
+          <text [attr.x]="r.x + 14" [attr.y]="r.y + 46" class="tag-name">{{ r.name }}</text>
+        </g>
+      }
+    }
+
+    <!-- furniture -->
+    <g class="furn">
+      @for (d of desks; track $index) {
+        <rect [attr.x]="d.x" [attr.y]="d.y" width="70" height="34" />
+      }
+      <rect x="95" y="105" width="110" height="64" rx="4" />
+      @for (c of [[85, 92], [130, 92], [175, 92], [85, 182], [130, 182], [175, 182]]; track $index) {
+        <circle [attr.cx]="c[0] + 10" [attr.cy]="c[1]" r="7" />
+      }
+      @for (k of [0, 1, 2, 3]; track k) {
+        <rect [attr.x]="728 + k * 48" y="74" width="34" height="104" />
+      }
+      <path d="M 730 300 H 880 V 330 H 760 V 380 H 730 Z" />
+      <path d="M 70 520 Q 150 470 230 520" />
+      @for (k of [0, 1, 2, 3, 4]; track k) {
+        <rect [attr.x]="290 + k * 80" y="512" width="56" height="26" />
+      }
+    </g>
+
+    <!-- cloud -->
+    <path
+      class="cloud"
+      d="M 1012 168 a 26 26 0 0 1 8 -50 a 34 34 0 0 1 64 -10 a 24 24 0 0 1 32 34 a 18 18 0 0 1 -6 26 Z"
+    />
+    <text x="1062" y="196" class="tag-name" text-anchor="middle">Cloud &amp; DR</text>
+
+    <!-- L1 Physical: structured cabling -->
+    <g class="lyr l1" [class.on]="on(1)">
+      <path pathLength="1" class="dr" d="M 760 205 V 405 H 150 V 160" />
+      @for (x of [330, 480, 630, 820]; track x) {
+        <path pathLength="1" class="dr" [attr.d]="'M ' + x + ' 405 V 330'" />
+      }
+      <path pathLength="1" class="dr" d="M 480 405 V 470" />
+      <path pathLength="1" class="dr" d="M 150 405 V 470" />
+      <rect x="722" y="190" width="196" height="10" class="fill" />
+      <g class="ltag" transform="translate(404 396)"><rect width="38" height="24" rx="12" /><text x="19" y="17">L1</text></g>
+    </g>
+
+    <!-- L2 Data link: switching and Wi-Fi cells -->
+    <g class="lyr l2" [class.on]="on(2)">
+      @for (a of [[380, 150], [580, 150], [480, 300], [150, 150], [150, 470], [820, 320], [480, 480]]; track $index) {
+        <mask [attr.id]="uid + 'r' + $index" maskUnits="userSpaceOnUse" x="0" y="0" width="1160" height="600">
+          <circle pathLength="1" class="mdraw" [attr.cx]="a[0]" [attr.cy]="a[1]" r="48" />
+        </mask>
+        <circle [attr.cx]="a[0]" [attr.cy]="a[1]" r="48" class="ring" [attr.mask]="'url(#' + uid + 'r' + $index + ')'" />
+      }
+      <g class="ltag" transform="translate(512 432)"><rect width="38" height="24" rx="12" /><text x="19" y="17">L2</text></g>
+    </g>
+
+    <!-- L3 Network: routing -->
+    <g class="lyr l3" [class.on]="on(3)">
+      <path pathLength="1" class="dr" d="M 872 186 C 780 205 640 236 492 300" />
+      <path pathLength="1" class="dr" d="M 885 176 C 720 110 560 140 392 150" />
+      <path pathLength="1" class="dr" d="M 872 184 C 620 430 320 480 162 470" />
+      @for (e of [[492, 300], [392, 150], [162, 470]]; track $index) {
+        <circle [attr.cx]="e[0]" [attr.cy]="e[1]" r="4" class="fill" />
+      }
+      <g class="ltag" transform="translate(640 214)"><rect width="38" height="24" rx="12" /><text x="19" y="17">L3</text></g>
+    </g>
+
+    <!-- L4 Transport: SD-WAN / MPLS -->
+    <g class="lyr l4" [class.on]="on(4)">
+      <mask [attr.id]="uid + 'w1'" maskUnits="userSpaceOnUse" x="0" y="0" width="1160" height="600"><path pathLength="1" class="mdraw" d="M 940 110 C 975 110 995 140 1018 142" /></mask><path d="M 940 110 C 975 110 995 140 1018 142" class="wan" [attr.mask]="'url(#' + uid + 'w1)'" />
+            @if (branch()) {
+        <mask [attr.id]="uid + 'w2'" maskUnits="userSpaceOnUse" x="0" y="0" width="1160" height="600"><path pathLength="1" class="mdraw" d="M 940 180 C 990 200 1050 300 1062 380" /></mask><path d="M 940 180 C 990 200 1050 300 1062 380" class="wan" [attr.mask]="'url(#' + uid + 'w2)'" />
+              }
+      <g class="ltag" transform="translate(958 80)"><rect width="38" height="24" rx="12" /><text x="19" y="17">L4</text></g>
+    </g>
+
+    <!-- L5 Session: meetings and calls -->
+    <g class="lyr l5" [class.on]="on(5)">
+      <mask [attr.id]="uid + 'c1'" maskUnits="userSpaceOnUse" x="0" y="0" width="1160" height="600"><path pathLength="1" class="mdraw" d="M 150 118 C 420 6 880 10 1044 110" /></mask><path d="M 150 118 C 420 6 880 10 1044 110" class="call" [attr.mask]="'url(#' + uid + 'c1)'" />
+            @if (branch()) {
+        <mask [attr.id]="uid + 'c2'" maskUnits="userSpaceOnUse" x="0" y="0" width="1160" height="600"><path pathLength="1" class="mdraw" d="M 162 128 C 520 40 1060 120 1070 384" /></mask><path d="M 162 128 C 520 40 1060 120 1070 384" class="call" [attr.mask]="'url(#' + uid + 'c2)'" />
+              }
+      <g class="ltag" transform="translate(470 38)"><rect width="38" height="24" rx="12" /><text x="19" y="17">L5</text></g>
+    </g>
+
+    <!-- L6 Presentation: protection at the edge and the endpoints -->
+    <g class="lyr l6" [class.on]="on(6)">
+      <mask [attr.id]="uid + 'p'" maskUnits="userSpaceOnUse" x="0" y="0" width="1160" height="600">
+        <rect pathLength="1" class="mdraw" x="22" y="22" width="936" height="556" />
+      </mask>
+      <rect x="22" y="22" width="936" height="556" class="perimeter" [attr.mask]="'url(#' + uid + 'p)'" />
+      @for (k of [[226, 290], [1112, 470], [622, 180]]; track $index) {
+        <g [attr.transform]="'translate(' + k[0] + ' ' + k[1] + ')'" class="lock">
+          <rect x="-9" y="-2" width="18" height="14" rx="2" class="fill" />
+          <path d="M -5 -2 V -7 a 5 5 0 0 1 10 0 V -2" />
+        </g>
+      }
+      <g class="ltag" transform="translate(44 569)"><rect width="38" height="24" rx="12" /><text x="19" y="17">L6</text></g>
+    </g>
+
+    <!-- L7 Application: business apps on-premises and in the cloud -->
+    <g class="lyr l7" [class.on]="on(7)">
+      @for (k of [0, 1, 2]; track k) {
+        <rect [attr.x]="848 + k * 28" y="52" width="20" height="14" rx="3" class="fill" />
+        <rect [attr.x]="1036 + k * 26" y="134" width="18" height="13" rx="3" class="fill" />
+      }
+      <g class="ltag" transform="translate(812 50)"><rect width="38" height="24" rx="12" /><text x="19" y="17">L7</text></g>
+    </g>
+
+    <!-- OEM equipment -->
+    <g class="devices" [class.on]="devices()">
+      @for (a of [[380, 150], [580, 150], [480, 300], [150, 150], [150, 470], [820, 320], [480, 480]]; track $index) {
+        <g class="dev" [style.--i]="$index">
+          <circle [attr.cx]="a[0]" [attr.cy]="a[1]" r="9" class="ap" />
+          <circle [attr.cx]="a[0]" [attr.cy]="a[1]" r="3" class="ap-dot" />
+        </g>
+      }
+      @for (s of [[330, 330], [480, 330], [630, 330], [820, 330], [150, 400]]; track $index) {
+        <rect class="dev sw" [style.--i]="$index + 7" [attr.x]="s[0] - 12" [attr.y]="s[1] - 6" width="24" height="10" />
+      }
+      <rect class="dev rtr" style="--i: 12" x="868" y="168" width="34" height="16" />
+      <rect class="dev ph" style="--i: 13" x="98" y="114" width="14" height="10" />
+      <rect class="dev ph" style="--i: 14" x="186" y="150" width="14" height="10" />
+    </g>
+
+    <!-- supply: OEM equipment callouts -->
+    @if (callouts()) {
+      <g class="callouts">
+        @for (c of calloutList; track c.label) {
+          <g>
+            <path [attr.d]="'M ' + c.x + ' ' + c.y + ' L ' + c.lx + ' ' + c.ly + ' H ' + (c.lx + 12)" />
+            <circle [attr.cx]="c.x" [attr.cy]="c.y" r="3" />
+            <text [attr.x]="c.lx + 16" [attr.y]="c.ly + 4">{{ c.label }}</text>
+          </g>
+        }
+      </g>
+    }
+
+    <!-- site survey: Fluke test points -->
+    <g class="survey" [class.on]="survey()">
+      @for (p of [[330, 330], [480, 330], [630, 330], [820, 330], [480, 470], [150, 470]]; track $index) {
+        <g [attr.transform]="'translate(' + p[0] + ' ' + p[1] + ')'">
+          <circle r="11" />
+          <path d="M -16 0 H 16 M 0 -16 V 16" />
+          <text x="15" y="-12" class="ft">FT</text>
+        </g>
+      }
+    </g>
+
+    <!-- before / with Epta -->
+    @if (showStates()) {
+      @for (r of rooms; track r.id) {
+        @if (r.id !== 'A-106' || branch()) {
+          <g [attr.transform]="'translate(' + r.px + ' ' + r.py + ')'">
+            <g class="pin">
+              <circle r="14" />
+              <path d="M 0 -7 V 2 M 0 6 V 7" />
+            </g>
+            <g class="stamp">
+              <circle r="14" />
+              <path d="M -6 0 L -2 5 L 7 -5" />
+            </g>
+          </g>
+        }
+      }
+    }
+
+    <!-- NOC: traffic on the wire -->
+    @if (pulses()) {
+      <g class="traffic">
+        @for (k of [0, 1, 2]; track k) {
+          <circle r="5">
+            <animateMotion
+              dur="5s"
+              repeatCount="indefinite"
+              [attr.begin]="k * 1.6 + 's'"
+              path="M 760 205 V 405 H 150 V 160"
+            />
+          </circle>
+        }
+      </g>
+    }
+    @if (incident()) {
+      <g class="incident" transform="translate(580 150)">
+        <circle r="20" class="ring-out" />
+        <circle r="10" class="core-dot" />
+        <text x="0" y="-30" text-anchor="middle" class="inc-tag">INCIDENT · CAUGHT &amp; CLOSED</text>
+      </g>
+    }
+
+    @if (renew()) {
+      <g class="renew">
+        <g transform="translate(728 30)">
+          <rect width="104" height="20" rx="10" />
+          <text x="52" y="14" text-anchor="middle">REFRESH CYCLE</text>
+        </g>
+        <g transform="translate(1004 64)">
+          <rect width="116" height="20" rx="10" />
+          <text x="58" y="14" text-anchor="middle">LICENCE RENEWAL</text>
+        </g>
+        <g transform="translate(990 556)">
+          <rect width="150" height="20" rx="10" />
+          <text x="75" y="14" text-anchor="middle">NEW SITE CONNECTED</text>
+        </g>
+      </g>
+    }
+  </g>
+</svg>
