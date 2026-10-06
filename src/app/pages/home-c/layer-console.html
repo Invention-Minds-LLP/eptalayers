@@ -1,0 +1,172 @@
+<!-- L7 · the ERP screen the sales manager is looking at -->
+<div class="con c-l7" [class.on]="on('l7')">
+  <header>
+    <span class="t">ERP · New purchase order</span>
+    <span class="pill swap"><i>Draft</i><i class="ok">Sent</i></span>
+  </header>
+  <dl class="form">
+    <div><dt>Order</dt><dd class="mono">PO-4471</dd></div>
+    <div><dt>From</dt><dd>Bangalore HQ · Sales</dd></div>
+    <div><dt>To</dt><dd>Mumbai branch</dd></div>
+    <div><dt>Lines</dt><dd>3 items</dd></div>
+  </dl>
+  <div class="send-row">
+    <span class="send">Send order</span>
+    <svg class="cursor" viewBox="0 0 16 22"><path d="M1 1 L1 17 L5.5 13 L8.5 20 L11 19 L8 12 L14 12 Z" fill="#fff" stroke="#0b1230" stroke-width="1.2" /></svg>
+  </div>
+  <p class="log mono"><span class="dim">→</span> POST /orders <b class="ok">201 Created</b></p>
+</div>
+
+<!-- L6 · the order encoded and encrypted, line by line -->
+<div class="con c-l6" [class.on]="on('l6')">
+  <header>
+    <span class="t">Encode and encrypt</span>
+    <span class="pill">TLS 1.3</span>
+  </header>
+  <ol class="cipher mono">
+    @for (row of cipher; track $index) {
+      <li [style.--i]="$index"><span class="plain">{{ row[0] }}</span><span class="ct">{{ row[1] }}</span></li>
+    }
+  </ol>
+  <p class="log mono">AES-256-GCM <span class="dim">·</span> certificate verified <b class="ok">✓</b></p>
+</div>
+
+<!-- L5 · the session held open between the two offices -->
+<div class="con c-l5" [class.on]="on('l5')">
+  <header>
+    <span class="t">Session · Bangalore ⇄ Mumbai</span>
+    <span class="pill ok"><span class="dot"></span>Open</span>
+  </header>
+  <div class="link">
+    <span class="end">BLR<small>Head office</small></span>
+    <span class="wire"><i class="beat a"></i><i class="beat b"></i></span>
+    <span class="end r">BOM<small>Branch</small></span>
+  </div>
+  <div class="clock mono"><span class="dim">held for</span> 00:00:<b class="sec"></b></div>
+  <ol class="events mono">
+    <li><span class="dim">session.open</span> ok</li>
+    <li><span class="dim">auth</span> ok</li>
+    <li><span class="dim">keep-alive</span> ok</li>
+  </ol>
+</div>
+
+<!-- L4 · numbered segments, acknowledged; one lost and resent -->
+<div class="con c-l4" [class.on]="on('l4')">
+  <header>
+    <span class="t">Transport · 12 segments</span>
+    <span class="pill swap"><i>Sending</i><i class="ok">12 / 12 acknowledged</i></span>
+  </header>
+  <ol class="segs mono">
+    @for (n of segments; track n) {
+      <li [style.--i]="n" [class.lost]="n === 7">
+        <span>#{{ n < 10 ? '0' + n : n }}</span>
+        @if (n === 7) {
+          <em>resent</em>
+        }
+      </li>
+    }
+  </ol>
+  <p class="log mono">1 segment resent <span class="dim">·</span> delivered in order <b class="ok">✓</b></p>
+</div>
+
+<!-- L3 · the route table steering around congestion -->
+<div class="con c-l3" [class.on]="on('l3')">
+  <header>
+    <span class="t">Network · best path to Mumbai</span>
+    <span class="pill swap"><i class="warn">Congestion</i><i class="ok">Rerouted</i></span>
+  </header>
+  <svg class="graph" viewBox="0 0 360 170">
+    <path class="ln" d="M40 120 L175 34" />
+    <path class="ln jam" d="M175 34 L320 86" />
+    <path class="ln" d="M40 120 L180 146" />
+    <path class="ln" d="M180 146 L320 86" />
+    <path class="route old" pathLength="1" d="M40 120 L175 34 L320 86" />
+    <path class="route new" pathLength="1" d="M40 120 L180 146 L320 86" />
+    @for (n of [[40, 120, 'BLR'], [175, 34, 'HYD'], [180, 146, 'PNQ'], [320, 86, 'BOM']]; track $index) {
+      <g [attr.transform]="'translate(' + n[0] + ' ' + n[1] + ')'">
+        <circle r="7" class="node" />
+        <text [attr.y]="$index === 1 ? -14 : 24" text-anchor="middle">{{ n[2] }}</text>
+      </g>
+    }
+  </svg>
+  <table class="rt mono">
+    <tr class="was"><td>BOM-branch</td><td>via HYD</td><td class="warn">congested</td></tr>
+    <tr class="now"><td>BOM-branch</td><td>via PNQ</td><td class="ok">best path</td></tr>
+  </table>
+</div>
+
+<!-- L2 · the access switch passing the frame to one port -->
+<div class="con c-l2" [class.on]="on('l2')">
+  <header>
+    <span class="t">Access switch · floor 3</span>
+    <span class="pill ok"><span class="dot"></span>Port 14 up</span>
+  </header>
+  <ol class="face">
+    @for (p of ports; track p) {
+      <li [class.hot]="p === 14" [style.--d]="((p * 7) % 11) / 10 + 's'"><i></i><span></span></li>
+    }
+  </ol>
+  <table class="rt mono">
+    <tr><td class="dim">MAC</td><td class="dim">Port</td><td class="dim">State</td></tr>
+    <tr><td>3c:22:fb:9a:41:0e</td><td>Gi1/0/09</td><td>learned</td></tr>
+    <tr class="now"><td>a4:5e:60:d2:17:c3</td><td>Gi1/0/14</td><td class="ok">forwarding</td></tr>
+  </table>
+</div>
+
+<!-- L1 · a cable certification wiremap -->
+<div class="con c-l1" [class.on]="on('l1')">
+  <header>
+    <span class="t">Cable certification · wiremap</span>
+    <span class="pill stamp ok">PASS</span>
+  </header>
+  <svg class="wiremap" viewBox="0 0 320 176">
+    @for (p of pins; track p; let i = $index) {
+      <text x="14" [attr.y]="20 + i * 20" class="pin">{{ p }}</text>
+      <text x="306" [attr.y]="20 + i * 20" class="pin" text-anchor="end">{{ p }}</text>
+      <circle cx="34" [attr.cy]="16 + i * 20" r="4" class="jack" />
+      <circle cx="286" [attr.cy]="16 + i * 20" r="4" class="jack" />
+      <path
+        class="pair"
+        pathLength="1"
+        [attr.d]="'M40 ' + (16 + i * 20) + ' H280'"
+        [attr.stroke]="pairColour(p)"
+        [style.--i]="i"
+      />
+    }
+  </svg>
+  <p class="log mono">Cat6A permanent link <span class="dim">·</span> all pairs within limits</p>
+</div>
+
+<!-- Between cities · the carrier link -->
+<div class="con c-travel" [class.on]="on('travel')">
+  <header>
+    <span class="t">Carrier link · MPLS</span>
+    <span class="pill"><span class="dot"></span>In transit</span>
+  </header>
+  <div class="span">
+    <span class="city">Bangalore</span>
+    <span class="fibre"><i class="pulse"></i><i class="pulse p2"></i><i class="pulse p3"></i><b class="pkt"></b></span>
+    <span class="city r">Mumbai</span>
+  </div>
+  <table class="rt mono">
+    <tr><td>Primary path</td><td class="ok">active</td></tr>
+    <tr><td>Protected path</td><td class="dim">standby</td></tr>
+  </table>
+</div>
+
+<!-- Arrival · the Mumbai branch inbox, every layer ticked -->
+<div class="con c-arrive" [class.on]="on('arrive')">
+  <header>
+    <span class="t">ERP · Mumbai branch</span>
+    <span class="pill ok">Received</span>
+  </header>
+  <ul class="inbox">
+    <li class="new"><b class="mono">PO-4471</b><span>From Bangalore HQ · Sales</span><time>just now</time></li>
+    <li><b class="mono">PO-4470</b><span>From Pune office</span><time>09:12</time></li>
+  </ul>
+  <ol class="ticks mono">
+    @for (l of layers; track l; let i = $index) {
+      <li [style.--i]="i">{{ l }} <b>✓</b></li>
+    }
+  </ol>
+</div>

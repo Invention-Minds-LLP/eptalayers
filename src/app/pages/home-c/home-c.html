@@ -1,0 +1,196 @@
+<!-- Hero: the city at dusk in depth; the order card already in the air -->
+<section class="hero" aria-labelledby="hero-title" appParallax="0.35">
+  <div class="h-media"><img src="photos/city-dusk.webp" alt="" fetchpriority="high" /></div>
+  <div class="h-shade" aria-hidden="true"></div>
+  <div class="wrap h-grid">
+    <div class="h-copy">
+      <h1 id="hero-title">Every order your business sends crosses seven layers.</h1>
+      <p class="lede">
+        Epta Layers keeps all seven running: designed, supplied, installed and watched 24x7, so your operations never
+        see the stop sign.
+      </p>
+      <div class="ctas">
+        <a class="btn" routerLink="/contact">Talk to an engineer <app-icon name="arrow" /></a>
+        <a class="follow" href="#journey">Follow one order <span class="drop" aria-hidden="true"></span></a>
+      </div>
+    </div>
+    <div class="h-card" aria-hidden="true">
+      <div class="ticket">
+        <div class="tk-top">
+          <span class="tk-no">PO-4471</span>
+          <span class="tk-st"><i></i>Sending</span>
+        </div>
+        <div class="tk-route">
+          <span>Bangalore HQ</span>
+          <span class="tk-line"><b></b></span>
+          <span>Mumbai branch</span>
+        </div>
+        <ol class="tk-layers">
+          @for (s of stops.slice(0, 7); track s.id; let i = $index) {
+            <li [style.--i]="i">{{ s.mark }}</li>
+          }
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- The journey: one photographed place per stop, with what an engineer sees there -->
+<section id="journey" class="journey" aria-labelledby="journey-title" [style.--dawn]="dawn()">
+  <div class="wrap j-head">
+    <h2 id="journey-title">Follow one order from Bangalore to Mumbai.</h2>
+    <p>An example: a sales order sent from head office to a branch, and every layer it crosses on the way.</p>
+  </div>
+
+  <div class="j-body">
+    <div class="j-stage">
+      <div class="j-photos" aria-hidden="true">
+        @for (s of stops; track s.id; let i = $index) {
+          <img [src]="s.photo" alt="" loading="lazy" [class.on]="active() === i" [class.past]="active() > i" />
+        }
+      </div>
+      <div class="j-grade" aria-hidden="true"></div>
+      <div class="wrap j-stage-grid">
+        <div class="j-console" aria-hidden="true">
+          <app-layer-console [stop]="activeStop().id" />
+        </div>
+      </div>
+      <div class="wrap j-rail-wrap">
+        <ol class="j-rail" aria-label="The order's stops" [style.--at]="active()">
+          @for (s of stops; track s.id; let i = $index) {
+            <li [class.is-on]="active() === i" [class.is-done]="active() > i">
+              <a [href]="'#' + s.id">
+                <b>
+                  @if (s.icon) {
+                    <app-icon [name]="s.icon" />
+                  } @else {
+                    {{ s.mark }}
+                  }
+                </b>
+                <span>{{ s.layer }}</span>
+              </a>
+            </li>
+          }
+        </ol>
+      </div>
+    </div>
+
+    <div class="wrap j-chapters">
+      @for (s of stops; track s.id; let i = $index) {
+        <article #stopEl class="chapter" [id]="s.id" [attr.data-i]="i" [class.is-on]="active() === i">
+          <div class="ch-text">
+            <p class="ch-layer">
+              @if (s.mark) {
+                Layer {{ s.mark.slice(1) }} · {{ s.layer }}
+              } @else {
+                {{ s.layer }}
+              }
+            </p>
+            <h3>{{ s.line }}</h3>
+            <p>{{ s.body }}</p>
+            <a class="keeper" [routerLink]="['/solutions', s.slug]">
+              <span>{{ s.keeper }}</span>
+              <app-icon name="arrow" />
+            </a>
+          </div>
+        </article>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- When a stop fails: the NOC, in a real operations setting -->
+<section class="fail" aria-labelledby="fail-title" appParallax="0.3" appInView>
+  <div class="f-media" aria-hidden="true"><img src="photos/noc-racks.webp" alt="" loading="lazy" /></div>
+  <div class="f-shade" aria-hidden="true"></div>
+  <div class="wrap f-grid">
+    <div class="f-copy">
+      <h2 id="fail-title">If any one of the seven fails, the order stops.</h2>
+      <p>
+        That is why Epta works as one accountable partner across all seven: we design the network around your line of
+        business, supply it as an extended arm of world-leading OEMs, implement it, and watch it 24x7, so a weak stop is
+        found and fixed before your business notices.
+      </p>
+      <figure class="quote">
+        <blockquote>“Epta’s NOC became our first line of defense against downtime.”</blockquote>
+        <figcaption>IT/ITeS client</figcaption>
+      </figure>
+    </div>
+    <div class="incident" aria-label="Example: how the NOC handles a failing stop">
+      <p class="inc-head"><span>Network Operation Center</span><span class="inc-live"><i></i>24x7</span></p>
+      <ol>
+        @for (step of incident; track $index) {
+          <li [class]="step.tone" [style.--i]="$index">{{ step.what }}</li>
+        }
+      </ol>
+      <p class="inc-note">Example sequence</p>
+    </div>
+  </div>
+</section>
+
+<!-- Proof: businesses that kept moving -->
+<section class="proof" aria-labelledby="proof-title">
+  <div class="wrap">
+    <h2 id="proof-title" class="section-title">Businesses that kept moving.</h2>
+    <ul class="results">
+      @for (r of results; track r.slug) {
+        <li class="result" appInView>
+          <div class="r-photo" appParallax="0.12" aria-hidden="true"><img [src]="r.photo" alt="" loading="lazy" /></div>
+          <h3>{{ r.title }}</h3>
+          <p class="r-meta">{{ r.sector }}</p>
+          <p class="r-story">{{ r.lead }} <b>{{ r.figure }}</b> {{ r.tail }}</p>
+          <a class="keeper" [routerLink]="['/case-studies', r.slug]"><span>Read the case study</span><app-icon name="arrow" /></a>
+        </li>
+      }
+    </ul>
+  </div>
+</section>
+
+<!-- Behind every stop: the LAER loop and the OEMs -->
+<section class="behind" aria-labelledby="behind-title" appInView>
+  <div class="wrap">
+    <div class="b-head">
+      <h2 id="behind-title" class="section-title">Behind every stop.</h2>
+      <p class="intro">
+        Epta works as an extended arm of world-leading OEMs: implementing their solutions to certified practice and
+        supporting them for the long term. The LAER model tracks KPIs for implementing, training and maximising the value
+        of every investment, then starts the loop again.
+      </p>
+    </div>
+    <ol class="laer">
+      @for (m of laer; track m.name; let i = $index) {
+        <li [style.--i]="i">
+          <span class="l-name">{{ m.name }}</span>
+          <span class="l-does">{{ m.does }}</span>
+        </li>
+      }
+    </ol>
+    <ul class="roster" aria-label="OEM partners">
+      @for (k of [1, 2, 3, 4, 5, 6]; track k) {
+        <li>Partner logo</li>
+      }
+    </ul>
+  </div>
+</section>
+
+<!-- Contact: Mumbai at first light, where the order arrived -->
+<section class="contact" aria-labelledby="contact-title" appParallax="0.25">
+  <div class="c-media" aria-hidden="true"><img src="photos/mumbai-sea.webp" alt="" loading="lazy" /></div>
+  <div class="c-shade" aria-hidden="true"></div>
+  <div class="wrap c-grid">
+    <div>
+      <h2 id="contact-title" class="section-title">Let’s keep your business moving.</h2>
+      <p class="intro">Tell us about your sites and what isn’t working. An Epta engineer will reply.</p>
+      <ul class="lines">
+        <li><app-icon name="phone" /><a [href]="contact.phoneHref">{{ contact.phoneDisplay }}</a></li>
+        <li><app-icon name="mail" /><a [href]="'mailto:' + contact.info">{{ contact.info }}</a></li>
+        @for (o of contact.offices; track o.name) {
+          <li><app-icon name="pin" /><span><b>{{ o.name }}</b> {{ o.lines.join(', ') }}</span></li>
+        }
+      </ul>
+    </div>
+    <div class="form-panel">
+      <app-sign-off-form />
+    </div>
+  </div>
+</section>

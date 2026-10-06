@@ -8,6 +8,8 @@
 @use '@fontsource/barlow-condensed/500.css' as bcond500;
 @use '@fontsource/barlow-condensed/600.css' as bcond600;
 @use '@fontsource/barlow-condensed/700.css' as bcond700;
+@use '@fontsource-variable/familjen-grotesk/index.css' as familjen;
+@use '@fontsource-variable/plus-jakarta-sans/index.css' as jakarta;
 
 :root {
   /* instrument panel */
@@ -148,6 +150,65 @@ body.theme-b {
   --font-sans: 'Barlow', system-ui, sans-serif;
   --ground: var(--paper-b);
   background: var(--paper-b);
+}
+
+/* main homepage: dusk night palette; light lives only in the fibres */
+body.theme-dusk {
+  --font-sans: 'Familjen Grotesk Variable', 'Familjen Grotesk', system-ui, sans-serif;
+  /* illustration palette */
+  --sky-900: #0b1230;
+  --sky-700: #1c2b5a;
+  --dusk-500: #5a3a62;
+  --lamp: #f2a93b;
+  --lamp-hi: #ffd27a;
+  --teal: #2bb3a3;
+  --night-950: #0b0f1f;
+  --night-900: #0f1426;
+  --night-800: #151c33;
+  --night-700: #1d2a4a;
+  --plum-700: #2c2350;
+  --plum-500: #3b2d5c;
+  --ember-300: #d9785a;
+
+  --ground: var(--night-900);
+  --sheet: var(--night-800);
+  --sheet-under: #1a2240;
+  --sheet-deep: var(--night-700);
+  --rule: rgb(185 191 210 / 0.16);
+  --rule-strong: rgb(185 191 210 / 0.34);
+  --ink: #f1f0f5;
+  --ink-2: #b9bfd2;
+  --ink-3: #8f96b0;
+  --accent: #ff9a6e;
+  --accent-deep: #ffb592;
+  --accent-fill: #c2410c;
+  --accent-fill-hover: #a9380a;
+  --pass-ink: #3ddc97;
+  --fault-ink: #f5b301;
+  --limit: #ff6b6b;
+  --limit-ink: #ff8a8a;
+
+  color-scheme: dark;
+  background: var(--night-900);
+  color: var(--ink);
+}
+
+/* homepage D (the agency comp): dusk header and footer, Plus Jakarta Sans throughout */
+body.theme-dusk.theme-d {
+  --font-sans: 'Plus Jakarta Sans Variable', 'Plus Jakarta Sans', system-ui, sans-serif;
+  --night-900: #0a1430;
+  --ground: #0a1430;
+  --sheet: #0a1430;
+  background: #0a1430;
+}
+
+body.theme-dusk .btn {
+  --btn-fg: #fff;
+}
+
+/* on the dusk page the footer closes on a hairline, not a bright ink edge */
+body.theme-dusk app-site-footer {
+  border-top: 1px solid var(--rule-strong);
 }
 
 a {

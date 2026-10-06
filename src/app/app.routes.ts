@@ -1,6 +1,5 @@
 import { Routes } from '@angular/router';
 import { Home } from './pages/home/home';
-import { HomeB } from './pages/home-b/home-b';
 import { StatusPage } from './pages/status/status-page';
 
 const pending = (path: string, title: string) => ({
@@ -18,8 +17,18 @@ export const routes: Routes = [
   },
   {
     path: 'home-b',
-    component: HomeB,
+    loadComponent: () => import('./pages/home-b/home-b').then((m) => m.HomeB),
     title: 'Epta Layers · Surveyed layer by layer, run 24x7',
+  },
+  {
+    path: 'home-c',
+    loadComponent: () => import('./pages/home-c/home-c').then((m) => m.HomeC),
+    title: 'Epta Layers · Single-point enterprise solutions provider, Bangalore',
+  },
+  {
+    path: 'home-d',
+    loadComponent: () => import('./pages/home-d/home-d').then((m) => m.HomeD),
+    title: 'Epta Layers · Enterprise infrastructure that keeps you ahead',
   },
   pending('solutions', 'Solutions'),
   pending('solutions/:slug', 'This solution page'),

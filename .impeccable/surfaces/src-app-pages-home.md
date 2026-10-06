@@ -5,24 +5,24 @@ primary_target: "src/app/pages/home"
 related_targets: []
 ---
 
-# Surface brief — Home
+# Surface brief: Home (main homepage, `/`), illustrated seven-stop story
 
-Scope: homepage (`/`). Visitor mode: **Persuade**.
-Audience: IT/infra decision-maker at an Indian enterprise, evaluating a single accountable infrastructure partner.
-Action: start a conversation (contact form, call, NOC inquiry). Proof: 3 anonymized case studies with real figures, one NOC quote. No invented stats, logos, or testimonials.
-Memorable moment: the hero coverage test running layer 1→7 and resolving PASS.
-Per-section scenarios (user standing request): each section dramatizes its own subject inside the report world — layer test rows, OSI sheet stack, solution test log with layer bars, OEM wiremap, LAER limit-line graph, NOC console, stacked signed case reports, sign-off form.
+Scope: replaces "The Light Path" homepage at `/` after the user judged it template-like (hero, sections, fibres, fonts and colours) and asked for illustrated story scenes built on the seven layers. Visitor mode: **Persuade**. Purely B2B: CIOs, IT heads, founders, operations and procurement at Indian enterprises.
+Theme: dusk palette the user chose (navy, indigo, plum, ember; burnt-orange actions), modelled on aloka-eye-care.netlify.app's colours only; its illustrations, layout and fonts must not be copied.
+Story chosen by the user (2026-10-05): "One request, seven stops": one sales order sent from the Bangalore HQ to the Mumbai branch, followed down L7→L1, across the country as light, received in Mumbai; then Epta keeps every stop running.
+Action: talk to an engineer. Proof: three anonymized case studies and one NOC quote; the order in the story is an illustrative device, labelled as such; no invented numbers.
+Memorable moment: the glowing order card descending a seven-stop spine while each stop's illustrated scene plays.
 
 ## Direction contract
 
-THESIS: Epta doesn't claim your network works — it tests every layer and signs the report. Refuses the IT-services default of navy gradient hero, data-center photo, and a grid of icon service cards.
+THESIS: Every order your business sends crosses seven layers; Epta keeps all seven running. Refuses the IT-services template: headline-left/effect-right hero, abstract tech visuals, repeating heading-plus-rows sections.
 
-OWN-WORLD: Field certification reports laid on a graphite instrument panel. Graphite instrument scale owns header/hero (#16191C), NOC (#1B1F23) and continuity/footer (#101316), darkening toward the page close; light sections sit on a desk ground #E1E6E4 carrying cool report-white #EEF1F0 sheets; PASS green #0E9F6E for verdicts, amber #F5B301 for alarms, red #B3261E for form errors only; the accent is the client logo's seven-step orange #FF5F27 → pink #FE046F (fills carry ink text; deep pink #C4003F for text links on light). T568B wire colours appear only inside cable diagrams. Archivo across widths (condensed labels, wide heavy heads), Martian Mono only for measured values/IDs. Hairline ruled tables, leader lines to limits, wiremaps, limit-line plots. No shadows, no gradients; depth only by flat sheets overlapping.
+OWN-WORLD: Original flat-vector night illustrations: Bangalore HQ tower, office desk, sealing envelope, held call line, courier, city route map, switch room, cable trench with an engineer, a night map of India, the Mumbai branch; people as simple geometric figures in warm skin tones. Dusk grounds (#0E1530 navy, #1C2B5A indigo, #3B2D5C plum, ember #F2A93B lamp light); the order card glows in brand orange #FF5F27 → pink #FE046F. Familjen Grotesk for all type. No cards, no stock photos, no icons-in-circles.
 
-STORY: Visitor sees Epta covers all 7 OSI layers, understands the name, sees seven solutions mapped to the layers they touch, believes via OEM wiremap, LAER plot, NOC console and real case results, then signs off a contact request.
+STORY: The visitor clicks "send" with the sales manager, follows the order through seven plain-language stops (sealed, held, guaranteed, routed, handed on, carried on cable), sees it arrive in Mumbai, learns which Epta solution keeps each stop running, trusts the recorded results, and talks to an engineer.
 
-FIRST VIEWPORT: Graphite nav + report-ID strip. Left 5/12: report header — H1 "A single-point enterprise solutions provider.", sub-line, primary "Talk to an engineer" + secondary "See the seven solutions". Right 7/12: white report sheet, 7 layer rows (layer, what we verify, Epta solution, result) with a scan line resolving each to PASS. Summary strip under it.
+FIRST VIEWPORT: Full-bleed illustrated dusk scene of the Bangalore HQ tower with one lit floor; the order card glows at the sales manager's window. Headline across the top-left over the sky: "Every order your business sends crosses seven layers." Sub-line, burnt-orange "Talk to an engineer", and "Follow one order" scroll cue.
 
-FORM: Cable-certification test report, candidate 5 of 7; seed key f0a1e1cb. Raises: leader lines to limits (Sukeban); flat-overlap depth only (Łowicz); two-second summary beside every readout (Wildstyle); one continuous timestamped report (Ebru). Signature interaction: the layer-by-layer test run; motion grammar: values settle with exponential ease-out, leader lines draw once.
+FORM: Illustrated journey of one request through seven stops (user-chosen story; seed key 33f7f2e0, the assigned storyboard and the winning city-nocturne challenger fused into the scene world). Raises: each stop is marked by one bold numbered roundel (Endurance livery); one enormous line of type per stop (TDR sleeve); all scene motion runs on one shared scroll clock (Algorave); every stop has its own linkable address #l7…#l1 (Teletext). Signature interaction: a sticky scene stage where the order card descends the L7→L1 spine and each stop's scene animates in; motion grammar: scenes rise in from below as the order descends, characters and objects act once per stop, idle loops stay subtle.
 
 FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance

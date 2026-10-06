@@ -1,0 +1,250 @@
+<!-- Hero -->
+<section class="hero" aria-labelledby="hero-title" appParallax="0.3">
+  <div class="h-photo" aria-hidden="true">
+    <img src="photos/d-hero.webp" alt="" fetchpriority="high" />
+    <span class="h-scan"></span>
+    <ul class="h-words">
+      @for (l of osi; track l.n; let i = $index) {
+        <li [style.--i]="i">{{ l.name }}</li>
+      }
+    </ul>
+  </div>
+  <div class="wrap h-copy">
+    <p class="eyebrow">A Single-Point Enterprise Solutions Provider</p>
+    <h1 id="hero-title">
+      @for (w of headline; track $index; let i = $index) {
+        <span class="w" [style.--i]="i"><span [class.hot]="i >= 4">{{ w }}</span></span>{{ ' ' }}
+      }
+    </h1>
+    <p class="lede">
+      Epta Layers works with world-leading OEMs to design, supply, implement and run your network and communication
+      infrastructure, so your business operations never see the stop sign.
+    </p>
+    <div class="ctas">
+      <a class="pill pill--fill" routerLink="/solutions">Explore Our Solutions <app-icon name="arrow" /></a>
+      <a class="play" href="#approach">
+        <span class="play-btn" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 7 L17 12 L9 17 Z" /></svg></span>
+        <span>How Epta works<br />through the seven layers</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Stats strip -->
+<section class="stats" aria-label="Epta in numbers" #statsEl>
+  <div class="wrap stats-row">
+    @for (s of stats(); track s.label) {
+      <p class="stat"><b>{{ s.value }}</b><span>{{ s.label }}</span></p>
+    }
+    <p class="stat-tag"><app-icon name="arrow" /><span>Business continuity<br />is at our core</span></p>
+  </div>
+</section>
+
+<!-- Solutions -->
+<section class="solutions light" aria-labelledby="sol-title">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <p class="eyebrow">Our solutions</p>
+        <h2 id="sol-title">Seven Solution Areas. <em>One Accountable Partner.</em></h2>
+      </div>
+      <a class="more" routerLink="/solutions">View All Solutions <app-icon name="arrow" /></a>
+    </div>
+    <ul class="sol-grid">
+      @for (s of solutions; track s.slug; let i = $index) {
+        <li appInView [style.--i]="i">
+          <a [routerLink]="['/solutions', s.slug]">
+            <span class="glyph" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                @switch (s.glyph) {
+                  @case ('network') {
+                    <circle cx="12" cy="5" r="2" /><circle cx="5" cy="19" r="2" /><circle cx="19" cy="19" r="2" />
+                    <path d="M12 7 V12 M12 12 L5 17 M12 12 L19 17" />
+                  }
+                  @case ('shield') {
+                    <path d="M12 3 L19 6 V11 C19 15.5 16 19 12 21 C8 19 5 15.5 5 11 V6 Z" /><path d="M9 12 L11.2 14 L15 10" />
+                  }
+                  @case ('people') {
+                    <circle cx="9" cy="8" r="3" /><path d="M3 20 C3 16 6 14 9 14 C12 14 15 16 15 20" />
+                    <circle cx="17" cy="9" r="2.4" /><path d="M16 14.2 C19 14 21 16 21 19" />
+                  }
+                  @case ('server') {
+                    <rect x="4" y="3" width="16" height="6" rx="1.5" /><rect x="4" y="10" width="16" height="6" rx="1.5" />
+                    <path d="M8 6 H8.01 M8 13 H8.01 M12 19 V21 M8 21 H16" />
+                  }
+                  @case ('cloud') {
+                    <path d="M7 18 H17.5 A3.5 3.5 0 0 0 17.5 11 A5.5 5.5 0 0 0 7 10 A4 4 0 0 0 7 18 Z" />
+                  }
+                  @case ('gear') {
+                    <circle cx="12" cy="12" r="3" />
+                    <path d="M12 2.5 V5 M12 19 V21.5 M21.5 12 H19 M5 12 H2.5 M18.7 5.3 L17 7 M7 17 L5.3 18.7 M18.7 18.7 L17 17 M7 7 L5.3 5.3" />
+                  }
+                  @case ('pulse') {
+                    <rect x="3" y="4" width="18" height="13" rx="2" /><path d="M6 11 H9 L10.5 8 L13 14 L14.5 11 H18 M9 21 H15" />
+                  }
+                }
+              </svg>
+            </span>
+            <h3>{{ s.name }}</h3>
+            <p class="tags">{{ s.tags.join('  |  ') }}</p>
+            <span class="go" aria-hidden="true"><app-icon name="arrow" /></span>
+          </a>
+        </li>
+      }
+    </ul>
+  </div>
+</section>
+
+<!-- Approach: the seven OSI layers as a live stack -->
+<section id="approach" class="approach" aria-labelledby="ap-title" appInView>
+  <div class="wrap ap-grid">
+    <div class="ap-visual" aria-hidden="true">
+      <ol class="ap-labels">
+        @for (l of osi; track l.n; let i = $index) {
+          <li [class.on]="lit() === i" (mouseenter)="hover.set(i)" (mouseleave)="hover.set(-1)">
+            <b>L{{ l.n }}</b> {{ l.name }}
+          </li>
+        }
+      </ol>
+      <div class="ap-scene">
+        <div class="ap-stack">
+          @for (l of osi; track l.n; let i = $index) {
+            <div class="plane" [style.--i]="i" [class.on]="lit() === i" [class.warm]="i >= 4">
+              <img [src]="planePhoto[i]" alt="" loading="lazy" />
+            </div>
+          }
+          <span class="packet" [style.--at]="lit()"></span>
+        </div>
+      </div>
+    </div>
+    <div class="ap-copy">
+      <p class="eyebrow">Our approach</p>
+      <h2 id="ap-title">Built on the Seven Layers of the <em>OSI Model</em></h2>
+      <p>
+        “Epta” is Greek for seven. We work through the layers to understand your line of business before designing a
+        solution, focusing on problem areas without losing sight of your business KPIs.
+      </p>
+      @let ll = litLayer();
+      <div class="ap-live" aria-live="polite">
+        @for (k of [ll.n]; track k) {
+          <p class="ap-layer"><b>Layer {{ ll.n }} · {{ ll.name }}</b><span>{{ ll.verify }}</span><small>{{ ll.covered }}</small></p>
+        }
+      </div>
+      <a class="pill pill--line" routerLink="/story">The Epta Story <app-icon name="arrow" /></a>
+    </div>
+  </div>
+</section>
+
+<!-- Lifecycle: one partner, assessment to renewal -->
+<section class="cycle" aria-labelledby="cy-title" appInView>
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <p class="eyebrow">One partner, whole lifecycle</p>
+        <h2 id="cy-title">From Assessment to <em>24x7 Operations</em></h2>
+      </div>
+    </div>
+    <ol class="cy-track">
+      @for (c of lifecycle; track c.name; let i = $index) {
+        <li [style.--i]="i">
+          <span class="cy-dot" aria-hidden="true">{{ pad(i + 1) }}</span>
+          <b>{{ c.name }}</b>
+          <span class="cy-does">{{ c.does }}</span>
+        </li>
+      }
+    </ol>
+  </div>
+</section>
+
+<!-- Industries, partners, success stories -->
+<section class="light industries" aria-labelledby="ind-title">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <p class="eyebrow">Industries we serve</p>
+        <h2 id="ind-title">Tailored Infrastructure<br />for <em>Every Line of Business</em></h2>
+      </div>
+      <a class="more" routerLink="/case-studies">View All Case Studies <app-icon name="arrow" /></a>
+    </div>
+    <ul class="ind-grid">
+      @for (n of industries; track n.slug; let i = $index) {
+        <li appInView [style.--i]="i">
+          <a [routerLink]="['/case-studies', n.slug]">
+            <img [src]="n.photo" alt="" loading="lazy" />
+            <span class="ind-name">{{ n.name }}</span>
+            <span class="ind-out">{{ n.outcome }}</span>
+          </a>
+        </li>
+      }
+    </ul>
+
+    <p class="eyebrow partners-head">An extended arm of world-leading OEMs</p>
+    <div class="marquee" aria-label="OEM partners (logos to come)">
+      <ul class="m-track">
+        @for (k of partnerSlots; track k) {
+          <li>OEM partner logo</li>
+        }
+        @for (k of partnerSlots; track k) {
+          <li aria-hidden="true">OEM partner logo</li>
+        }
+      </ul>
+    </div>
+
+    <p class="eyebrow">Success stories</p>
+    <div class="story" aria-live="polite">
+      @let c = current();
+      <div class="s-photo">
+        @for (s of stories; track s.slug; let i = $index) {
+          <img [src]="s.photo" alt="" loading="lazy" [class.on]="story() === i" />
+        }
+      </div>
+      @for (k of [story()]; track k) {
+        <div class="s-copy">
+          <p class="s-kicker">Case study · {{ c.sector }}</p>
+          <h3>{{ c.heading }}</h3>
+          <p class="s-sum">{{ c.summary }}</p>
+          <a class="s-link" [routerLink]="['/case-studies', c.slug]">Read the Story <app-icon name="arrow" /></a>
+        </div>
+      }
+      <div class="s-side">
+        <div class="s-nav">
+          <p class="s-count"><b>{{ pad(story() + 1) }}</b> / {{ pad(stories.length) }}</p>
+          <button type="button" class="arrow-btn" aria-label="Previous story" (click)="step(-1)"><app-icon name="arrow" class="flip" /></button>
+          <button type="button" class="arrow-btn" aria-label="Next story" (click)="step(1)"><app-icon name="arrow" /></button>
+        </div>
+        @for (k of [story()]; track k) {
+          <span class="s-timer" aria-hidden="true" (animationend)="step(1)"></span>
+          <ul class="s-points">
+            @for (p of c.points; track p; let j = $index) {
+              <li [style.--j]="j">{{ p }}</li>
+            }
+          </ul>
+        }
+      </div>
+    </div>
+
+    <figure class="quote" appInView>
+      <blockquote>“Epta’s NOC became our first line of defense against downtime.”</blockquote>
+      <figcaption>IT/ITeS client</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- Closing call -->
+<section class="cta" aria-labelledby="cta-title" appInView>
+  <svg class="cta-curves" viewBox="0 0 1440 220" preserveAspectRatio="none" aria-hidden="true">
+    <defs>
+      <linearGradient id="cta-g" x1="0" x2="1">
+        <stop offset="0" stop-color="#ff5f27" />
+        <stop offset="1" stop-color="#fe046f" />
+      </linearGradient>
+    </defs>
+    <path d="M-20 200 C 120 40, 260 40, 300 120 S 420 230, 520 -10" />
+    <path d="M60 240 C 180 110, 300 140, 360 60" />
+    <path d="M1460 10 C 1300 120, 1200 60, 1120 180" />
+  </svg>
+  <div class="wrap cta-row">
+    <h2 id="cta-title">Let’s Build a<br />Connected Future Together</h2>
+    <a class="pill pill--line" routerLink="/contact">Talk to an Engineer <app-icon name="arrow" /></a>
+  </div>
+</section>

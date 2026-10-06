@@ -63,7 +63,7 @@ import { Icon } from '../../ui/icon';
         </label>
         <div class="submit">
           <button class="btn" type="submit">
-            Send for review <app-icon name="arrow" />
+            Send to an engineer <app-icon name="arrow" />
           </button>
           <span class="note">Goes to {{ contact.info }}</span>
         </div>
@@ -116,6 +116,13 @@ import { Icon } from '../../ui/icon';
       background-repeat: no-repeat;
       background-position: right 0 center;
       background-size: 18px;
+    }
+    :host-context(.theme-dusk) select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23b9bfd2' stroke-width='1.6'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+    }
+    :host-context(.theme-dusk) option {
+      background: #151c33;
+      color: #f1f0f5;
     }
     ::placeholder {
       color: var(--ink-3);

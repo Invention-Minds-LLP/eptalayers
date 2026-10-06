@@ -36,7 +36,7 @@ import { Wordmark } from '../ui/wordmark';
 
       <div class="reach">
         <h2 class="label">Reach us</h2>
-        <a class="data" [href]="contact.phoneHref">{{ contact.phoneDisplay }}</a>
+        <a [href]="contact.phoneHref">{{ contact.phoneDisplay }}</a>
         <a [href]="'mailto:' + contact.info">{{ contact.info }}</a>
         <a [href]="'mailto:' + contact.hr">{{ contact.hr }}</a>
         @for (o of contact.offices; track o.name) {

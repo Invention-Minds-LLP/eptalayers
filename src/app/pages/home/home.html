@@ -1,252 +1,277 @@
-<!-- Hero: the report header and the coverage check -->
+<!-- Hero: Bangalore at dusk, the headline set into the sky -->
 <section class="hero" aria-labelledby="hero-title">
-  <div class="wrap strip">
-    <span><span class="k">Report</span> <span class="data">EL-OSI-07</span></span>
-    <span><span class="k">Subject</span> Your enterprise network, layers 1–7</span>
-    <span class="strip-far"><span class="k">Engineer</span> Epta Layers, Bangalore</span>
-  </div>
-  <div class="wrap hero-grid">
-    <div class="hero-copy">
-      <h1 id="hero-title">A single-point enterprise solutions provider.</h1>
-      <p class="lede">
-        We work with IT world leaders to deliver tailor-made solutions, from the cabling in your walls to the
-        applications your business runs on.
-      </p>
-      <div class="ctas">
-        <a class="btn" routerLink="/contact">Talk to an engineer <app-icon name="arrow" /></a>
-        <a class="btn btn--ghost" href="#solutions">See the seven solutions</a>
-      </div>
+  <div class="hero-art"><app-hero-scene /></div>
+  <div class="wrap hero-copy">
+    <h1 id="hero-title">Every order your business sends crosses seven layers.</h1>
+    <p class="lede">
+      Epta Layers keeps all seven running: designed, supplied, installed and watched 24x7, so your operations never see
+      the stop sign.
+    </p>
+    <div class="ctas">
+      <a class="btn" routerLink="/contact">Talk to an engineer <app-icon name="arrow" /></a>
+      <a class="follow" href="#journey"><span class="follow-dot" aria-hidden="true"></span>Follow one order</a>
     </div>
-    <app-layer-test class="hero-sheet" />
-    <dl class="findings">
-      @for (f of findings; track f.id) {
-        <div>
-          <dt class="data">{{ f.id }}</dt>
-          <dd>{{ f.text }}</dd>
-          <dd class="ok"><app-icon name="check" /><span class="sr-only">Confirmed</span></dd>
-        </div>
-      }
-    </dl>
   </div>
-  <div class="wrap"><app-folio [sheet]="1" name="Coverage check" /></div>
 </section>
 
-<!-- The name: seven sheets, one per layer -->
-<section class="name" aria-labelledby="name-title">
+<!-- The journey: one order, seven stops -->
+<section id="journey" class="journey" aria-labelledby="journey-title" [style.--dawn]="dawn()">
   <div class="wrap">
-    <div class="name-grid">
-      <div class="name-copy">
-        <p class="greek" lang="el" aria-hidden="true">επτά</p>
-        <h2 id="name-title">Epta is Greek for seven.</h2>
-        <p>
-          It names our vision: to focus on the seven layers of networking in the OSI model. Our service framework
-          lets us understand your needs based on your line of business before we design a customised networking
-          solution, focusing on the problem areas without losing sight of your business KPIs.
-        </p>
-        <p class="aside">
-          Epta assists in visualising and communicating how IT networks operate, with a keen focus on network
-          architecture.
-        </p>
-      </div>
-      <ol class="sheets" appInView aria-label="The seven OSI layers">
-        @for (l of stack; track l.n; let i = $index) {
-          <li [style.--i]="i" [style.--dot]="'var(--brand-' + (i + 1) + ')'">
-            <span class="data">{{ l.n }}</span>
-            <strong>{{ l.name }}</strong>
-          </li>
+    <h2 id="journey-title" class="journey-title">
+      Follow one order from Bangalore to Mumbai.
+      <span>An illustrated example: a sales order sent from head office to a branch.</span>
+    </h2>
+    <div class="journey-grid">
+      <div class="chapters">
+        @for (s of stops; track s.id; let i = $index) {
+          <article #stopEl class="chapter" [id]="s.id" [attr.data-i]="i" [class.is-on]="active() === i">
+            <h3><span class="sr-only">{{ s.mark || s.layer }}, {{ s.layer }}: </span>{{ s.line }}</h3>
+            <p>{{ s.body }}</p>
+            <a class="keeper" [routerLink]="['/solutions', s.slug]">
+              <span>{{ s.keeper }}</span>
+              <app-icon name="arrow" />
+            </a>
+          </article>
         }
-      </ol>
+      </div>
+
+      <div class="stage">
+        <div class="stage-inner">
+          <ol class="spine" aria-label="The order's stops" [style.--at]="active()">
+            <span class="spine-card" aria-hidden="true"></span>
+            @for (s of stops; track s.id; let i = $index) {
+              <li [class.is-on]="active() === i" [class.is-done]="active() > i">
+                <a [href]="'#' + s.id">
+                  <span class="sr-only">{{ s.layer }}</span>
+                  <b aria-hidden="true">
+                    @if (s.icon) {
+                      <app-icon [name]="s.icon" />
+                    } @else {
+                      {{ s.mark }}
+                    }
+                  </b>
+                </a>
+              </li>
+            }
+          </ol>
+          <div class="world">
+            <app-journey-scene [stop]="activeStop().id" />
+          </div>
+        </div>
+      </div>
     </div>
-    <app-folio [sheet]="2" name="The name" />
   </div>
 </section>
 
-<!-- Solutions as a test log -->
-<section id="solutions" class="log" aria-labelledby="log-title">
+<!-- The stop sign: the order halted at a broken junction, then moving again -->
+<section class="stopsign" aria-labelledby="stop-title" appInView>
   <div class="wrap">
-    <div class="section-head">
-      <h2 id="log-title">Tailored IT infrastructure, mapped to the layers it touches.</h2>
-      <p>
-        Seven solution areas, one accountable partner. Each row shows where in the stack the work happens.
-      </p>
-    </div>
-
-    <div class="log-table" role="table" aria-label="Epta solutions and the OSI layers they cover">
-      <div class="log-row log-headrow" role="row">
-        <span class="label" role="columnheader">Solution</span>
-        <span class="label col-offer" role="columnheader">Core offerings</span>
-        <span class="layer-scale" role="columnheader">
-          <span class="sr-only">OSI layers covered</span>
-          @for (c of layerCols; track c) {
-            <span class="data" aria-hidden="true">L{{ c }}</span>
+    <h2 id="stop-title">If any one of the seven fails, the order stops.</h2>
+    <svg class="halt" viewBox="0 0 1100 220" role="img" aria-label="Illustration: the order card stopped at a failed Network junction until it is repaired, then moving on">
+      <defs>
+        <linearGradient id="ss-card" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#ff5f27" />
+          <stop offset="1" stop-color="#fe046f" />
+        </linearGradient>
+        <radialGradient id="ss-amber">
+          <stop offset="0" stop-color="#f5b301" stop-opacity="0.55" />
+          <stop offset="1" stop-color="#f5b301" stop-opacity="0" />
+        </radialGradient>
+      </defs>
+      <path d="M40 120 H1060" stroke="#26336a" stroke-width="26" stroke-linecap="round" />
+      <path d="M40 120 H1060" stroke="#3b4a86" stroke-width="2" stroke-dasharray="14 14" />
+      @for (s of layerStops; track s.id; let i = $index) {
+        <g [attr.transform]="'translate(' + (110 + i * 147) + ' 120)'" [class.broken]="s.id === 'l3'">
+          @if (s.id === 'l3') {
+            <circle r="70" fill="url(#ss-amber)" class="hz-glow" />
           }
-        </span>
-        <span aria-hidden="true"></span>
-      </div>
-      @for (s of solutions; track s.slug) {
-        <div class="log-row" role="row">
-          <span class="sol" role="cell">
-            <span class="code data">{{ s.code }}</span>
-            <span>
-              <a class="sol-name" [routerLink]="['/solutions', s.slug]">{{ s.name }}</a>
-              <span class="sol-line">{{ s.line }}</span>
-            </span>
-          </span>
-          <span class="col-offer" role="cell">{{ s.offerings.join(' · ') }}</span>
-          <span class="bar" role="cell">
-            <span class="sr-only">Layers {{ s.layers.join(', ') }}</span>
-            @for (c of layerCols; track c) {
-              <i [class.on]="s.layers.includes($any(c))" aria-hidden="true"></i>
-            }
-          </span>
-          <span class="go" aria-hidden="true"><app-icon name="arrow" /></span>
-        </div>
+          <rect x="-26" y="-26" width="52" height="52" rx="8" class="junction" />
+          <text y="6" text-anchor="middle" class="j-l">{{ s.mark }}</text>
+          <text y="62" text-anchor="middle" class="j-name">{{ s.layer }}</text>
+        </g>
       }
-    </div>
-    <app-folio [sheet]="3" name="Solutions log" />
+      <g class="halt-card">
+        <rect x="-26" y="-18" width="52" height="36" rx="5" fill="url(#ss-card)" />
+        <rect x="-18" y="-10" width="22" height="4" rx="2" fill="#fff" />
+        <rect x="-18" y="-1" width="34" height="3" rx="1.5" fill="#fff" opacity="0.65" />
+      </g>
+    </svg>
+    <!-- phones: the same road, run vertically so its labels stay readable -->
+    <svg class="halt-v" viewBox="0 0 320 780" role="img" aria-label="Illustration: the order card stopped at a failed Network junction until it is repaired, then moving on">
+      <defs>
+        <linearGradient id="ssv-card" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#ff5f27" />
+          <stop offset="1" stop-color="#fe046f" />
+        </linearGradient>
+        <radialGradient id="ssv-amber">
+          <stop offset="0" stop-color="#f5b301" stop-opacity="0.55" />
+          <stop offset="1" stop-color="#f5b301" stop-opacity="0" />
+        </radialGradient>
+      </defs>
+      <path d="M60 24 V756" stroke="#26336a" stroke-width="26" stroke-linecap="round" />
+      <path d="M60 24 V756" stroke="#3b4a86" stroke-width="2" stroke-dasharray="14 14" />
+      @for (s of layerStops; track s.id; let i = $index) {
+        <g [attr.transform]="'translate(60 ' + (70 + i * 106) + ')'" [class.broken]="s.id === 'l3'">
+          @if (s.id === 'l3') {
+            <circle r="62" fill="url(#ssv-amber)" class="hz-glow" />
+          }
+          <rect x="-24" y="-24" width="48" height="48" rx="8" class="junction" />
+          <text y="6" text-anchor="middle" class="j-l">{{ s.mark }}</text>
+          <text x="48" y="6" class="j-name">{{ s.layer }}</text>
+        </g>
+      }
+      <g class="halt-card">
+        <rect x="-18" y="-26" width="36" height="52" rx="5" fill="url(#ssv-card)" />
+        <rect x="-10" y="-17" width="20" height="4" rx="2" fill="#fff" />
+        <rect x="-10" y="-8" width="14" height="3" rx="1.5" fill="#fff" opacity="0.65" />
+      </g>
+    </svg>
+    <p class="stop-sub">
+      That is why Epta works as one accountable partner across all seven: we design the network around your line of
+      business, supply it as an extended arm of world-leading OEMs, implement it, and watch it 24x7, so a weak stop is
+      found and fixed before your business notices.
+    </p>
   </div>
 </section>
 
-<!-- Strengths: OEM wiremap + LAER plot -->
-<section class="strengths" aria-labelledby="strengths-title">
+<!-- Proof: businesses that kept moving -->
+<section class="proof" aria-labelledby="proof-title">
   <div class="wrap">
-    <div class="strengths-grid">
-      <h2 id="strengths-title" class="strengths-title">OEM depth on the way in. Your KPIs on the way out.</h2>
-      <div class="strength">
-        <h3>Extended arm of OEMs</h3>
-        <p>
-          Epta works with world-leading OEMs. We specialise in implementing their unique solutions and offering
-          long-term support, so nothing is lost between the technology and your enterprise.
-        </p>
-        <app-wiremap />
-        <div class="roster" aria-label="OEM partners">
-          <span class="label">OEM partners</span>
-          <ul>
-            @for (slot of oemSlots; track slot) {
-              <li>Logo to be supplied</li>
-            }
-          </ul>
-        </div>
-      </div>
-      <div class="strength">
-        <h3>The LAER delivery model</h3>
-        <p>
-          Land, Adopt, Expand, Renew: our framework for customer success. It lets us track KPIs for implementing,
-          training and maximising the value of your investments.
-        </p>
-        <app-laer-plot />
-      </div>
-    </div>
-    <app-folio [sheet]="4" name="Strengths" />
+    <h2 id="proof-title" class="section-title">Businesses that kept moving.</h2>
+    <ul class="results">
+      @for (r of results; track r.slug) {
+        <li class="result" appInView>
+          <div class="r-art" aria-hidden="true">
+            <svg viewBox="0 0 240 140">
+              <rect width="240" height="140" rx="6" fill="#151c3e" />
+              <circle cx="120" cy="120" r="110" fill="#f2a93b" opacity="0.08" />
+              <rect y="104" width="240" height="36" fill="#0e1530" />
+              @switch (r.art) {
+                @case ('campus') {
+                  @for (b of [[24, 46, 54, 58], [92, 30, 60, 74], [166, 52, 52, 52]]; track $index) {
+                    <rect [attr.x]="b[0]" [attr.y]="b[1]" [attr.width]="b[2]" [attr.height]="b[3]" fill="#22306a" />
+                    @for (k of [0, 1, 2, 3, 4, 5]; track k) {
+                      <rect [attr.x]="b[0] + 8 + (k % 3) * 15" [attr.y]="b[1] + 10 + Math.floor(k / 3) * 18" width="9" height="10" fill="#f2a93b" class="lit" [style.--k]="k" />
+                    }
+                  }
+                  @for (rr of [16, 28, 40]; track rr) {
+                    <path [attr.d]="'M ' + (122 - rr) + ' 26 A ' + rr + ' ' + rr + ' 0 0 1 ' + (122 + rr) + ' 26'" fill="none" stroke="#3ddc97" stroke-width="3" class="wave" />
+                  }
+                }
+                @case ('turbine') {
+                  <rect x="56" y="40" width="5" height="66" fill="#b9bfd2" />
+                  <g class="blades">
+                    @for (a of [0, 120, 240]; track a) {
+                      <rect x="56.5" y="4" width="4" height="36" rx="2" fill="#e9eef6" [attr.transform]="'rotate(' + a + ' 58.5 40)'" />
+                    }
+                  </g>
+                  <rect x="120" y="56" width="96" height="48" fill="#22306a" />
+                  <rect x="130" y="66" width="34" height="22" fill="#0b1230" stroke="#3b4a86" stroke-width="2" />
+                  <rect x="170" y="66" width="34" height="22" fill="#0b1230" stroke="#3b4a86" stroke-width="2" />
+                  <path d="M58 104 C90 90 110 96 130 104" fill="none" stroke="#ff5f27" stroke-width="3" />
+                }
+                @case ('factory') {
+                  <path d="M20 104 V60 L54 76 V60 L88 76 V60 L122 76 V104 Z" fill="#22306a" />
+                  <rect x="100" y="34" width="12" height="40" fill="#22306a" />
+                  <path d="M122 80 L150 40 L190 60 L168 86 L214 92" fill="none" stroke="#ff5f27" stroke-width="2" stroke-dasharray="4 4" />
+                  @for (n of [[150, 40], [190, 60], [168, 86], [214, 92]]; track $index) {
+                    <circle [attr.cx]="n[0]" [attr.cy]="n[1]" r="7" fill="#ff5f27" class="site" [style.--k]="$index" />
+                  }
+                }
+              }
+            </svg>
+          </div>
+          <h3>{{ r.title }}</h3>
+          <p class="r-meta">{{ r.sector }}</p>
+          <p class="r-story">{{ r.lead }} <b>{{ r.figure }}</b> {{ r.tail }}</p>
+          <a class="keeper" [routerLink]="['/case-studies', r.slug]"><span>Read the case study</span><app-icon name="arrow" /></a>
+        </li>
+      }
+    </ul>
+    <figure class="quote">
+      <blockquote>“Epta’s NOC became our first line of defense against downtime.”</blockquote>
+      <figcaption>IT/ITeS client</figcaption>
+    </figure>
   </div>
 </section>
 
-<!-- NOC -->
-<section class="noc" aria-labelledby="noc-title">
-  <div class="wrap">
-    <div class="noc-grid">
-      <div class="noc-copy">
-        <h2 id="noc-title">Your 24x7 network sentinel.</h2>
-        <p>
-          Proactive monitoring and incident resolution: real-time monitoring, KPI tracking, threat response and
-          performance optimisation, reported through custom dashboards and driven by the LAER model.
-        </p>
-        <figure class="quote">
-          <blockquote>“Epta’s NOC became our first line of defense against downtime.”</blockquote>
-          <figcaption>IT/ITeS client</figcaption>
-        </figure>
-        <a class="btn" routerLink="/contact" [queryParams]="{ service: 'NOC' }">
-          Send a NOC service inquiry <app-icon name="arrow" />
-        </a>
-      </div>
-      <app-noc-console />
-    </div>
-    <app-folio [sheet]="5" name="Network operation center" />
-  </div>
-</section>
-
-<!-- Case studies -->
-<section class="cases" aria-labelledby="cases-title">
-  <div class="wrap">
-    <div class="section-head">
-      <h2 id="cases-title">Signed off in the field.</h2>
-      <p>Three engagements across three industries. Client names are withheld; results are as recorded.</p>
-    </div>
-    <app-case-files />
-    <app-folio [sheet]="6" name="Field reports" />
-  </div>
-</section>
-
-<!-- Continuity -->
-<section class="continuity" aria-labelledby="continuity-title">
-  <div class="wrap">
-    <div class="continuity-grid">
-      <h2 id="continuity-title">Business continuity is at our core.</h2>
-      <p>
-        Think of Epta Layers as the chief engineer of a communications satellite. We don’t just draft the technical
-        specs: we integrate every complex sub-system and stay at the controls 24x7, so your signal, and your
-        business, never goes dark.
+<!-- Behind every stop: OEMs and the LAER loop -->
+<section class="behind" aria-labelledby="behind-title">
+  <div class="wrap behind-grid">
+    <div>
+      <h2 id="behind-title" class="section-title">Behind every stop.</h2>
+      <p class="intro">
+        Epta works as an extended arm of world-leading OEMs: implementing their solutions to certified practice and
+        supporting them for the long term. The LAER model (Land, Adopt, Expand, Renew) tracks KPIs for implementing,
+        training and maximising the value of every investment, then starts the loop again.
       </p>
     </div>
-
-    <figure class="failover" appInView>
-      <svg viewBox="0 0 1200 150" preserveAspectRatio="none" aria-hidden="true">
-        <path class="primary" d="M0 40 H520" vector-effect="non-scaling-stroke" />
-        <path class="primary" d="M600 40 H1200" vector-effect="non-scaling-stroke" />
-        <path class="fault" d="M540 26 L580 54 M580 26 L540 54" vector-effect="non-scaling-stroke" />
-        <path class="backup" d="M0 110 H1200" vector-effect="non-scaling-stroke" />
-        <path class="switch" d="M470 40 V110 M650 110 V40" vector-effect="non-scaling-stroke" />
-        <path class="service" d="M0 75 H1200" vector-effect="non-scaling-stroke" />
-      </svg>
-      <div class="lanes" aria-hidden="true">
-        <span class="lane-a label">Primary path</span>
-        <span class="lane-fault label">Fault</span>
-        <span class="lane-s label">Your business: uninterrupted</span>
-        <span class="lane-b label">Redundant path</span>
-      </div>
-      <figcaption>Illustrative: when a path fails, traffic moves to the redundant path and the service line never breaks.</figcaption>
-    </figure>
-    <app-folio [sheet]="7" name="Continuity" />
+    <svg class="loop" viewBox="0 -20 560 340" role="img" aria-label="The LAER loop: Land, Adopt, Expand and Renew, with the order card travelling around it and starting again">
+      <defs>
+        <linearGradient id="lp-card" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#ff5f27" />
+          <stop offset="1" stop-color="#fe046f" />
+        </linearGradient>
+      </defs>
+      <path id="lp-track" d="M130 60 H390 A90 90 0 0 1 390 240 H130 A90 90 0 0 1 130 60 Z" fill="none" stroke="#26336a" stroke-width="22" />
+      <path d="M130 60 H390 A90 90 0 0 1 390 240 H130 A90 90 0 0 1 130 60 Z" fill="none" stroke="#3b4a86" stroke-width="2" stroke-dasharray="10 10" />
+      @for (m of laer; track m.name) {
+        <g [attr.transform]="'translate(' + m.x + ' ' + m.y + ')'">
+          <rect x="-6" y="-30" width="4" height="30" fill="#b9bfd2" />
+          <path d="M-2 -30 L30 -22 L-2 -14 Z" fill="#c2410c" />
+          <text [attr.x]="m.tx" [attr.y]="m.ty" [attr.text-anchor]="m.anchor" class="m-name">{{ m.name }}</text>
+          <text [attr.x]="m.tx" [attr.y]="m.ty + 18" [attr.text-anchor]="m.anchor" class="m-does">{{ m.does }}</text>
+        </g>
+      }
+      <g>
+        <rect x="-20" y="-14" width="40" height="28" rx="4" fill="url(#lp-card)" />
+        <rect x="-13" y="-7" width="18" height="3" rx="1.5" fill="#fff" />
+        <animateMotion dur="9s" repeatCount="indefinite" rotate="auto" path="M130 60 H390 A90 90 0 0 1 390 240 H130 A90 90 0 0 1 130 60 Z" />
+      </g>
+    </svg>
+    <p class="loop-key">Land: implement · Adopt: train your teams · Expand: maximise value · Renew: refresh and renew</p>
+  </div>
+  <div class="wrap">
+    <ul class="roster" aria-label="OEM partners">
+      @for (k of [1, 2, 3, 4, 5, 6]; track k) {
+        <li>Partner logo</li>
+      }
+    </ul>
   </div>
 </section>
 
-<!-- Contact sign-off -->
+<!-- Contact at dawn -->
 <section class="contact" aria-labelledby="contact-title">
-  <div class="wrap">
-    <div class="contact-grid">
-      <div class="contact-copy">
-        <h2 id="contact-title">Let’s build a connected future together.</h2>
-        <p>Tell us what’s failing, slowing or about to grow. An Epta engineer will reply.</p>
-        <ul class="lines">
-          <li>
-            <app-icon name="phone" />
-            <a class="data" [href]="contact.phoneHref">{{ contact.phoneDisplay }}</a>
-          </li>
-          <li>
-            <app-icon name="mail" />
-            <a [href]="'mailto:' + contact.info">{{ contact.info }}</a>
-          </li>
-        </ul>
-        <div class="offices">
-          @for (o of contact.offices; track o.name) {
-            <address>
-              <strong><app-icon name="pin" />{{ o.name }}</strong>
-              @for (l of o.lines; track l) {
-                <span>{{ l }}</span>
-              }
-              <span class="note">{{ o.note }}</span>
-            </address>
-          }
-        </div>
-      </div>
-      <div class="sheet">
-        <div class="sheet-head">
-          <h3>Request for review</h3>
-          <span class="to">To: Epta engineering</span>
-        </div>
-        <app-sign-off-form />
-      </div>
+  <div class="wrap contact-grid">
+    <div>
+      <h2 id="contact-title" class="section-title">Let’s keep your business moving.</h2>
+      <p class="intro">Tell us about your sites and what isn’t working. An Epta engineer will reply.</p>
+      <ul class="lines">
+        <li><app-icon name="phone" /><a [href]="contact.phoneHref">{{ contact.phoneDisplay }}</a></li>
+        <li><app-icon name="mail" /><a [href]="'mailto:' + contact.info">{{ contact.info }}</a></li>
+        @for (o of contact.offices; track o.name) {
+          <li><app-icon name="pin" /><span><b>{{ o.name }}</b> {{ o.lines.join(', ') }}</span></li>
+        }
+      </ul>
     </div>
-    <app-folio [sheet]="8" name="Sign-off" />
+    <div class="form-panel">
+      <app-sign-off-form />
+    </div>
   </div>
+  <svg class="dawn" viewBox="0 0 1600 260" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+    <defs>
+      <linearGradient id="dawn-sky" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#3b2d5c" stop-opacity="0" />
+        <stop offset="0.6" stop-color="#d9785a" stop-opacity="0.6" />
+        <stop offset="1" stop-color="#f3a765" stop-opacity="0.85" />
+      </linearGradient>
+    </defs>
+    <rect width="1600" height="260" fill="url(#dawn-sky)" />
+    <circle cx="800" cy="210" r="80" fill="#ffd27a" opacity="0.8" />
+    <g fill="#1a1838">
+      @for (b of dawnSkyline; track $index) {
+        <rect [attr.x]="b[0]" [attr.y]="260 - b[1]" [attr.width]="b[2]" [attr.height]="b[1]" />
+      }
+    </g>
+  </svg>
 </section>

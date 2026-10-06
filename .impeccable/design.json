@@ -1,275 +1,1197 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-01T09:00:00Z",
+  "generatedAt": "2026-10-05T18:00:00Z",
   "title": "Design System: Epta Layers",
   "extensions": {
     "worlds": [
-      { "name": "The Signed Test Report", "surface": "Homepage A (/), shared shell, status pages", "fonts": ["Archivo Variable", "Martian Mono Variable"], "ground": "ground" },
-      { "name": "The Site Survey", "surface": "Homepage B (/home-b), body.theme-b", "fonts": ["Barlow", "Barlow Condensed"], "ground": "paper-b" }
+      {
+        "name": "One request, seven stops",
+        "surface": "Main homepage (/), body.theme-dusk; lead world",
+        "fonts": [
+          "Familjen Grotesk Variable"
+        ],
+        "ground": "night-900",
+        "imagery": "hand-authored flat-vector SVG scenes (hero-scene.ts, journey-scene.html)"
+      },
+      {
+        "name": "The Site Survey",
+        "surface": "Homepage B (/home-b), body.theme-b; daylight world",
+        "fonts": [
+          "Barlow",
+          "Barlow Condensed"
+        ],
+        "ground": "paper-b"
+      }
     ],
+    "themeMap": {
+      "note": "body.theme-dusk re-maps the shared tokens and adds the illustration palette; components read the shared names.",
+      "--font-sans": "Familjen Grotesk Variable",
+      "--ground": "night-900",
+      "--sheet": "night-800",
+      "--sheet-under": "night-750",
+      "--sheet-deep": "night-700",
+      "--rule": "dusk-rule",
+      "--rule-strong": "dusk-rule-strong",
+      "--ink": "dusk-ink",
+      "--ink-2": "dusk-ink-2",
+      "--ink-3": "dusk-ink-3",
+      "--accent": "dusk-accent",
+      "--accent-deep": "dusk-accent-deep",
+      "--accent-fill": "action",
+      "--accent-fill-hover": "action-hover",
+      "--pass-ink": "dusk-pass",
+      "--fault-ink": "fault",
+      "--limit": "dusk-limit",
+      "--limit-ink": "dusk-limit-ink",
+      ".btn text": "on-action",
+      "--sky-900": "sky-900",
+      "--sky-700": "sky-700",
+      "--dusk-500": "dusk-500",
+      "--lamp": "lamp",
+      "--lamp-hi": "lamp-hi",
+      "--teal": "teal"
+    },
     "colorMeta": {
-      "ground": { "role": "neutral", "displayName": "Desk Ground (World A)", "canonical": "#e1e6e4" },
-      "paper-b": { "role": "neutral", "displayName": "Drafting White (World B)", "canonical": "#f7f8f6" },
-      "sheet": { "role": "neutral", "displayName": "Report White", "canonical": "oklch(95.6% 0.003 174)", "tonalRamp": ["#0a0c0b", "#222524", "#3e403f", "#5c5e5d", "#7b7e7d", "#9c9f9e", "#c2c5c4", "#eeefee"] },
-      "sheet-white": { "role": "neutral", "displayName": "Sheet White (World B sheets)", "canonical": "#ffffff" },
-      "sheet-under": { "role": "neutral", "displayName": "Sheet Under", "canonical": "#e6eae8" },
-      "sheet-deep": { "role": "neutral", "displayName": "Sheet Deep", "canonical": "#cfd7d4" },
-      "rule": { "role": "neutral", "displayName": "Rule", "canonical": "oklch(83.7% 0.011 174)", "tonalRamp": ["#070d0b", "#1f2624", "#3a423f", "#58605d", "#777f7d", "#98a19e", "#bdc6c3", "#ecefee"] },
-      "rule-strong": { "role": "neutral", "displayName": "Rule Strong", "canonical": "#9aa5a2" },
-      "plan-furniture": { "role": "neutral", "displayName": "Plan Furniture (B plan only)", "canonical": "#b9c2bf" },
-      "ink": { "role": "neutral", "displayName": "Ink", "canonical": "#16191c" },
-      "ink-2": { "role": "neutral", "displayName": "Ink 2", "canonical": "oklch(42.3% 0.021 248)", "tonalRamp": ["#050c14", "#1c252e", "#37414b", "#555f69", "#747f8a", "#95a0ab", "#bac6d1", "#ebeff3"] },
-      "ink-3": { "role": "neutral", "displayName": "Ink 3", "canonical": "#505a64" },
-      "graphite-950": { "role": "neutral", "displayName": "Graphite 950 (verdict chip text only)", "canonical": "#101316" },
-      "graphite-800": { "role": "neutral", "displayName": "Graphite 800 (wiremap pin blocks only)", "canonical": "#1b1f23" },
-      "graphite-600": { "role": "neutral", "displayName": "Graphite 600 (scrollbar thumb only)", "canonical": "#343b43" },
-      "on-graphite": { "role": "neutral", "displayName": "On-Graphite (pin numerals only)", "canonical": "#eef1f0" },
-      "brand-1": { "role": "primary", "displayName": "Brand Step 1 (L7, orange; accent fill)", "canonical": "oklch(68.9% 0.205 37)", "tonalRamp": ["#400000", "#670000", "#8d0000", "#b40000", "#db3c00", "#ff632c", "#ff8b57", "#ffe1d1"] },
-      "brand-2": { "role": "primary", "displayName": "Brand Step 2 (L6)", "canonical": "#ff4f34" },
-      "brand-3": { "role": "primary", "displayName": "Brand Step 3 (L5; accent fill hover)", "canonical": "#ff4041" },
-      "brand-4": { "role": "primary", "displayName": "Brand Step 4 (L4)", "canonical": "oklch(64.7% 0.234 20)", "tonalRamp": ["#460000", "#6f0000", "#970000", "#bf0017", "#e8093a", "#ff485b", "#ff757f", "#ffddda"] },
-      "brand-5": { "role": "primary", "displayName": "Brand Step 5 (L3)", "canonical": "#fe2258" },
-      "brand-6": { "role": "primary", "displayName": "Brand Step 6 (L2)", "canonical": "#fe1363" },
-      "brand-7": { "role": "primary", "displayName": "Brand Step 7 (L1, pink)", "canonical": "oklch(64.0% 0.255 7)", "tonalRamp": ["#480000", "#70000b", "#990026", "#c20042", "#eb0061", "#ff3481", "#ff66a5", "#ffdae5"] },
-      "accent": { "role": "primary", "displayName": "Accent (hover, focus, selection)", "canonical": "oklch(52.1% 0.208 15)", "tonalRamp": ["#400000", "#670000", "#8e0016", "#b50034", "#dd2e52", "#ff5872", "#ff8196", "#ffdee1"] },
-      "accent-deep": { "role": "primary", "displayName": "Accent Deep", "canonical": "#9e0033" },
-      "probe-tint": { "role": "primary", "displayName": "Probe Tint (brand-1 at 10%)", "canonical": "rgb(255 95 39 / 0.1)" },
-      "focus-tint": { "role": "primary", "displayName": "Focus Tint (brand-1 at 7%)", "canonical": "rgb(255 95 39 / 0.07)" },
-      "pass": { "role": "secondary", "displayName": "Pass Green", "canonical": "oklch(62.2% 0.133 162)", "tonalRamp": ["#001700", "#00350d", "#005329", "#007346", "#009565", "#3ab885", "#67dfaa", "#d8f7e6"] },
-      "pass-ink": { "role": "secondary", "displayName": "Pass Ink", "canonical": "#0a7552" },
-      "limit": { "role": "tertiary", "displayName": "Limit Red (form errors)", "canonical": "oklch(50.1% 0.178 28)", "tonalRamp": ["#3a0000", "#600000", "#860000", "#ac1d17", "#d2463a", "#f96a5b", "#ff927f", "#ffe2da"] },
-      "fault": { "role": "tertiary", "displayName": "Fault Amber (alarm fills)", "canonical": "oklch(80.7% 0.166 81)", "tonalRamp": ["#280000", "#490b00", "#692e00", "#8b4e00", "#ad6f00", "#d19100", "#f9b713", "#ffecc9"] },
-      "fault-ink": { "role": "tertiary", "displayName": "Fault Ink (amber strokes and text on light)", "canonical": "#8a6100" },
-      "wire-orange": { "role": "tertiary", "displayName": "T568B Orange Pair (wiremap only)", "canonical": "#e07a1f" },
-      "wire-green": { "role": "tertiary", "displayName": "T568B Green Pair (wiremap only)", "canonical": "#2e8b57" },
-      "wire-blue": { "role": "tertiary", "displayName": "T568B Blue Pair (wiremap only)", "canonical": "#1e5aa8" },
-      "wire-brown": { "role": "tertiary", "displayName": "T568B Brown Pair (wiremap only)", "canonical": "#7a4b2a" },
-      "wire-outline": { "role": "tertiary", "displayName": "Striped Wire Outline", "canonical": "rgb(22 25 28 / 0.12)" }
+      "hero-night": {
+        "role": "neutral",
+        "displayName": "Hero Night",
+        "canonical": "#090f2a"
+      },
+      "journey-night": {
+        "role": "neutral",
+        "displayName": "Journey Night",
+        "canonical": "#0a1029"
+      },
+      "night-900": {
+        "role": "neutral",
+        "displayName": "Night 900 (dusk ground)",
+        "canonical": "oklch(19.6% 0.037 270)",
+        "tonalRamp": [
+          "#060a1b",
+          "#1d2336",
+          "#383f54",
+          "#565d73",
+          "#757d94",
+          "#969eb6",
+          "#bbc3dd",
+          "#ebeef6"
+        ]
+      },
+      "night-800": {
+        "role": "neutral",
+        "displayName": "Night 800 (dusk sheet, shell, roundels)",
+        "canonical": "#151c33"
+      },
+      "night-750": {
+        "role": "neutral",
+        "displayName": "Night 750 (dusk hover fill)",
+        "canonical": "#1a2240"
+      },
+      "night-700": {
+        "role": "neutral",
+        "displayName": "Night 700 / Indigo",
+        "canonical": "oklch(29.1% 0.061 266)",
+        "tonalRamp": [
+          "#020824",
+          "#162242",
+          "#303f60",
+          "#4d5d81",
+          "#6c7da2",
+          "#8d9ec5",
+          "#b2c4ed",
+          "#e9effb"
+        ]
+      },
+      "dusk-violet": {
+        "role": "neutral",
+        "displayName": "Dusk Violet",
+        "canonical": "#252447"
+      },
+      "plum-700": {
+        "role": "neutral",
+        "displayName": "Plum 700",
+        "canonical": "oklch(29.2% 0.079 289)",
+        "tonalRamp": [
+          "#0d0129",
+          "#241b47",
+          "#3f3766",
+          "#5d5687",
+          "#7c75aa",
+          "#9d96cd",
+          "#c3bcf5",
+          "#eeecfe"
+        ]
+      },
+      "plum-500": {
+        "role": "neutral",
+        "displayName": "Plum 500",
+        "canonical": "#3b2d5c"
+      },
+      "dawn-violet": {
+        "role": "neutral",
+        "displayName": "Dawn Violet (journey dawn wash)",
+        "canonical": "#4e346c"
+      },
+      "ember-300": {
+        "role": "tertiary",
+        "displayName": "Ember",
+        "canonical": "#d9785a"
+      },
+      "horizon-gold": {
+        "role": "tertiary",
+        "displayName": "Horizon Gold",
+        "canonical": "#f3a765"
+      },
+      "horizon-mauve": {
+        "role": "tertiary",
+        "displayName": "Horizon Mauve",
+        "canonical": "#7a4a70"
+      },
+      "dawn-skyline": {
+        "role": "neutral",
+        "displayName": "Dawn Skyline",
+        "canonical": "#1a1838"
+      },
+      "sky-900": {
+        "role": "neutral",
+        "displayName": "Sky 900 (scene night)",
+        "canonical": "#0b1230"
+      },
+      "sky-700": {
+        "role": "neutral",
+        "displayName": "Sky 700 (scene indigo)",
+        "canonical": "#1c2b5a"
+      },
+      "dusk-500": {
+        "role": "neutral",
+        "displayName": "Dusk 500 (scene plum)",
+        "canonical": "#5a3a62"
+      },
+      "ill-ground": {
+        "role": "neutral",
+        "displayName": "Illustration Ground",
+        "canonical": "#0e1530"
+      },
+      "ill-panel": {
+        "role": "neutral",
+        "displayName": "Proof Tile Sky",
+        "canonical": "#151c3e"
+      },
+      "ill-shadow": {
+        "role": "neutral",
+        "displayName": "Illustration Shadow",
+        "canonical": "#070b1c"
+      },
+      "structure-800": {
+        "role": "neutral",
+        "displayName": "Structure 800 (junctions, trousers)",
+        "canonical": "#1c2754"
+      },
+      "structure-750": {
+        "role": "neutral",
+        "displayName": "Structure 750",
+        "canonical": "#1d2756"
+      },
+      "structure-725": {
+        "role": "neutral",
+        "displayName": "Structure 725 (window frames, posts)",
+        "canonical": "#24305f"
+      },
+      "structure-block": {
+        "role": "neutral",
+        "displayName": "Structure Block (proof buildings)",
+        "canonical": "#22306a"
+      },
+      "structure-700": {
+        "role": "neutral",
+        "displayName": "Structure 700 (facades)",
+        "canonical": "#2e3d78"
+      },
+      "road": {
+        "role": "neutral",
+        "displayName": "Road",
+        "canonical": "#26336a"
+      },
+      "structure-line": {
+        "role": "neutral",
+        "displayName": "Structure Line (outlines, lane dashes)",
+        "canonical": "#3b4a86"
+      },
+      "paper-cool": {
+        "role": "neutral",
+        "displayName": "Paper Cool (paper, shirts, city names)",
+        "canonical": "#e9eef6"
+      },
+      "screen-glow": {
+        "role": "tertiary",
+        "displayName": "Screen Glow (the only cool light)",
+        "canonical": "#bcd2ff"
+      },
+      "lamp": {
+        "role": "tertiary",
+        "displayName": "Lamp (warm key light, lit windows)",
+        "canonical": "#f2a93b"
+      },
+      "lamp-hi": {
+        "role": "tertiary",
+        "displayName": "Lamp High (light core, low sun)",
+        "canonical": "#ffd27a"
+      },
+      "teal": {
+        "role": "tertiary",
+        "displayName": "Teal (people and equipment accents)",
+        "canonical": "#2bb3a3"
+      },
+      "order-glow": {
+        "role": "primary",
+        "displayName": "Order Glow (the order card's halo)",
+        "canonical": "#ff6a3d"
+      },
+      "skin-light": {
+        "role": "neutral",
+        "displayName": "Skin Light",
+        "canonical": "#e0a98a"
+      },
+      "skin-mid": {
+        "role": "neutral",
+        "displayName": "Skin Mid",
+        "canonical": "#c98b6b"
+      },
+      "skin-warm": {
+        "role": "neutral",
+        "displayName": "Skin Warm",
+        "canonical": "#a86f4f"
+      },
+      "skin-deep": {
+        "role": "neutral",
+        "displayName": "Skin Deep",
+        "canonical": "#8d5a3b"
+      },
+      "parcel": {
+        "role": "neutral",
+        "displayName": "Parcel",
+        "canonical": "#d9a066"
+      },
+      "parcel-strap": {
+        "role": "neutral",
+        "displayName": "Parcel Strap",
+        "canonical": "#b07d48"
+      },
+      "junction-repaired": {
+        "role": "secondary",
+        "displayName": "Junction Repaired",
+        "canonical": "#0f2b2a"
+      },
+      "junction-fault": {
+        "role": "tertiary",
+        "displayName": "Junction Fault",
+        "canonical": "#3a2a12"
+      },
+      "dusk-ink": {
+        "role": "neutral",
+        "displayName": "Dusk Ink",
+        "canonical": "#f1f0f5"
+      },
+      "hero-lede": {
+        "role": "neutral",
+        "displayName": "Hero Lede",
+        "canonical": "#d3d8e8"
+      },
+      "dusk-ink-2": {
+        "role": "neutral",
+        "displayName": "Dusk Ink 2",
+        "canonical": "oklch(80.6% 0.028 271)",
+        "tonalRamp": [
+          "#070a17",
+          "#1f2332",
+          "#3a3f4f",
+          "#585d6e",
+          "#777d8e",
+          "#989eb0",
+          "#bdc4d7",
+          "#eceef4"
+        ]
+      },
+      "dusk-ink-3": {
+        "role": "neutral",
+        "displayName": "Dusk Ink 3 (idle stops)",
+        "canonical": "#8f96b0"
+      },
+      "dusk-rule": {
+        "role": "neutral",
+        "displayName": "Dusk Rule",
+        "canonical": "rgb(185 191 210 / 0.16)"
+      },
+      "dusk-rule-strong": {
+        "role": "neutral",
+        "displayName": "Dusk Rule Strong",
+        "canonical": "rgb(185 191 210 / 0.34)"
+      },
+      "night-veil-panel": {
+        "role": "neutral",
+        "displayName": "Night Veil 82% (form panel)",
+        "canonical": "rgb(15 20 38 / 0.82)"
+      },
+      "hero-fade": {
+        "role": "neutral",
+        "displayName": "Hero Fade (narrow screens)",
+        "canonical": "rgb(9 15 42 / 0.9)"
+      },
+      "action": {
+        "role": "primary",
+        "displayName": "Burnt Orange Action",
+        "canonical": "oklch(55.3% 0.174 38)",
+        "tonalRamp": [
+          "#390000",
+          "#5e0000",
+          "#830000",
+          "#a92700",
+          "#cf4d1e",
+          "#f67145",
+          "#ff976b",
+          "#ffe3d5"
+        ]
+      },
+      "action-hover": {
+        "role": "primary",
+        "displayName": "Action Hover",
+        "canonical": "#a9380a"
+      },
+      "on-action": {
+        "role": "primary",
+        "displayName": "On Action",
+        "canonical": "#ffffff"
+      },
+      "dusk-accent": {
+        "role": "primary",
+        "displayName": "Dusk Accent",
+        "canonical": "oklch(78.2% 0.135 43)",
+        "tonalRamp": [
+          "#300000",
+          "#520000",
+          "#751b00",
+          "#993d09",
+          "#bd5f33",
+          "#e38055",
+          "#ffa67a",
+          "#ffe7d9"
+        ]
+      },
+      "dusk-accent-deep": {
+        "role": "primary",
+        "displayName": "Dusk Accent Deep",
+        "canonical": "#ffb592"
+      },
+      "dusk-pass": {
+        "role": "secondary",
+        "displayName": "Dusk Pass",
+        "canonical": "#3ddc97"
+      },
+      "dusk-limit": {
+        "role": "tertiary",
+        "displayName": "Dusk Limit",
+        "canonical": "#ff6b6b"
+      },
+      "dusk-limit-ink": {
+        "role": "tertiary",
+        "displayName": "Dusk Limit Ink",
+        "canonical": "#ff8a8a"
+      },
+      "ground": {
+        "role": "neutral",
+        "displayName": "Desk Ground (light shell, utility pages)",
+        "canonical": "#e1e6e4"
+      },
+      "paper-b": {
+        "role": "neutral",
+        "displayName": "Drafting White (World B)",
+        "canonical": "#f7f8f6"
+      },
+      "sheet": {
+        "role": "neutral",
+        "displayName": "Report White (light shell)",
+        "canonical": "oklch(95.6% 0.003 174)",
+        "tonalRamp": [
+          "#0a0c0b",
+          "#222524",
+          "#3e403f",
+          "#5c5e5d",
+          "#7b7e7d",
+          "#9c9f9e",
+          "#c2c5c4",
+          "#eeefee"
+        ]
+      },
+      "sheet-white": {
+        "role": "neutral",
+        "displayName": "Sheet White",
+        "canonical": "#ffffff"
+      },
+      "sheet-under": {
+        "role": "neutral",
+        "displayName": "Sheet Under",
+        "canonical": "#e6eae8"
+      },
+      "sheet-deep": {
+        "role": "neutral",
+        "displayName": "Sheet Deep",
+        "canonical": "#cfd7d4"
+      },
+      "rule": {
+        "role": "neutral",
+        "displayName": "Rule",
+        "canonical": "oklch(83.7% 0.011 174)",
+        "tonalRamp": [
+          "#070d0b",
+          "#1f2624",
+          "#3a423f",
+          "#58605d",
+          "#777f7d",
+          "#98a19e",
+          "#bdc6c3",
+          "#ecefee"
+        ]
+      },
+      "rule-strong": {
+        "role": "neutral",
+        "displayName": "Rule Strong",
+        "canonical": "#9aa5a2"
+      },
+      "plan-furniture": {
+        "role": "neutral",
+        "displayName": "Plan Furniture (B plan only)",
+        "canonical": "#b9c2bf"
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Ink",
+        "canonical": "#16191c"
+      },
+      "ink-2": {
+        "role": "neutral",
+        "displayName": "Ink 2",
+        "canonical": "oklch(42.3% 0.021 248)",
+        "tonalRamp": [
+          "#050c14",
+          "#1c252e",
+          "#37414b",
+          "#555f69",
+          "#747f8a",
+          "#95a0ab",
+          "#bac6d1",
+          "#ebeff3"
+        ]
+      },
+      "ink-3": {
+        "role": "neutral",
+        "displayName": "Ink 3",
+        "canonical": "#505a64"
+      },
+      "graphite-950": {
+        "role": "neutral",
+        "displayName": "Graphite 950 (verdict chip text only)",
+        "canonical": "#101316"
+      },
+      "graphite-600": {
+        "role": "neutral",
+        "displayName": "Graphite 600 (scrollbar thumb only)",
+        "canonical": "#343b43"
+      },
+      "brand-1": {
+        "role": "primary",
+        "displayName": "Brand Step 1 (L7, orange; order card start)",
+        "canonical": "oklch(68.9% 0.205 37)",
+        "tonalRamp": [
+          "#400000",
+          "#670000",
+          "#8d0000",
+          "#b40000",
+          "#db3c00",
+          "#ff632c",
+          "#ff8b57",
+          "#ffe1d1"
+        ]
+      },
+      "brand-2": {
+        "role": "primary",
+        "displayName": "Brand Step 2 (L6)",
+        "canonical": "#ff4f34"
+      },
+      "brand-3": {
+        "role": "primary",
+        "displayName": "Brand Step 3 (L5)",
+        "canonical": "#ff4041"
+      },
+      "brand-4": {
+        "role": "primary",
+        "displayName": "Brand Step 4 (L4)",
+        "canonical": "oklch(64.7% 0.234 20)",
+        "tonalRamp": [
+          "#460000",
+          "#6f0000",
+          "#970000",
+          "#bf0017",
+          "#e8093a",
+          "#ff485b",
+          "#ff757f",
+          "#ffddda"
+        ]
+      },
+      "brand-5": {
+        "role": "primary",
+        "displayName": "Brand Step 5 (L3)",
+        "canonical": "#fe2258"
+      },
+      "brand-6": {
+        "role": "primary",
+        "displayName": "Brand Step 6 (L2)",
+        "canonical": "#fe1363"
+      },
+      "brand-7": {
+        "role": "primary",
+        "displayName": "Brand Step 7 (L1, pink; order card end)",
+        "canonical": "oklch(64.0% 0.255 7)",
+        "tonalRamp": [
+          "#480000",
+          "#70000b",
+          "#990026",
+          "#c20042",
+          "#eb0061",
+          "#ff3481",
+          "#ff66a5",
+          "#ffdae5"
+        ]
+      },
+      "accent": {
+        "role": "primary",
+        "displayName": "Accent (daylight)",
+        "canonical": "oklch(52.1% 0.208 15)",
+        "tonalRamp": [
+          "#400000",
+          "#670000",
+          "#8e0016",
+          "#b50034",
+          "#dd2e52",
+          "#ff5872",
+          "#ff8196",
+          "#ffdee1"
+        ]
+      },
+      "accent-deep": {
+        "role": "primary",
+        "displayName": "Accent Deep",
+        "canonical": "#9e0033"
+      },
+      "focus-tint": {
+        "role": "primary",
+        "displayName": "Focus Tint (brand-1 at 7%)",
+        "canonical": "rgb(255 95 39 / 0.07)"
+      },
+      "pass": {
+        "role": "secondary",
+        "displayName": "Pass Green",
+        "canonical": "oklch(62.2% 0.133 162)",
+        "tonalRamp": [
+          "#001700",
+          "#00350d",
+          "#005329",
+          "#007346",
+          "#009565",
+          "#3ab885",
+          "#67dfaa",
+          "#d8f7e6"
+        ]
+      },
+      "pass-ink": {
+        "role": "secondary",
+        "displayName": "Pass Ink",
+        "canonical": "#0a7552"
+      },
+      "limit": {
+        "role": "tertiary",
+        "displayName": "Limit Red (form errors)",
+        "canonical": "oklch(50.1% 0.178 28)",
+        "tonalRamp": [
+          "#3a0000",
+          "#600000",
+          "#860000",
+          "#ac1d17",
+          "#d2463a",
+          "#f96a5b",
+          "#ff927f",
+          "#ffe2da"
+        ]
+      },
+      "fault": {
+        "role": "tertiary",
+        "displayName": "Fault Amber (congestion, hazards, faults)",
+        "canonical": "oklch(80.7% 0.166 81)",
+        "tonalRamp": [
+          "#280000",
+          "#490b00",
+          "#692e00",
+          "#8b4e00",
+          "#ad6f00",
+          "#d19100",
+          "#f9b713",
+          "#ffecc9"
+        ]
+      },
+      "fault-ink": {
+        "role": "tertiary",
+        "displayName": "Fault Ink (daylight)",
+        "canonical": "#8a6100"
+      }
     },
     "typographyMeta": {
-      "numeral": { "displayName": "A Numeral", "purpose": "The Greek 'επτά' in brand-7; one per page at most." },
-      "display": { "displayName": "A Display", "purpose": "World A page H1." },
-      "display-compact": { "displayName": "A Display compact", "purpose": "A Display at 640px and below." },
-      "headline-close": { "displayName": "A Headline close", "purpose": "Closing continuity statement." },
-      "headline": { "displayName": "A Headline", "purpose": "World A section H2s." },
-      "headline-status": { "displayName": "A Headline status", "purpose": "H1 on status and 404 sheets." },
-      "headline-sm": { "displayName": "A Headline small", "purpose": "H2 beside the Numeral." },
-      "title-file": { "displayName": "A Title file", "purpose": "Case-file sheet title." },
-      "quote": { "displayName": "A Quote", "purpose": "NOC testimonial." },
-      "title": { "displayName": "A Title", "purpose": "Sheet titles, strength heads, form sheet heads." },
-      "stack-name": { "displayName": "A Stack name", "purpose": "Layer names on stacked OSI sheets." },
-      "row-title": { "displayName": "A Row title", "purpose": "Name in a report log row." },
-      "drawer-link": { "displayName": "Drawer link", "purpose": "Mobile navigation rows (shared shell)." },
-      "lede": { "displayName": "A Lede", "purpose": "Paragraph under a Display or closing Headline." },
-      "figure": { "displayName": "A Figure", "purpose": "Recorded figures, summary count, compact row titles." },
-      "body": { "displayName": "Body", "purpose": "Running text, form inputs, contact lines." },
-      "body-md": { "displayName": "Body medium", "purpose": "Buttons, coverage-sheet layer names, LAER phase names." },
-      "drawer-phone": { "displayName": "Drawer phone", "purpose": "Phone row in the mobile drawer only; off-ramp by 0.0125rem, as shipped." },
-      "body-sm": { "displayName": "Body small", "purpose": "Table cells, nav links, footer links, addresses." },
-      "caption": { "displayName": "Caption", "purpose": "Captions, reference lines, report links, legal line." },
-      "note": { "displayName": "Note", "purpose": "Notes, form errors, report strip, header phone." },
-      "label-lg": { "displayName": "Label large", "purpose": "The .label utility default; uppercase." },
-      "label": { "displayName": "Label", "purpose": "World A column heads, field labels, folio names; uppercase." },
-      "data": { "displayName": "Data", "purpose": "World A IDs, codes, verdict text, readouts." },
-      "data-sm": { "displayName": "Data small", "purpose": "Folio numbering, tab and channel IDs." },
-      "data-xs": { "displayName": "Data xs", "purpose": "NOC target tag only." },
-      "b-display": { "displayName": "B Display", "purpose": "World B H1." },
-      "b-headline": { "displayName": "B Headline", "purpose": "World B section titles, max 20ch." },
-      "b-chapter-numeral": { "displayName": "B Chapter numeral", "purpose": "01-06 step index beside a chapter title; brand-1 when on." },
-      "b-chapter-numeral-compact": { "displayName": "B Chapter numeral compact", "purpose": "Chapter numeral at 860px and below." },
-      "b-chapter-title": { "displayName": "B Chapter title", "purpose": "Engagement step titles." },
-      "b-figure": { "displayName": "B Figure", "purpose": "With-Epta counts in the schedule." },
-      "b-subhead": { "displayName": "B Subhead", "purpose": "'On record from the field' heading." },
-      "b-lede": { "displayName": "B Lede", "purpose": "One line under the B H1." },
-      "b-quote": { "displayName": "B Quote", "purpose": "NOC testimonial inside a chapter." },
-      "b-intro": { "displayName": "B Intro", "purpose": "Paragraph under a B section title." },
-      "b-body": { "displayName": "B Body", "purpose": "World B running text." },
-      "b-body-sm": { "displayName": "B Body small", "purpose": "Room states, plan captions, layer names." },
-      "b-cond": { "displayName": "B Condensed", "purpose": "Legend entries, room layer lines, rail step names." },
-      "b-label": { "displayName": "B Label", "purpose": "Fieldset legend, schedule heads, title block; uppercase." },
-      "b-tag": { "displayName": "B Tag", "purpose": "'Recorded' provenance tags, rail numerals; uppercase." },
-      "b-plan-name": { "displayName": "Plan room name", "purpose": "Plan units; scales with the drawing." },
-      "b-plan-callout": { "displayName": "Plan OEM callout", "purpose": "Plan units." },
-      "b-plan-layer-tag": { "displayName": "Plan layer tag", "purpose": "Plan units." },
-      "b-plan-id": { "displayName": "Plan room ID", "purpose": "Plan units." },
-      "b-plan-note": { "displayName": "Plan note", "purpose": "Core, survey, incident and dead-zone tags; plan units." },
-      "b-plan-stamp": { "displayName": "Plan renew stamp", "purpose": "Plan units." }
+      "d-display": {
+        "displayName": "d-display",
+        "purpose": "Hero headline, centred over the sky, max 20ch."
+      },
+      "d-stop-line": {
+        "displayName": "d-stop-line",
+        "purpose": "One enormous line per stop."
+      },
+      "d-stop-line-compact": {
+        "displayName": "d-stop-line-compact",
+        "purpose": "Stop line at 900px and below."
+      },
+      "d-stopsign": {
+        "displayName": "d-stopsign",
+        "purpose": "Stop-sign headline, centred."
+      },
+      "d-headline": {
+        "displayName": "d-headline",
+        "purpose": "Section headlines."
+      },
+      "d-journey-title": {
+        "displayName": "d-journey-title",
+        "purpose": "Journey title."
+      },
+      "d-quote": {
+        "displayName": "d-quote",
+        "purpose": "NOC testimonial."
+      },
+      "d-result-title": {
+        "displayName": "d-result-title",
+        "purpose": "Proof story titles."
+      },
+      "d-figure-inline": {
+        "displayName": "d-figure-inline",
+        "purpose": "Recorded figure set inline in a proof story."
+      },
+      "d-lede": {
+        "displayName": "d-lede",
+        "purpose": "Hero sub-line."
+      },
+      "d-intro": {
+        "displayName": "d-intro",
+        "purpose": "Section intros, stop-sign body."
+      },
+      "d-roundel": {
+        "displayName": "d-roundel",
+        "purpose": "L7-L1 in spine roundels."
+      },
+      "d-roundel-compact": {
+        "displayName": "d-roundel-compact",
+        "purpose": "Roundel text at 900px."
+      },
+      "ill-loop-name-compact": {
+        "displayName": "ill-loop-name-compact",
+        "purpose": "LAER names on phones (scene units)."
+      },
+      "ill-loop-name": {
+        "displayName": "ill-loop-name",
+        "purpose": "LAER names (scene units)."
+      },
+      "ill-junction": {
+        "displayName": "ill-junction",
+        "purpose": "Halt-road junction marks."
+      },
+      "ill-junction-v": {
+        "displayName": "ill-junction-v",
+        "purpose": "Vertical halt-road labels."
+      },
+      "ill-city": {
+        "displayName": "ill-city",
+        "purpose": "City names; checklist rows."
+      },
+      "ill-place": {
+        "displayName": "ill-place",
+        "purpose": "Place names in scenes."
+      },
+      "ill-note": {
+        "displayName": "ill-note",
+        "purpose": "Notes, parcel numbers, received text, LAER captions."
+      },
+      "ill-chip": {
+        "displayName": "ill-chip",
+        "purpose": "Status chips in scenes."
+      },
+      "ill-label": {
+        "displayName": "ill-label",
+        "purpose": "Small scene labels."
+      },
+      "ill-micro": {
+        "displayName": "ill-micro",
+        "purpose": "The tester's PASS readout."
+      },
+      "headline-status": {
+        "displayName": "headline-status",
+        "purpose": "Status and 404 pages (Archivo)."
+      },
+      "drawer-link": {
+        "displayName": "drawer-link",
+        "purpose": "Mobile drawer rows."
+      },
+      "body": {
+        "displayName": "body",
+        "purpose": "Running text, stop bodies, form inputs."
+      },
+      "body-md": {
+        "displayName": "body-md",
+        "purpose": "Buttons."
+      },
+      "drawer-phone": {
+        "displayName": "drawer-phone",
+        "purpose": "Drawer phone row; off-ramp, as shipped."
+      },
+      "body-sm": {
+        "displayName": "body-sm",
+        "purpose": "Nav and footer links, result meta, loop key."
+      },
+      "caption": {
+        "displayName": "caption",
+        "purpose": "Footer addresses, legal."
+      },
+      "note": {
+        "displayName": "note",
+        "purpose": "Header phone, form notes and errors, roster slots."
+      },
+      "label": {
+        "displayName": "label",
+        "purpose": "Form field labels; uppercase."
+      },
+      "data": {
+        "displayName": "data",
+        "purpose": "Phone numbers, status code line, verdict chip."
+      },
+      "b-display": {
+        "displayName": "b-display",
+        "purpose": "World B H1."
+      },
+      "b-headline": {
+        "displayName": "b-headline",
+        "purpose": "World B section titles."
+      },
+      "b-chapter-numeral": {
+        "displayName": "b-chapter-numeral",
+        "purpose": "B 01-06 step index."
+      },
+      "b-chapter-numeral-compact": {
+        "displayName": "b-chapter-numeral-compact",
+        "purpose": "B step index at 860px."
+      },
+      "b-chapter-title": {
+        "displayName": "b-chapter-title",
+        "purpose": "B chapter titles."
+      },
+      "b-figure": {
+        "displayName": "b-figure",
+        "purpose": "Schedule counts."
+      },
+      "b-subhead": {
+        "displayName": "b-subhead",
+        "purpose": "B subhead."
+      },
+      "b-lede": {
+        "displayName": "b-lede",
+        "purpose": "B lede."
+      },
+      "b-intro": {
+        "displayName": "b-intro",
+        "purpose": "B section intro."
+      },
+      "b-cond": {
+        "displayName": "b-cond",
+        "purpose": "Legend, room layer lines, rail names."
+      },
+      "b-label": {
+        "displayName": "b-label",
+        "purpose": "Legend heads, schedule heads, title block; uppercase."
+      },
+      "b-tag": {
+        "displayName": "b-tag",
+        "purpose": "'Recorded' tags, rail numerals; uppercase."
+      },
+      "b-plan-name": {
+        "displayName": "b-plan-name",
+        "purpose": "Plan room names (plan units)."
+      },
+      "b-plan-callout": {
+        "displayName": "b-plan-callout",
+        "purpose": "Plan OEM callouts."
+      },
+      "b-plan-layer-tag": {
+        "displayName": "b-plan-layer-tag",
+        "purpose": "Plan layer tags."
+      },
+      "b-plan-id": {
+        "displayName": "b-plan-id",
+        "purpose": "Plan room IDs."
+      },
+      "b-plan-note": {
+        "displayName": "b-plan-note",
+        "purpose": "Plan notes and tags."
+      },
+      "b-plan-stamp": {
+        "displayName": "b-plan-stamp",
+        "purpose": "Plan renew stamps."
+      }
     },
     "shadows": [
-      { "name": "probe-foot", "value": "inset 0 -2px 0 var(--brand-1)", "purpose": "Not light: a hard 2px brand-1 rule along the foot of the A row under test, over probe-tint. The system has no drop shadows." },
-      { "name": "wire-outline", "value": "inset 0 0 0 1px rgb(22 25 28 / 0.12)", "purpose": "Not light: holds the edge of white-striped wire pairs." },
-      { "name": "coverage-heatmap", "value": "radialGradient #0e9f6e 38% -> 0%", "purpose": "Not depth: measured Wi-Fi coverage on the World B plan; the only soft fill in the system." }
+      {
+        "name": "lamp-light",
+        "value": "radialGradient lamp-hi 55% > lamp 18% (at 45%) > transparent",
+        "purpose": "The one warm key light per place in a scene. Light, not elevation."
+      },
+      {
+        "name": "order-glow",
+        "value": "radialGradient #ff6a3d 70% > transparent",
+        "purpose": "The order card's halo in scenes and the hero."
+      },
+      {
+        "name": "screen-spill",
+        "value": "radialGradient #bcd2ff 35% > transparent",
+        "purpose": "The only cool light: monitor spill."
+      },
+      {
+        "name": "feathered-stage",
+        "value": "mask-image: radial-gradient(ellipse 72% 70% at 50% 50%, #000 62%, transparent 100%)",
+        "purpose": "Dissolves the journey stage into the page instead of a card edge; removed at 900px."
+      },
+      {
+        "name": "hazard-glow",
+        "value": "radialGradient #f5b301 55% > transparent",
+        "purpose": "Amber glow around the broken junction on the halt road."
+      },
+      {
+        "name": "coverage-heatmap",
+        "value": "radialGradient #0e9f6e 38% > transparent",
+        "purpose": "World B measured coverage; the only soft fill in the daylight world."
+      }
+    ],
+    "gradients": [
+      {
+        "name": "order-card",
+        "value": "linear 135deg brand-1 > brand-7",
+        "purpose": "The order, everywhere it appears. Nothing else takes it."
+      },
+      {
+        "name": "dusk-progression",
+        "value": "journey-night > night-900 > night-800 > night-700 > dusk-violet > plum-700 > plum-500",
+        "purpose": "Section grounds step further into dusk down the page."
+      },
+      {
+        "name": "journey-dawn",
+        "value": "transparent > rgb(59 45 92 / 0.6) 45% > rgb(78 52 108 / 0.62) 85% > transparent, opacity --dawn squared",
+        "purpose": "The journey section warms as the order nears Mumbai."
+      },
+      {
+        "name": "world-sky",
+        "value": "dawn overlay (horizon-gold, ember, mauve x --dawn) over sky-900 > sky-700 > plum-700",
+        "purpose": "The world stage sky, night to dawn."
+      },
+      {
+        "name": "contact-dawn",
+        "value": "plum-500 0% > ember 60% at 60% > horizon-gold 85%; sun lamp-hi; skyline dawn-skyline",
+        "purpose": "The page ends at dawn."
+      }
     ],
     "motion": [
-      { "name": "ease-out", "value": "cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "The only easing." },
-      { "name": "state", "value": "0.2s-0.25s", "purpose": "Colour, fill and border changes on hover." },
-      { "name": "nudge", "value": "0.35s", "purpose": "Arrow nudges, nav underline draw, rail and swatch changes." },
-      { "name": "settle", "value": "0.45s-0.5s", "purpose": "Verdict chip settling, case-file slide, pin-to-stamp crossfade." },
-      { "name": "sheet-stagger", "value": "0.8s + 60ms per sheet", "purpose": "A stacked sheets sliding into their offsets." },
-      { "name": "device-drop", "value": "0.6s + 60ms per device", "purpose": "B OEM devices dropping onto the plan." },
-      { "name": "wire-draw", "value": "0.9s + 70ms per wire", "purpose": "A wiremap wires extending pin to pin." },
-      { "name": "layer-draw", "value": "1.3s", "purpose": "B CAD layers drawing along their path (dashoffset), dashed ones via a drawn white mask; tags fade in at 0.9s." },
-      { "name": "line-draw", "value": "1.8s-2.4s", "purpose": "A traces and service lines drawing once when in view." },
-      { "name": "plan-zoom", "value": "0.9s", "purpose": "B plan reframing between steps." }
+      {
+        "name": "ease-out",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "The one CSS easing."
+      },
+      {
+        "name": "scene-rise",
+        "value": "opacity 0.6s, translateY 26px > 0 over 0.8s",
+        "purpose": "Each stop rising in as the order arrives."
+      },
+      {
+        "name": "spine-card",
+        "value": "0.8s, 54px per stop",
+        "purpose": "The order travelling down the spine."
+      },
+      {
+        "name": "stop-highlight",
+        "value": "0.45s",
+        "purpose": "Active stop line and body brightening."
+      },
+      {
+        "name": "dawn",
+        "value": "1s",
+        "purpose": "Sky and section warming with --dawn."
+      },
+      {
+        "name": "actors",
+        "value": "once per stop, 0.5-1.6s with staged delays",
+        "purpose": "Press, seal, stamp, tick, route draw, land."
+      },
+      {
+        "name": "halt-loop",
+        "value": "6s infinite",
+        "purpose": "Order stopped at an amber junction, repaired green, moves on."
+      },
+      {
+        "name": "laer-lap",
+        "value": "9s infinite (SVG animateMotion)",
+        "purpose": "The order lapping the LAER loop."
+      },
+      {
+        "name": "follow-ping",
+        "value": "2s infinite",
+        "purpose": "Ring on the \"Follow one order\" dot."
+      },
+      {
+        "name": "hero-rise",
+        "value": "1s; delays 0 / 120 / 240ms",
+        "purpose": "Hero copy rising 18px into place."
+      },
+      {
+        "name": "layer-draw",
+        "value": "1.3s",
+        "purpose": "World B CAD layers drawing along their path."
+      }
     ],
     "breakpoints": [
-      { "name": "sheet-columns", "value": "1180px" },
-      { "name": "stack-hero", "value": "1080px" },
-      { "name": "footer-2col", "value": "960px" },
-      { "name": "stack-grids", "value": "860px" },
-      { "name": "reflow-tables", "value": "640px" },
-      { "name": "narrow", "value": "560px" },
-      { "name": "hide-header-cta", "value": "520px" }
+      {
+        "name": "stack",
+        "value": "1080px"
+      },
+      {
+        "name": "footer-2col",
+        "value": "960px"
+      },
+      {
+        "name": "journey-stack",
+        "value": "900px"
+      },
+      {
+        "name": "b-compact",
+        "value": "860px"
+      },
+      {
+        "name": "narrow",
+        "value": "560px"
+      },
+      {
+        "name": "hide-header-cta",
+        "value": "520px"
+      }
     ]
   },
   "components": [
     {
-      "name": "Primary Button",
+      "name": "Primary Button and Follow Link (dusk)",
       "kind": "button",
-      "refersTo": "button-primary",
-      "description": "Brand-1 orange action key with ink text and a trailing arrow; both worlds.",
-      "html": "<a class=\"ds-btn\" href=\"#\">Talk to an engineer <svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"square\"><path d=\"M4 12h15M13 6l6 6-6 6\"/></svg></a>",
-      "css": ".ds-btn { display: inline-flex; align-items: center; gap: 0.6em; min-height: 48px; padding: 0 1.25rem; border: 1px solid var(--brand-1, #ff5f27); border-radius: 3px; background: var(--brand-1, #ff5f27); color: var(--ink, #16191c); font-family: var(--font-sans, 'Archivo Variable', 'Archivo', system-ui, sans-serif); font-weight: 650; font-stretch: 90%; font-size: 1rem; text-decoration: none; cursor: pointer; transition: background-color 0.25s cubic-bezier(0.16,1,0.3,1), border-color 0.25s cubic-bezier(0.16,1,0.3,1); } .ds-btn svg { width: 18px; height: 18px; transition: transform 0.35s cubic-bezier(0.16,1,0.3,1); } .ds-btn:hover { background: var(--brand-3, #ff4041); border-color: var(--brand-3, #ff4041); } .ds-btn:hover svg { transform: translateX(3px); } .ds-btn:focus-visible { outline: 2px solid var(--accent, #c4003f); outline-offset: 3px; }"
+      "refersTo": "d-button-primary",
+      "description": "Burnt-orange action with white text; the follow link led by a pinging brand-1 dot.",
+      "html": "<div class=\"ds-night\"><a class=\"ds-dbtn\" href=\"#\">Talk to an engineer <svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"square\"><path d=\"M4 12h15M13 6l6 6-6 6\"/></svg></a><a class=\"ds-follow\" href=\"#\"><span class=\"dot\"></span>Follow one order</a></div>",
+      "css": ".ds-night { background: #090f2a; padding: 24px; font-family: 'Familjen Grotesk Variable', 'Familjen Grotesk', system-ui, sans-serif; color: #f1f0f5; } .ds-night { display: flex; gap: 28px; align-items: center; flex-wrap: wrap; } .ds-dbtn { display: inline-flex; align-items: center; gap: 0.6em; min-height: 48px; padding: 0 1.25rem; border: 1px solid #c2410c; border-radius: 3px; background: #c2410c; color: #fff; font-weight: 650; font-size: 1rem; text-decoration: none; transition: background-color 0.25s cubic-bezier(0.16,1,0.3,1), border-color 0.25s cubic-bezier(0.16,1,0.3,1); } .ds-dbtn svg { width: 18px; height: 18px; transition: transform 0.35s cubic-bezier(0.16,1,0.3,1); } .ds-dbtn:hover { background: #a9380a; border-color: #a9380a; } .ds-dbtn:hover svg { transform: translateX(3px); } .ds-follow { display: inline-flex; align-items: center; gap: 12px; color: #f1f0f5; font-weight: 600; text-decoration: none; } .ds-follow:hover { color: #ff9a6e; } .ds-follow .dot { position: relative; width: 12px; height: 12px; border-radius: 50%; background: #ff5f27; } .ds-follow .dot::after { content: ''; position: absolute; inset: -6px; border-radius: 50%; border: 2px solid #ff5f27; animation: ds-ping 2s cubic-bezier(0.16,1,0.3,1) infinite; } @keyframes ds-ping { from { transform: scale(0.6); opacity: 1; } to { transform: scale(1.6); opacity: 0; } } .ds-dbtn:focus-visible, .ds-follow:focus-visible { outline: 2px solid #ff9a6e; outline-offset: 3px; }"
     },
     {
-      "name": "Ghost Button",
-      "kind": "button",
-      "refersTo": "button-ghost",
-      "description": "Secondary action on paper (World A).",
-      "html": "<a class=\"ds-btn-ghost\" href=\"#\">See the seven solutions</a>",
-      "css": ".ds-btn-ghost { display: inline-flex; align-items: center; min-height: 48px; padding: 0 1.25rem; border: 1px solid var(--rule-strong, #9aa5a2); border-radius: 3px; background: transparent; color: var(--ink, #16191c); font-family: 'Archivo Variable', 'Archivo', system-ui, sans-serif; font-weight: 650; font-stretch: 90%; font-size: 1rem; text-decoration: none; transition: background-color 0.25s cubic-bezier(0.16,1,0.3,1), border-color 0.25s cubic-bezier(0.16,1,0.3,1); } .ds-btn-ghost:hover { background: var(--sheet-under, #e6eae8); border-color: var(--ink, #16191c); } .ds-btn-ghost:focus-visible { outline: 2px solid var(--accent, #c4003f); outline-offset: 3px; }"
+      "name": "Stop with Keeper Link (dusk)",
+      "kind": "custom",
+      "refersTo": "d-keeper-link",
+      "description": "One display-scale line, a short body, and the solution that keeps the stop running.",
+      "html": "<div class=\"ds-night\"><article class=\"ds-stop is-on\"><h3>Delivery is guaranteed.</h3><p>The order travels as numbered packets. Every one is checked off on arrival.</p><a class=\"ds-keeper\" href=\"#\"><span>Enterprise Network: reliable data delivery across your sites, with SD-WAN.</span><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"square\"><path d=\"M4 12h15M13 6l6 6-6 6\"/></svg></a></article></div>",
+      "css": ".ds-night { background: #0f1426; padding: 24px; font-family: 'Familjen Grotesk Variable', 'Familjen Grotesk', system-ui, sans-serif; color: #f1f0f5; } .ds-stop h3 { margin: 0; font-size: clamp(2.6rem, 5vw, 5rem); font-weight: 700; line-height: 0.96; letter-spacing: -0.04em; color: #8f96b0; transition: color 0.45s cubic-bezier(0.16,1,0.3,1); } .ds-stop p { margin: 20px 0 0; max-width: 44ch; font-size: 1.0625rem; color: #8f96b0; } .ds-stop.is-on h3 { color: #f1f0f5; } .ds-stop.is-on p { color: #b9bfd2; } .ds-keeper { display: inline-flex; align-items: flex-start; gap: 10px; margin-top: 22px; padding-top: 14px; border-top: 1px solid rgb(185 191 210 / 0.34); color: #f1f0f5; font-weight: 600; text-decoration: none; max-width: 46ch; } .ds-keeper svg { flex: none; width: 18px; height: 18px; margin-top: 3px; color: #ff5f27; transition: transform 0.35s cubic-bezier(0.16,1,0.3,1); } .ds-keeper:hover { color: #ff9a6e; } .ds-keeper:hover svg { transform: translateX(4px); } .ds-keeper:focus-visible { outline: 2px solid #ff9a6e; outline-offset: 3px; }"
     },
     {
-      "name": "Text Link",
-      "kind": "button",
-      "refersTo": "text-link",
-      "description": "Ink link with a 2px brand-1 underline; accent on hover. World B's secondary action and every in-report link.",
-      "html": "<a class=\"ds-text-link\" href=\"#\">See how an engagement works</a>",
-      "css": ".ds-text-link { color: var(--ink, #16191c); font-family: 'Barlow', system-ui, sans-serif; font-weight: 600; font-size: 1.0625rem; text-decoration: underline; text-decoration-color: var(--brand-1, #ff5f27); text-decoration-thickness: 2px; text-underline-offset: 0.3em; transition: color 0.2s cubic-bezier(0.16,1,0.3,1); } .ds-text-link:hover { color: var(--accent, #c4003f); } .ds-text-link:focus-visible { outline: 2px solid var(--accent, #c4003f); outline-offset: 3px; }"
+      "name": "Spine with Order Card (dusk)",
+      "kind": "nav",
+      "refersTo": "d-spine-roundel",
+      "description": "Linked roundels per stop; passed ones ringed brand-7, the active one white; the order card travels 54px per stop.",
+      "html": "<div class=\"ds-night\"><ol class=\"ds-spine\" style=\"--at:2\"><span class=\"card\"></span><li class=\"done\"><a href=\"#\"><b>L7</b></a></li><li class=\"done\"><a href=\"#\"><b>L6</b></a></li><li class=\"on\"><a href=\"#\"><b>L5</b></a></li><li><a href=\"#\"><b>L4</b></a></li><li><a href=\"#\"><b><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"square\"><path d=\"M4 12h15M13 6l6 6-6 6\"/></svg></b></a></li></ol></div>",
+      "css": ".ds-night { background: #0f1426; padding: 24px; font-family: 'Familjen Grotesk Variable', 'Familjen Grotesk', system-ui, sans-serif; color: #f1f0f5; } .ds-spine { --at: 0; position: relative; list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; width: 52px; } .ds-spine::before { content: ''; position: absolute; left: 25px; top: 20px; bottom: 20px; width: 2px; background: rgb(185 191 210 / 0.16); } .ds-spine a { position: relative; display: grid; place-items: center; width: 52px; height: 44px; text-decoration: none; } .ds-spine b { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: #151c33; border: 2px solid rgb(185 191 210 / 0.34); font-size: 0.75rem; font-weight: 700; color: #8f96b0; transition: border-color 0.4s cubic-bezier(0.16,1,0.3,1), color 0.4s cubic-bezier(0.16,1,0.3,1); } .ds-spine b svg { width: 15px; height: 15px; } .ds-spine li.done b { border-color: #fe046f; color: #b9bfd2; } .ds-spine li.on b { border-color: #fff; color: #fff; } .ds-spine .card { position: absolute; z-index: 1; left: 50%; top: 0; width: 30px; height: 21px; margin: 12px 0 0 -15px; border-radius: 3px; background: linear-gradient(#fff, #fff) 6px 5px / 11px 2px no-repeat, linear-gradient(rgb(255 255 255 / 0.65), rgb(255 255 255 / 0.65)) 6px 10px / 17px 2px no-repeat, linear-gradient(135deg, #ff5f27, #fe046f); transform: translateY(calc(var(--at) * 54px)); transition: transform 0.8s cubic-bezier(0.16,1,0.3,1); } .ds-spine a:focus-visible { outline: 2px solid #ff9a6e; outline-offset: 3px; }"
+    },
+    {
+      "name": "World Stage with Order (dusk)",
+      "kind": "card",
+      "refersTo": "d-world",
+      "description": "A borderless scene panel feathered into the page by a radial mask; the sky warms toward dawn on --dawn; one warm lamp; the order card glowing.",
+      "html": "<div class=\"ds-night\"><div class=\"ds-world\" style=\"--dawn:0.3\"><svg viewBox=\"0 0 400 260\"><defs><radialGradient id=\"ds-lamp\"><stop offset=\"0\" stop-color=\"#ffd27a\" stop-opacity=\"0.55\"/><stop offset=\"0.45\" stop-color=\"#f2a93b\" stop-opacity=\"0.18\"/><stop offset=\"1\" stop-color=\"#f2a93b\" stop-opacity=\"0\"/></radialGradient><radialGradient id=\"ds-glow\"><stop offset=\"0\" stop-color=\"#ff6a3d\" stop-opacity=\"0.7\"/><stop offset=\"1\" stop-color=\"#ff6a3d\" stop-opacity=\"0\"/></radialGradient></defs><rect y=\"190\" width=\"400\" height=\"70\" fill=\"#0e1530\"/><rect x=\"60\" y=\"80\" width=\"90\" height=\"110\" fill=\"#2e3d78\"/><rect x=\"250\" y=\"110\" width=\"80\" height=\"80\" fill=\"#1c2754\"/><circle cx=\"200\" cy=\"170\" r=\"110\" fill=\"url(#ds-lamp)\"/><circle cx=\"200\" cy=\"110\" r=\"44\" fill=\"url(#ds-glow)\"/><g transform=\"translate(176 92)\"><svg x=\"0\" y=\"0\" viewBox=\"0 0 80 56\" width=\"48\" height=\"34\"><defs><linearGradient id=\"ds-c\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\"><stop offset=\"0\" stop-color=\"#ff5f27\"/><stop offset=\"1\" stop-color=\"#fe046f\"/></linearGradient></defs><rect width=\"80\" height=\"56\" rx=\"6\" fill=\"url(#ds-c)\"/><rect x=\"10\" y=\"12\" width=\"34\" height=\"5\" rx=\"2.5\" fill=\"#fff\"/><rect x=\"10\" y=\"23\" width=\"56\" height=\"4\" rx=\"2\" fill=\"#fff\" opacity=\"0.65\"/><rect x=\"10\" y=\"32\" width=\"44\" height=\"4\" rx=\"2\" fill=\"#fff\" opacity=\"0.65\"/></svg></g></svg></div></div>",
+      "css": ".ds-night { background: #0f1426; padding: 24px; font-family: 'Familjen Grotesk Variable', 'Familjen Grotesk', system-ui, sans-serif; color: #f1f0f5; } .ds-world { border-radius: 10px; background: linear-gradient(180deg, rgb(243 167 101 / calc(var(--dawn) * 0.75)) 0%, rgb(217 120 90 / calc(var(--dawn) * 0.6)) 45%, rgb(122 74 112 / calc(var(--dawn) * 0.5)) 100%), linear-gradient(180deg, #0b1230 0%, #1c2b5a 70%, #2c2350 100%); -webkit-mask-image: radial-gradient(ellipse 72% 70% at 50% 50%, #000 62%, transparent 100%); mask-image: radial-gradient(ellipse 72% 70% at 50% 50%, #000 62%, transparent 100%); } .ds-world svg { display: block; width: 100%; height: auto; }"
+    },
+    {
+      "name": "Halt Road (dusk)",
+      "kind": "custom",
+      "refersTo": "d-halt-road",
+      "description": "The order stops at a failed junction (amber), the junction is repaired (green), the order moves on.",
+      "html": "<div class=\"ds-night\"><svg class=\"ds-halt\" viewBox=\"0 0 520 140\"><path d=\"M30 70 H490\" stroke=\"#26336a\" stroke-width=\"26\" stroke-linecap=\"round\"/><path d=\"M30 70 H490\" stroke=\"#3b4a86\" stroke-width=\"2\" stroke-dasharray=\"14 14\"/><g transform=\"translate(110 70)\"><rect x=\"-26\" y=\"-26\" width=\"52\" height=\"52\" rx=\"8\" class=\"j\"/><text y=\"6\" text-anchor=\"middle\">L4</text></g><g transform=\"translate(260 70)\" class=\"broken\"><rect x=\"-26\" y=\"-26\" width=\"52\" height=\"52\" rx=\"8\" class=\"j\"/><text y=\"6\" text-anchor=\"middle\">L3</text></g><g transform=\"translate(410 70)\"><rect x=\"-26\" y=\"-26\" width=\"52\" height=\"52\" rx=\"8\" class=\"j\"/><text y=\"6\" text-anchor=\"middle\">L2</text></g><g class=\"card\"><rect x=\"-26\" y=\"-18\" width=\"52\" height=\"36\" rx=\"5\" fill=\"#ff5f27\"/><rect x=\"-18\" y=\"-10\" width=\"22\" height=\"4\" rx=\"2\" fill=\"#fff\"/></g></svg></div>",
+      "css": ".ds-night { background: #151c33; padding: 24px; font-family: 'Familjen Grotesk Variable', 'Familjen Grotesk', system-ui, sans-serif; color: #f1f0f5; } .ds-halt { width: 100%; height: auto; } .ds-halt .j { fill: #1c2754; stroke: #3b4a86; stroke-width: 2; } .ds-halt text { fill: #f1f0f5; font-size: 17px; font-weight: 700; font-family: 'Familjen Grotesk Variable', 'Familjen Grotesk', system-ui, sans-serif; } .ds-halt .broken .j { animation: ds-junction 6s cubic-bezier(0.16,1,0.3,1) infinite; } .ds-halt .card { animation: ds-halt 6s cubic-bezier(0.16,1,0.3,1) infinite; } @keyframes ds-junction { 0%, 18% { fill: #1c2754; stroke: #3b4a86; } 24%, 54% { fill: #3a2a12; stroke: #f5b301; } 62%, 100% { fill: #0f2b2a; stroke: #3ddc97; } } @keyframes ds-halt { 0% { transform: translate(30px, 70px); } 20%, 56% { transform: translate(214px, 70px); } 90%, 100% { transform: translate(500px, 70px); } }"
+    },
+    {
+      "name": "Proof Story (dusk)",
+      "kind": "card",
+      "refersTo": "d-proof-tile",
+      "description": "A self-contained illustration tile, then title, sector, a one-sentence story with its figure inline, and a keeper link.",
+      "html": "<div class=\"ds-night\"><article class=\"ds-proof\"><svg viewBox=\"0 0 240 140\"><rect width=\"240\" height=\"140\" rx=\"6\" fill=\"#151c3e\"/><circle cx=\"120\" cy=\"120\" r=\"110\" fill=\"#f2a93b\" opacity=\"0.08\"/><rect y=\"104\" width=\"240\" height=\"36\" fill=\"#0e1530\"/><rect x=\"92\" y=\"30\" width=\"60\" height=\"74\" fill=\"#22306a\"/><rect x=\"100\" y=\"40\" width=\"9\" height=\"10\" fill=\"#f2a93b\"/><rect x=\"115\" y=\"40\" width=\"9\" height=\"10\" fill=\"#f2a93b\"/><path d=\"M106 26 A16 16 0 0 1 138 26\" fill=\"none\" stroke=\"#3ddc97\" stroke-width=\"3\"/></svg><h3>From network chaos to IT harmony</h3><p class=\"meta\">IT/ITeS · three-office Bangalore campus</p><p class=\"story\">Wi-Fi connectivity accuracy reached <b>90–95%</b> after implementation.</p></article></div>",
+      "css": ".ds-night { background: #1d2a4a; padding: 24px; font-family: 'Familjen Grotesk Variable', 'Familjen Grotesk', system-ui, sans-serif; color: #f1f0f5; } .ds-proof { max-width: 360px; } .ds-proof svg { display: block; width: 100%; height: auto; border-radius: 6px; } .ds-proof h3 { margin: 22px 0 0; font-size: 1.5rem; font-weight: 700; line-height: 1.1; letter-spacing: -0.02em; } .ds-proof .meta { margin: 6px 0 0; color: #8f96b0; font-size: 0.9375rem; } .ds-proof .story { margin: 14px 0 0; color: #b9bfd2; } .ds-proof .story b { color: #f1f0f5; font-size: 1.25rem; font-weight: 700; }"
+    },
+    {
+      "name": "Form Panel (dusk)",
+      "kind": "input",
+      "refersTo": "d-form-panel",
+      "description": "An 82% night veil panel with underline fields above the dawn skyline.",
+      "html": "<div class=\"ds-dusk\"><div class=\"ds-panel\"><label class=\"ds-f\"><span>Work email</span><input type=\"email\" placeholder=\"name@company.com\"></label></div></div>",
+      "css": ".ds-dusk { padding: 32px 32px 80px; background: linear-gradient(180deg, rgb(59 45 92 / 0) 30%, rgb(217 120 90 / 0.6) 75%, rgb(243 167 101 / 0.85) 100%), linear-gradient(180deg, #2c2350, #3b2d5c); } .ds-panel { padding: 36px; border: 1px solid rgb(185 191 210 / 0.34); border-radius: 6px; background: rgb(15 20 38 / 0.82); font-family: 'Familjen Grotesk Variable', 'Familjen Grotesk', system-ui, sans-serif; color: #f1f0f5; } .ds-f { display: flex; flex-direction: column; gap: 6px; } .ds-f span { color: #8f96b0; font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; } .ds-f input { min-height: 48px; padding: 10px 0; border: 0; border-bottom: 1px solid rgb(185 191 210 / 0.34); border-radius: 0; background: transparent; color: #f1f0f5; font: inherit; font-size: 1.0625rem; transition: border-color 0.2s cubic-bezier(0.16,1,0.3,1); } .ds-f input::placeholder { color: #8f96b0; } .ds-f input:hover { border-bottom-color: #f1f0f5; } .ds-f input:focus-visible { outline: none; border-bottom: 2px solid #ff9a6e; }"
+    },
+    {
+      "name": "Header Navigation",
+      "kind": "nav",
+      "refersTo": "d-shell-bar",
+      "description": "Shell bar on the page's sheet colour (night-800 at dusk, sheet by day); links draw a brand-1 underline.",
+      "html": "<nav class=\"ds-nav\"><a href=\"#\" class=\"is-active\">Solutions</a><a href=\"#\">Case studies</a><a href=\"#\">Epta story</a><a href=\"#\">Careers</a></nav>",
+      "css": ".ds-nav { display: flex; gap: 4px; padding: 12px 16px; background: #151c33; border-bottom: 1px solid rgb(185 191 210 / 0.16); } .ds-nav a { position: relative; padding: 8px 12px; color: #b9bfd2; text-decoration: none; font-family: 'Familjen Grotesk Variable', 'Familjen Grotesk', system-ui, sans-serif; font-size: 0.9375rem; font-weight: 500; transition: color 0.2s cubic-bezier(0.16,1,0.3,1); } .ds-nav a::after { content: ''; position: absolute; left: 12px; right: 12px; bottom: 2px; height: 2px; background: #ff5f27; transform: scaleX(0); transform-origin: left; transition: transform 0.35s cubic-bezier(0.16,1,0.3,1); } .ds-nav a:hover, .ds-nav a.is-active { color: #f1f0f5; } .ds-nav a:hover::after, .ds-nav a.is-active::after { transform: scaleX(1); } .ds-nav a:focus-visible { outline: 2px solid #ff9a6e; outline-offset: 3px; }"
     },
     {
       "name": "Verdict Chip",
       "kind": "chip",
       "refersTo": "verdict-chip",
-      "description": "World A's only badge: a recorded result. Always pass green, never brand.",
-      "html": "<span class=\"ds-verdict\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.4\" stroke-linecap=\"square\"><path d=\"M4.5 12.5l4.5 4.5L19.5 6.5\"/></svg>PASS</span>",
-      "css": ".ds-verdict { display: inline-flex; align-items: center; gap: 0.4em; padding: 0.2em 0.55em 0.2em 0.45em; border-radius: 2px; background: var(--pass, #0e9f6e); color: var(--graphite-950, #101316); font-family: 'Martian Mono Variable', 'Martian Mono', ui-monospace, monospace; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.04em; } .ds-verdict svg { width: 13px; height: 13px; }"
+      "description": "A recorded result only (READY TO SEND after the contact form submits).",
+      "html": "<span class=\"ds-verdict\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.4\" stroke-linecap=\"square\"><path d=\"M4.5 12.5l4.5 4.5L19.5 6.5\"/></svg>READY TO SEND</span>",
+      "css": ".ds-verdict { display: inline-flex; align-items: center; gap: 0.4em; padding: 0.2em 0.55em 0.2em 0.45em; border-radius: 2px; background: #0e9f6e; color: #101316; font-family: 'Martian Mono Variable', 'Martian Mono', ui-monospace, monospace; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.04em; } .ds-verdict svg { width: 13px; height: 13px; }"
     },
     {
-      "name": "Field",
-      "kind": "input",
-      "refersTo": "field-input",
-      "description": "An underline on the sheet with a label above; accent on focus, limit red on error.",
-      "html": "<label class=\"ds-field\"><span class=\"ds-field-label\">Work email</span><input type=\"email\" placeholder=\"name@company.com\" /></label>",
-      "css": ".ds-field { display: flex; flex-direction: column; gap: 6px; font-family: 'Archivo Variable', 'Archivo', system-ui, sans-serif; } .ds-field-label { color: var(--ink-3, #505a64); font-size: 0.6875rem; font-weight: 600; font-stretch: 75%; letter-spacing: 0.06em; text-transform: uppercase; } .ds-field input { min-height: 48px; padding: 10px 0; border: 0; border-bottom: 1px solid var(--rule-strong, #9aa5a2); border-radius: 0; background: transparent; color: var(--ink, #16191c); font: inherit; font-size: 1.0625rem; transition: border-color 0.2s cubic-bezier(0.16,1,0.3,1); } .ds-field input::placeholder { color: var(--ink-3, #505a64); } .ds-field input:hover { border-bottom-color: var(--ink, #16191c); } .ds-field input:focus-visible { outline: none; border-bottom: 2px solid var(--accent, #c4003f); } .ds-field input[aria-invalid='true'] { border-bottom: 2px solid var(--limit, #b3261e); }"
+      "name": "Primary Button (daylight)",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Brand-1 fill with ink text on daylight pages.",
+      "html": "<a class=\"ds-btn\" href=\"#\">Request an assessment <svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"square\"><path d=\"M4 12h15M13 6l6 6-6 6\"/></svg></a>",
+      "css": ".ds-btn { display: inline-flex; align-items: center; gap: 0.6em; min-height: 48px; padding: 0 1.25rem; border: 1px solid #ff5f27; border-radius: 3px; background: #ff5f27; color: #16191c; font-family: 'Barlow', system-ui, sans-serif; font-weight: 650; font-size: 1rem; text-decoration: none; transition: background-color 0.25s cubic-bezier(0.16,1,0.3,1), border-color 0.25s cubic-bezier(0.16,1,0.3,1); } .ds-btn svg { width: 18px; height: 18px; transition: transform 0.35s cubic-bezier(0.16,1,0.3,1); } .ds-btn:hover { background: #ff4041; border-color: #ff4041; } .ds-btn:hover svg { transform: translateX(3px); } .ds-btn:focus-visible { outline: 2px solid #c4003f; outline-offset: 3px; }"
     },
     {
-      "name": "Header Navigation",
-      "kind": "nav",
-      "refersTo": "nav-link",
-      "description": "Light sheet bar; links draw a brand-1 underline on hover and when active.",
-      "html": "<nav class=\"ds-nav\"><a href=\"#\" class=\"is-active\">Solutions</a><a href=\"#\">Case studies</a><a href=\"#\">Epta story</a><a href=\"#\">Careers</a></nav>",
-      "css": ".ds-nav { display: flex; gap: 4px; padding: 12px 16px; background: var(--sheet, #eef1f0); border-bottom: 1px solid var(--rule, #c3ccc9); } .ds-nav a { position: relative; padding: 8px 12px; color: var(--ink-2, #454f59); text-decoration: none; font-family: 'Archivo Variable', 'Archivo', system-ui, sans-serif; font-size: 0.9375rem; font-weight: 500; font-stretch: 92%; transition: color 0.2s cubic-bezier(0.16,1,0.3,1); } .ds-nav a::after { content: ''; position: absolute; left: 12px; right: 12px; bottom: 2px; height: 2px; background: var(--brand-1, #ff5f27); transform: scaleX(0); transform-origin: left; transition: transform 0.35s cubic-bezier(0.16,1,0.3,1); } .ds-nav a:hover, .ds-nav a.is-active { color: var(--ink, #16191c); } .ds-nav a:hover::after, .ds-nav a.is-active::after { transform: scaleX(1); } .ds-nav a:focus-visible { outline: 2px solid var(--accent, #c4003f); outline-offset: 3px; }"
-    },
-    {
-      "name": "Report Sheet (A)",
-      "kind": "card",
-      "refersTo": "report-sheet",
-      "description": "1px rule, 6px ink top edge, title block over a 2px ink rule, ruled rows, 2px ink sign-off foot.",
-      "html": "<article class=\"ds-sheet\"><header class=\"ds-sheet-head\"><div><h3>Coverage check</h3><p>Tested against the OSI reference model, layers 1-7</p></div><dl><dt>Report</dt><dd class=\"ds-data\">EL-OSI-07</dd></dl></header><div class=\"ds-sheet-row\"><span class=\"ds-data\">L7</span><strong>Application</strong><a href=\"#\" class=\"ds-report-link\">ADC · WAF</a><span class=\"ds-verdict-mini\">PASS</span></div><div class=\"ds-sheet-row is-testing\"><span class=\"ds-data\">L6</span><strong>Presentation</strong><a href=\"#\" class=\"ds-report-link\">Email security</a><span class=\"ds-data\">TESTING</span></div><footer class=\"ds-sheet-foot\"><strong class=\"ds-data\">7/7</strong> layers in scope &middot; one accountable partner</footer></article>",
-      "css": ".ds-sheet { background: var(--sheet, #eef1f0); color: var(--ink, #16191c); border: 1px solid var(--rule, #c3ccc9); border-top: 6px solid var(--ink, #16191c); padding: 24px 28px 20px; font-family: 'Archivo Variable', 'Archivo', system-ui, sans-serif; } .ds-sheet-head { display: flex; justify-content: space-between; gap: 24px; padding-bottom: 18px; border-bottom: 2px solid var(--ink, #16191c); } .ds-sheet-head h3 { margin: 0; font-size: 1.5rem; font-weight: 800; font-stretch: 112%; letter-spacing: -0.02em; } .ds-sheet-head p { margin: 4px 0 0; color: var(--ink-2, #454f59); font-size: 0.875rem; } .ds-sheet-head dl { margin: 0; text-align: right; } .ds-sheet-head dt { color: var(--ink-3, #505a64); font-size: 0.6875rem; font-weight: 600; font-stretch: 75%; letter-spacing: 0.06em; text-transform: uppercase; } .ds-sheet-head dd { margin: 2px 0 0; } .ds-data { font-family: 'Martian Mono Variable', 'Martian Mono', ui-monospace, monospace; font-variant-numeric: tabular-nums slashed-zero; font-stretch: 87.5%; font-size: 0.75rem; } .ds-sheet-row { display: grid; grid-template-columns: 2.4em 1fr 1fr auto; align-items: baseline; gap: 8px; padding: 10px 0; border-bottom: 1px solid var(--rule, #c3ccc9); transition: background-color 0.3s cubic-bezier(0.16,1,0.3,1); } .ds-sheet-row > .ds-data:first-child { color: var(--pass-ink, #0a7552); font-weight: 700; } .ds-sheet-row.is-testing { background: rgb(255 95 39 / 0.1); box-shadow: inset 0 -2px 0 var(--brand-1, #ff5f27); } .ds-sheet-row.is-testing > .ds-data:first-child { color: var(--ink-3, #505a64); } .ds-report-link { color: var(--ink, #16191c); font-size: 0.875rem; font-weight: 550; text-decoration: underline; text-decoration-color: var(--brand-1, #ff5f27); text-decoration-thickness: 2px; text-underline-offset: 0.3em; transition: color 0.2s cubic-bezier(0.16,1,0.3,1); } .ds-report-link:hover { color: var(--accent, #c4003f); } .ds-report-link:focus-visible { outline: 2px solid var(--accent, #c4003f); outline-offset: 3px; } .ds-verdict-mini { padding: 0.2em 0.5em; border-radius: 2px; background: var(--pass, #0e9f6e); color: var(--graphite-950, #101316); font-family: 'Martian Mono Variable', 'Martian Mono', ui-monospace, monospace; font-size: 0.75rem; font-weight: 700; } .ds-sheet-foot { margin-top: 4px; padding-top: 14px; border-top: 2px solid var(--ink, #16191c); font-size: 0.875rem; color: var(--ink-2, #454f59); } .ds-sheet-foot strong { font-size: 1.125rem; color: var(--pass-ink, #0a7552); }"
-    },
-    {
-      "name": "Layer Bar (A)",
-      "kind": "custom",
-      "refersTo": "layer-bar",
-      "description": "Seven cells L1-L7; covered layers in their own brand step (L1 brand-7 pink to L7 brand-1 orange), empties in ground.",
-      "html": "<div class=\"ds-layerbar\"><i class=\"on\"></i><i class=\"on\"></i><i class=\"on\"></i><i></i><i></i><i class=\"on\"></i><i class=\"on\"></i></div>",
-      "css": ".ds-layerbar { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; max-width: 224px; padding: 12px; background: var(--sheet, #eef1f0); } .ds-layerbar i { display: block; height: 18px; background: var(--ground, #e1e6e4); } .ds-layerbar i.on:nth-of-type(1) { background: var(--brand-7, #fe046f); } .ds-layerbar i.on:nth-of-type(2) { background: var(--brand-6, #fe1363); } .ds-layerbar i.on:nth-of-type(3) { background: var(--brand-5, #fe2258); } .ds-layerbar i.on:nth-of-type(4) { background: var(--brand-4, #fd314b); } .ds-layerbar i.on:nth-of-type(5) { background: var(--brand-3, #ff4041); } .ds-layerbar i.on:nth-of-type(6) { background: var(--brand-2, #ff4f34); } .ds-layerbar i.on:nth-of-type(7) { background: var(--brand-1, #ff5f27); }"
-    },
-    {
-      "name": "Folio (A)",
-      "kind": "custom",
-      "refersTo": "folio",
-      "description": "Running foot that closes every World A section.",
-      "html": "<div class=\"ds-folio\"><span class=\"ds-folio-data\">EL-OSI-07</span><span class=\"ds-folio-rule\"></span><span class=\"ds-folio-name\">Solutions log</span><span class=\"ds-folio-data\">03 / 08</span></div>",
-      "css": ".ds-folio { display: flex; align-items: center; gap: 14px; font-family: 'Archivo Variable', 'Archivo', system-ui, sans-serif; font-size: 0.6875rem; color: var(--ink-3, #505a64); } .ds-folio-data { font-family: 'Martian Mono Variable', 'Martian Mono', ui-monospace, monospace; font-size: 0.625rem; } .ds-folio-rule { flex: 1; height: 1px; background: currentColor; opacity: 0.35; } .ds-folio-name { font-stretch: 80%; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }"
-    },
-    {
-      "name": "Layer Switch (B)",
+      "name": "Layer Switch (daylight)",
       "kind": "custom",
       "refersTo": "b-layer-switch",
       "description": "CAD layer toggles: ink check box, brand-step swatch, condensed layer number, layer name.",
-      "html": "<fieldset class=\"ds-layers\"><legend>Layers on this plan</legend><button type=\"button\" role=\"switch\" aria-checked=\"true\" class=\"ds-lrow\" style=\"--c: var(--brand-1, #ff5f27)\"><span class=\"box\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.4\" stroke-linecap=\"square\"><path d=\"M4.5 12.5l4.5 4.5L19.5 6.5\"/></svg></span><span class=\"sw\"></span><span class=\"ln\">L7</span><span>Application</span></button><button type=\"button\" role=\"switch\" aria-checked=\"false\" class=\"ds-lrow\" style=\"--c: var(--brand-7, #fe046f)\"><span class=\"box\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.4\" stroke-linecap=\"square\"><path d=\"M4.5 12.5l4.5 4.5L19.5 6.5\"/></svg></span><span class=\"sw\"></span><span class=\"ln\">L1</span><span>Physical</span></button></fieldset>",
-      "css": ".ds-layers { margin: 0; padding: 0; border: 0; border-top: 2px solid var(--ink, #16191c); font-family: 'Barlow', system-ui, sans-serif; max-width: 320px; } .ds-layers legend { float: left; width: 100%; padding: 12px 0 8px; font-family: 'Barlow Condensed', sans-serif; font-size: 0.8125rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-3, #505a64); } .ds-lrow { display: grid; grid-template-columns: 20px 12px 26px 1fr; align-items: center; gap: 10px; width: 100%; min-height: 38px; padding: 5px 4px; border: 0; border-bottom: 1px solid var(--rule, #c3ccc9); background: transparent; text-align: left; font: inherit; font-weight: 600; font-size: 0.9375rem; color: var(--ink, #16191c); cursor: pointer; transition: background-color 0.2s cubic-bezier(0.16,1,0.3,1); } .ds-lrow:hover { background: #fff; } .ds-lrow:focus-visible { outline: 2px solid var(--accent, #c4003f); outline-offset: 3px; } .ds-lrow .box { display: grid; place-items: center; width: 18px; height: 18px; border: 1.5px solid var(--ink, #16191c); border-radius: 2px; color: transparent; } .ds-lrow .box svg { width: 13px; height: 13px; } .ds-lrow[aria-checked='true'] .box { background: var(--ink, #16191c); color: #fff; } .ds-lrow .sw { width: 12px; height: 12px; border-radius: 50%; background: var(--c); transform: scale(0.6); opacity: 0.4; transition: transform 0.35s cubic-bezier(0.16,1,0.3,1), opacity 0.35s cubic-bezier(0.16,1,0.3,1); } .ds-lrow[aria-checked='true'] .sw { transform: none; opacity: 1; } .ds-lrow .ln { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 0.875rem; color: var(--ink-3, #505a64); }"
+      "html": "<fieldset class=\"ds-layers\"><legend>Layers on this plan</legend><button type=\"button\" role=\"switch\" aria-checked=\"true\" class=\"ds-lrow\" style=\"--c:#ff5f27\"><span class=\"box\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.4\" stroke-linecap=\"square\"><path d=\"M4.5 12.5l4.5 4.5L19.5 6.5\"/></svg></span><span class=\"sw\"></span><span class=\"ln\">L7</span><span>Application</span></button><button type=\"button\" role=\"switch\" aria-checked=\"false\" class=\"ds-lrow\" style=\"--c:#fe046f\"><span class=\"box\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.4\" stroke-linecap=\"square\"><path d=\"M4.5 12.5l4.5 4.5L19.5 6.5\"/></svg></span><span class=\"sw\"></span><span class=\"ln\">L1</span><span>Physical</span></button></fieldset>",
+      "css": ".ds-layers { margin: 0; padding: 0; border: 0; border-top: 2px solid #16191c; font-family: 'Barlow', system-ui, sans-serif; max-width: 320px; background: #f7f8f6; } .ds-layers legend { float: left; width: 100%; padding: 12px 0 8px; font-family: 'Barlow Condensed', sans-serif; font-size: 0.8125rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #505a64; } .ds-lrow { display: grid; grid-template-columns: 20px 12px 26px 1fr; align-items: center; gap: 10px; width: 100%; min-height: 38px; padding: 5px 4px; border: 0; border-bottom: 1px solid #c3ccc9; background: transparent; text-align: left; font: inherit; font-weight: 600; font-size: 0.9375rem; color: #16191c; cursor: pointer; transition: background-color 0.2s cubic-bezier(0.16,1,0.3,1); } .ds-lrow:hover { background: #fff; } .ds-lrow:focus-visible { outline: 2px solid #c4003f; outline-offset: 3px; } .ds-lrow .box { display: grid; place-items: center; width: 18px; height: 18px; border: 1.5px solid #16191c; border-radius: 2px; color: transparent; } .ds-lrow .box svg { width: 13px; height: 13px; } .ds-lrow[aria-checked='true'] .box { background: #16191c; color: #fff; } .ds-lrow .sw { width: 12px; height: 12px; border-radius: 50%; background: var(--c); transform: scale(0.6); opacity: 0.4; transition: transform 0.35s cubic-bezier(0.16,1,0.3,1), opacity 0.35s cubic-bezier(0.16,1,0.3,1); } .ds-lrow[aria-checked='true'] .sw { transform: none; opacity: 1; } .ds-lrow .ln { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 0.875rem; color: #505a64; }"
     },
     {
-      "name": "Drafting Sheet with Title Block (B)",
+      "name": "Drafting Sheet and Provenance Tag (daylight)",
       "kind": "card",
       "refersTo": "b-drafting-sheet",
-      "description": "White sheet, 1px rule, 6px ink top edge; sheet foot with legend and title block.",
-      "html": "<figure class=\"ds-dsheet\"><div class=\"ds-plan\">Floor plan</div><figcaption class=\"ds-dfoot\"><dl class=\"ds-legend\"><div><dt><svg viewBox=\"0 0 28 20\"><circle cx=\"14\" cy=\"10\" r=\"7\" fill=\"#f5b301\" stroke=\"#16191c\" stroke-width=\"1.2\"/></svg></dt><dd>Fault found</dd></div><div><dt><svg viewBox=\"0 0 28 20\"><circle cx=\"14\" cy=\"10\" r=\"7\" fill=\"#0e9f6e\" stroke=\"#16191c\" stroke-width=\"1.2\"/></svg></dt><dd>Resolved</dd></div><div><dt><svg viewBox=\"0 0 28 20\"><rect x=\"1\" y=\"1\" width=\"26\" height=\"18\" rx=\"9\" fill=\"#ff5f27\" stroke=\"#16191c\"/></svg></dt><dd>OSI layer</dd></div></dl><div class=\"ds-tblock\"><div><span>Sheet</span><b>A · Office floor plan</b></div><div><span>Scale</span><b>Not to scale</b></div><div>Illustrative plan, not a client site</div></div></figcaption></figure>",
-      "css": ".ds-dsheet { margin: 0; background: #fff; border: 1px solid var(--rule, #c3ccc9); border-top: 6px solid var(--ink, #16191c); padding: 16px 16px 0; font-family: 'Barlow Condensed', 'Barlow', sans-serif; } .ds-plan { height: 120px; display: grid; place-items: center; color: var(--ink-3, #505a64); border: 2.5px solid var(--ink, #16191c); } .ds-dfoot { display: grid; grid-template-columns: minmax(0, 1fr) 220px; margin: 12px -16px 0; border-top: 1px solid var(--ink, #16191c); } .ds-legend { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); align-content: center; gap: 10px 16px; margin: 0; padding: 14px 16px; } .ds-legend > div { display: flex; align-items: center; gap: 8px; } .ds-legend svg { width: 28px; height: 20px; } .ds-legend dd { margin: 0; font-size: 0.875rem; color: var(--ink-2, #454f59); } .ds-tblock { border-left: 1px solid var(--ink, #16191c); font-size: 0.8125rem; } .ds-tblock > div { display: flex; justify-content: space-between; gap: 12px; padding: 6px 12px; border-bottom: 1px solid var(--rule, #c3ccc9); color: var(--ink-3, #505a64); letter-spacing: 0.04em; } .ds-tblock > div:last-child { border-bottom: 0; } .ds-tblock b { color: var(--ink, #16191c); }"
-    },
-    {
-      "name": "Provenance Tag and Schedule (B)",
-      "kind": "custom",
-      "refersTo": "b-provenance-tag",
-      "description": "'Recorded' ink tag inline before a real figure; schedule table with ink top edge and condensed heads.",
-      "html": "<p class=\"ds-rec\"><span class=\"ds-tag\">Recorded</span><b>90–95% Wi-Fi connectivity accuracy</b></p><table class=\"ds-sched\"><thead><tr><th>Item</th><th>Today</th><th>With Epta</th></tr></thead><tbody><tr><th>IT vendors to coordinate</th><td class=\"t\">5</td><td><b>1</b> accountable partner</td></tr></tbody></table>",
-      "css": ".ds-rec { display: flex; gap: 12px; align-items: baseline; font-family: 'Barlow', system-ui, sans-serif; font-size: 1.0625rem; color: var(--ink, #16191c); } .ds-tag { padding: 1px 6px; background: var(--ink, #16191c); color: #fff; font-family: 'Barlow Condensed', sans-serif; font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; } .ds-sched { width: 100%; border-collapse: collapse; background: #fff; border: 1px solid var(--rule, #c3ccc9); border-top: 6px solid var(--ink, #16191c); font-family: 'Barlow', system-ui, sans-serif; margin-top: 16px; } .ds-sched th, .ds-sched td { padding: 16px 20px; text-align: left; vertical-align: baseline; border-bottom: 1px solid var(--rule, #c3ccc9); } .ds-sched thead th { padding-block: 10px; font-family: 'Barlow Condensed', sans-serif; font-size: 0.8125rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-3, #505a64); border-bottom: 1px solid var(--ink, #16191c); } .ds-sched tbody th { font-weight: 500; color: var(--ink-2, #454f59); } .ds-sched td { font-variant-numeric: tabular-nums; color: var(--ink-2, #454f59); } .ds-sched td.t { font-size: 1.25rem; font-weight: 600; color: var(--ink-3, #505a64); } .ds-sched td b { margin-right: 6px; font-size: 1.5rem; font-weight: 700; color: var(--ink, #16191c); }"
+      "description": "White sheet with a 6px ink top edge and title block; an inline 'Recorded' tag before a real figure.",
+      "html": "<figure class=\"ds-dsheet\"><div class=\"ds-plan\">Floor plan</div><figcaption class=\"ds-tb\"><div><span>Sheet</span><b>A · Office floor plan</b></div><div><span>Scale</span><b>Not to scale</b></div></figcaption></figure><p class=\"ds-rec\"><span class=\"ds-tag\">Recorded</span><b>90–95% Wi-Fi connectivity accuracy</b></p>",
+      "css": ".ds-dsheet { margin: 0; background: #fff; border: 1px solid #c3ccc9; border-top: 6px solid #16191c; padding: 16px 16px 0; font-family: 'Barlow Condensed', 'Barlow', sans-serif; } .ds-plan { height: 120px; display: grid; place-items: center; color: #505a64; border: 2.5px solid #16191c; } .ds-tb { margin: 12px -16px 0; border-top: 1px solid #16191c; font-size: 0.8125rem; } .ds-tb > div { display: flex; justify-content: space-between; gap: 12px; padding: 6px 12px; border-bottom: 1px solid #c3ccc9; color: #505a64; letter-spacing: 0.04em; } .ds-tb b { color: #16191c; } .ds-rec { display: flex; gap: 12px; align-items: baseline; font-family: 'Barlow', system-ui, sans-serif; font-size: 1.0625rem; color: #16191c; } .ds-tag { padding: 1px 6px; background: #16191c; color: #fff; font-family: 'Barlow Condensed', sans-serif; font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; }"
     }
   ],
   "narrative": {
-    "northStar": "The Field Document, In Daylight",
-    "overview": "Epta's pages are working documents an engineer would hand a client: paper, ink, ruled lines and the logo's seven steps, always on a light ground. One brand runs two surface worlds that share every brand and status decision but differ in the kind of document they are.\n\nWorld A, \"The Signed Test Report\" (Homepage /, the shared shell, status pages). A continuous field certification report: cool report-white sheets on a desk ground, title blocks over heavy ink rules, hairline-ruled rows, measured values in a monospace, PASS verdicts, a folio closing every section. Archivo is worked across its width axis; Martian Mono is the meter readout. Diagrams are cable-certification instruments: wiremap, limit-line plot, scope console, failover line.\n\nWorld B, \"The Site Survey\" (Homepage /home-b, under body.theme-b). An architect's survey drawing of the client's own floor: drafting-white paper, pure-white sheets edged in ink, Barlow and Barlow Condensed like CAD annotation. The signature is the floor plan: the seven OSI layers are CAD layers drawn onto the floor in the brand steps, with on-plan layer tags, fault pins resolving to green stamps, a coverage heatmap, OEM callouts, a legend and a title block, and revision captions (Rev A–F) as the engagement advances.\n\nBoth worlds are flat, light and evidence-led. Depth is sheets on paper, never shadow. Brand colour names layers and invites action; status colour (green, red, amber) reports results and never borrows brand. Each further page (solutions, case studies, story, careers, contact, blog, legal) is written as another document in one of the two worlds, with its own subject-specific scenario built from that world's materials.",
+    "northStar": "Follow One Order",
+    "overview": "Epta keeps a client's network running across all seven OSI layers. The site says so in two surface worlds that share one brand: the logo's seven orange-to-pink steps, one status vocabulary, one shell. Each world is a complete material system, and a page lives in exactly one.\n\n**One request, seven stops** (main homepage `/`, `body.theme-dusk`; the lead world). An original, hand-authored flat-vector picture book at dusk. One sales order leaves the Bangalore head office, descends the seven layers as seven plain-language stops (clicked, sealed, held, guaranteed, routed, handed on, carried on cable), crosses the region to Mumbai as light, and arrives at dawn. Every scene is a real place with a real person or object: the HQ tower with its sales floor lit, a desk, a sealed envelope, two colleagues on a held call, a scooter courier, a city route map, a switch room, an engineer kneeling in a cable trench, a night view of the coast, the Mumbai branch. The order is always the same glowing card in the brand gradient, so the eye can follow it anywhere. Type is Familjen Grotesk, set big: one enormous line per stop. Grounds run from night navy through indigo and plum to an ember dawn as the story ends.\n\n**The Site Survey** (Homepage B `/home-b`, `body.theme-b`; the daylight world). An architect's survey drawing of the client's own floor: drafting-white paper, pure-white sheets edged in ink, Barlow and Barlow Condensed like CAD annotation. The seven OSI layers are CAD layers drawn onto the floor in the brand steps, with on-plan tags, fault pins resolving to green stamps, a coverage heatmap, OEM callouts, a legend and title block, and Rev A–F captions as the engagement advances.\n\nNew pages follow the lead world unless the user directs otherwise. Each is written as a subject-specific scene inside it: a solution page as the stop that solution keeps running, a case study as its own illustrated place. Never a generic template.",
     "keyCharacteristics": [
-      "Light only: every band, panel, header and footer sits on ground, paper or sheet. No dark panels anywhere.",
-      "The client logo (ink-wordmark lockup) and its seven orange-to-pink steps, mapped to the seven OSI layers, shared by both worlds.",
-      "World A: Archivo across its width axis, Martian Mono for measured values, ruled report sheets, verdict chips, folios.",
-      "World B: Barlow and Barlow Condensed, white drafting sheets on drafting-white paper, a CAD floor plan with layers drawn along their path.",
-      "Status colours (pass green, limit red, fault amber) kept apart from brand.",
-      "Flat depth: sheets edged in 1px rule with a 6px ink top edge, overlapping, never floating."
+      "Two worlds, one brand: an illustrated dusk journey (`/`) and a daylight survey drawing (`/home-b`). One world per page.",
+      "One recurring protagonist: the order card, always in the brand gradient, with a warm glow.",
+      "Original flat-vector scenes with one warm lamp per place, people as geometric figures in warm skin tones, no stock imagery.",
+      "One display-scale line of type per stop; the story is read top to bottom, night to dawn.",
+      "The seven brand steps map L7 orange to L1 pink in both worlds.",
+      "Status colours (green, red, amber) kept apart from brand in both worlds.",
+      "No cards around scenes, no icons in circles, no drop shadows."
     ],
     "rules": [
-      { "name": "The Daylight Rule", "body": "No Epta surface uses a dark panel, dark band, dark header or footer, or a dark theme. Every section sits on ground, drafting white or sheet. Graphite survives only as small instrument parts (chip text, connector pins, the scrollbar thumb).", "section": "colors" },
-      { "name": "The Seven Steps Rule", "body": "The brand steps follow the logo: brand-1 orange at L7 on top, brand-7 pink at L1 at the foot. When brand colour encodes layers, in either world, each layer gets its own step and the order is never shuffled, reversed or interpolated.", "section": "colors" },
-      { "name": "The Status-Apart Rule", "body": "Brand colour never reports a result. Resolved and passed are green, form errors are the true red limit, alarms and unresolved faults are amber (fault fills, fault-ink strokes and text). A fault is never drawn in brand orange or pink, and a brand fill never sits where a verdict would.", "section": "colors" },
-      { "name": "The Ink-Beside-Verdicts Rule", "body": "Red-family link text next to a status reads as a failure. Links are ink with a 2px brand-1 underline and turn accent only on hover.", "section": "colors" },
-      { "name": "The Wire-Colors-Are-Data Rule", "body": "The wiremap's pair colours are the physical T568B cable code, scoped to cable diagrams. They are data, not palette, and never appear on buttons, text or section surfaces.", "section": "colors" },
-      { "name": "The Measured-Only Mono Rule", "body": "In World A, Martian Mono is for things a meter could print: IDs, codes, counts, timestamps, phone numbers, readouts. Sentences, headings and labels stay in Archivo.", "section": "typography" },
-      { "name": "The Width-Axis Rule", "body": "In World A, hierarchy is carried by width as much as size: heads at 105–112% width, body at 100%, labels at 75%.", "section": "typography" },
-      { "name": "The Lettering Rule", "body": "In World B, anything that would be lettered on a drawing (room IDs, layer tags, legend, title block, schedule heads, step rail) is Barlow Condensed; statements are Barlow. No third family.", "section": "typography" },
-      { "name": "The One-World-Per-Page Rule", "body": "A page is set in one world's type. Shared shell components inherit the page's --font-sans; don't mix Archivo heads and Barlow heads on one page.", "section": "typography" },
-      { "name": "The Folio Rule (A)", "body": "Every World A section ends with the folio: report ID, a 35%-opacity hairline, the section name in label type, and \"nn / nn\" sheet numbering. There are no eyebrows above headings.", "section": "layout" },
-      { "name": "The Revision Rule (B)", "body": "World B marks progress on the drawing itself: a six-step rail above the plan and a \"Rev A–F · Step\" caption below it. There are no eyebrows above headings; the chapter numeral sits beside its title as a step index, not above it.", "section": "layout" },
-      { "name": "The No-Soft-Light Rule", "body": "No drop shadows, no blurred shadows, no gradient washes or glows. Hard-edged devices native to the instruments are allowed because they are rules, not light: an inset 2px foot rule on a probe row, a 1px scope graticule, white-striped wire pairs with a 1px inset outline, a hard-stop progress fill on a range track.", "section": "elevation" },
-      { "name": "The Heatmap-Is-Data Rule", "body": "The only soft-edged fill in the system is the World B coverage heatmap: pass green fading radially from 38% to transparent, because it plots measured signal. It never appears outside a coverage plot and never as decoration.", "section": "elevation" },
-      { "name": "The Ink-Edge Rule", "body": "A standalone sheet (report, drafting sheet, form, schedule, status) is announced by a 6px ink top edge and a 1px rule border, never by lifting it.", "section": "elevation" }
+      {
+        "name": "The Theme-Per-Surface Rule",
+        "body": "Each page is wholly one world: `/` is the dusk journey; `/home-b` and light utility pages are daylight. New pages follow the dusk lead unless the user directs otherwise. Never mix a dusk band into a daylight page or a daylight sheet into a dusk page.",
+        "section": "colors"
+      },
+      {
+        "name": "The One-Order Rule",
+        "body": "The order card is always the brand-1 to brand-7 gradient with white text lines, wherever it appears. Nothing else in the illustrations takes the full brand gradient, so the order can always be found.",
+        "section": "colors"
+      },
+      {
+        "name": "The Status-Apart Rule",
+        "body": "Brand colour never reports a result. Working and resolved are green, form errors are red, congestion, hazards and faults are amber. A delay or alarm is never drawn in the order's orange or pink.",
+        "section": "colors"
+      },
+      {
+        "name": "The Seven Steps Rule",
+        "body": "The brand steps follow the logo: brand-1 orange at L7, brand-7 pink at L1. When brand colour encodes layers, in either world, each layer gets its own step and the order is never shuffled or reversed.",
+        "section": "colors"
+      },
+      {
+        "name": "The Ink-Beside-Verdicts Rule",
+        "body": "On daylight pages, red-family link text beside a status reads as a failure: links are ink with a 2px brand-1 underline and turn accent only on hover.",
+        "section": "colors"
+      },
+      {
+        "name": "The One-Line-Per-Stop Rule (dusk)",
+        "body": "Each stop is told by one enormous line of type and a short body. No subheads, no bullet lists inside a stop.",
+        "section": "typography"
+      },
+      {
+        "name": "The Lettering Rule (daylight)",
+        "body": "In the survey world, anything lettered on a drawing is Barlow Condensed; statements are Barlow.",
+        "section": "typography"
+      },
+      {
+        "name": "The One-World-Per-Page Rule",
+        "body": "A page is set in one world's type; shared shell components inherit the page's `--font-sans`.",
+        "section": "typography"
+      },
+      {
+        "name": "The Addressable-Stop Rule (dusk)",
+        "body": "Every stop has its own anchor and its own roundel on the spine. The roundels are links; the spine is the only place roundels appear.",
+        "section": "layout"
+      },
+      {
+        "name": "The Revision Rule (daylight)",
+        "body": "Survey progress is marked on the drawing: a six-step rail above the plan and a \"Rev A–F · Step\" caption below it.",
+        "section": "layout"
+      },
+      {
+        "name": "The One-Lamp Rule (dusk)",
+        "body": "Each place in a scene has one warm key light (lamp to lamp-hi). A split scene has one per place: two desks on the call, two cities at night. The only other light is cool screen spill and the order's own glow.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Feathered-Stage Rule (dusk)",
+        "body": "Scenes never sit in cards, frames or bordered boxes. The journey stage dissolves into the page through a mask; small proof illustrations are self-contained tiles with their own sky and ground, 6px corners, no border.",
+        "section": "elevation"
+      },
+      {
+        "name": "The No-Shadow Rule",
+        "body": "No drop shadows in either world. Glow belongs only to light sources in the illustrations; by day, soft fills belong only to measured coverage.",
+        "section": "elevation"
+      }
     ],
     "dos": [
-      "Do keep every Epta surface light: ground, drafting white, sheet or sheet-white.",
-      "Do write each new page as a document in one world (a test report in A, a survey drawing in B), with its own subject-specific scenario built from that world's materials.",
-      "Do colour layers by their brand step in both worlds: L7 brand-1 orange down to L1 brand-7 pink.",
-      "Do put ink text on brand-1 fills, and make links ink with a 2px brand-1 underline.",
-      "Do announce a standalone sheet with a 1px rule border and a 6px ink top edge.",
-      "Do report results only in status colours: pass green for passed and resolved, limit red for form errors, amber for faults (fault fills, fault-ink strokes and text).",
-      "Do set World A measured values, IDs and codes in Martian Mono with tabular, slashed-zero numerals, and close every A section with the folio.",
-      "Do letter World B plan annotation, legends, title blocks and table heads in Barlow Condensed.",
-      "Do label illustrative drawings as illustrative and tag real figures as \"Recorded\".",
-      "Do mark empty content slots with dashed rule-strong placeholders that say what is awaited."
+      "Do put each page wholly in one world; new pages follow the dusk journey unless the user directs otherwise.",
+      "Do tell each page through a real, specific scene: a place, a person, an object the visitor recognises.",
+      "Do draw the order as the same brand-gradient card with white lines in every scene, and let it glow.",
+      "Do give each place in a scene one warm lamp, and build scenes from flat back, mid and front planes.",
+      "Do draw people as flat geometric figures in warm skin tones, reusing the shared seated figure where it fits.",
+      "Do draw congestion, hazards and faults in amber and their resolution in green.",
+      "Do tell each stop with one display-scale line, a short body and the solution that keeps it running.",
+      "Do use action (#c2410c) with white text for primary actions at dusk, and brand-1 with ink text by day.",
+      "Do label illustrative devices as illustrative, set recorded figures inline, and leave empty partner slots visibly empty.",
+      "Do letter survey-world annotation, legends, title blocks and table heads in Barlow Condensed."
     ],
     "donts": [
-      "Don't use dark panels, dark bands, a dark header or footer, or a dark theme on any Epta surface.",
-      "Don't use drop shadows, blurred shadows, glows or gradient washes; the coverage heatmap is the only soft fill, and only on a coverage plot.",
-      "Don't use brand orange or pink for a verdict, an error or an alarm.",
-      "Don't set link text in a red-family colour beside a status; use ink with the brand-1 underline.",
-      "Don't shuffle, reverse or interpolate the brand steps when they encode layers.",
-      "Don't use wire pair colours outside cable diagrams.",
-      "Don't mix World A and World B type on one page.",
-      "Don't use a navy gradient hero, data-center photography, or a grid of icon service cards.",
-      "Don't put eyebrow kickers above headings; A uses the folio, B uses the rail and revision caption.",
-      "Don't round corners beyond 3px except for the meaning-bearing dots, pins, stamps, swatches, thumbs and layer tags listed in Shapes."
+      "Don't mix dusk and daylight bands, sheets or type on one page.",
+      "Don't put scenes in cards, frames or bordered boxes; feather the stage into the page.",
+      "Don't draw national borders on maps; show regions, coasts and cities only.",
+      "Don't draw a delay, alarm or fault in the order's orange or pink, or give anything but the order the full brand gradient.",
+      "Don't add a second warm light to one place in a scene, or use drop shadows anywhere.",
+      "Don't use roundels anywhere but the spine, or icons in circles as decoration.",
+      "Don't use font glyphs or emoji as icons; draw them in SVG.",
+      "Don't use stock photography, abstract tech visuals, or the headline-left/effect-right hero with repeating heading-plus-rows sections.",
+      "Don't put eyebrow kickers above headings.",
+      "Don't set link text in a red-family colour beside a status on a daylight page."
     ]
   }
 }

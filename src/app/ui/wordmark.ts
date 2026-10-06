@@ -1,12 +1,27 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 
-/** Client lockup: seven-step orange-to-pink mark + wordmark. `light` = ink wordmark (derived), `dark` = white original. */
+/**
+ * Client lockup: seven-step orange-to-pink mark + wordmark.
+ * The ink-wordmark file (derived) shows on light pages; the client's original white-wordmark
+ * file shows on dark pages (`body.theme-dusk`) or when `ground` is set to 'dark'.
+ */
 @Component({
   selector: 'app-wordmark',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  host: { '[class.force-dark]': "ground() === 'dark'" },
   template: `
     <img
-      [src]="ground() === 'dark' ? 'brand/epta-layers-logo-dark.png' : 'brand/epta-layers-logo-light.png'"
+      class="on-light"
+      src="brand/epta-layers-logo-light.png"
+      alt="Epta Layers"
+      width="850"
+      height="204"
+      [style.height.px]="height()"
+      decoding="async"
+    />
+    <img
+      class="on-dark"
+      src="brand/epta-layers-logo-dark.png"
       alt="Epta Layers"
       width="850"
       height="204"
@@ -22,6 +37,17 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
     img {
       width: auto;
       max-width: none;
+    }
+    .on-dark {
+      display: none;
+    }
+    :host-context(.theme-dusk) .on-light,
+    :host(.force-dark) .on-light {
+      display: none;
+    }
+    :host-context(.theme-dusk) .on-dark,
+    :host(.force-dark) .on-dark {
+      display: block;
     }
   `,
 })

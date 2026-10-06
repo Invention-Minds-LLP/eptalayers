@@ -23,7 +23,7 @@ import { Wordmark } from '../ui/wordmark';
       </nav>
 
       <div class="actions">
-        <a class="phone data" [href]="contact.phoneHref">{{ contact.phoneDisplay }}</a>
+        <a class="phone" [href]="contact.phoneHref">{{ contact.phoneDisplay }}</a>
         <a class="btn" routerLink="/contact">Talk to an engineer</a>
         <button
           class="toggle"
@@ -51,7 +51,7 @@ import { Wordmark } from '../ui/wordmark';
             Contact
             <app-icon name="arrow" />
           </a>
-          <a class="drawer-phone data" [href]="contact.phoneHref">
+          <a class="drawer-phone" [href]="contact.phoneHref">
             <app-icon name="phone" />
             {{ contact.phoneDisplay }}
           </a>

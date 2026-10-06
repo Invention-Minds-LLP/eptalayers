@@ -1,0 +1,431 @@
+<svg viewBox="0 0 800 600" role="img" [attr.aria-label]="'Illustration of the order at stop ' + stop()">
+  <defs>
+    <linearGradient id="js-card" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ff5f27" />
+      <stop offset="1" stop-color="#fe046f" />
+    </linearGradient>
+    <radialGradient id="js-glow">
+      <stop offset="0" stop-color="#ff6a3d" stop-opacity="0.7" />
+      <stop offset="1" stop-color="#ff6a3d" stop-opacity="0" />
+    </radialGradient>
+    <!-- warm lamp light, the one light source in every scene -->
+    <radialGradient id="js-lamp">
+      <stop offset="0" stop-color="#ffd27a" stop-opacity="0.55" />
+      <stop offset="0.45" stop-color="#f2a93b" stop-opacity="0.18" />
+      <stop offset="1" stop-color="#f2a93b" stop-opacity="0" />
+    </radialGradient>
+    <radialGradient id="js-screen">
+      <stop offset="0" stop-color="#bcd2ff" stop-opacity="0.35" />
+      <stop offset="1" stop-color="#bcd2ff" stop-opacity="0" />
+    </radialGradient>
+    <linearGradient id="js-beam" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffd27a" stop-opacity="0.5" />
+      <stop offset="1" stop-color="#ffd27a" stop-opacity="0" />
+    </linearGradient>
+    <linearGradient id="js-night" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0b1230" />
+      <stop offset="1" stop-color="#2c2350" />
+    </linearGradient>
+    <linearGradient id="js-dawn" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2c2350" />
+      <stop offset="0.55" stop-color="#7a4a70" />
+      <stop offset="0.85" stop-color="#d9785a" />
+      <stop offset="1" stop-color="#f3a765" />
+    </linearGradient>
+    <linearGradient id="js-sea" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#0b1230" />
+      <stop offset="1" stop-color="#1c2b5a" />
+    </linearGradient>
+
+    <symbol id="js-order" viewBox="0 0 80 56" overflow="visible">
+      <rect width="80" height="56" rx="6" fill="url(#js-card)" />
+      <rect x="10" y="12" width="34" height="5" rx="2.5" fill="#fff" />
+      <rect x="10" y="23" width="56" height="4" rx="2" fill="#fff" opacity="0.65" />
+      <rect x="10" y="32" width="44" height="4" rx="2" fill="#fff" opacity="0.65" />
+      <rect x="10" y="41" width="26" height="4" rx="2" fill="#fff" opacity="0.65" />
+    </symbol>
+
+    <!-- seated in profile, facing right, hand forward on a keyboard -->
+    <symbol id="js-seated" viewBox="0 0 140 200" overflow="visible">
+      <rect x="10" y="88" width="14" height="72" rx="5" fill="#0a1029" />
+      <rect x="10" y="150" width="72" height="12" rx="4" fill="#0a1029" />
+      <rect x="40" y="160" width="8" height="40" fill="#0a1029" />
+      <path d="M36 140 H110 a10 10 0 0 1 0 20 H36 Z" style="fill: var(--pants)" />
+      <rect x="102" y="150" width="18" height="46" rx="8" style="fill: var(--pants)" />
+      <ellipse cx="118" cy="196" rx="16" ry="6" fill="#070b1c" />
+      <path d="M30 90 C30 68 44 58 62 58 C80 58 88 70 88 88 L90 152 L32 152 Z" style="fill: var(--shirt)" />
+      <path d="M62 58 C80 58 88 70 88 88 L90 152 L72 152 L70 86 C70 72 66 62 62 58 Z" fill="#000" opacity="0.14" />
+      <rect x="56" y="44" width="14" height="18" rx="4" style="fill: var(--skin)" />
+      <circle cx="66" cy="34" r="20" style="fill: var(--skin)" />
+      <circle cx="86" cy="37" r="3.5" style="fill: var(--skin)" />
+      <path d="M46 34 C44 12 64 4 80 12 C90 17 90 27 86 30 C80 22 70 21 62 26 C56 30 52 38 50 46 Z" style="fill: var(--hair)" />
+      <path d="M72 72 C88 76 106 88 124 100" fill="none" style="stroke: var(--shirt)" stroke-width="16" stroke-linecap="round" />
+      <circle cx="127" cy="102" r="7" style="fill: var(--skin)" />
+    </symbol>
+  </defs>
+
+  <!-- ============ L7 · Application: it starts with a click ============ -->
+  <g class="sc sc-l7" [class.on]="on('l7')">
+    <rect width="800" height="600" fill="#131b3c" fill-opacity="0.55" />
+    <!-- back plane: the window onto the city -->
+    <rect x="50" y="60" width="330" height="270" rx="4" fill="url(#js-night)" />
+    @for (w of cityWins; track $index) {
+      <rect [attr.x]="w.x - 16" [attr.y]="w.y + 70" width="22" height="26" [attr.fill]="w.lit ? '#f2a93b' : '#1c2754'" [attr.opacity]="w.lit ? 0.55 : 1" />
+    }
+    <rect x="50" y="60" width="330" height="270" rx="4" fill="none" stroke="#24305f" stroke-width="10" />
+    <rect x="210" y="60" width="10" height="270" fill="#24305f" />
+    <!-- mid plane: desk, lamp, monitor -->
+    <circle cx="470" cy="398" r="170" fill="url(#js-lamp)" />
+    <path d="M444 398 L460 330 L500 318" fill="none" stroke="#2e3d78" stroke-width="6" stroke-linecap="round" />
+    <path d="M486 306 L520 300 L512 332 Z" fill="#2e3d78" />
+    <circle cx="512" cy="326" r="5" fill="#ffd27a" />
+    <rect x="370" y="398" width="410" height="16" rx="4" fill="#2e3d78" />
+    <rect x="390" y="414" width="12" height="150" fill="#1d2756" />
+    <rect x="748" y="414" width="12" height="150" fill="#1d2756" />
+    <circle cx="640" cy="300" r="180" fill="url(#js-screen)" />
+    <g class="monitor">
+      <rect x="540" y="196" width="220" height="156" rx="10" fill="#0b1230" stroke="#3b4a86" stroke-width="5" />
+      <rect x="554" y="210" width="192" height="18" rx="3" fill="#1c2754" />
+      @for (k of [0, 1, 2, 3]; track k) {
+        <rect x="554" [attr.y]="240 + k * 19" width="130" height="8" rx="4" fill="#2a3768" />
+        <rect x="694" [attr.y]="240 + k * 19" width="40" height="8" rx="4" fill="#2a3768" />
+      }
+      <g class="send">
+        <rect x="660" y="318" width="84" height="24" rx="5" fill="#c2410c" />
+        <text x="702" y="335" text-anchor="middle" class="lbl">SEND ORDER</text>
+      </g>
+      <rect x="638" y="352" width="26" height="46" fill="#1d2756" />
+      <rect x="612" y="394" width="78" height="6" rx="3" fill="#1d2756" />
+    </g>
+    <rect x="520" y="388" width="110" height="9" rx="3" fill="#3b4a86" />
+    <use href="#js-seated" x="398" y="288" width="140" height="200" style="--shirt: #e9eef6; --pants: #2c3a6e; --skin: #c98b6b; --hair: #1b1b2b" />
+    <!-- front plane -->
+    <g class="order-rise">
+      <circle cx="702" cy="168" r="70" fill="url(#js-glow)" />
+      <use href="#js-order" x="662" y="140" width="80" height="56" />
+    </g>
+  </g>
+
+  <!-- ============ L6 · Presentation: sealed before it leaves ============ -->
+  <g class="sc sc-l6" [class.on]="on('l6')">
+    <rect width="800" height="600" fill="#151c3e" fill-opacity="0.55" />
+    <circle cx="400" cy="320" r="260" fill="url(#js-lamp)" opacity="0.7" />
+    @for (r of [250, 200, 150]; track r; let i = $index) {
+      <circle cx="400" cy="320" [attr.r]="r" fill="none" stroke="#2bb3a3" [attr.stroke-opacity]="0.12 + i * 0.1" stroke-width="3" class="ring" [style.--k]="i" />
+    }
+    <path d="M400 130 L520 175 C520 300 470 380 400 420 C330 380 280 300 280 175 Z" fill="#1c2b5a" stroke="#2bb3a3" stroke-width="4" />
+    <path d="M400 130 L520 175 C520 300 470 380 400 420 Z" fill="#000" opacity="0.15" />
+    <g class="envelope">
+      <rect x="310" y="236" width="180" height="120" rx="8" fill="#e9eef6" />
+      <path d="M310 244 L400 306 L490 244" fill="none" stroke="#b9bfd2" stroke-width="3" />
+      <use href="#js-order" x="340" y="200" width="120" height="84" class="card-in" />
+      <path d="M310 244 Q310 236 318 236 H482 Q490 236 490 244 L400 300 Z" fill="#d6dcea" class="flap" />
+    </g>
+    <g class="seal">
+      <circle cx="400" cy="320" r="30" fill="url(#js-card)" />
+      <rect x="388" y="318" width="24" height="18" rx="3" fill="#fff" />
+      <path d="M392 318 V310 a8 8 0 0 1 16 0 V318" fill="none" stroke="#fff" stroke-width="4" />
+    </g>
+  </g>
+
+  <!-- ============ L5 · Session: the line stays open ============ -->
+  <g class="sc sc-l5" [class.on]="on('l5')">
+    <rect width="800" height="600" fill="#131b3c" fill-opacity="0.55" />
+    <!-- HQ desk, left: a colleague on the call -->
+    <circle cx="200" cy="360" r="170" fill="url(#js-lamp)" />
+    <rect x="20" y="420" width="330" height="14" rx="4" fill="#2e3d78" />
+    <rect x="200" y="320" width="120" height="78" rx="6" fill="#0b1230" stroke="#3b4a86" stroke-width="4" transform="rotate(-6 260 360)" />
+    <circle cx="262" cy="352" r="16" fill="#c98b6b" />
+    <path d="M242 392 q20 -26 40 0 z" fill="#e9eef6" />
+    <rect x="190" y="404" width="150" height="10" rx="3" fill="#3b4a86" />
+    <use href="#js-seated" x="62" y="300" width="140" height="200" style="--shirt: #2bb3a3; --pants: #1c2754; --skin: #8d5a3b; --hair: #120f1c" />
+    <text x="180" y="545" text-anchor="middle" class="place">BANGALORE HQ</text>
+    <!-- Mumbai desk, right: the branch on the same call -->
+    <circle cx="600" cy="360" r="170" fill="url(#js-lamp)" />
+    <rect x="450" y="420" width="330" height="14" rx="4" fill="#2e3d78" />
+    <rect x="480" y="320" width="120" height="78" rx="6" fill="#0b1230" stroke="#3b4a86" stroke-width="4" transform="rotate(6 540 360)" />
+    <circle cx="538" cy="352" r="16" fill="#8d5a3b" />
+    <path d="M518 392 q20 -26 40 0 z" fill="#2bb3a3" />
+    <rect x="460" y="404" width="150" height="10" rx="3" fill="#3b4a86" />
+    <g transform="translate(738 300) scale(-1 1)">
+      <use href="#js-seated" x="0" y="0" width="140" height="200" style="--shirt: #e9eef6; --pants: #2c3a6e; --skin: #c98b6b; --hair: #2a1b14" />
+    </g>
+    <text x="620" y="545" text-anchor="middle" class="place">MUMBAI BRANCH</text>
+    <!-- the held line between them -->
+    <path d="M300 310 C360 150 440 150 500 310" fill="none" stroke="#3b4a86" stroke-width="6" />
+    <path d="M300 310 C360 150 440 150 500 310" fill="none" stroke="url(#js-card)" stroke-width="6" stroke-dasharray="14 12" class="line-flow" />
+    <g class="chip">
+      <rect x="330" y="130" width="140" height="34" rx="17" fill="#0b1230" stroke="#3ddc97" stroke-width="2" />
+      <circle cx="352" cy="147" r="6" fill="#3ddc97" class="live" />
+      <text x="410" y="152" text-anchor="middle" class="chip-t">CONNECTED</text>
+    </g>
+  </g>
+
+  <!-- ============ L4 · Transport: delivery is guaranteed ============ -->
+  <g class="sc sc-l4" [class.on]="on('l4')">
+    <rect width="800" height="600" fill="#151c3e" fill-opacity="0.5" />
+    <!-- back plane: a row of shopfronts -->
+    @for (k of [0, 1, 2, 3, 4]; track k) {
+      <rect [attr.x]="k * 170 - 20" y="220" width="150" height="250" fill="#1a2350" />
+      <rect [attr.x]="k * 170 + 10" y="260" width="90" height="60" fill="#22306a" />
+    }
+    <!-- the streetlamp: light source -->
+    <rect x="640" y="150" width="6" height="320" fill="#24305f" />
+    <rect x="626" y="146" width="34" height="8" rx="4" fill="#ffd27a" />
+    <path d="M643 154 L560 470 L726 470 Z" fill="url(#js-beam)" />
+    <circle cx="643" cy="470" r="150" fill="url(#js-lamp)" />
+    <rect y="470" width="800" height="130" fill="#0e1530" />
+    <g class="road">
+      @for (k of [0, 1, 2, 3, 4, 5, 6, 7, 8]; track k) {
+        <rect [attr.x]="k * 110 - 20" y="530" width="60" height="6" rx="3" fill="#2e3d78" />
+      }
+    </g>
+    <g class="scooter">
+      <circle cx="210" cy="462" r="34" fill="#070b1c" />
+      <circle cx="210" cy="462" r="14" fill="#3b4a86" />
+      <circle cx="410" cy="462" r="34" fill="#070b1c" />
+      <circle cx="410" cy="462" r="14" fill="#3b4a86" />
+      <path d="M180 440 C190 390 250 380 300 400 L360 400 C390 400 420 420 430 450 L250 450 Z" fill="#c2410c" />
+      <path d="M300 400 L360 400 C390 400 420 420 430 450 L380 450 Z" fill="#000" opacity="0.15" />
+      <path d="M380 400 L420 330" stroke="#2e3d78" stroke-width="10" stroke-linecap="round" />
+      <rect x="404" y="320" width="34" height="10" rx="5" fill="#2e3d78" />
+      <circle cx="440" cy="356" r="6" fill="#ffd27a" />
+      <!-- carrier rack the parcels are strapped to -->
+      <rect x="130" y="392" width="110" height="8" rx="3" fill="#2e3d78" />
+      <rect x="226" y="392" width="8" height="40" fill="#2e3d78" />
+      @for (k of [0, 1, 2]; track k) {
+        <g class="parcel" [style.--k]="k">
+          <rect [attr.x]="140 + k * 4" [attr.y]="350 - k * 44" width="70" height="42" rx="4" fill="#d9a066" />
+          <rect [attr.x]="171 + k * 4" [attr.y]="350 - k * 44" width="8" height="42" fill="#b07d48" />
+          <text [attr.x]="160 + k * 4" [attr.y]="377 - k * 44" class="pnum">{{ k + 1 }}/3</text>
+        </g>
+      }
+      <path d="M150 300 V392 M208 260 V392" stroke="#0b1230" stroke-width="3" opacity="0.6" />
+      <path d="M290 392 C290 350 300 320 318 300 L352 306 C356 340 350 370 340 396 Z" fill="#2bb3a3" />
+      <path d="M330 392 L380 404 L392 446" stroke="#1c2754" stroke-width="18" stroke-linecap="round" fill="none" />
+      <path d="M340 316 C360 324 384 330 410 326" stroke="#2bb3a3" stroke-width="14" stroke-linecap="round" fill="none" />
+      <circle cx="334" cy="270" r="24" fill="#a86f4f" />
+      <path d="M308 268 C306 238 352 236 360 262 Z" fill="#c2410c" />
+      <rect x="306" y="262" width="58" height="8" rx="4" fill="#0b1230" />
+    </g>
+    <g class="checklist">
+      <rect x="560" y="170" width="180" height="200" rx="10" fill="#e9eef6" />
+      <rect x="560" y="170" width="180" height="40" rx="10" fill="#c2410c" />
+      <text x="650" y="196" text-anchor="middle" class="lbl">RECEIVED</text>
+      @for (k of [0, 1, 2]; track k) {
+        <text x="584" [attr.y]="248 + k * 44" class="row-t">Packet {{ k + 1 }}/3</text>
+        <path class="tick" [style.--k]="k" [attr.d]="'M696 ' + (236 + k * 44) + ' l8 9 l16 -18'" fill="none" stroke="#0a7552" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" />
+      }
+    </g>
+  </g>
+
+  <!-- ============ L3 · Network: the best route is chosen ============ -->
+  <g class="sc sc-l3" [class.on]="on('l3')">
+    <rect width="800" height="600" fill="#101734" fill-opacity="0.8" />
+    @for (b of blocks; track $index) {
+      <rect [attr.x]="b[0]" [attr.y]="b[1]" [attr.width]="b[2]" [attr.height]="b[3]" rx="10" fill="#18224a" />
+      <rect [attr.x]="b[0] + 12" [attr.y]="b[1] + 12" [attr.width]="b[2] - 24" [attr.height]="b[3] - 24" rx="6" fill="#1d2858" />
+    }
+    <g stroke="#26336a" stroke-width="22" fill="none" stroke-linecap="round">
+      <path d="M40 200 H760 M40 385 H760 M230 40 V560 M420 40 V560 M590 40 V560" />
+    </g>
+    <!-- the direct road is jammed: stalled cars in amber -->
+    <circle cx="410" cy="385" r="150" fill="url(#js-lamp)" />
+    @for (k of [0, 1, 2, 3, 4, 5]; track k) {
+      <g [attr.transform]="'translate(' + (250 + k * 56) + ' 377)'">
+        <rect width="30" height="16" rx="5" fill="#f5b301" />
+        <rect x="6" y="3" width="12" height="6" rx="2" fill="#0b1230" opacity="0.5" />
+        <circle cx="4" cy="17" r="3" fill="#070b1c" />
+        <circle cx="26" cy="17" r="3" fill="#070b1c" />
+      </g>
+    }
+    <g transform="translate(400 330)" class="hazard">
+      <path d="M0 -22 L22 16 L-22 16 Z" fill="#f5b301" />
+      <rect x="-2.5" y="-8" width="5" height="13" rx="2" fill="#0b1230" />
+      <circle cx="0" cy="10" r="3" fill="#0b1230" />
+    </g>
+    <!-- the detour the router chose -->
+    <path d="M110 385 H230 V200 H590 V385 H700" fill="none" stroke="url(#js-card)" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" pathLength="1" class="route" />
+    @for (n of [[230, 200], [590, 200], [230, 385], [590, 385]]; track $index) {
+      <g [attr.transform]="'translate(' + n[0] + ' ' + n[1] + ')'">
+        <circle r="16" fill="#0b1230" stroke="#b9bfd2" stroke-width="3" />
+        <path d="M-7 0 H7 M0 -7 V7" stroke="#b9bfd2" stroke-width="3" stroke-linecap="round" />
+      </g>
+    }
+    <g transform="translate(90 365)">
+      <rect width="44" height="40" rx="6" fill="#2e3d78" />
+      <text x="22" y="26" text-anchor="middle" class="lbl">HQ</text>
+    </g>
+    <use href="#js-order" x="690" y="364" width="60" height="42" class="route-card" />
+  </g>
+
+  <!-- ============ L2 · Data link: handed on, point to point ============ -->
+  <g class="sc sc-l2" [class.on]="on('l2')">
+    <rect width="800" height="600" fill="#131b3c" fill-opacity="0.55" />
+    <circle cx="400" cy="300" r="300" fill="url(#js-screen)" opacity="0.5" />
+    <rect x="120" y="90" width="460" height="430" rx="10" fill="#0e1530" stroke="#2e3d78" stroke-width="6" />
+    @for (s of [0, 1, 2]; track s) {
+      <g [attr.transform]="'translate(150 ' + (150 + s * 120) + ')'">
+        <rect width="400" height="70" rx="6" fill="#1c2754" />
+        <rect y="56" width="400" height="14" rx="4" fill="#000" opacity="0.18" />
+        @for (p of ports; track p) {
+          <rect [attr.x]="16 + p * 31" y="18" width="20" height="16" rx="2" fill="#0b1230" />
+          <circle [attr.cx]="26 + p * 31" cy="48" r="3" class="led" [style.--d]="(p * 97 + s * 211) % 900 + 'ms'" />
+        }
+      </g>
+    }
+    <path d="M220 206 C190 240 190 250 220 286" fill="none" stroke="#2bb3a3" stroke-width="5" />
+    <path d="M500 326 C530 360 530 370 500 406" fill="none" stroke="#2bb3a3" stroke-width="5" />
+    <g transform="translate(350 60)">
+      <rect x="-30" y="-10" width="60" height="16" rx="8" fill="#2e3d78" />
+      @for (r of [24, 40, 56]; track r) {
+        <path [attr.d]="'M ' + -r + ' 18 A ' + r + ' ' + r + ' 0 0 0 ' + r + ' 18'" fill="none" stroke="#b9bfd2" stroke-width="3" stroke-opacity="0.5" class="wave" />
+      }
+    </g>
+    <!-- the network engineer, plugging in a patch lead -->
+    <circle cx="690" cy="300" r="130" fill="url(#js-lamp)" />
+    <g transform="translate(640 300)">
+      <rect x="32" y="130" width="15" height="84" rx="6" fill="#1c2754" />
+      <rect x="53" y="130" width="15" height="84" rx="6" fill="#1c2754" />
+      <ellipse cx="38" cy="218" rx="13" ry="6" fill="#070b1c" />
+      <ellipse cx="62" cy="218" rx="13" ry="6" fill="#070b1c" />
+      <path d="M24 76 C24 60 36 52 50 52 C64 52 76 60 76 76 L78 140 L22 140 Z" fill="#f2a93b" />
+      <path d="M26 80 C10 90 -20 70 -50 54" fill="none" stroke="#f2a93b" stroke-width="13" stroke-linecap="round" />
+      <circle cx="-54" cy="52" r="6.5" fill="#a86f4f" />
+      <rect x="75" y="70" width="13" height="62" rx="6" fill="#f2a93b" />
+      <rect x="43" y="40" width="14" height="16" rx="4" fill="#a86f4f" />
+      <circle cx="50" cy="30" r="18" fill="#a86f4f" />
+      <path d="M32 30 C30 10 48 4 60 8 C70 12 70 22 68 28 C62 20 52 18 44 22 C38 26 35 30 34 38 Z" fill="#120f1c" />
+    </g>
+    <path d="M586 352 C566 352 548 320 527 300" fill="none" stroke="#2bb3a3" stroke-width="4" />
+    <rect x="519" y="288" width="16" height="12" rx="2" fill="#2bb3a3" />
+    <use href="#js-order" x="200" y="130" width="56" height="39" class="hop" />
+  </g>
+
+  <!-- ============ L1 · Physical: down to the cable ============ -->
+  <g class="sc sc-l1" [class.on]="on('l1')">
+    <rect width="800" height="190" fill="url(#js-night)" fill-opacity="0.7" />
+    <rect y="186" width="800" height="18" fill="#3b4a86" />
+    <rect x="660" y="96" width="6" height="92" fill="#2e3d78" />
+    <rect x="646" y="92" width="34" height="8" rx="4" fill="#ffd27a" />
+    <!-- soil strata -->
+    <rect y="204" width="800" height="110" fill="#35264d" />
+    <rect y="314" width="800" height="130" fill="#2c2142" />
+    <rect y="444" width="800" height="156" fill="#231b37" />
+    @for (k of [0, 1, 2, 3, 4, 5, 6, 7]; track k) {
+      <circle [attr.cx]="40 + k * 100" [attr.cy]="250 + (k % 3) * 70" r="5" fill="#45345f" />
+    }
+    <!-- the trench, lit by the engineer's headlamp -->
+    <path d="M230 204 L262 520 H600 L632 204 Z" fill="#170f26" />
+    <path d="M412 314 L330 520 L560 520 Z" fill="url(#js-beam)" opacity="0.7" />
+    <circle cx="470" cy="470" r="150" fill="url(#js-lamp)" opacity="0.8" />
+    <!-- conduit along the trench floor, the fibre inside, an open splice box -->
+    <rect y="470" width="800" height="36" rx="18" fill="#4a3a6c" />
+    <rect y="481" width="800" height="14" rx="7" fill="#170f26" />
+    <rect y="485" width="800" height="6" rx="3" fill="#3a2d58" />
+    @for (k of [0, 1, 2]; track k) {
+      <rect y="485" width="70" height="6" rx="3" fill="url(#js-card)" class="pulse" [style.--k]="k" />
+    }
+    <rect x="470" y="452" width="70" height="40" rx="5" fill="#5a4880" />
+    <rect x="478" y="460" width="54" height="24" rx="3" fill="#170f26" />
+    <!-- the engineer, kneeling on the trench floor -->
+    <g>
+      <!-- back leg: knee down, shin along the floor -->
+      <path d="M370 452 L398 468" stroke="#1c2754" stroke-width="20" stroke-linecap="round" />
+      <path d="M398 468 L340 470" stroke="#1c2754" stroke-width="16" stroke-linecap="round" />
+      <ellipse cx="334" cy="468" rx="12" ry="6" fill="#070b1c" />
+      <!-- front leg: knee up, foot planted -->
+      <path d="M380 448 L430 432" stroke="#24305f" stroke-width="20" stroke-linecap="round" />
+      <path d="M430 432 L436 466" stroke="#24305f" stroke-width="16" stroke-linecap="round" />
+      <ellipse cx="444" cy="470" rx="14" ry="6" fill="#070b1c" />
+      <!-- torso, high-vis vest -->
+      <path d="M352 380 C350 356 368 344 388 346 C406 348 414 362 412 384 L404 452 L360 452 Z" fill="#f2a93b" />
+      <rect x="362" y="404" width="44" height="6" fill="#e9eef6" opacity="0.85" />
+      <!-- arm reaching to the splice box, holding the tester -->
+      <path d="M404 378 C430 392 446 410 462 430" stroke="#f2a93b" stroke-width="14" stroke-linecap="round" fill="none" />
+      <g class="tester">
+        <rect x="452" y="404" width="30" height="46" rx="6" fill="#ff5f27" />
+        <rect x="457" y="410" width="20" height="14" rx="2" fill="#0b1230" />
+        <text x="467" y="421" text-anchor="middle" class="pass">PASS</text>
+        <path d="M467 450 V466 L500 470" stroke="#0b1230" stroke-width="3" fill="none" />
+      </g>
+      <!-- head, hard hat and headlamp -->
+      <rect x="378" y="330" width="14" height="18" rx="4" fill="#8d5a3b" />
+      <circle cx="390" cy="318" r="20" fill="#8d5a3b" />
+      <path d="M368 314 C368 290 412 290 412 314 Z" fill="#f2a93b" />
+      <rect x="364" y="310" width="54" height="7" rx="3" fill="#c98b3b" />
+      <circle cx="414" cy="312" r="5" fill="#ffd27a" />
+    </g>
+  </g>
+
+  <!-- ============ Across the region as light: Bangalore to Mumbai ============ -->
+  <g class="sc sc-travel" [class.on]="on('travel')">
+    <!-- the Arabian Sea to the west, the land to the east (a regional view, not a map of borders) -->
+    <rect width="800" height="600" fill="url(#js-sea)" fill-opacity="0.85" />
+    <path d="M260 0 C250 60 220 110 236 160 C250 210 300 250 318 300 C340 360 360 420 400 470 C430 510 450 560 470 600 L800 600 L800 0 Z" fill="#1d2750" />
+    <path d="M330 0 C320 70 310 130 330 190 C350 250 400 300 420 360 C440 420 480 480 520 600 L560 600 C520 480 480 400 460 340 C440 280 390 220 380 170 C372 120 380 60 390 0 Z" fill="#232e5e" />
+    <text x="120" y="330" text-anchor="middle" class="sea">ARABIAN SEA</text>
+    @for (w of [[90, 380], [150, 420], [70, 460], [180, 470]]; track $index) {
+      <path [attr.d]="'M ' + w[0] + ' ' + w[1] + ' q 10 -6 20 0 t 20 0'" fill="none" stroke="#2e3d78" stroke-width="2" />
+    }
+    <!-- city lights -->
+    @for (c of [[262, 168], [270, 160], [256, 178], [276, 174], [266, 186], [282, 164]]; track $index) {
+      <circle [attr.cx]="c[0]" [attr.cy]="c[1]" r="3" fill="#ffd27a" />
+    }
+    <circle cx="268" cy="172" r="40" fill="url(#js-lamp)" />
+    @for (c of [[600, 452], [610, 444], [594, 462], [616, 460], [606, 470], [622, 448]]; track $index) {
+      <circle [attr.cx]="c[0]" [attr.cy]="c[1]" r="3" fill="#ffd27a" />
+    }
+    <circle cx="606" cy="456" r="40" fill="url(#js-lamp)" />
+    <text x="300" y="150" class="city">MUMBAI</text>
+    <text x="630" y="500" class="city">BANGALORE</text>
+    <!-- the backbone between them, and the order riding it -->
+    <path id="js-backbone" d="M606 456 C560 400 470 380 430 320 C390 260 330 230 268 172" fill="none" stroke="#3b4a86" stroke-width="5" />
+    <path d="M606 456 C560 400 470 380 430 320 C390 260 330 230 268 172" fill="none" stroke="url(#js-card)" stroke-width="6" stroke-linecap="round" pathLength="1" class="backbone" />
+    @if (on('travel')) {
+      <g>
+        <circle r="34" fill="url(#js-glow)" />
+        <use href="#js-order" x="-22" y="-15" width="44" height="31" />
+        <animateMotion dur="3.4s" repeatCount="indefinite" path="M606 456 C560 400 470 380 430 320 C390 260 330 230 268 172" />
+      </g>
+    }
+  </g>
+
+  <!-- ============ Received in Mumbai ============ -->
+  <g class="sc sc-arrive" [class.on]="on('arrive')">
+    <rect width="800" height="600" fill="#1a2148" fill-opacity="0.55" />
+    <!-- dawn through the window: the light source -->
+    <rect x="360" y="60" width="380" height="290" rx="6" fill="url(#js-dawn)" />
+    <rect x="360" y="280" width="380" height="70" fill="#3b2d5c" opacity="0.8" />
+    <g stroke="#2c2350" stroke-width="3">
+      <path d="M440 280 L520 180 L600 280 M480 280 L520 180 L560 280 M520 280 V180" fill="none" />
+    </g>
+    <rect x="380" y="276" width="340" height="6" fill="#2c2350" />
+    <rect x="360" y="60" width="380" height="290" rx="6" fill="none" stroke="#24305f" stroke-width="10" />
+    <path d="M360 350 L740 350 L800 600 L300 600 Z" fill="#f3a765" opacity="0.08" />
+    <rect x="30" y="400" width="420" height="16" rx="4" fill="#2e3d78" />
+    <rect x="50" y="416" width="12" height="150" fill="#1d2756" />
+    <rect x="418" y="416" width="12" height="150" fill="#1d2756" />
+    <circle cx="175" cy="290" r="160" fill="url(#js-screen)" />
+    <g class="monitor">
+      <rect x="60" y="200" width="230" height="160" rx="10" fill="#0b1230" stroke="#3b4a86" stroke-width="5" />
+      <rect x="74" y="214" width="202" height="18" rx="3" fill="#1c2754" />
+      <g class="received">
+        <rect x="88" y="252" width="174" height="80" rx="8" fill="#0f2b2a" stroke="#3ddc97" stroke-width="2" />
+        <circle cx="122" cy="292" r="18" fill="#3ddc97" />
+        <path d="M113 292 l7 7 l13 -14" fill="none" stroke="#0b1230" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" />
+        <text x="150" y="288" class="ok-t">ORDER</text>
+        <text x="150" y="306" class="ok-t">RECEIVED</text>
+      </g>
+      <rect x="162" y="360" width="26" height="40" fill="#1d2756" />
+      <rect x="136" y="396" width="78" height="6" rx="3" fill="#1d2756" />
+    </g>
+    <use href="#js-order" x="170" y="120" width="70" height="49" class="card-land" />
+    <g transform="translate(450 286) scale(-1 1)">
+      <use href="#js-seated" x="0" y="0" width="140" height="200" style="--shirt: #c2410c; --pants: #1c2754; --skin: #e0a98a; --hair: #2a1b14" />
+    </g>
+    <rect x="34" y="360" width="30" height="40" rx="4" fill="#3b4a86" />
+    <circle cx="42" cy="346" r="15" fill="#2bb3a3" />
+    <circle cx="57" cy="339" r="13" fill="#23998b" />
+  </g>
+</svg>
