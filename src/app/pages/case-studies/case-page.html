@@ -1,0 +1,157 @@
+@if (cs(); as c) {
+  <app-page-hero
+    [crumb]="{ label: 'All case studies', link: '/case-studies' }"
+    [eyebrow]="'Case study · ' + c.sector"
+    [heading]="c.title"
+    [lede]="c.teaser"
+    [photo]="c.photo"
+  />
+
+  <!-- the figures, counted in -->
+  <section class="figs-band" aria-label="At a glance">
+    <div class="wrap figs">
+      @for (f of c.figures; track f.label) {
+        <p class="fig"><b [appCountUp]="f.value">{{ f.value }}</b><span>{{ f.label }}</span></p>
+      }
+    </div>
+  </section>
+
+  <!-- overview + highlights -->
+  <section class="d-band d-band--light" aria-labelledby="ov-title">
+    <div class="wrap d-split">
+      <div class="d-reveal" appInView>
+        <p class="d-eyebrow">Overview</p>
+        <h2 id="ov-title" class="d-h2">The engagement</h2>
+        <div class="d-prose"><p class="ov">{{ c.overview }}</p></div>
+      </div>
+      <div class="d-reveal" appInView style="--i: 1">
+        <div class="panel">
+          <h3 class="d-h3">Solution Highlights</h3>
+          <ul class="d-checks d-stagger" appInView>
+            @for (h of c.highlights; track h) {
+              <li>{{ h }}</li>
+            }
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- challenge -->
+  <section class="d-band d-band--deep" aria-labelledby="ch-title">
+    <div class="wrap d-split">
+      <div class="d-reveal" appInView>
+        <p class="d-eyebrow">Challenge</p>
+        <h2 id="ch-title" class="d-h2">{{ c.challenge.heading ?? 'The challenge' }}</h2>
+      </div>
+      <div class="d-reveal" appInView style="--i: 1">
+        <div class="d-prose">
+          @for (p of c.challenge.text; track $index) {
+            <p>{{ p }}</p>
+          }
+        </div>
+        @if (c.challenge.list) {
+          <ul class="pains d-stagger" appInView>
+            @for (l of c.challenge.list; track l) {
+              <li>{{ l }}</li>
+            }
+          </ul>
+        }
+        @if (c.challenge.after) {
+          <div class="d-prose after"><p>{{ c.challenge.after }}</p></div>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- solution: phases on a line that draws as you read -->
+  <section class="d-band" aria-labelledby="so-title">
+    <div class="wrap">
+      <div class="d-head d-reveal" appInView>
+        <div>
+          <p class="d-eyebrow">Solution</p>
+          <h2 id="so-title" class="d-h2">{{ c.solution.heading ?? 'The solution' }}</h2>
+          @for (p of c.solution.text; track $index) {
+            <p class="d-lede">{{ p }}</p>
+          }
+        </div>
+      </div>
+      @if (c.solution.phases.length) {
+        <ol class="phases" appInView>
+          @for (ph of c.solution.phases; track ph.title; let i = $index) {
+            <li class="phase d-reveal" appInView>
+              <span class="ph-n">{{ i + 1 }}</span>
+              <div>
+                <h3 class="d-h3">{{ ph.title }}</h3>
+                @if (ph.lede) {
+                  <p class="ph-lede">{{ ph.lede }}</p>
+                }
+                <ul class="ph-items">
+                  @for (it of ph.items; track $index) {
+                    <li>
+                      @if (it.name) {
+                        <b>{{ it.name }}:</b>
+                      }
+                      {{ it.text }}
+                    </li>
+                  }
+                </ul>
+                @if (ph.after) {
+                  <p class="ph-after">{{ ph.after }}</p>
+                }
+              </div>
+            </li>
+          }
+        </ol>
+      }
+    </div>
+  </section>
+
+  <!-- outcomes -->
+  <section class="d-band d-band--light" aria-labelledby="oc-title">
+    <div class="wrap">
+      <div class="d-head d-reveal" appInView>
+        <div>
+          <p class="d-eyebrow">Outcomes</p>
+          <h2 id="oc-title" class="d-h2">{{ c.outcomes.heading ?? 'The outcomes' }}</h2>
+        </div>
+      </div>
+      @if (c.outcomes.items.length) {
+        <ul class="d-cards d-stagger" appInView>
+          @for (o of c.outcomes.items; track $index) {
+            <li class="d-card">
+              @if (o.name) {
+                <h3 class="d-h3">{{ o.name }}</h3>
+              }
+              <p>{{ o.text }}</p>
+            </li>
+          }
+        </ul>
+      }
+      @if (c.outcomes.after.length) {
+        <div class="d-prose oc-after d-reveal" appInView>
+          @for (p of c.outcomes.after; track $index) {
+            <p>{{ p }}</p>
+          }
+        </div>
+      }
+      <p class="more d-reveal" appInView>
+        For more details, contact <a [href]="'mailto:' + mail">{{ mail }}</a>
+      </p>
+    </div>
+  </section>
+
+  <nav class="d-band d-band--deep next" aria-label="Next case study">
+    <div class="wrap next-row">
+      <a class="d-link back" routerLink="/case-studies"><app-icon name="arrow" class="flip" /> All case studies</a>
+      <a class="next-link" [routerLink]="['/case-studies', next().slug]">
+        <span class="d-eyebrow">Next case study · {{ next().sector }}</span>
+        <b>{{ next().title }}</b>
+      </a>
+    </div>
+  </nav>
+
+  <app-cta-band />
+} @else {
+  <app-not-found />
+}

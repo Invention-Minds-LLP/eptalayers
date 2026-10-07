@@ -1,7 +1,7 @@
 <!-- Hero -->
 <section class="hero" aria-labelledby="hero-title" appParallax="0.3">
   <div class="h-photo" aria-hidden="true">
-    <img src="photos/d-hero.webp" alt="" fetchpriority="high" />
+    <img src="photos/d-hero-engineer.webp" alt="" fetchpriority="high" />
     <span class="h-scan"></span>
     <ul class="h-words">
       @for (l of osi; track l.n; let i = $index) {
@@ -41,7 +41,7 @@
 </section>
 
 <!-- Solutions -->
-<section class="solutions light" aria-labelledby="sol-title">
+<section id="solutions" class="solutions light" aria-labelledby="sol-title">
   <div class="wrap">
     <div class="sec-head">
       <div>
@@ -95,42 +95,48 @@
   </div>
 </section>
 
-<!-- Approach: the seven OSI layers as a live stack -->
-<section id="approach" class="approach" aria-labelledby="ap-title" appInView>
-  <div class="wrap ap-grid">
-    <div class="ap-visual" aria-hidden="true">
-      <ol class="ap-labels">
-        @for (l of osi; track l.n; let i = $index) {
-          <li [class.on]="lit() === i" (mouseenter)="hover.set(i)" (mouseleave)="hover.set(-1)">
-            <b>L{{ l.n }}</b> {{ l.name }}
-          </li>
-        }
-      </ol>
-      <div class="ap-scene">
-        <div class="ap-stack">
-          @for (l of osi; track l.n; let i = $index) {
-            <div class="plane" [style.--i]="i" [class.on]="lit() === i" [class.warm]="i >= 4">
-              <img [src]="planePhoto[i]" alt="" loading="lazy" />
-            </div>
-          }
-          <span class="packet" [style.--at]="lit()"></span>
-        </div>
-      </div>
+<!-- Approach: a rack assembled by scrolling, one unit of hardware per OSI layer (the section pins) -->
+<section id="approach" class="approach" aria-labelledby="ap-title" #approachEl>
+  <div class="ap-pin">
+    <div class="ap-bg" aria-hidden="true">
+      <span class="bg-glow g1"></span>
+      <span class="bg-glow g2"></span>
+      <span class="bg-floor"></span>
+      <span class="bg-dots d1"></span>
+      <span class="bg-dots d2"></span>
+      <p class="bg-words">Physical · Data Link · Network · Transport · Session · Presentation · Application</p>
     </div>
-    <div class="ap-copy">
-      <p class="eyebrow">Our approach</p>
-      <h2 id="ap-title">Built on the Seven Layers of the <em>OSI Model</em></h2>
-      <p>
-        “Epta” is Greek for seven. We work through the layers to understand your line of business before designing a
-        solution, focusing on problem areas without losing sight of your business KPIs.
-      </p>
-      @let ll = litLayer();
-      <div class="ap-live" aria-live="polite">
-        @for (k of [ll.n]; track k) {
-          <p class="ap-layer"><b>Layer {{ ll.n }} · {{ ll.name }}</b><span>{{ ll.verify }}</span><small>{{ ll.covered }}</small></p>
-        }
+    <div class="wrap ap-grid">
+      <div class="ap-visual" aria-hidden="true">
+        <ol class="ap-labels">
+          @for (l of osi; track l.n; let i = $index) {
+            <li [class.on]="lit() === i" [class.in]="6 - i < built()" (mouseenter)="hover.set(i)" (mouseleave)="hover.set(-1)">
+              <b>L{{ l.n }}</b> {{ l.name }}
+            </li>
+          }
+        </ol>
+        <app-osi-rack [lit]="lit()" [live]="built() >= 7" />
       </div>
-      <a class="pill pill--line" routerLink="/story">The Epta Story <app-icon name="arrow" /></a>
+      <div class="ap-copy">
+        <p class="eyebrow">Our approach</p>
+        <h2 id="ap-title">Built on the Seven Layers of the <em>OSI Model</em></h2>
+        <p class="ap-intro">
+          “Epta” is Greek for seven. We work through the layers to understand your line of business before designing a
+          solution, focusing on problem areas without losing sight of your business KPIs.
+        </p>
+        <div class="ap-live" aria-live="polite">
+          <span class="ap-meter" aria-hidden="true"><i [style.--b]="built()"></i></span>
+          @if (lit() >= 0) {
+            @let ll = osi[lit()];
+            @for (k of [ll.n]; track k) {
+              <p class="ap-layer"><b>Layer {{ ll.n }} · {{ ll.name }}</b><span>{{ ll.verify }}</span><small>{{ ll.covered }}</small></p>
+            }
+          } @else {
+            <p class="ap-layer"><b>Scroll to build the stack</b><span>From the cabling up to the applications your people use.</span></p>
+          }
+        </div>
+        <a class="pill pill--line" routerLink="/story">The Epta Story <app-icon name="arrow" /></a>
+      </div>
     </div>
   </div>
 </section>

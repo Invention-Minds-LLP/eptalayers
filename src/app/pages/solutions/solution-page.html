@@ -1,0 +1,154 @@
+@if (page(); as s) {
+  <app-page-hero
+    [crumb]="{ label: 'Back to Solutions', link: '/', fragment: 'solutions' }"
+    [eyebrow]="s.name"
+    [heading]="s.title"
+    [accent]="2"
+    [lede]="s.subtitle"
+    [photo]="s.photo"
+  >
+    <a ctas class="d-pill d-pill--fill" routerLink="/contact" [queryParams]="{ service: s.closing.service }">
+      {{ s.closing.cta }} <app-icon name="arrow" />
+    </a>
+  </app-page-hero>
+
+  <!-- intro + the solution's own live picture -->
+  <section class="d-band d-band--deep" [attr.aria-label]="s.name">
+    <div class="wrap intro" [class.d-split]="!s.osi">
+      <div class="d-prose d-reveal" appInView>
+        @for (p of s.intro; track $index) {
+          <p>{{ p }}</p>
+        }
+      </div>
+      <!-- Enterprise Network shows its rack with the OSI layers below instead -->
+      @if (!s.osi) {
+        <div class="d-reveal" appInView style="--i: 1">
+          <app-solution-visual [kind]="s.visual" />
+        </div>
+      }
+    </div>
+  </section>
+
+  <!-- core offerings -->
+  <section class="d-band d-band--light" aria-labelledby="off-title">
+    <div class="wrap">
+      <div class="d-head d-reveal" appInView>
+        <div>
+          <p class="d-eyebrow">{{ s.name }}</p>
+          <h2 id="off-title" class="d-h2">{{ s.offerings.heading }}</h2>
+          @if (s.offerings.lede) {
+            <p class="d-lede">{{ s.offerings.lede }}</p>
+          }
+        </div>
+      </div>
+      <ul class="d-cards d-stagger" appInView>
+        @for (o of s.offerings.items; track o.name; let i = $index) {
+          <li class="d-card">
+            <span class="d-num">{{ pad(i) }}</span>
+            <h3 class="d-h3">{{ o.name }}</h3>
+            <p>{{ o.text }}</p>
+          </li>
+        }
+      </ul>
+
+      @if (s.table) {
+        <div class="table d-stagger" appInView>
+          @for (c of s.table; track c.head) {
+            <div class="t-col">
+              <b>{{ c.head }}</b>
+              @for (r of c.rows; track r) {
+                <span>{{ r }}</span>
+              }
+            </div>
+          }
+        </div>
+      }
+    </div>
+  </section>
+
+  <!-- Enterprise Network: the OSI-aligned approach -->
+  @if (s.osi; as o) {
+    <section class="d-band" aria-labelledby="osi-title">
+      <div class="wrap d-split">
+        <div class="d-reveal" appInView>
+          <p class="d-eyebrow">Open Systems Interconnection (OSI) model</p>
+          <h2 id="osi-title" class="d-h2">{{ o.heading }}</h2>
+          <p class="d-lede">{{ o.lede }}</p>
+          <ol class="layers d-stagger" appInView>
+            @for (l of o.layers; track l.n) {
+              <li><b>{{ l.n }}</b><span><strong>{{ l.name }}:</strong> {{ l.text }}</span></li>
+            }
+          </ol>
+        </div>
+        <div class="d-reveal" appInView style="--i: 1">
+          <app-solution-visual kind="rack" />
+        </div>
+      </div>
+    </section>
+  }
+
+  <!-- further groups: alternate light and dark -->
+  @for (g of s.more; track g.heading; let gi = $index) {
+    <section class="d-band" [class.d-band--light]="gi % 2 === 1" [class.d-band--deep]="gi % 2 === 0" [attr.aria-label]="g.heading">
+      <div class="wrap">
+        <div class="d-head d-reveal" appInView>
+          <div>
+            <h2 class="d-h2">{{ g.heading }}</h2>
+            @if (g.lede) {
+              <p class="d-lede">{{ g.lede }}</p>
+            }
+          </div>
+        </div>
+        @if (g.items.length) {
+          <ul class="d-cards d-stagger" appInView>
+            @for (o of g.items; track o.name) {
+              <li class="d-card">
+                <h3 class="d-h3">{{ o.name }}</h3>
+                <p>{{ o.text }}</p>
+              </li>
+            }
+          </ul>
+        }
+      </div>
+    </section>
+  }
+
+  @if (s.quote; as q) {
+    <section class="d-band d-band--light quote-band" aria-label="Client testimonial">
+      <figure class="wrap quote d-reveal" appInView>
+        <blockquote>“{{ q.text }}”</blockquote>
+        <figcaption>{{ q.by }}</figcaption>
+      </figure>
+    </section>
+  }
+
+  @if (s.caseLink; as c) {
+    <section class="d-band d-band--light" aria-labelledby="case-title">
+      <div class="wrap">
+        <a class="case d-reveal" appInView [routerLink]="['/case-studies', c.slug]">
+          <div>
+            <p class="d-eyebrow">Case study</p>
+            <h2 id="case-title" class="d-h2">{{ c.heading }}</h2>
+            <p class="d-lede">{{ c.text }}</p>
+          </div>
+          <span class="d-link">Click to read: {{ c.title }} <app-icon name="arrow" /></span>
+        </a>
+      </div>
+    </section>
+  }
+
+  <!-- next solution -->
+  <nav class="d-band d-band--deep next" aria-label="Next solution">
+    <div class="wrap next-row">
+      <a class="d-link back" routerLink="/" fragment="solutions"><app-icon name="arrow" class="flip" /> Back to Solutions</a>
+      <a class="next-link" [routerLink]="['/solutions', next().slug]">
+        <span class="d-eyebrow">Next solution</span>
+        <b>{{ next().name }}</b>
+      </a>
+    </div>
+  </nav>
+
+  <app-cta-band [heading]="s.closing.heading" [text]="s.closing.text" [label]="s.closing.cta" link="/contact" [query]="{ service: s.closing.service }" />
+} @else {
+  <app-not-found />
+}

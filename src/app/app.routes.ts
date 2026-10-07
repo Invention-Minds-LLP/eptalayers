@@ -1,45 +1,76 @@
 import { Routes } from '@angular/router';
-import { Home } from './pages/home/home';
-import { StatusPage } from './pages/status/status-page';
+import { HomeD } from './pages/home-d/home-d';
 
-const pending = (path: string, title: string) => ({
-  path,
-  component: StatusPage,
-  title: `${title} · Epta Layers`,
-  data: { pending: true, title },
-});
+const T = (t: string) => `${t} · Epta Layers`;
 
 export const routes: Routes = [
   {
     path: '',
-    component: Home,
-    title: 'Epta Layers · Single-point enterprise solutions provider, Bangalore',
+    component: HomeD,
+    title: 'Epta Layers · A single-point enterprise solutions provider, Bangalore',
+  },
+  /* the earlier homepage directions, kept for review */
+  {
+    path: 'home-a',
+    loadComponent: () => import('./pages/home/home').then((m) => m.Home),
+    title: T('One request, seven stops'),
   },
   {
     path: 'home-b',
     loadComponent: () => import('./pages/home-b/home-b').then((m) => m.HomeB),
-    title: 'Epta Layers · Surveyed layer by layer, run 24x7',
+    title: T('Surveyed layer by layer, run 24x7'),
   },
   {
     path: 'home-c',
     loadComponent: () => import('./pages/home-c/home-c').then((m) => m.HomeC),
-    title: 'Epta Layers · Single-point enterprise solutions provider, Bangalore',
+    title: T('Every order crosses seven layers'),
+  },
+  { path: 'home-d', redirectTo: '', pathMatch: 'full' },
+
+  {
+    path: 'solutions',
+    loadComponent: () => import('./pages/solutions/solutions-index').then((m) => m.SolutionsIndex),
+    title: T('Solutions'),
   },
   {
-    path: 'home-d',
-    loadComponent: () => import('./pages/home-d/home-d').then((m) => m.HomeD),
-    title: 'Epta Layers · Enterprise infrastructure that keeps you ahead',
+    path: 'solutions/:slug',
+    loadComponent: () => import('./pages/solutions/solution-page').then((m) => m.SolutionPage),
+    title: T('Solutions'),
   },
-  pending('solutions', 'Solutions'),
-  pending('solutions/:slug', 'This solution page'),
-  pending('case-studies', 'Case studies'),
-  pending('case-studies/:slug', 'This case study'),
-  pending('story', 'The Epta story'),
-  pending('vision-mission', 'Vision & mission'),
-  pending('careers', 'Careers'),
-  pending('blog', 'Epta Insights'),
-  pending('contact', 'Contact'),
-  pending('privacy', 'Privacy policy'),
-  pending('terms', 'Terms & conditions'),
-  { path: '**', component: StatusPage, title: 'Page not found · Epta Layers' },
+  {
+    path: 'case-studies',
+    loadComponent: () => import('./pages/case-studies/case-index').then((m) => m.CaseIndex),
+    title: T('Case studies'),
+  },
+  {
+    path: 'case-studies/:slug',
+    loadComponent: () => import('./pages/case-studies/case-page').then((m) => m.CasePage),
+    title: T('Case study'),
+  },
+  { path: 'story', loadComponent: () => import('./pages/story/story').then((m) => m.Story), title: T('The Epta story') },
+  {
+    path: 'vision-mission',
+    loadComponent: () => import('./pages/vision/vision').then((m) => m.Vision),
+    title: T('Vision & mission'),
+  },
+  { path: 'careers', loadComponent: () => import('./pages/careers/careers').then((m) => m.Careers), title: T('Careers') },
+  { path: 'blog', loadComponent: () => import('./pages/blog/blog').then((m) => m.Blog), title: T('Epta Insights') },
+  { path: 'contact', loadComponent: () => import('./pages/contact/contact').then((m) => m.Contact), title: T('Contact') },
+  {
+    path: 'privacy',
+    loadComponent: () => import('./pages/legal/legal-page').then((m) => m.LegalPage),
+    data: { doc: 'privacy' },
+    title: T('Privacy policy'),
+  },
+  {
+    path: 'terms',
+    loadComponent: () => import('./pages/legal/legal-page').then((m) => m.LegalPage),
+    data: { doc: 'terms' },
+    title: T('Terms & conditions'),
+  },
+  {
+    path: '**',
+    loadComponent: () => import('./pages/not-found/not-found').then((m) => m.NotFound),
+    title: T('Page not found'),
+  },
 ];

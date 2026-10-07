@@ -15,6 +15,7 @@ import { CASE_STUDIES, OSI } from '../../content/site';
 import { Icon } from '../../ui/icon';
 import { InView } from '../../ui/in-view';
 import { Parallax } from '../../ui/parallax';
+import { OsiRack } from './osi-rack';
 
 type Glyph = 'network' | 'shield' | 'people' | 'server' | 'cloud' | 'gear' | 'pulse';
 
@@ -24,7 +25,7 @@ type Glyph = 'network' | 'shield' | 'people' | 'server' | 'cloud' | 'gear' | 'pu
  */
 @Component({
   selector: 'app-home-d',
-  imports: [RouterLink, Icon, InView, Parallax],
+  imports: [RouterLink, Icon, InView, Parallax, OsiRack],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './home-d.html',
   styleUrl: './home-d.scss',
@@ -59,19 +60,20 @@ export class HomeD {
     { glyph: 'pulse', name: 'Network Operation Center', tags: ['24x7 monitoring', 'KPI tracking', 'Threat response'], slug: 'network-operation-center' },
   ];
 
-  /* ---------- the seven-layer stack: a pulse runs L7 → L1 unless a layer is hovered ---------- */
-  protected readonly planePhoto = [
-    'photos/l7-desk.webp',
-    'photos/ly-security.webp',
-    'photos/ly-collab.webp',
-    'photos/travel-fibre.webp',
-    'photos/ly-network.webp',
-    'photos/l2-switch.webp',
-    'photos/l1-cable.webp',
-  ];
+  /* ---------- the rack, assembled by scrolling (see OsiRack); a pulse runs L7 → L1 once it is complete ---------- */
   protected readonly hover = signal(-1);
   private readonly pulse = signal(0);
-  protected readonly lit = computed(() => (this.hover() >= 0 ? this.hover() : this.pulse()));
+  /**
+   * The section pins and the rack builds as you scroll: the cabinet first, then a unit per layer, L1 first.
+   * `built` counts the units in place (0-7); once all seven are in, the rack goes live and the pulse takes over.
+   */
+  protected readonly built = signal(7);
+  protected readonly lit = computed(() => {
+    if (this.hover() >= 0) return this.hover();
+    const b = this.built();
+    return b >= 7 ? this.pulse() : b > 0 ? 7 - b : -1;
+  });
+  private readonly approachEl = viewChild<ElementRef<HTMLElement>>('approachEl');
   protected readonly litLayer = computed(() => this.osi[this.lit()]);
 
   /** Epta's engagement lifecycle, in the client's own six steps. */
@@ -156,6 +158,28 @@ export class HomeD {
       );
       const el = this.statsEl()?.nativeElement;
       if (el) io.observe(el);
+
+      // scroll-built stack: --p is the section's pinned progress, 0 → 1
+      const ap = this.approachEl()?.nativeElement;
+      let apFrame = 0;
+      const build = () => {
+        apFrame = 0;
+        if (!ap) return;
+        const r = ap.getBoundingClientRect();
+        const travel = r.height - (innerHeight - 72);
+        const p = Math.max(0, Math.min(1, (72 - r.top) / Math.max(1, travel)));
+        ap.style.setProperty('--p', p.toFixed(4));
+        this.built.set(Math.max(0, Math.min(7, Math.floor(p * 9.5 - 0.65))));
+      };
+      const queue = () => (apFrame ||= requestAnimationFrame(build));
+      build();
+      addEventListener('scroll', queue, { passive: true });
+      addEventListener('resize', queue);
+      destroy.onDestroy(() => {
+        removeEventListener('scroll', queue);
+        removeEventListener('resize', queue);
+        cancelAnimationFrame(apFrame);
+      });
 
       const tick = setInterval(() => this.pulse.update((i) => (i + 1) % 7), 1700);
       destroy.onDestroy(() => {

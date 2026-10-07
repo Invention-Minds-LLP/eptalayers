@@ -1,0 +1,93 @@
+@switch (kind()) {
+  @case ('rack') {
+    <app-rack-show />
+  }
+
+  <!-- Security: a shield passes down through all seven layers -->
+  @case ('shield') {
+    <div class="v v-shield" appInView>
+      <p class="v-cap">Security embedded in every layer</p>
+      <ol>
+        @for (l of osi; track l.n; let i = $index) {
+          <li [style.--i]="i">
+            <b>L{{ l.n }}</b><span>{{ l.name }}</span>
+            <svg viewBox="0 0 24 24" class="sh"><path d="M12 3 L19 6 V11 C19 15.5 16 19 12 21 C8 19 5 15.5 5 11 V6 Z" /><path d="M9 12 L11.2 14 L15 10" /></svg>
+          </li>
+        }
+      </ol>
+    </div>
+  }
+
+  <!-- Collaboration: a meeting in progress, speaker ring moving between people -->
+  @case ('meeting') {
+    <div class="v v-meet" appInView>
+      <div class="m-bar"><span class="m-dot"></span>Cloud meeting</div>
+      <div class="m-grid">
+        @for (p of people; track p) {
+          <div class="m-tile" [style.--i]="p">
+            <span class="m-avatar"></span>
+            <span class="m-wave"><i></i><i></i><i></i><i></i></span>
+          </div>
+        }
+      </div>
+      <div class="m-ctl"><span></span><span></span><span class="end"></span></div>
+    </div>
+  }
+
+  <!-- Data Center Architecture: four pillars rise under one roof -->
+  @case ('pillars') {
+    <div class="v v-pillars" appInView>
+      <div class="roof">Next-gen data center</div>
+      <div class="cols">
+        @for (p of pillars; track p; let i = $index) {
+          <div class="col" [style.--i]="i"><span>{{ p }}</span></div>
+        }
+      </div>
+      <div class="base"></div>
+    </div>
+  }
+
+  <!-- Data Center Services: primary site replicating to DR, services around it -->
+  @case ('cloud') {
+    <div class="v v-cloud" appInView>
+      <div class="sites">
+        <div class="site"><b>Primary</b><span class="rk"><i></i><i></i><i></i></span></div>
+        <div class="link"><i class="pk"></i><i class="pk p2"></i><i class="pk p3"></i></div>
+        <div class="site"><b>DR</b><span class="rk"><i></i><i></i><i></i></span></div>
+      </div>
+      <ul class="chips">
+        @for (d of dcs; track d; let i = $index) {
+          <li [style.--i]="i">{{ d }}</li>
+        }
+      </ul>
+    </div>
+  }
+
+  <!-- Enterprise Services: the lifecycle ring, a marker travelling it -->
+  @case ('lifecycle') {
+    <div class="v v-cycle" appInView>
+      <svg viewBox="0 0 300 300">
+        <circle cx="150" cy="150" r="110" class="ring" />
+        <circle cx="150" cy="150" r="110" class="ring-draw" pathLength="1" />
+        <g class="orbit"><circle cx="150" cy="40" r="7" class="marker" /></g>
+      </svg>
+      @for (c of cycle; track c; let i = $index) {
+        <span class="node n{{ i }}" [style.--i]="i">{{ c }}</span>
+      }
+      <span class="hub">Lifecycle<br />partner</span>
+    </div>
+  }
+
+  <!-- NOC: four capabilities, all live, a trace drawing across -->
+  @case ('noc') {
+    <div class="v v-noc" appInView>
+      <div class="n-head"><span>Network Operation Center</span><span class="live"><i></i>24x7</span></div>
+      <svg class="trace" viewBox="0 0 240 40" preserveAspectRatio="none"><path [attr.d]="trace" pathLength="1" /></svg>
+      <ul>
+        @for (n of noc; track n; let i = $index) {
+          <li [style.--i]="i"><span>{{ n }}</span><b>Active</b></li>
+        }
+      </ul>
+    </div>
+  }
+}

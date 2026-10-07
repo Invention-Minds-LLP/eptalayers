@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, effect, input, signal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CONTACT } from '../../content/site';
 import { Icon } from '../../ui/icon';
@@ -181,8 +181,17 @@ export class SignOffForm {
     'NOC',
     'General',
   ];
+  /** preselects the Area dropdown, e.g. from a solution page's call to action */
+  readonly preset = input<string | null | undefined>(null);
   protected readonly sent = signal(false);
   private readonly tried = signal(false);
+
+  constructor() {
+    effect(() => {
+      const p = this.preset();
+      if (p && this.services.includes(p)) this.form.controls.service.setValue(p);
+    });
+  }
 
   protected readonly form = new FormGroup({
     name: new FormControl('', { nonNullable: true, validators: [Validators.required] }),

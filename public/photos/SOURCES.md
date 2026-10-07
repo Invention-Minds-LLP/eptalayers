@@ -21,3 +21,11 @@ All photographs are from Unsplash (Unsplash Licence: free for commercial use, no
 | mumbai-sea.webp | 1595658658481-d53d3f999875 | Contact |
 
 These are stand-ins: replace with Epta's own site and NOC photography when available.
+
+## Homepage D
+
+| File | Source | Used for |
+| --- | --- | --- |
+| d-hero-engineer.webp | Unsplash 1581092919535-7146ff1a590b | /home-d hero: engineer patching a rack |
+| case-building.webp | Unsplash 1486406146926-c627a92ad1ab | /home-d success story (IT/ITeS) |
+| noc-room.webp | Unsplash 1629904853716-f0bc54eea481 | NOC solution page hero |
