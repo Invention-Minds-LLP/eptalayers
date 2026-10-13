@@ -1,7 +1,7 @@
 @if (page(); as s) {
   <app-page-hero
     [crumb]="{ label: 'Back to Solutions', link: '/', fragment: 'solutions' }"
-    [eyebrow]="s.name"
+    [eyebrow]="kicker()"
     [heading]="s.title"
     [accent]="2"
     [lede]="s.subtitle"

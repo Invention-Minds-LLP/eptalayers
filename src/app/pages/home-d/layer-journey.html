@@ -1,0 +1,102 @@
+<section id="approach" class="lj" aria-labelledby="lj-title" #sec>
+  <div class="pin">
+    <div class="bg" aria-hidden="true">
+      <span class="glow g1"></span>
+      <span class="glow g2"></span>
+      <span class="floor"></span>
+      <span class="dots d1"></span>
+      <span class="dots d2"></span>
+      <p class="words">Physical · Data Link · Network · Transport · Session · Presentation · Application</p>
+    </div>
+
+    <div class="wrap grid">
+      <!-- left: the heading and the stack being built -->
+      <div class="left">
+        <p class="d-eyebrow">Our approach</p>
+        <h2 id="lj-title" class="d-h2">Built on the Seven Layers of the <span class="d-em">OSI Model</span></h2>
+        <p class="intro">
+          “Epta” is Greek for seven. Every network works in seven layers, and Epta Layers checks each one, from the
+          cables up to your apps, before designing your solution.
+        </p>
+
+        <div class="stack-wrap" aria-hidden="true">
+          <ol class="labels">
+            @for (l of top; track l.n) {
+              <li [class.in]="l.n - 1 <= stage()" [class.on]="!done() && l.n - 1 === stage()" (click)="go(l.n - 1)">
+                <b>L{{ l.n }}</b> {{ l.name }}
+              </li>
+            }
+          </ol>
+          <div class="scene">
+            <div class="stack">
+              @for (l of layers; track l.n) {
+                <div class="plane" [style.--k]="l.n - 1" [style.--s]="l.n % 2 ? -1 : 1" [class.on]="!done() && l.n - 1 === stage()" [class.warm]="l.n <= 3">
+                  <span class="pl-label">L{{ l.n }} · {{ l.name }}</span>
+                </div>
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- right: the current layer in detail -->
+      <div class="right" aria-live="polite">
+        @if (!done()) {
+          @let l = layer();
+          @for (k of [stage()]; track k) {
+            <article class="card" [class.from-left]="k % 2 === 1">
+              <header class="c-head">
+                <span class="c-num">{{ l.n }}</span>
+                <div>
+                  <p class="c-of">Layer {{ l.n }} of 7</p>
+                  <h3>{{ l.name }}</h3>
+                </div>
+              </header>
+              <p class="c-is">{{ l.is }}</p>
+              <div class="c-body">
+                <div class="c-console" aria-hidden="true"><app-layer-console [stop]="l.console" /></div>
+                <div class="c-text">
+                  <p class="c-label">Why it matters</p>
+                  <p class="c-means">{{ l.means }}</p>
+                  <p class="c-label">How Epta Layers helps</p>
+                  <p class="c-we">{{ l.we }}</p>
+                  <ul class="c-tech">
+                    @for (t of l.tech; track t) {
+                      <li>{{ t }}</li>
+                    }
+                  </ul>
+                  <a class="d-link" [routerLink]="['/solutions', l.slug]">Learn more <app-icon name="arrow" /></a>
+                </div>
+              </div>
+            </article>
+          }
+        } @else {
+          <article class="card done">
+            <p class="c-of">All seven layers in place</p>
+            <h3>One accountable partner, <span class="d-em">cable to cloud</span></h3>
+            <ol class="ticks">
+              @for (l of top; track l.n; let i = $index) {
+                <li [style.--i]="i"><b>L{{ l.n }}</b> {{ l.name }} <span aria-hidden="true">✓</span></li>
+              }
+            </ol>
+            <a class="d-pill d-pill--fill" routerLink="/solutions">Explore Our Solutions <app-icon name="arrow" /></a>
+          </article>
+        }
+      </div>
+    </div>
+
+    <!-- progress -->
+    <ol class="rail" aria-label="Layers">
+      @for (l of layers; track l.n) {
+        <li>
+          <button type="button" [class.in]="l.n - 1 <= stage()" [class.on]="!done() && l.n - 1 === stage()" (click)="go(l.n - 1)">
+            <span class="sr-only">Layer {{ l.n }}, {{ l.name }}</span><i aria-hidden="true">L{{ l.n }}</i>
+          </button>
+        </li>
+      }
+    </ol>
+    @if (stage() === 0) {
+      <p class="hint" aria-hidden="true"><span></span>Scroll to build the stack</p>
+    }
+  </div>
+</section>

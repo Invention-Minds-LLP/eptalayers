@@ -1,0 +1,780 @@
+/* The layer-by-layer OSI section. --p (0 → 1) is the pinned scroll progress, set by the component.
+   Each of eight equal slices brings in one layer (L1 … L7), the eighth completes the stack. */
+
+:host {
+  display: block;
+}
+
+.lj {
+  --p: 0;
+  position: relative;
+  height: 720svh;
+  background: var(--navy);
+  color: #fff;
+}
+
+.pin {
+  position: sticky;
+  top: 72px;
+  height: calc(100svh - 72px);
+  overflow: hidden;
+  display: grid;
+  align-items: center;
+  isolation: isolate;
+}
+
+/* ---------- background: five depths drifting at their own speeds ---------- */
+.bg {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(70px);
+
+  &.g1 {
+    left: 0;
+    top: 8%;
+    width: 48%;
+    height: 84%;
+    background: radial-gradient(rgb(40 90 220 / 0.5), transparent 68%);
+    transform: translateY(calc((0.5 - var(--p)) * 180px));
+  }
+
+  &.g2 {
+    left: 10%;
+    bottom: -24%;
+    width: 42%;
+    height: 64%;
+    background: radial-gradient(rgb(255 95 39 / 0.42), transparent 68%);
+    opacity: calc(0.3 + var(--p) * 0.7);
+    transform: translateY(calc((0.5 - var(--p)) * -240px));
+  }
+}
+
+.floor {
+  position: absolute;
+  left: -40%;
+  right: -40%;
+  bottom: -18%;
+  height: 60%;
+  background-image:
+    linear-gradient(rgb(90 140 255 / 0.15) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(90 140 255 / 0.15) 1px, transparent 1px);
+  background-size: 64px 64px;
+  background-position: 0 calc(var(--p) * 1024px);
+  transform: perspective(520px) rotateX(64deg);
+  transform-origin: center top;
+  mask-image: linear-gradient(transparent 0%, #000 55%);
+}
+
+.dots {
+  position: absolute;
+  inset: -40% -10%;
+  background-image: radial-gradient(rgb(170 195 255 / 0.55) 1px, transparent 1.6px);
+  background-size: 52px 52px;
+  opacity: 0.3;
+  transform: translateY(calc(var(--p) * -240px));
+
+  &.d2 {
+    background-size: 120px 120px;
+    background-position: 30px 50px;
+    opacity: 0.45;
+    transform: translateY(calc(var(--p) * -620px));
+  }
+}
+
+.words {
+  position: absolute;
+  top: 3%;
+  left: 0;
+  margin: 0;
+  white-space: nowrap;
+  font-size: clamp(5rem, 11vw, 10rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: transparent;
+  -webkit-text-stroke: 1px rgb(150 175 235 / 0.09);
+  transform: translateX(calc(4% - var(--p) * 60%));
+}
+
+/* ---------- layout ---------- */
+.grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: 48px;
+  align-items: center;
+  /* room for the L1–L7 rail pinned at the bottom */
+  padding-bottom: 72px;
+}
+
+.left .d-h2 {
+  font-size: clamp(1.7rem, 2.6vw, 2.3rem);
+}
+
+.intro {
+  margin: 14px 0 0;
+  max-width: 46ch;
+  color: #c7cfe4;
+  line-height: 1.6;
+}
+
+/* ---------- the stack ---------- */
+.stack-wrap {
+  display: grid;
+  grid-template-columns: 150px 1fr;
+  align-items: center;
+  margin-top: 8px;
+}
+
+.labels {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-auto-rows: 34px;
+  align-items: center;
+  z-index: 2;
+
+  li {
+    position: relative;
+    padding-right: 26px;
+    text-align: right;
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #9aa4c2;
+    cursor: pointer;
+    opacity: 0.22;
+    transform: translateX(-12px);
+    transition:
+      color 0.3s ease,
+      opacity 0.5s ease,
+      transform 0.6s var(--ease-out);
+
+    b {
+      color: #c7cfe4;
+      margin-right: 4px;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      right: 4px;
+      top: calc(50% - 4px);
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #3b4a86;
+      transition:
+        background-color 0.3s ease,
+        box-shadow 0.3s ease,
+        transform 0.3s ease;
+    }
+
+    &.in {
+      opacity: 1;
+      transform: none;
+
+      &::after {
+        background: #3ddc97;
+      }
+    }
+
+    &.on {
+      color: #fff;
+
+      b {
+        color: var(--orange);
+      }
+
+      &::after {
+        background: var(--orange);
+        box-shadow: 0 0 12px var(--orange);
+        transform: scale(1.5);
+      }
+    }
+  }
+}
+
+.scene {
+  display: grid;
+  place-items: center;
+  height: 420px;
+  padding-top: 150px;
+  perspective: 1800px;
+}
+
+.stack {
+  --gap: 38px;
+  position: relative;
+  width: 220px;
+  height: 220px;
+  transform: rotateX(calc(58deg - var(--my, 0) * 4deg)) rotateZ(calc(-45deg + var(--mx, 0) * 6deg));
+  transform-style: preserve-3d;
+  transition: transform 0.8s var(--ease-out);
+}
+
+.plane {
+  --tint: 64 140 255;
+  --lift: 0px;
+  /* this layer's own progress through its slice, eased, and what is left of its flight */
+  --t: clamp(0, (var(--p) * 8 - var(--k)) * 1.7, 1);
+  --e: calc(var(--t) * var(--t) * (3 - 2 * var(--t)));
+  --away: calc(1 - var(--e));
+  position: absolute;
+  inset: 0;
+  border: 1px solid rgb(var(--tint) / 0.7);
+  border-radius: 6px;
+  background-color: rgb(var(--tint) / 0.1);
+  box-shadow:
+    0 0 22px rgb(var(--tint) / 0.28),
+    inset 0 0 30px rgb(var(--tint) / 0.28);
+  transform: translate3d(
+      calc(var(--s) * var(--away) * 620px),
+      calc(var(--s) * var(--away) * 620px),
+      calc(var(--k) * var(--gap) + var(--away) * 260px + var(--lift))
+    )
+    rotateZ(calc(var(--s) * var(--away) * 24deg));
+  opacity: calc(var(--e) * 1.5 - 0.25);
+  transition:
+    box-shadow 0.45s ease,
+    background-color 0.45s ease,
+    border-color 0.45s ease,
+    --lift 0.5s var(--ease-out);
+
+  /* each layer carries its own pattern */
+  &:nth-child(1) {
+    background-image: repeating-linear-gradient(90deg, rgb(255 140 80 / 0.55) 0 2px, transparent 2px 14px);
+  }
+  &:nth-child(2) {
+    background-image:
+      radial-gradient(rgb(255 160 90 / 0.8) 1.6px, transparent 2.2px),
+      linear-gradient(rgb(255 120 50 / 0.06), rgb(255 120 50 / 0.06));
+    background-size: 18px 18px, auto;
+  }
+  &:nth-child(3) {
+    background-image:
+      linear-gradient(35deg, transparent 47%, rgb(255 170 100 / 0.7) 48% 52%, transparent 53%),
+      linear-gradient(-35deg, transparent 47%, rgb(255 170 100 / 0.5) 48% 52%, transparent 53%);
+    background-size: 70px 70px;
+  }
+  &:nth-child(4) {
+    background-image: repeating-linear-gradient(0deg, transparent 0 16px, rgb(120 170 255 / 0.5) 16px 18px),
+      repeating-linear-gradient(90deg, rgb(120 170 255 / 0.4) 0 22px, transparent 22px 30px);
+    background-size: auto, auto;
+  }
+  &:nth-child(5) {
+    background-image: radial-gradient(circle at 30% 50%, rgb(120 180 255 / 0.6) 0 10px, transparent 11px),
+      radial-gradient(circle at 70% 50%, rgb(120 180 255 / 0.6) 0 10px, transparent 11px),
+      linear-gradient(90deg, transparent 30%, rgb(120 180 255 / 0.5) 30% 70%, transparent 70%);
+    background-size: 100% 100%, 100% 100%, 100% 3px;
+    background-position: 0 0, 0 0, 0 50%;
+    background-repeat: no-repeat;
+  }
+  &:nth-child(6) {
+    background-image: repeating-linear-gradient(45deg, rgb(140 190 255 / 0.35) 0 3px, transparent 3px 11px);
+  }
+  &:nth-child(7) {
+    background-image:
+      linear-gradient(rgb(160 200 255 / 0.45), rgb(160 200 255 / 0.45)),
+      linear-gradient(rgb(160 200 255 / 0.3), rgb(160 200 255 / 0.3)),
+      linear-gradient(rgb(160 200 255 / 0.3), rgb(160 200 255 / 0.3));
+    background-size: 70% 14%, 40% 30%, 24% 30%;
+    background-position: 50% 18%, 22% 66%, 78% 66%;
+    background-repeat: no-repeat;
+  }
+
+  &.warm {
+    --tint: 255 120 50;
+  }
+
+  &.on {
+    --lift: 18px;
+    border-color: rgb(var(--tint) / 1);
+    background-color: rgb(var(--tint) / 0.26);
+    box-shadow:
+      0 0 60px rgb(var(--tint) / 0.7),
+      inset 0 0 50px rgb(var(--tint) / 0.5);
+  }
+}
+
+@property --lift {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 0px;
+}
+
+.pl-label {
+  position: absolute;
+  left: 10px;
+  bottom: 8px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgb(255 255 255 / 0.85);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+
+  .on & {
+    opacity: 1;
+  }
+}
+
+/* ---------- the detail card ---------- */
+.right {
+  perspective: 1600px;
+}
+
+.card {
+  position: relative;
+  padding: 26px 28px 24px;
+  border: 1px solid rgb(255 255 255 / 0.13);
+  border-radius: 14px;
+  background:
+    radial-gradient(120% 80% at 100% 0%, rgb(255 95 39 / 0.12), transparent 60%),
+    rgb(12 17 36 / 0.82);
+  backdrop-filter: blur(16px);
+  box-shadow:
+    0 1px 0 rgb(255 255 255 / 0.08) inset,
+    0 50px 90px -40px rgb(0 0 0 / 0.8);
+  animation: card-in-r 0.9s var(--ease-out) both;
+
+  &.from-left {
+    animation-name: card-in-l;
+  }
+
+  /* gradient edge along the top */
+  &::before {
+    content: '';
+    position: absolute;
+    left: 24px;
+    right: 24px;
+    top: -1px;
+    height: 2px;
+    background: var(--hot);
+    transform-origin: left;
+    animation: edge-draw 1s var(--ease-out) 0.2s both;
+  }
+}
+
+@keyframes card-in-r {
+  from {
+    opacity: 0;
+    transform: translateX(80px) rotateY(-18deg);
+  }
+}
+
+@keyframes card-in-l {
+  from {
+    opacity: 0;
+    transform: translateX(-80px) rotateY(18deg);
+  }
+}
+
+@keyframes edge-draw {
+  from {
+    transform: scaleX(0);
+  }
+}
+
+.c-head {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+
+  h3 {
+    margin: 2px 0 0;
+    font-size: clamp(1.6rem, 2.4vw, 2.1rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+}
+
+.c-num {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 58px;
+  height: 58px;
+  border-radius: 14px;
+  background: var(--hot);
+  font-size: 1.6rem;
+  font-weight: 800;
+  box-shadow: 0 12px 30px -10px rgb(254 4 111 / 0.7);
+  animation: num-pop 0.7s var(--ease-out) 0.15s both;
+}
+
+@keyframes num-pop {
+  from {
+    transform: scale(0.4) rotate(-20deg);
+    opacity: 0;
+  }
+}
+
+.c-of {
+  margin: 0;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #9aa4c2;
+}
+
+.c-is {
+  margin: 16px 0 0;
+  font-size: 1.125rem;
+  line-height: 1.5;
+  color: #e9ecf5;
+  animation: rise 0.6s var(--ease-out) 0.25s both;
+}
+
+.c-body {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+  gap: 22px;
+  margin-top: 18px;
+  align-items: start;
+}
+
+.c-console {
+  zoom: 0.82;
+  min-width: 0;
+  animation: rise 0.7s var(--ease-out) 0.3s both;
+
+  ::ng-deep .con {
+    background: rgb(6 10 24 / 0.7);
+  }
+
+  /* only the current layer's console takes space; each card is created fresh per layer */
+  ::ng-deep .con:not(.on) {
+    display: none;
+  }
+}
+
+.c-text {
+  display: grid;
+  gap: 6px;
+  align-content: start;
+
+  > * {
+    animation: rise 0.6s var(--ease-out) both;
+  }
+
+  @for $k from 1 through 6 {
+    > :nth-child(#{$k}) {
+      animation-delay: #{0.35 + $k * 0.07}s;
+    }
+  }
+}
+
+.c-label {
+  margin: 8px 0 0;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--orange);
+}
+
+.c-means,
+.c-we {
+  margin: 0;
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  color: #c7cfe4;
+}
+
+.c-tech {
+  list-style: none;
+  margin: 10px 0 6px;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+
+  li {
+    padding: 5px 10px;
+    border: 1px solid rgb(255 255 255 / 0.16);
+    border-radius: 999px;
+    font-size: 0.75rem;
+    color: #e9ecf5;
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+}
+
+/* final card */
+.done {
+  h3 {
+    margin: 8px 0 0;
+    font-size: clamp(1.6rem, 2.6vw, 2.2rem);
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  .d-pill {
+    margin-top: 22px;
+  }
+}
+
+.ticks {
+  list-style: none;
+  margin: 20px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 6px;
+
+  li {
+    display: grid;
+    grid-template-columns: 36px 1fr auto;
+    align-items: center;
+    padding: 9px 14px;
+    border: 1px solid rgb(61 220 151 / 0.3);
+    border-radius: 8px;
+    background: rgb(61 220 151 / 0.06);
+    animation: rise 0.5s var(--ease-out) both;
+    animation-delay: calc(var(--i) * 0.08s);
+
+    b {
+      color: var(--orange);
+      font-size: 0.8125rem;
+    }
+
+    span {
+      color: #3ddc97;
+      font-weight: 700;
+    }
+  }
+}
+
+/* ---------- progress rail ---------- */
+.rail {
+  position: absolute;
+  left: 50%;
+  bottom: 18px;
+  translate: -50% 0;
+  list-style: none;
+  margin: 0;
+  padding: 6px;
+  display: flex;
+  gap: 6px;
+  border: 1px solid var(--navy-line);
+  border-radius: 999px;
+  background: rgb(10 20 48 / 0.7);
+  backdrop-filter: blur(8px);
+
+  button {
+    display: grid;
+    place-items: center;
+    width: 38px;
+    height: 26px;
+    padding: 0;
+    border: 0;
+    border-radius: 999px;
+    background: transparent;
+    color: #6f7896;
+    font: inherit;
+    font-size: 0.6875rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition:
+      background-color 0.3s ease,
+      color 0.3s ease;
+
+    i {
+      font-style: normal;
+    }
+
+    &.in {
+      color: #c7cfe4;
+    }
+
+    &.on {
+      background: var(--hot);
+      color: #fff;
+    }
+  }
+}
+
+.hint {
+  position: absolute;
+  right: var(--gutter);
+  bottom: 26px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  font-size: 0.8125rem;
+  color: #9aa4c2;
+
+  span {
+    position: relative;
+    width: 18px;
+    height: 28px;
+    border: 1.5px solid #9aa4c2;
+    border-radius: 10px;
+
+    &::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 5px;
+      width: 3px;
+      height: 6px;
+      margin-left: -1.5px;
+      border-radius: 2px;
+      background: var(--orange);
+      animation: wheel 1.6s ease-in-out infinite;
+    }
+  }
+}
+
+@keyframes wheel {
+  to {
+    transform: translateY(9px);
+    opacity: 0;
+  }
+}
+
+/* ---------- smaller screens ---------- */
+@media (max-height: 820px) and (min-width: 901px) {
+  .intro {
+    display: none;
+  }
+
+  .scene {
+    height: 360px;
+    padding-top: 130px;
+  }
+
+  .c-is {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 1100px) and (min-width: 901px) {
+  .c-body {
+    grid-template-columns: 1fr;
+  }
+
+  .c-console {
+    display: none;
+  }
+}
+
+@media (max-width: 900px) {
+  .lj {
+    height: 760svh;
+  }
+
+  .pin {
+    align-items: start;
+    padding-top: 18px;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 22px;
+    padding-bottom: 64px;
+  }
+
+  .left .d-h2 {
+    font-size: 1.45rem;
+    margin-top: 8px;
+  }
+
+  .intro,
+  .stack-wrap,
+  .hint {
+    display: none;
+  }
+
+  .card {
+    padding: 18px 18px 16px;
+  }
+
+  .c-num {
+    width: 46px;
+    height: 46px;
+    font-size: 1.3rem;
+  }
+
+  .c-is {
+    margin-top: 12px;
+    font-size: 0.9375rem;
+  }
+
+  .c-body {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    margin-top: 12px;
+  }
+
+  .c-console {
+    zoom: 0.78;
+  }
+
+  .c-means,
+  .c-label:first-child,
+  .c-tech {
+    display: none;
+  }
+
+  .c-we {
+    font-size: 0.875rem;
+  }
+
+  .rail {
+    bottom: 12px;
+
+    button {
+      width: 34px;
+    }
+  }
+}
+
+@media (max-width: 380px) {
+  .rail button {
+    width: 30px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lj {
+    height: auto;
+  }
+
+  .pin {
+    position: relative;
+    top: 0;
+    height: auto;
+    padding-block: 72px 96px;
+  }
+
+  .card,
+  .card::before,
+  .c-num,
+  .c-is,
+  .c-console,
+  .c-text > *,
+  .ticks li,
+  .hint span::after {
+    animation: none;
+  }
+
+  .plane {
+    transition: none;
+  }
+}

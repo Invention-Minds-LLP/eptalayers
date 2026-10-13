@@ -160,7 +160,7 @@ export const SOLUTIONS: Solution[] = [
     code: 'NOC',
     slug: 'network-operation-center',
     name: 'Network Operation Center',
-    line: 'Proactive monitoring and 24x7 incident resolution',
+    line: 'Proactive monitoring and 24/7* incident resolution',
     offerings: ['Real-time monitoring', 'KPI tracking', 'Threat response', 'Performance optimisation'],
     layers: [1, 2, 3, 4, 5, 6, 7],
     cta: 'Send a NOC service inquiry',
@@ -180,7 +180,7 @@ export const CASE_STUDIES: CaseStudy[] = [
       { measure: 'Wi-Fi connectivity accuracy after implementation', value: '90–95%' },
       { measure: 'Employees on the rebuilt network', value: '1,500+' },
       { measure: 'Method', value: 'Fluke testing · network audit · floor-plan analysis' },
-      { measure: 'Outcome', value: 'Epta extended to more locations' },
+      { measure: 'Outcome', value: 'Epta Layers extended to more locations' },
     ],
   },
   {
@@ -195,7 +195,7 @@ export const CASE_STUDIES: CaseStudy[] = [
       { measure: 'Phases delivered', value: 'Network · workstations · servers' },
       { measure: 'Infrastructure', value: 'Converged, scalable, built for zero downtime' },
       { measure: 'Workstations', value: 'Multi Full-HD displays over KVM' },
-      { measure: 'Outcome', value: "Epta's approach adopted on other client projects" },
+      { measure: 'Outcome', value: "Epta Layers' approach adopted on other client projects" },
     ],
   },
   {
@@ -218,7 +218,7 @@ export const CASE_STUDIES: CaseStudy[] = [
 export const NAV = [
   { label: 'Solutions', path: '/solutions' },
   { label: 'Case studies', path: '/case-studies' },
-  { label: 'Epta story', path: '/story' },
+  { label: 'Epta Layers story', path: '/story' },
   { label: 'Careers', path: '/careers' },
   { label: 'Insights', path: '/blog' },
 ];

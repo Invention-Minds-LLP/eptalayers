@@ -8,18 +8,18 @@ import { PageHero } from '../../ui/d/page-hero';
 import { RackShow } from '../../ui/d/rack-show';
 import { useThemeD } from '../../ui/d/theme';
 
-/** The Epta story (content section 2): the name, the 7 layers, the founder, careers. */
+/** The Epta Layers story (content section 2): the name, the 7 layers, the founder, careers. */
 @Component({
   selector: 'app-story',
   imports: [RouterLink, Icon, InView, PageHero, CtaBand, RackShow],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <app-page-hero
-      eyebrow="The Epta story"
+      eyebrow="About Epta Layers"
       heading="A Single-Point Enterprise Solutions Provider"
       [accent]="3"
       photo="photos/city-dusk.webp"
-      lede="Epta Layers is a single-point enterprise solutions provider that works with IT world leaders to deliver tailor-made solutions for networking and communication Infrastructure."
+      lede="One partner for your network and communication infrastructure. We work with the world’s leading technology brands to build solutions that fit your business."
     />
 
     <!-- the name: seven, and the 7 layers -->
@@ -29,7 +29,8 @@ import { useThemeD } from '../../ui/d/theme';
           <p class="d-eyebrow">Open Systems Interconnection (OSI) model</p>
           <h2 id="osi-title" class="d-h2">Epta stands for <span class="d-em">‘seven’</span> in Greek</h2>
           <p class="d-lede">
-            It encapsulates our vision to focus on the 7 layers of networking in the OSI model.
+            Every network is built in seven layers, known as the OSI model, from the physical cables up to the apps
+            people use. Our name is a reminder that we look after all seven.
           </p>
           <ol class="layers d-stagger" appInView>
             @for (l of osi; track l.n) {
@@ -57,10 +58,10 @@ import { useThemeD } from '../../ui/d/theme';
           </div>
           <div class="d-prose d-reveal" appInView style="--i: 1">
             <p class="big">
-              After spending more than 20 years in Sales and Business Development for the Enterprise IT segment, I
-              launched Epta Layers Pvt. Ltd. where I drive business continuity and IT transformation.
+              After more than 20 years in enterprise IT sales and business development, I started Epta Layers Pvt. Ltd.
+              to help businesses keep running and modernise their IT.
             </p>
-            <p>My expertise lies in effectively identifying, satisfying, and retaining customers.</p>
+            <p>My focus has always been on finding the right customers, serving them well and keeping them for the long term.</p>
           </div>
         </div>
         <ul class="d-cards trio d-stagger" appInView>
@@ -86,11 +87,11 @@ import { useThemeD } from '../../ui/d/theme';
           <p class="d-eyebrow">Careers</p>
           <h2 id="cr-title" class="d-h2">Shape the Connected World with Us</h2>
           <p class="d-lede">
-            To apply for a position at Epta Layers, please send a cover letter together with your resume to
+            See our current openings and apply online, or send your resume and cover letter to
             <a [href]="'mailto:' + hr">{{ hr }}</a>
           </p>
         </div>
-        <a class="d-pill d-pill--line" routerLink="/careers">Careers at Epta <app-icon name="arrow" /></a>
+        <a class="d-pill d-pill--line" routerLink="/careers">Careers at Epta Layers <app-icon name="arrow" /></a>
       </div>
     </section>
 
@@ -192,22 +193,22 @@ export class Story {
     {
       name: 'Identifying Customers',
       points: [
-        'Recognizing and anticipating customer wants and needs.',
-        'Segmenting the target market to better understand specific customer groups and their unique preferences.',
+        'Understanding what customers need, often before they ask.',
+        'Getting to know each customer group and what matters to them.',
       ],
     },
     {
       name: 'Satisfying Customers',
       points: [
-        'Ensuring the availability of the appropriate product or service to meet customers’ demands at the right time.',
-        'Creating value for customers by providing products/services that exceed their expectations.',
+        'Having the right product or service ready at the right time.',
+        'Delivering more value than customers expect.',
       ],
     },
     {
       name: 'Retaining Customers',
       points: [
-        'Fostering customer loyalty by consistently delivering exceptional experiences.',
-        'Staying updated with innovative technology solutions to enhance customer engagement.',
+        'Earning loyalty through a great experience, every time.',
+        'Keeping up with new technology so customers always get the best.',
       ],
     },
   ];

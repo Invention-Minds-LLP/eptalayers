@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /home-a
+Disallow: /home-b
+Disallow: /home-c
+
+Sitemap: https://www.eptalayers.com/sitemap.xml

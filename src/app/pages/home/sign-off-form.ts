@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, effect, input, signal } from '@angu
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CONTACT } from '../../content/site';
 import { Icon } from '../../ui/icon';
+import { submitNetlifyForm } from '../../ui/netlify-form';
 
 @Component({
   selector: 'app-sign-off-form',
@@ -10,13 +11,12 @@ import { Icon } from '../../ui/icon';
   template: `
     @if (sent()) {
       <div class="done" role="status">
-        <span class="verdict"><app-icon name="check" />READY TO SEND</span>
+        <span class="verdict"><app-icon name="check" />MESSAGE SENT</span>
         <p>
-          Your email app should have opened with the request filled in. If it didn't, write to
-          <a [href]="'mailto:' + contact.info">{{ contact.info }}</a> or call
-          <a class="data" [href]="contact.phoneHref">{{ contact.phoneDisplay }}</a>.
+          Thank you. An Epta Layers engineer will reply soon. For anything urgent, call
+          <a [href]="contact.phoneHref">{{ contact.phoneDisplay }}</a>.
         </p>
-        <button type="button" class="btn btn--ghost" (click)="sent.set(false)">Edit request</button>
+        <button type="button" class="btn btn--ghost" (click)="sent.set(false); form.reset()">Send another message</button>
       </div>
     } @else {
       <form [formGroup]="form" (ngSubmit)="submit()" novalidate>
@@ -41,6 +41,16 @@ import { Icon } from '../../ui/icon';
             }
           </label>
         </div>
+        <div class="row two">
+          <label>
+            <span class="label">Phone (optional)</span>
+            <input type="tel" formControlName="phone" autocomplete="tel" />
+          </label>
+          <label>
+            <span class="label">Company (optional)</span>
+            <input formControlName="company" autocomplete="organization" />
+          </label>
+        </div>
         <label class="row">
           <span class="label">Area</span>
           <select formControlName="service">
@@ -62,11 +72,17 @@ import { Icon } from '../../ui/icon';
           }
         </label>
         <div class="submit">
-          <button class="btn" type="submit">
-            Send to an engineer <app-icon name="arrow" />
+          <button class="btn" type="submit" [disabled]="sending()">
+            {{ sending() ? 'Sending…' : 'Send to an engineer' }} <app-icon name="arrow" />
           </button>
-          <span class="note">Goes to {{ contact.info }}</span>
+          <span class="note">Goes to the Epta Layers team</span>
         </div>
+        @if (failed()) {
+          <p class="fail" role="alert">
+            We could not send your message. Please try again, or email
+            <a [href]="'mailto:' + contact.info">{{ contact.info }}</a>.
+          </p>
+        }
       </form>
     }
   `,
@@ -152,6 +168,15 @@ import { Icon } from '../../ui/icon';
       gap: 16px;
       margin-top: 8px;
     }
+    .fail {
+      margin: 0;
+      color: var(--limit-ink);
+      font-size: 0.875rem;
+    }
+    .fail a {
+      color: inherit;
+      font-weight: 700;
+    }
     .note {
       font-size: 0.8125rem;
       color: var(--ink-3);
@@ -184,6 +209,8 @@ export class SignOffForm {
   /** preselects the Area dropdown, e.g. from a solution page's call to action */
   readonly preset = input<string | null | undefined>(null);
   protected readonly sent = signal(false);
+  protected readonly sending = signal(false);
+  protected readonly failed = signal(false);
   private readonly tried = signal(false);
 
   constructor() {
@@ -199,6 +226,8 @@ export class SignOffForm {
       nonNullable: true,
       validators: [Validators.required, Validators.email],
     }),
+    phone: new FormControl('', { nonNullable: true }),
+    company: new FormControl('', { nonNullable: true }),
     service: new FormControl('General', { nonNullable: true }),
     message: new FormControl('', { nonNullable: true, validators: [Validators.required] }),
   });
@@ -208,16 +237,17 @@ export class SignOffForm {
     return c.invalid && (c.touched || this.tried()) ? true : null;
   }
 
-  protected submit(): void {
+  protected async submit(): Promise<void> {
     this.tried.set(true);
     if (this.form.invalid) {
       this.form.markAllAsTouched();
       return;
     }
-    const { name, email, service, message } = this.form.getRawValue();
-    const subject = `Website inquiry: ${service}`;
-    const body = `${message}\n\n— ${name}\n${email}`;
-    window.location.href = `mailto:${CONTACT.info}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    this.sent.set(true);
+    this.sending.set(true);
+    this.failed.set(false);
+    const ok = await submitNetlifyForm('contact', this.form.getRawValue());
+    this.sending.set(false);
+    if (ok) this.sent.set(true);
+    else this.failed.set(true);
   }
 }

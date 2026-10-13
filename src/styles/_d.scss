@@ -11,6 +11,12 @@
   initial-value: 1;
 }
 
+/* off-screen animation starting points must never add a horizontal scrollbar */
+html,
+body.theme-d {
+  overflow-x: clip;
+}
+
 body.theme-d {
   --navy: #0a1430;
   --navy-2: #0e1b3f;

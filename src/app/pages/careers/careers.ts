@@ -1,224 +1,121 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, afterNextRender, signal, viewChild } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { RouterLink } from '@angular/router';
+import { Opening, loadOpenings } from '../../content/careers';
 import { CONTACT } from '../../content/site';
 import { Icon } from '../../ui/icon';
 import { InView } from '../../ui/in-view';
 import { PageHero } from '../../ui/d/page-hero';
 import { useThemeD } from '../../ui/d/theme';
+import { submitNetlifyForm } from '../../ui/netlify-form';
+
+const MAX_RESUME = 5 * 1024 * 1024;
 
 /**
- * Careers (content section 4). The site is static, so "Apply now" opens the visitor's email app addressed
- * to hr@ with the application filled in; the resume is attached there (a browser cannot attach it to mailto).
+ * Careers. Openings are read live from the client's Google Sheet (see content/careers.ts).
+ * Applications go to Netlify Forms (form "careers"), which stores the resume and emails HR.
  */
 @Component({
   selector: 'app-careers',
-  imports: [ReactiveFormsModule, Icon, InView, PageHero],
+  imports: [ReactiveFormsModule, RouterLink, Icon, InView, PageHero],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  template: `
-    <app-page-hero
-      eyebrow="Careers"
-      heading="Shape the Connected World with Us"
-      [accent]="3"
-      photo="photos/case-campus.webp"
-      lede="At Epta Layers, we’re more than an IT solutions provider; we’re architects of robust, intelligent networks. Rooted in the foundational 7 Layers of the OSI model, we partner with global IT leaders to design and deliver custom networking solutions that solve complex business challenges."
-    >
-      <a ctas class="d-pill d-pill--fill" href="#apply">Apply now <app-icon name="arrow" /></a>
-    </app-page-hero>
-
-    <section id="apply" class="d-band d-band--light" aria-labelledby="ap-title">
-      <div class="wrap d-split">
-        <div class="d-reveal" appInView>
-          <p class="d-eyebrow">Join the team</p>
-          <h2 id="ap-title" class="d-h2">Ready to layer your expertise onto <span class="d-em">something foundational?</span></h2>
-          <p class="d-lede">Explore your next career chapter at Epta Layers.</p>
-          <p class="d-lede">
-            To show your interest in joining the team, send a cover letter together with your resume to
-            <a [href]="'mailto:' + hr">{{ hr }}</a>
-          </p>
-          <ol class="stack d-stagger" appInView aria-hidden="true">
-            @for (l of layers; track l; let i = $index) {
-              <li [style.--i]="i">{{ l }}</li>
-            }
-          </ol>
-        </div>
-
-        <div class="panel d-reveal" appInView style="--i: 1">
-          @if (sent()) {
-            <div class="done" role="status">
-              <p class="d-h3">Your email app should have opened.</p>
-              <p>
-                Attach your resume to that email before sending it to <a [href]="'mailto:' + hr">{{ hr }}</a>.
-              </p>
-              <button type="button" class="d-pill d-pill--line" (click)="sent.set(false)">Edit application</button>
-            </div>
-          } @else {
-            <form [formGroup]="form" (ngSubmit)="submit()" novalidate>
-              <label>
-                <span>Name</span>
-                <input formControlName="name" autocomplete="name" [attr.aria-invalid]="bad('name')" />
-                @if (bad('name')) {
-                  <small>Add your name.</small>
-                }
-              </label>
-              <label>
-                <span>Email</span>
-                <input type="email" formControlName="email" autocomplete="email" [attr.aria-invalid]="bad('email')" />
-                @if (bad('email')) {
-                  <small>Enter an email address like name&#64;example.com.</small>
-                }
-              </label>
-              <label>
-                <span>Resume</span>
-                <input type="file" accept=".pdf,.doc,.docx" (change)="pick($event)" />
-                <small class="hint">You’ll attach it to the email that opens.</small>
-              </label>
-              <label>
-                <span>Cover letter</span>
-                <textarea formControlName="cover" rows="6" [attr.aria-invalid]="bad('cover')"></textarea>
-                @if (bad('cover')) {
-                  <small>A few lines about you and the role you want.</small>
-                }
-              </label>
-              <button class="d-pill d-pill--fill" type="submit">Apply now <app-icon name="arrow" /></button>
-            </form>
-          }
-        </div>
-      </div>
-    </section>
-  `,
-  styles: `
-    .d-lede a {
-      color: var(--orange);
-      font-weight: 600;
-    }
-    .stack {
-      list-style: none;
-      margin: 32px 0 0;
-      padding: 0;
-      display: grid;
-      gap: 6px;
-      max-width: 340px;
-    }
-    .stack li {
-      padding: 10px 16px;
-      border-radius: 6px;
-      background: linear-gradient(90deg, #0e1b3f, #1d2a5a);
-      color: #c7cfe4;
-      font-size: 0.8125rem;
-      font-weight: 600;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      margin-left: calc((6 - var(--i)) * 10px);
-    }
-    .stack li:first-child {
-      background: var(--hot);
-      color: #fff;
-    }
-    .panel {
-      padding: 36px;
-      border: 1px solid var(--line-l);
-      border-radius: 12px;
-      background: #f6f8fd;
-    }
-    form {
-      display: grid;
-      gap: 20px;
-    }
-    label {
-      display: grid;
-      gap: 8px;
-    }
-    label > span {
-      font-size: 0.75rem;
-      font-weight: 600;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--muted-l);
-    }
-    input,
-    textarea {
-      width: 100%;
-      padding: 12px 14px;
-      border: 1px solid #c9d0e0;
-      border-radius: 8px;
-      background: #fff;
-      color: var(--ink-l);
-      font: inherit;
-      transition:
-        border-color 0.2s ease,
-        box-shadow 0.2s ease;
-    }
-    input:focus-visible,
-    textarea:focus-visible {
-      outline: none;
-      border-color: var(--orange);
-      box-shadow: 0 0 0 3px rgb(255 95 39 / 0.18);
-    }
-    [aria-invalid='true'] {
-      border-color: #d93a3a;
-    }
-    small {
-      color: #c42b2b;
-      font-size: 0.8125rem;
-    }
-    small.hint {
-      color: var(--muted-l);
-    }
-    form .d-pill {
-      justify-self: start;
-    }
-    .done {
-      display: grid;
-      gap: 14px;
-      justify-items: start;
-    }
-    .done p {
-      margin: 0;
-      color: var(--muted-l);
-    }
-    .done a {
-      color: var(--orange);
-      font-weight: 600;
-    }
-    @media (max-width: 560px) {
-      .panel {
-        padding: 22px;
-      }
-    }
-  `,
+  templateUrl: './careers.html',
+  styleUrl: './careers.scss',
 })
 export class Careers {
   protected readonly hr = CONTACT.hr;
-  protected readonly layers = ['Application', 'Presentation', 'Session', 'Transport', 'Network', 'Data Link', 'Physical'];
-  protected readonly sent = signal(false);
+  protected readonly openings = signal<Opening[] | null>(null);
+  protected readonly openingsFailed = signal(false);
+  protected readonly state = signal<'idle' | 'sending' | 'sent' | 'error'>('idle');
+  protected readonly fileError = signal('');
+  protected readonly fileName = signal('');
   private readonly tried = signal(false);
-  private file = '';
+  private resume: File | null = null;
+  private readonly formEl = viewChild<ElementRef<HTMLElement>>('formEl');
+
+  protected readonly experience = ['Fresher', 'Less than 2 years', '2–5 years', '5–10 years', 'More than 10 years'];
+  protected readonly notice = ['Immediate', '15 days', '30 days', '60 days', '90 days'];
 
   protected readonly form = new FormGroup({
+    role: new FormControl('General application', { nonNullable: true }),
     name: new FormControl('', { nonNullable: true, validators: [Validators.required] }),
     email: new FormControl('', { nonNullable: true, validators: [Validators.required, Validators.email] }),
-    cover: new FormControl('', { nonNullable: true, validators: [Validators.required] }),
+    phone: new FormControl('', { nonNullable: true, validators: [Validators.required, Validators.pattern(/^[+\d][\d\s-]{7,}$/)] }),
+    location: new FormControl('', { nonNullable: true, validators: [Validators.required] }),
+    experience: new FormControl('', { nonNullable: true, validators: [Validators.required] }),
+    currentCompany: new FormControl('', { nonNullable: true }),
+    notice: new FormControl('', { nonNullable: true }),
+    currentCtc: new FormControl('', { nonNullable: true }),
+    expectedCtc: new FormControl('', { nonNullable: true }),
+    linkedin: new FormControl('', { nonNullable: true }),
+    cover: new FormControl('', { nonNullable: true }),
+    consent: new FormControl(false, { nonNullable: true, validators: [Validators.requiredTrue] }),
   });
 
   constructor() {
     useThemeD();
+    afterNextRender(() => {
+      loadOpenings()
+        .then((o) => this.openings.set(o))
+        .catch(() => {
+          this.openings.set([]);
+          this.openingsFailed.set(true);
+        });
+    });
   }
 
-  protected bad(name: 'name' | 'email' | 'cover'): boolean | null {
+  protected bad(name: keyof typeof this.form.controls): boolean | null {
     const c = this.form.controls[name];
     return c.invalid && (c.touched || this.tried()) ? true : null;
   }
 
-  protected pick(e: Event) {
-    this.file = (e.target as HTMLInputElement).files?.[0]?.name ?? '';
+  protected apply(o: Opening) {
+    this.form.controls.role.setValue(o.role);
+    this.formEl()?.nativeElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
-  protected submit() {
+  protected pick(e: Event) {
+    const f = (e.target as HTMLInputElement).files?.[0] ?? null;
+    this.fileError.set('');
+    if (f && f.size > MAX_RESUME) {
+      this.fileError.set('Please upload a file under 5 MB.');
+      this.resume = null;
+      this.fileName.set('');
+      return;
+    }
+    this.resume = f;
+    this.fileName.set(f?.name ?? '');
+  }
+
+  protected async submit() {
     this.tried.set(true);
-    if (this.form.invalid) return;
-    const { name, email, cover } = this.form.getRawValue();
-    const body = `${cover}\n\n${name}\n${email}${this.file ? `\n\nResume: ${this.file} (attached)` : ''}`;
-    location.href = `mailto:${this.hr}?subject=${encodeURIComponent(`Application: ${name}`)}&body=${encodeURIComponent(body)}`;
-    this.sent.set(true);
+    if (!this.resume) this.fileError.set(this.fileError() || 'Please attach your resume.');
+    if (this.form.invalid || !this.resume) return;
+    const v = this.form.getRawValue();
+    this.state.set('sending');
+    const ok = await submitNetlifyForm('careers', {
+      role: v.role,
+      name: v.name,
+      email: v.email,
+      phone: v.phone,
+      location: v.location,
+      experience: v.experience,
+      'current-company': v.currentCompany,
+      'notice-period': v.notice,
+      'current-ctc': v.currentCtc,
+      'expected-ctc': v.expectedCtc,
+      linkedin: v.linkedin,
+      'cover-letter': v.cover,
+      resume: this.resume,
+    });
+    this.state.set(ok ? 'sent' : 'error');
+  }
+
+  protected reset() {
+    this.form.reset();
+    this.resume = null;
+    this.fileName.set('');
+    this.tried.set(false);
+    this.state.set('idle');
   }
 }

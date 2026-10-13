@@ -16,11 +16,11 @@ import { SignOffForm } from '../home/sign-off-form';
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <app-page-hero
-      eyebrow="Contact Epta"
+      eyebrow="Contact Epta Layers"
       heading="Let’s Build a Connected Future Together!"
       [accent]="3"
       photo="photos/city-dusk.webp"
-      lede="Tell us about your sites and what isn’t working. An Epta engineer will reply."
+      lede="Tell us about your sites and what isn’t working. An Epta Layers engineer will reply."
     />
 
     <section class="d-band d-band--light" aria-label="Get in touch">

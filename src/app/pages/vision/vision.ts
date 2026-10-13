@@ -15,26 +15,26 @@ import { useThemeD } from '../../ui/d/theme';
       heading="Business Continuity is at Our Core"
       [accent]="3"
       photo="photos/mumbai-sea.webp"
-      lede="Along with network and infrastructure solutions, Epta assists in hardware supply, implementation, and post-implementation support. We ensure your business operations never see the stop sign."
+      lede="Your business should never have to stop because of IT. That one idea shapes everything Epta Layers designs, supplies, installs and supports."
     />
 
     <section class="d-band d-band--light" aria-label="Our approach">
       <div class="wrap">
         <div class="d-prose d-reveal wide" appInView>
           <p>
-            At Epta Layers, business continuity serves as the fundamental driver behind our network and infrastructure
-            solutions. Our vision is to provide the best IT infrastructure solutions and help our customers improve
-            their operational resilience so that their business processes never encounter a “stop sign”. The name
-            Epta, meaning ‘seven’ in Greek, reflects our specialized focus on the 7 layers of the OSI model, which
-            allows us to understand your specific line of business before designing a customized networking solution.
-            By focusing on critical problem areas while maintaining sight of your business KPIs, we aim to become the
-            most reliable technology partner to your enterprise business.
+            Business continuity means your operations keep running, whatever happens. It is the reason Epta Layers
+            exists. We aim to provide the best IT infrastructure and help our customers become more resilient, so their
+            business never meets a “stop sign”.
           </p>
           <p>
-            We work closely with IT world leaders and global OEMs to deliver tailor-made solutions across security,
-            collaboration, and data center architecture. We are dedicated to delivering the best possible customer
-            experience and strive to continually improve our solution offerings, acting as an architect of robust,
-            intelligent networks for the connected world.
+            The name Epta means ‘seven’ in Greek, after the seven layers of the OSI model. Looking at all seven helps us
+            understand your business first, then design a solution that fixes the real problem while keeping your goals
+            in sight.
+          </p>
+          <p>
+            We work closely with the world’s leading IT brands to deliver solutions across networking, security,
+            collaboration and data centers, and we keep improving them. Our goal is to be the most reliable technology
+            partner your business has.
           </p>
         </div>
       </div>
@@ -47,9 +47,8 @@ import { useThemeD } from '../../ui/d/theme';
           <p class="d-eyebrow">Our approach</p>
           <h2 id="sat-title" class="d-h2">The chief engineer of a <span class="d-em">global communications satellite</span></h2>
           <p class="d-lede">
-            To better understand our approach, you can think of Epta Layers as the chief engineer of a global
-            communications satellite. We don’t just draft the technical specs, we integrate every complex sub-system
-            and remain at the controls 24x7 to ensure your signal—and your business—never goes dark.
+            Think of Epta Layers as the chief engineer of a communications satellite. We don’t just write the plan. We
+            connect every part, then stay at the controls 24/7* so your signal, and your business, never goes dark.
           </p>
         </div>
         <svg class="sat" viewBox="0 0 420 360" aria-hidden="true">
@@ -93,16 +92,15 @@ import { useThemeD } from '../../ui/d/theme';
           <li class="d-card">
             <span class="d-num">Vision</span>
             <p class="big">
-              To provide the best IT infrastructure solutions and help our customers improve their business continuity.
-              We aim to become the most reliable technology partner to enterprise customers.
+              To provide the best IT infrastructure solutions and help our customers keep their business running. We aim
+              to be the most reliable technology partner for enterprises.
             </p>
           </li>
           <li class="d-card">
             <span class="d-num">Mission</span>
             <p class="big">
-              To be the point solutions team for all IT infrastructure needs. From implementation to business
-              continuity, we are dedicated to delivering the best possible customer experience and strive to continually
-              improve our solution offerings.
+              To be the one team you call for all your IT infrastructure needs. From installation to keeping you running,
+              we deliver the best possible experience and keep improving what we offer.
             </p>
           </li>
         </ul>

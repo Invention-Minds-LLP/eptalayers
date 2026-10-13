@@ -14,7 +14,7 @@ import { useThemeD } from '../../ui/d/theme';
       eyebrow="Page not found"
       heading="This page isn’t on the network"
       [accent]="2"
-      lede="The address may have changed. Everything Epta offers is one step away."
+      lede="The address may have changed. Everything Epta Layers offers is one step away."
     >
       <a ctas class="d-pill d-pill--fill" routerLink="/">Back to home <app-icon name="arrow" /></a>
       <a ctas class="d-pill d-pill--line" routerLink="/solutions">Our solutions</a>

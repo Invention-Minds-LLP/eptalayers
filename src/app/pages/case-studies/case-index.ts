@@ -16,11 +16,11 @@ import { useThemeD } from '../../ui/d/theme';
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <app-page-hero
-      eyebrow="Success stories"
-      heading="Case Studies"
-      [accent]="1"
+      eyebrow="IT Infrastructure Case Studies"
+      heading="Businesses That Kept Moving"
+      [accent]="2"
       photo="photos/case-building.webp"
-      lede="How Epta Layers delivered for a leading American IT/ITeS corporation, a global engineering company and a leading Indian manufacturer."
+      lede="Real projects, real results. See how Epta Layers fixed networks, security and data centers for three very different companies."
     />
 
     <section class="d-band d-band--light" aria-label="Case studies">
@@ -52,7 +52,7 @@ import { useThemeD } from '../../ui/d/theme';
 
     <app-cta-band
       heading="Let’s Build a Connected Future Together"
-      text="For more details on any case study, an Epta engineer will walk you through it."
+      text="Want the full story behind a project? An Epta Layers engineer will walk you through it."
       label="Talk to an Engineer"
     />
   `,

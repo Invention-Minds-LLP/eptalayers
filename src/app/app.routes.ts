@@ -47,14 +47,14 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/case-studies/case-page').then((m) => m.CasePage),
     title: T('Case study'),
   },
-  { path: 'story', loadComponent: () => import('./pages/story/story').then((m) => m.Story), title: T('The Epta story') },
+  { path: 'story', loadComponent: () => import('./pages/story/story').then((m) => m.Story), title: T('The Epta Layers story') },
   {
     path: 'vision-mission',
     loadComponent: () => import('./pages/vision/vision').then((m) => m.Vision),
     title: T('Vision & mission'),
   },
   { path: 'careers', loadComponent: () => import('./pages/careers/careers').then((m) => m.Careers), title: T('Careers') },
-  { path: 'blog', loadComponent: () => import('./pages/blog/blog').then((m) => m.Blog), title: T('Epta Insights') },
+  { path: 'blog', loadComponent: () => import('./pages/blog/blog').then((m) => m.Blog), title: T('Epta Layers Insights') },
   { path: 'contact', loadComponent: () => import('./pages/contact/contact').then((m) => m.Contact), title: T('Contact') },
   {
     path: 'privacy',

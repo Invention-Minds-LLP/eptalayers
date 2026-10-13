@@ -1,7 +1,7 @@
 /**
- * The seven solution pages, worded from the client's content file (sections 6–12).
- * Data Center Services has no page of its own in the content; its page is built from the
- * Solutions overview paragraph and the offerings listed there.
+ * The seven solution pages. Facts from the client's content file (sections 6–12), rewritten in plain
+ * language at the client's request (2026-10-13): one idea per sentence, jargon explained, no repeated
+ * boilerplate between pages. "24/7*" carries the footnote in TWENTY_FOUR_SEVEN_NOTE.
  */
 
 export type Visual = 'rack' | 'shield' | 'meeting' | 'pillars' | 'cloud' | 'lifecycle' | 'noc';
@@ -23,6 +23,8 @@ export interface SolutionPage {
   title: string;
   subtitle: string;
   photo: string;
+  /** describes the hero photograph for screen readers and image search */
+  alt: string;
   visual: Visual;
   intro: string[];
   offerings: SolutionGroup;
@@ -36,101 +38,107 @@ export interface SolutionPage {
   closing: { heading: string; text: string; cta: string; service: string };
 }
 
-const LAER: SolutionItem = {
-  name: 'LAER Model',
-  text: 'We utilize the LAER model (Land-Adopt-Expand-Renew) as a framework for customer success, enabling us to track KPIs for implementing, training, and maximizing the value of your investments.',
-};
+/** Shown wherever 24/7 appears with an asterisk. */
+export const TWENTY_FOUR_SEVEN_NOTE =
+  '*24/7 coverage is provided based on your requirement and the service agreement (SLA) we sign with you.';
+
 const OEM: SolutionItem = {
-  name: 'Extended Arm of OEMs',
-  text: 'Epta works as an extended arm of world-leading OEMs, specializing in implementing their unique solutions and offering long-term support.',
+  name: 'Backed by world-leading OEMs',
+  text: 'We work as an extended arm of the brands we implement. You get certified installation and long-term support from one team.',
+};
+const LAER: SolutionItem = {
+  name: 'The LAER model',
+  text: 'Land, Adopt, Expand, Renew. We track clear goals at each step, so your investment keeps paying off long after go-live.',
 };
 
 export const SOLUTION_PAGES: SolutionPage[] = [
   {
     slug: 'enterprise-network',
     name: 'Enterprise Network',
-    title: 'Connected Enterprises Designed for Seamless Collaboration',
-    subtitle: 'Future-ready networking solutions rooted in OSI fundamentals.',
+    title: 'Enterprise Networks That Keep Every Team Connected',
+    subtitle: 'Fast, reliable wired and wireless networks for offices, campuses and branches.',
     photo: 'photos/l2-switch.webp',
+    alt: 'Network switch with patch cables in an enterprise server rack',
     visual: 'rack',
     intro: [
-      'Epta specializes in providing future-ready networking solutions rooted in OSI fundamentals. Our approach is deeply informed by the 7 layers of the OSI model, which is central to Epta’s vision and service framework. By focusing on these foundational layers, we are able to understand your specific needs based on your line of business before designing a customized networking solution. Our goal is to address your problem areas without losing sight of your business KPIs.',
-      'Epta assists in visualizing and communicating how IT Networks operate, with a keen focus on network architecture. We work as a single-point enterprise solutions provider with IT world leaders to deliver tailor-made solutions that ensure business continuity. Beyond design, we also assist in hardware supply, implementation, and post-implementation support.',
+      'Your network carries every call, file and application your business uses. When it slows down or drops, work stops.',
+      'Epta Layers designs, supplies, installs and supports enterprise networks built around how your business actually works. We start with the cabling and build up layer by layer, so every part is tested and nothing is left to chance.',
     ],
     offerings: {
-      heading: 'Core Offerings for Your Enterprise Network',
+      heading: 'What We Deliver',
       items: [
-        { name: 'Routing & Switching', text: 'We optimize your data flow infrastructure to ensure efficient and reliable communication across your organization.' },
-        { name: 'Wi-Fi & SD-WAN', text: 'Our solutions provide secure connectivity across distributed operations, enabling seamless collaboration whether your teams are in the office or remote.' },
-        { name: 'Information Management', text: 'Achieve unified network visibility and control through robust information management system capabilities. This empowers you to monitor, manage, and optimize your entire network ecosystem.' },
+        { name: 'Routing & Switching', text: 'The core equipment that moves data around your organisation quickly and reliably.' },
+        { name: 'Wi-Fi & SD-WAN', text: 'Secure wireless inside the office, and SD-WAN to link branches and remote teams over the internet as one network.' },
+        { name: 'Network Management', text: 'One clear view of your whole network, so you can see, control and fix issues from a single place.' },
       ],
     },
     osi: {
-      heading: 'Our OSI-Aligned Approach',
-      lede: 'We design enterprise network services that precisely align with your business layer requirements. Our detailed understanding of each layer ensures a comprehensive and effective solution:',
+      heading: 'How We Build It, Layer by Layer',
+      lede: 'Networks are built in layers, a model called OSI. We make sure each layer is right before moving to the next:',
       layers: [
-        { n: '1', name: 'Physical', text: 'We establish a robust infrastructure foundation.' },
-        { n: '2', name: 'Data Link', text: 'We ensure secure device connectivity within your network.' },
-        { n: '3', name: 'Network', text: 'Our designs facilitate intelligent traffic routing, ensuring data reaches its destination efficiently.' },
-        { n: '4', name: 'Transport', text: 'We focus on reliable data delivery across your network.' },
-        { n: '5–7', name: 'Application', text: 'We optimize performance for your critical business applications.' },
+        { n: '1', name: 'Physical', text: 'Cabling that is installed properly and tested, the foundation for everything else.' },
+        { n: '2', name: 'Data Link', text: 'Every device connects to the network securely.' },
+        { n: '3', name: 'Network', text: 'Traffic takes the best route to where it needs to go.' },
+        { n: '4', name: 'Transport', text: 'Data arrives complete and in order, every time.' },
+        { n: '5–7', name: 'Application', text: 'Your business applications run fast for every user.' },
       ],
     },
     more: [
       {
-        heading: 'Why Choose Epta for Your Enterprise Network?',
-        lede: 'Epta’s unique strength lies in our LAER model (Land-Adopt-Expand-Renew), which serves as a framework for customer success. This framework ensures that we Land, Adopt, Expand, and Renew your network to continuously match your evolving business KPIs. As an extended arm of world-leading OEMs, we specialize in implementing their unique solutions and offering long-term support. Our dedication is to provide the best IT infrastructure solutions and help our customers improve their business continuity.',
-        items: [],
+        heading: 'Why Businesses Choose Epta Layers',
+        items: [
+          { name: 'One partner from design to support', text: 'We plan the network, supply the hardware, install it and support it afterwards. You deal with one team, not five vendors.' },
+          LAER,
+          OEM,
+        ],
       },
     ],
     closing: {
-      heading: 'Build a connected future together',
-      text: 'Contact Epta Experts today to discuss your enterprise network needs and build a connected future together.',
-      cta: 'Contact Epta Experts',
+      heading: 'Let’s plan your network',
+      text: 'Tell us about your sites and users. An Epta Layers engineer will suggest the right next step.',
+      cta: 'Talk to a Network Expert',
       service: 'Enterprise Network',
     },
   },
   {
     slug: 'security-architecture',
     name: 'Security Architecture',
-    title: 'Security Embedded in Every Layer',
-    subtitle: 'Multi-dimensional protection for hybrid environments',
+    title: 'Security Built Into Every Layer of Your Network',
+    subtitle: 'Protection for your network, email, devices and cloud, designed in from the start.',
     photo: 'photos/l6-code.webp',
+    alt: 'Security engineer reviewing code and network activity on screens',
     visual: 'shield',
     intro: [
-      'At Epta Layers, our core vision is to focus on the 7 layers of networking in the OSI model. This foundational understanding allows us to design and deliver tailor-made security solutions that are not merely add-ons but are embedded in every layer of your IT infrastructure.',
-      'As a single-point enterprise solutions provider, Epta partners with IT world leaders to address your unique problem areas without losing sight of your business KPIs. We aim to provide the best IT infrastructure solutions and help our customers improve their business continuity.',
-      'Our comprehensive approach to security architecture ensures robust, multi-dimensional protection for hybrid environments, covering everything from initial design to post-implementation support.',
+      'Most security problems start where protection was added as an afterthought. We design security into every layer of your IT setup instead, from the network edge to the cloud.',
+      'Whether your teams work in the office, at home or in the cloud, Epta Layers keeps your data and systems protected, and helps you stay compliant.',
     ],
     offerings: {
-      heading: 'Deep Dive Solutions for Robust Protection',
-      lede: 'Our deep dive solutions are crafted to provide holistic protection across your digital landscape:',
+      heading: 'Three Lines of Protection',
       items: [
-        { name: 'Perimeter Defense', text: 'We secure your network’s boundaries through robust Network Security and cutting-edge SASE Implementation, safeguarding your connections and access points.' },
-        { name: 'Data Protection', text: 'Critical information is safeguarded with our Email Security and Endpoint Security solutions, protecting against evolving threats at every touchpoint.' },
-        { name: 'Infrastructure Guard', text: 'We secure your cloud assets with Public/Private Cloud Security, ensuring the integrity and availability of your infrastructure whether on-premises or in the cloud.' },
+        { name: 'Perimeter Defense', text: 'Firewalls, network security and SASE (secure access for users anywhere) guard the edges of your network.' },
+        { name: 'Data Protection', text: 'Email security and endpoint security protect your information on every laptop, phone and inbox.' },
+        { name: 'Infrastructure Guard', text: 'Public and private cloud security keeps your systems safe, whether they run on-site or in the cloud.' },
       ],
     },
     more: [
       {
-        heading: 'Delivering Tangible Business Impact',
-        lede: 'Epta Layer’s security architecture is designed to deliver clear business impact by enhancing your organization’s resilience and operational continuity.',
+        heading: 'What It Means for Your Business',
         items: [
-          { name: '24/7 Threat Monitoring', text: 'Through our Network Operation Center (NOC), we provide constant vigilance, offering 24/7 threat monitoring and proactive incident resolution. The NOC’s capabilities include real-time monitoring, KPI tracking, threat response, and performance optimization, ensuring your network is always guarded.' },
-          { name: 'Compliance-Aligned Architecture Design', text: 'Our experts design solutions that meet regulatory requirements, ensuring your architecture is compliance-aligned and adheres to industry best practices.' },
-          { name: 'OEM-Certified Security Implementations', text: 'As an extended arm of world-leading OEMs, we specialize in implementing their unique solutions with OEM-certified security implementations, ensuring best practices and long-term support.' },
+          { name: '24/7* threat monitoring', text: 'Our Network Operation Center watches for threats around the clock and acts quickly when something looks wrong.' },
+          { name: 'Designed for compliance', text: 'We design to regulatory requirements and industry best practice, so audits are easier.' },
+          { name: 'OEM-certified implementation', text: 'Security products are installed to the manufacturer’s standards, with long-term support from us.' },
         ],
       },
     ],
     caseLink: {
-      heading: 'Case in Point: Transforming Security for Enterprises',
-      text: 'Discover how we’ve helped other enterprises strengthen their security posture. Read how Epta Layers helped revolutionize the IT infrastructure architecture of a global engineering company, enhancing project efficiency and scalability through tailored solutions in IT infrastructure.',
+      heading: 'See It in Action',
+      text: 'A global engineering company needed one partner to secure and rebuild its IT. See how Epta Layers did it, phase by phase.',
       slug: 'engineering',
-      title: 'From Complexity to Clarity: Epta’s IT Transformation for Engineering Excellence',
+      title: 'From Complexity to Clarity',
     },
     closing: {
-      heading: 'Secure Your Future with Epta Layers',
-      text: 'Looking to fortify your defenses and ensure your IT infrastructure services are impenetrable? Request a Security Assessment with our experts today.',
+      heading: 'How secure is your network today?',
+      text: 'Request a security assessment and our experts will show you where you stand and what to fix first.',
       cta: 'Request a Security Assessment',
       service: 'Security',
     },
@@ -138,40 +146,38 @@ export const SOLUTION_PAGES: SolutionPage[] = [
   {
     slug: 'collaboration-architecture',
     name: 'Collaboration Architecture',
-    title: 'Seamless and Connected Network Ecosystems',
-    subtitle: 'Unified communication solutions for distributed teams',
+    title: 'Meetings and Calls That Just Work',
+    subtitle: 'Video meetings, calling and conference rooms for teams in any location.',
     photo: 'photos/l5-call.webp',
+    alt: 'Team on a video call in a conference room',
     visual: 'meeting',
     intro: [
-      'At Epta Layers, our core vision is to focus on the 7 layers of networking in the OSI model. This foundational understanding allows us to design and deliver tailor-made solutions that integrate deeply with your existing systems, ensuring a seamless and connected network ecosystem for your organization.',
-      'As a single-point enterprise solutions provider, Epta works with IT world leaders to understand your specific needs based on your line of business, focusing on problem areas without losing sight of your business KPIs.',
-      'Our collaboration architecture services are designed to provide unified communication solutions for distributed teams, enhancing productivity and connectivity. Beyond design, we also assist in hardware supply, implementation, and post-implementation support.',
+      'When teams are spread across offices and homes, a dropped call or a meeting room that will not connect costs time every day.',
+      'Epta Layers sets up the meeting tools, phones and rooms your people need, and makes sure they work smoothly with the systems you already have.',
     ],
     offerings: {
-      heading: 'Comprehensive Collaboration Solution Stack',
-      lede: 'Our solution stack is built to empower your teams with advanced communication and collaboration tools:',
+      heading: 'What We Set Up',
       items: [
-        { name: 'Meeting Solutions', text: 'We provide cloud-based video & audio meeting solutions, including various Cloud Meeting Solutions and Cloud Meeting and Calling Solutions.' },
-        { name: 'Voice Infrastructure', text: 'This includes robust IP Phones & Conference Systems, encompassing IP Phones, Headsets, Speaker Phones, and Conference Phones.' },
-        { name: 'Room Integration', text: 'We specialize in custom conference room tech, offering comprehensive Conference Room Solutions to create highly functional and interactive meeting spaces.' },
+        { name: 'Meeting Solutions', text: 'Cloud video and audio meetings, plus cloud calling, so anyone can join from anywhere.' },
+        { name: 'Voice Equipment', text: 'IP phones, headsets, speakerphones and conference phones that sound clear and are easy to use.' },
+        { name: 'Meeting Rooms', text: 'Conference rooms fitted with the right cameras, screens and audio, ready at the press of a button.' },
       ],
     },
     more: [
       {
-        heading: 'The Epta Layers Advantage',
-        lede: 'Choosing Epta Layers for your collaboration needs offers distinct benefits:',
+        heading: 'Why Epta Layers',
         items: [
-          { name: 'Vendor-Agnostic Architecture Design', text: 'Our approach ensures that your collaboration solution is designed based on your specific needs, not limited by a single vendor.' },
-          { name: 'Business Continuity-Focused Deployment', text: 'We prioritize solutions that ensure your business continuity, meaning your operations remain uninterrupted even in challenging circumstances.' },
-          { name: 'Post-Implementation Support Included', text: 'Our commitment extends beyond deployment, with comprehensive post-implementation support to ensure long-term success.' },
+          { name: 'Not tied to one brand', text: 'We recommend what fits your needs, not what one vendor sells.' },
+          { name: 'Built for continuity', text: 'Your meetings and calls keep working, even when things go wrong elsewhere.' },
+          { name: 'Support included', text: 'We stay with you after setup, so your teams are never left on their own.' },
           OEM,
-          { name: 'LAER Model', text: 'We utilize the LAER model (Land-Adopt-Expand-Renew) as a framework for customer success, ensuring that your collaboration solutions evolve with your business KPIs and maximize your investments.' },
+          LAER,
         ],
       },
     ],
     closing: {
-      heading: 'Build a connected future together',
-      text: 'Explore Collaboration Solutions with Epta Layers today and build a connected future together.',
+      heading: 'Make every meeting easier',
+      text: 'Tell us how your teams meet today, and we will show you a simpler setup.',
       cta: 'Explore Collaboration Solutions',
       service: 'Collaboration',
     },
@@ -179,47 +185,45 @@ export const SOLUTION_PAGES: SolutionPage[] = [
   {
     slug: 'data-center-architecture',
     name: 'Data Center Architecture',
-    title: 'Next-Gen Data Center with Future-Proof Foundations',
-    subtitle: 'Scalable, secure, and intelligent infrastructure',
+    title: 'Data Centers Built to Grow With You',
+    subtitle: 'Scalable, secure data center design for today’s load and tomorrow’s growth.',
     photo: 'photos/noc-racks.webp',
+    alt: 'Rows of server racks in a data center',
     visual: 'pillars',
     intro: [
-      'At Epta Layers, our core vision is rooted in the 7 layers of networking in the OSI model, allowing us to deliver tailor-made solutions that seamlessly integrate into your existing IT networks. As a single-point enterprise solutions provider, Epta partners with IT world leaders to address your unique problem areas without losing sight of your business KPIs. Our approach to Data Center Architecture focuses on designing next-gen data centers with future-proof foundations, ensuring a scalable, secure, and intelligent infrastructure.',
-      'Epta assists in visualizing and communicating how IT networks operate, with a keen focus on network architecture. We understand your technology requirements and design solutions that target your problem areas, business KPIs, and future scalability. We also assist in hardware supply, implementation, and post-implementation support.',
+      'Your data center runs the applications and stores the data your business depends on. It has to be fast, secure and ready to grow.',
+      'Epta Layers designs data centers around your current needs and your plans for the future. We also supply the hardware, install it and support it.',
     ],
     offerings: {
-      heading: 'Architecture Pillars for Robust Data Centers',
-      lede: 'Our architecture pillars are designed to build a resilient and high-performing data center environment:',
+      heading: 'The Four Building Blocks',
       items: [
-        { name: 'Software-Defined Network (SDN)', text: 'We implement SDN to provide agile and programmable network control, enhancing efficiency and flexibility.' },
-        { name: 'Storage Area Network (SAN)', text: 'Our SAN solutions ensure high-speed, reliable, and scalable data storage capabilities.' },
-        { name: 'Application Development Controllers (ADC)', text: 'We utilize ADCs to optimize application delivery, ensuring performance and availability.' },
-        { name: 'Web Application Firewalls (WAF)', text: 'Our WAF implementations provide robust protection for your web applications against various threats.' },
+        { name: 'Software-Defined Networking (SDN)', text: 'Network control through software, so changes are quick and flexible.' },
+        { name: 'Storage Area Network (SAN)', text: 'Fast, reliable storage that grows as your data grows.' },
+        { name: 'Application Delivery Controllers (ADC)', text: 'Spread traffic across servers, so applications stay fast and available.' },
+        { name: 'Web Application Firewalls (WAF)', text: 'Protect your websites and web applications from attacks.' },
       ],
     },
     more: [
       {
-        heading: 'Delivering Enterprise Benefits',
-        lede: 'Epta’s Data Center Architecture provides tangible enterprise benefits.',
+        heading: 'What You Gain',
         items: [
-          { name: 'Fabric switch implementation', text: 'We facilitate advanced fabric switch implementation for high-performance and efficient data center networking.' },
-          { name: 'Cloud and DR service integration', text: 'Our solutions include cloud and DR service integration, ensuring your data center environment is resilient and capable of seamless disaster recovery.' },
-          { name: 'World-leading OEM partnerships', text: 'As an extended arm of world-leading OEMs, we specialize in implementing their unique solutions and offering long-term support for your data center infrastructure.' },
-          { name: 'Data center services', text: 'Epta provides comprehensive data center services including colocation, CDN, and MPLS solutions.' },
+          { name: 'High-speed fabric switching', text: 'Fast, efficient connections between every server in the data center.' },
+          { name: 'Cloud and disaster recovery', text: 'Your data center links to the cloud and can recover quickly if something fails.' },
+          { name: 'Leading OEM partners', text: 'Equipment from world-leading brands, installed and supported by us.' },
+          { name: 'Related services', text: 'We also offer colocation, CDN and MPLS. See Data Center Services.' },
         ],
       },
       {
-        heading: 'The Epta Layers Advantage',
-        lede: 'Choosing Epta Layers translates to leveraging our unique strengths.',
+        heading: 'Why Epta Layers',
         items: [
-          { name: 'Delivery Model of LAER', text: 'Epta uses the LAER model (Land-Adopt-Expand-Renew) as a framework for customer success, enabling us to track KPIs for implementing, training, and maximizing the value of your investments in your data center.' },
-          { name: 'Business Continuity at Our Core', text: 'We ensure your business operations never see the stop sign, with solutions focused on business continuity.' },
+          LAER,
+          { name: 'Business continuity first', text: 'Everything we design aims for one result: your operations never stop.' },
         ],
       },
     ],
     closing: {
-      heading: 'Build your future-proof data center',
-      text: 'Discuss Data Center Needs with Epta Layers today to build your next-generation, future-proof data center.',
+      heading: 'Planning a new or upgraded data center?',
+      text: 'Share your plans and an Epta Layers engineer will help you shape the right design.',
       cta: 'Discuss Data Center Needs',
       service: 'Data Center',
     },
@@ -227,32 +231,37 @@ export const SOLUTION_PAGES: SolutionPage[] = [
   {
     slug: 'data-center-services',
     name: 'Data Center Services',
-    title: 'Comprehensive Data Center Services for Future-Ready Enterprises',
-    subtitle: 'Your critical information, always available and protected',
+    title: 'Keep Your Data Safe, Available and Connected',
+    subtitle: 'Colocation, cloud, disaster recovery and connectivity services in one place.',
     photo: 'photos/travel-fibre.webp',
+    alt: 'Fibre optic cables carrying light between data centers',
     visual: 'cloud',
     intro: [
-      'Epta provides comprehensive data center services, including colocation and remote services, Cloud and DR services, CDN, and MPLS solutions. We also offer network security services and data resiliency services to ensure your critical information is always available and protected.',
+      'Your critical data must always be available, even if a site fails. Epta Layers provides the services that keep it hosted, backed up, connected and protected.',
     ],
     offerings: {
-      heading: 'Data Center Services',
+      heading: 'Our Data Center Services',
       items: [
-        { name: 'Colocation and Remote Services', text: 'Colocation and remote services for your data center infrastructure.' },
-        { name: 'Cloud and DR Services', text: 'Cloud and disaster recovery services.' },
-        { name: 'CDN and MPLS', text: 'CDN and MPLS solutions.' },
-        { name: 'Network Security Services', text: 'Network security services for your data center.' },
-        { name: 'Data Resiliency Services', text: 'Data resiliency services to ensure your critical information is always available and protected.' },
+        { name: 'Colocation & Remote Services', text: 'Host your servers in a secure facility, managed remotely when you need it.' },
+        { name: 'Cloud & Disaster Recovery', text: 'Cloud hosting plus a recovery plan, so your systems come back quickly after an outage.' },
+        { name: 'CDN & MPLS', text: 'Faster content delivery to users, and private, reliable links between your sites.' },
+        { name: 'Network Security Services', text: 'Protection for the traffic moving in and out of your data center.' },
+        { name: 'Data Resiliency', text: 'Backup and replication that keep your critical information safe and available.' },
       ],
     },
     more: [
       {
-        heading: 'The Epta Layers Advantage',
-        items: [OEM, LAER, { name: 'Business Continuity is at Our Core', text: 'We ensure your business operations never see the stop sign.' }],
+        heading: 'Why Epta Layers',
+        items: [
+          OEM,
+          LAER,
+          { name: 'Business continuity first', text: 'We plan for failure, so your business does not feel it.' },
+        ],
       },
     ],
     closing: {
-      heading: 'Build a connected future together',
-      text: 'Talk to Epta about colocation, Cloud and DR, CDN, MPLS and data resiliency for your enterprise.',
+      heading: 'Is your data ready for a bad day?',
+      text: 'Talk to us about colocation, cloud and disaster recovery that fits your business.',
       cta: 'Discuss Data Center Needs',
       service: 'Data Center',
     },
@@ -260,21 +269,20 @@ export const SOLUTION_PAGES: SolutionPage[] = [
   {
     slug: 'enterprise-services',
     name: 'Enterprise Services',
-    title: 'Connectivity Architecture for Sustained Excellence',
-    subtitle: 'Your end-to-end technology lifecycle partner',
+    title: 'Your Technology Lifecycle, Handled',
+    subtitle: 'Hardware renewal, software licensing and expert support, all from one partner.',
     photo: 'photos/l1-cable.webp',
+    alt: 'Structured network cabling in a patch panel',
     visual: 'lifecycle',
     intro: [
-      'At Epta Layers, our vision is rooted in understanding and focusing on the 7 layers of networking in the OSI model. This foundational approach enables us to deliver tailor-made solutions that integrate seamlessly within your IT networks. As a single-point enterprise solutions provider, Epta partners with IT world leaders to address your unique problem areas while keeping your business KPIs in sharp focus. We are dedicated to being your end-to-end technology lifecycle partner.',
-      'Epta assists in visualizing and communicating how IT networks operate, with a keen focus on network architecture. We understand your technology requirements and design solutions that target your problem areas, business KPIs, and future scalability. We also assist in hardware supply, implementation, and post-implementation support.',
+      'Hardware ages, licences expire and projects need extra hands. Epta Layers looks after the full life of your technology, so your IT stays current without the admin.',
     ],
     offerings: {
-      heading: 'Comprehensive Service Portfolio',
-      lede: 'Our service portfolio covers critical aspects of your enterprise technology, ensuring sustained excellence.',
+      heading: 'What We Take Care Of',
       items: [
-        { name: 'Hardware Renewal', text: 'We offer OEM-certified hardware solutions and manage refresh cycles to keep your infrastructure modern and efficient. These core hardware/software services ensure your systems are always up-to-date and performing optimally.' },
-        { name: 'Software Licensing', text: 'Our services include efficient subscription management and license optimization, ensuring you get the most value from your software investments.' },
-        { name: 'Professional Services', text: 'From architecture consulting to implementation support, our experts guide you through complex deployments and IT transformations. These professional IT services are designed to streamline your operations and enhance capabilities.' },
+        { name: 'Hardware Renewal', text: 'OEM-certified hardware and planned refresh cycles, so your equipment never falls behind.' },
+        { name: 'Software Licensing', text: 'We manage subscriptions and licences, so you only pay for what you use.' },
+        { name: 'Professional Services', text: 'Architecture advice and hands-on implementation support for complex projects.' },
       ],
     },
     table: [
@@ -284,26 +292,25 @@ export const SOLUTION_PAGES: SolutionPage[] = [
     ],
     more: [
       {
-        heading: 'Additional Solutions for Complete Coverage',
-        lede: 'Beyond our core portfolio, we provide specialized additional solutions to meet unique operational needs.',
+        heading: 'Also Available',
         items: [
-          { name: 'IT accessories', text: 'End-to-end IT accessories provisioning.' },
-          { name: 'Data resiliency', text: 'Data resiliency services to protect your critical information, a key aspect often supported by advanced data center capabilities.' },
-          { name: 'Custom SLA-driven support', text: 'Custom SLA-driven support to ensure your specific service level requirements are met.' },
+          { name: 'IT accessories', text: 'Everything from cables to peripherals, supplied end to end.' },
+          { name: 'Data resiliency', text: 'Services that keep your critical information protected and recoverable.' },
+          { name: 'Custom SLA support', text: 'Support levels agreed with you and written into your service agreement.' },
         ],
       },
       {
-        heading: 'The Epta Layers Advantage',
+        heading: 'Why Epta Layers',
         items: [
-          { name: 'Extended Arm of OEMs', text: 'As an extended arm of world-leading OEMs, Epta specializes in implementing their unique solutions and offering long-term support, ensuring you benefit from cutting-edge technology and expertise.' },
-          { name: 'LAER Model', text: 'We utilize the LAER model (Land-Adopt-Expand-Renew) as a framework for customer success, enabling us to track KPIs for implementing, training, and maximizing the value of your investments. This approach ensures your services evolve with your business needs.' },
-          { name: 'Business Continuity is at Our Core', text: 'Our commitment ensures your business operations never see the stop sign, with solutions designed for unwavering reliability across all aspects of your IT, including crucial data center services. We aim to become the most reliable technology partner for all our esteemed customers.' },
+          OEM,
+          LAER,
+          { name: 'Business continuity first', text: 'Every service is planned so your operations keep running. We aim to be your most reliable technology partner.' },
         ],
       },
     ],
     closing: {
-      heading: 'Build a connected future together',
-      text: 'Explore Service Agreements with Epta Layers today and let’s build a connected future together.',
+      heading: 'Simplify your IT lifecycle',
+      text: 'Ask us about a service agreement that covers your hardware, licences and support.',
       cta: 'Explore Service Agreements',
       service: 'General',
     },
@@ -311,79 +318,80 @@ export const SOLUTION_PAGES: SolutionPage[] = [
   {
     slug: 'network-operation-center',
     name: 'Network Operation Center',
-    title: 'Your 24x7 Network Sentinel',
-    subtitle: 'Proactive monitoring and incident resolution',
+    title: 'Your 24/7* Network Watch',
+    subtitle: 'We monitor your network around the clock and fix issues before they reach your users.',
     photo: 'photos/noc-room.webp',
+    alt: 'Network Operation Center with monitoring screens',
     visual: 'noc',
     intro: [
-      'At Epta Layers, our Network Operation Center (NOC) serves as your vigilant guardian, ensuring the continuous health and performance of your IT environment. Rooted in our overarching vision to provide the best IT infrastructure solutions and enhance business continuity, our NOC offers a critical layer of oversight for your enterprise. We aim to become the most reliable technology partner for all our esteemed customers.',
+      'Problems rarely wait for office hours. The Epta Layers Network Operation Center (NOC) keeps watch over your IT environment day and night.',
+      'We spot issues early, act on them fast and keep you informed, so your business keeps running.',
     ],
     offerings: {
-      heading: 'Comprehensive Network Operational Services',
-      lede: 'Our NOC capabilities are designed to deliver comprehensive network operational services, ensuring your IT environment remains robust and responsive. We provide:',
+      heading: 'What the NOC Does for You',
       items: [
-        { name: 'Real-time Monitoring', text: 'Continuous surveillance of your network infrastructure.' },
-        { name: 'KPI Tracking', text: 'Monitoring key performance indicators to assess network health and efficiency.' },
-        { name: 'Threat Response', text: 'Swift identification and mitigation of security threats.' },
-        { name: 'Performance Optimization', text: 'Ongoing adjustments to maximize network output and reliability.' },
+        { name: 'Real-time Monitoring', text: 'We watch your network continuously.' },
+        { name: 'KPI Tracking', text: 'We measure the health and performance of your network against clear goals.' },
+        { name: 'Threat Response', text: 'We find security threats quickly and stop them.' },
+        { name: 'Performance Optimization', text: 'We keep fine-tuning, so your network stays fast and reliable.' },
       ],
     },
     more: [
       {
-        heading: 'Operational Excellence: Driving Network Infrastructure Management',
-        lede: 'These capabilities are integral to proactive network infrastructure maintenance, allowing us to identify and address potential issues before they impact your operations. Our commitment to operational excellence in network infrastructure management is unwavering. This is achieved through:',
+        heading: 'How We Keep You Running',
+        lede: 'Catching problems early means most of them never affect your operations.',
         items: [
-          { name: 'LAER Model-Driven Service Delivery', text: 'We utilize our proprietary LAER model (Land-Adopt-Expand-Renew) as a framework for customer success. This approach enables us to track KPIs for implementing, training, and maximizing the value of your investments, ensuring a continuous cycle of improvement and adaptation for your network.' },
-          { name: 'Business Continuity Assurance', text: 'Our core mission is to ensure your business operations never see the stop sign. The NOC plays a pivotal role in this, with solutions designed for unwavering reliability across all aspects of your IT.' },
-          { name: 'Custom Reporting Dashboards', text: 'We provide tailored insights into your network’s performance and operational status, offering transparency and data-driven decision-making.' },
+          { name: 'Driven by the LAER model', text: 'Land, Adopt, Expand, Renew: a cycle of tracking and improving your network over time.' },
+          { name: 'Business continuity assurance', text: 'Our goal is simple: your business operations never see a stop sign.' },
+          { name: 'Custom reporting dashboards', text: 'Clear reports on how your network is performing, so you can make decisions with real data.' },
         ],
       },
     ],
     quote: { text: 'Epta’s NOC became our first line of defense against downtime.', by: 'IT/ITeS Client' },
     closing: {
-      heading: 'Ready to Enhance Your Network Operations?',
-      text: 'Send a NOC Service Inquiry today. Let Epta Layers provide the peace of mind that comes with expert, 24/7 network oversight.',
+      heading: 'Want expert eyes on your network?',
+      text: 'Send a NOC service inquiry and we will explain how monitoring would work for your setup.',
       cta: 'Send a NOC Service Inquiry',
       service: 'NOC',
     },
   },
 ];
 
-/** Solutions overview (content section 6): each offering's line and its call to action. */
+/** Solutions overview: each offering's line and its call to action. */
 export const SOLUTION_OVERVIEW: Record<string, { line: string; text: string; cta: string }> = {
   'enterprise-network': {
-    line: 'Connected Enterprises Designed for Seamless Collaboration.',
-    text: 'Epta designs future-ready networking solutions rooted in OSI fundamentals to optimize data flow infrastructure, provide secure connectivity across distributed operations, and offer unified network visibility and control through core offerings like Routing & Switching, Wi-Fi & SD-WAN, and Information Management.',
-    cta: 'Explore Enterprise Network Solutions',
+    line: 'Fast, reliable networks for every office and branch.',
+    text: 'Routing and switching, Wi-Fi, SD-WAN and network management, designed around how your business works.',
+    cta: 'Explore Enterprise Network',
   },
   'security-architecture': {
-    line: 'Security Embedded in Every Layer.',
-    text: 'We provide multi-dimensional protection for hybrid environments, offering deep dive solutions in perimeter defense, data protection (including Email Security and Endpoint Security), and infrastructure guard for Public/Private cloud services. Our offerings include robust network security services designed for 24/7 threat monitoring and compliance-aligned architecture.',
+    line: 'Security built into every layer.',
+    text: 'Protection for your network edge, email, devices and cloud, with 24/7* threat monitoring and compliance-ready design.',
     cta: 'Discover Security Architecture',
   },
   'collaboration-architecture': {
-    line: 'Seamless and Connected Network Ecosystems.',
-    text: 'Epta delivers unified communication solutions for distributed teams, including cloud services for video and audio meeting solutions, IP Phones, Conference Systems, and custom conference room technology.',
+    line: 'Meetings and calls that just work.',
+    text: 'Cloud meetings and calling, IP phones, conference systems and fully fitted meeting rooms.',
     cta: 'Learn More About Collaboration',
   },
   'data-center-architecture': {
-    line: 'Next-Gen Data Center with Future-Proof Foundations.',
-    text: 'We build scalable, secure, and intelligent data center infrastructures, leveraging Architecture Pillars such as Software-Defined Networks (SDN), Storage Area Network (SAN) solutions, Application Development Controllers, and Web Application Firewalls (WAF).',
+    line: 'Data centers built to grow with you.',
+    text: 'Scalable, secure designs using SDN, SAN storage, application delivery controllers and web application firewalls.',
     cta: 'Explore Data Center Architecture',
   },
   'data-center-services': {
-    line: 'Comprehensive data center services.',
-    text: 'Epta provides comprehensive data center services, including colocation and remote services, Cloud and DR services, CDN, and MPLS solutions. We also offer network security services and data resiliency services to ensure your critical information is always available and protected.',
+    line: 'Your data, always available.',
+    text: 'Colocation, cloud and disaster recovery, CDN, MPLS, network security and data resiliency services.',
     cta: 'View Data Center Services',
   },
   'enterprise-services': {
-    line: 'Connectivity Architecture for Sustained Excellence.',
-    text: 'As your end-to-end technology lifecycle partner, we offer a service portfolio encompassing hardware renewal, software licensing and subscription management, and professional services like architecture consulting and implementation support. These solutions support robust enterprise cloud services and overall IT infrastructure needs.',
+    line: 'Your technology lifecycle, handled.',
+    text: 'Hardware renewal, software licensing and professional services from one partner.',
     cta: 'Discover Enterprise Services',
   },
   'network-operation-center': {
-    line: 'Your 24x7 Network Sentinel.',
-    text: 'We offer proactive monitoring and incident resolution through our NOC capabilities, which include Real-time Monitoring, KPI Tracking, Threat Response, and Performance Optimization. Our operational excellence is driven by the LAER model and focused on business continuity assurance, providing custom reporting dashboards.',
+    line: 'Your network, watched 24/7*.',
+    text: 'Real-time monitoring, KPI tracking, threat response and performance tuning, with clear reports.',
     cta: 'Send a NOC Service Inquiry',
   },
 };

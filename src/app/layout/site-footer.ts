@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { CONTACT, SOLUTIONS } from '../content/site';
+import { TWENTY_FOUR_SEVEN_NOTE } from '../content/solution-pages';
 import { Wordmark } from '../ui/wordmark';
 
 @Component({
@@ -26,11 +27,11 @@ import { Wordmark } from '../ui/wordmark';
 
       <nav aria-label="Company">
         <h2 class="label">Company</h2>
-        <a routerLink="/story">Epta story</a>
+        <a routerLink="/story">Epta Layers story</a>
         <a routerLink="/vision-mission">Vision &amp; mission</a>
         <a routerLink="/case-studies">Case studies</a>
         <a routerLink="/careers">Careers</a>
-        <a routerLink="/blog">Epta Insights</a>
+        <a routerLink="/blog">Epta Layers Insights</a>
         <a routerLink="/contact">Contact</a>
       </nav>
 
@@ -49,6 +50,8 @@ import { Wordmark } from '../ui/wordmark';
         }
       </div>
     </div>
+
+    <p class="wrap footnote">{{ note }}</p>
 
     <div class="wrap legal">
       <span>© {{ year }} Epta Layers Pvt. Ltd.</span>
@@ -71,6 +74,11 @@ import { Wordmark } from '../ui/wordmark';
       color: var(--ink);
       border-top: 6px solid var(--ink);
       padding-top: 72px;
+    }
+    .footnote {
+      margin: 40px auto 0;
+      font-size: 0.8125rem;
+      color: var(--ink-3);
     }
     .grid {
       display: grid;
@@ -172,4 +180,5 @@ export class SiteFooter {
   protected readonly solutions = SOLUTIONS;
   protected readonly contact = CONTACT;
   protected readonly year = new Date().getFullYear();
+  protected readonly note = TWENTY_FOUR_SEVEN_NOTE;
 }

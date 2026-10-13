@@ -2,7 +2,8 @@ import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/c
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { map } from 'rxjs';
-import { SOLUTION_PAGES } from '../../content/solution-pages';
+import { SEO } from '../../content/seo';
+import { SOLUTION_PAGES, TWENTY_FOUR_SEVEN_NOTE } from '../../content/solution-pages';
 import { Icon } from '../../ui/icon';
 import { InView } from '../../ui/in-view';
 import { CtaBand } from '../../ui/d/cta-band';
@@ -24,6 +25,8 @@ export class SolutionPage {
     initialValue: '',
   });
   protected readonly page = computed(() => SOLUTION_PAGES.find((s) => s.slug === this.slug()));
+  protected readonly kicker = computed(() => SEO['/solutions/' + this.slug()]?.kicker ?? this.page()?.name ?? '');
+  protected readonly note = TWENTY_FOUR_SEVEN_NOTE;
   protected readonly next = computed(() => {
     const i = SOLUTION_PAGES.findIndex((s) => s.slug === this.slug());
     return SOLUTION_PAGES[(i + 1) % SOLUTION_PAGES.length];

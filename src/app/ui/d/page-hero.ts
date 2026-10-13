@@ -25,10 +25,10 @@ import { Parallax } from '../parallax';
               <app-icon name="arrow" class="flip" />{{ c.label }}
             </a>
           }
-          @if (eyebrow()) {
-            <p class="d-eyebrow">{{ eyebrow() }}</p>
-          }
           <h1 [id]="id()">
+            @if (eyebrow()) {
+              <span class="d-eyebrow kick">{{ eyebrow() }}</span>
+            }
             @for (w of words(); track $index; let i = $index) {
               <span class="w" [style.--i]="i"><span [class.d-em]="i >= words().length - accent()">{{ w }}</span></span>{{ ' ' }}
             }
@@ -148,8 +148,13 @@ import { Parallax } from '../parallax';
     .d-eyebrow {
       animation: ph-rise 0.9s var(--ease-out) 0.05s both;
     }
+    .kick {
+      margin-bottom: 20px;
+      font-size: 0.75rem;
+      line-height: 1.5;
+    }
     h1 {
-      margin: 20px 0 0;
+      margin: 0;
       max-width: 17ch;
       font-size: clamp(2.3rem, 4.2vw, 3.7rem);
       font-weight: 700;

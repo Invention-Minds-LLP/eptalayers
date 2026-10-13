@@ -4,18 +4,18 @@ import { CtaBand } from '../../ui/d/cta-band';
 import { PageHero } from '../../ui/d/page-hero';
 import { useThemeD } from '../../ui/d/theme';
 
-/** Epta Insights (content section 14). No articles exist yet, so the three slots say so plainly. */
+/** Epta Layers Insights (content section 14). No articles exist yet, so the three slots say so plainly. */
 @Component({
   selector: 'app-blog',
   imports: [InView, PageHero, CtaBand],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <app-page-hero
-      eyebrow="Epta Insights"
+      eyebrow="Epta Layers Insights"
       heading="Latest Articles & Expertise"
       [accent]="1"
       photo="photos/l6-code.webp"
-      lede="Welcome to the Epta Layers Blog. Here we share our deep understanding of IT networks and infrastructure, drawing on our foundational approach to the 7 layers of the OSI model."
+      lede="Practical guides on networks, security, meetings and data centers, written by the Epta Layers team for IT leaders."
     />
 
     <section class="d-band d-band--light" aria-labelledby="bl-title">
@@ -25,8 +25,8 @@ import { useThemeD } from '../../ui/d/theme';
             <p class="d-eyebrow">Articles</p>
             <h2 id="bl-title" class="d-h2">Insights on the way</h2>
             <p class="d-lede">
-              This blog is designed to extend our commitment to delivering the best possible customer experience by
-              sharing valuable insights and expertise on topics central to our comprehensive solution offerings.
+              We are writing our first articles now: clear, practical answers to the questions our customers ask us
+              most.
             </p>
           </div>
         </div>

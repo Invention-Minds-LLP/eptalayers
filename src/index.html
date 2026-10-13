@@ -2,17 +2,123 @@
 <html lang="en-IN">
   <head>
     <meta charset="utf-8" />
-    <title>Epta Layers · Single-point enterprise solutions provider, Bangalore</title>
+    <title>IT Infrastructure &amp; Network Solutions in Bangalore | Epta Layers</title>
     <base href="/" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta
       name="description"
-      content="Epta Layers designs, supplies, implements and runs enterprise network, security, collaboration and data center infrastructure across all seven OSI layers, with a 24x7 NOC. Bangalore, India."
+      content="Epta Layers is a single-point IT infrastructure partner in Bangalore: enterprise networks, security, collaboration, data centers and 24/7* NOC support."
     />
-    <meta name="theme-color" content="#16191c" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <meta name="theme-color" content="#0a1430" />
+    <meta name="geo.region" content="IN-KA" />
+    <meta name="geo.placename" content="Bengaluru" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Epta Layers" />
+    <meta property="og:locale" content="en_IN" />
+    <meta property="og:image" content="https://www.eptalayers.com/og-image.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="canonical" href="https://www.eptalayers.com/" />
     <link rel="icon" type="image/png" href="favicon.png" />
+    <link rel="apple-touch-icon" href="favicon.png" />
+
+    <!-- who Epta Layers is, for search engines; page-level data is added per route -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "ProfessionalService",
+            "@id": "https://www.eptalayers.com/#organization",
+            "name": "Epta Layers",
+            "legalName": "Epta Layers Pvt. Ltd.",
+            "url": "https://www.eptalayers.com/",
+            "logo": "https://www.eptalayers.com/brand/epta-layers-logo-dark.png",
+            "image": "https://www.eptalayers.com/og-image.jpg",
+            "description": "Single-point enterprise solutions provider for networking and communication infrastructure: enterprise networks, security, collaboration, data centers and NOC services.",
+            "telephone": "+91-98867-13131",
+            "email": "info@eptalayers.com",
+            "priceRange": "On request",
+            "founder": { "@type": "Person", "name": "Santosh Baragur" },
+            "areaServed": { "@type": "Country", "name": "India" },
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "#47, 9th Cross, 5th Main, Srinidhi Layout",
+              "addressLocality": "Bengaluru",
+              "addressRegion": "Karnataka",
+              "postalCode": "560062",
+              "addressCountry": "IN"
+            },
+            "department": {
+              "@type": "ProfessionalService",
+              "name": "Epta Layers, Jayanagar Branch",
+              "telephone": "+91-98867-13131",
+              "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "1st Floor, No 427/14-1, 9th Main Road, 5th Block, Jayanagar",
+                "addressLocality": "Bengaluru",
+                "addressRegion": "Karnataka",
+                "postalCode": "560041",
+                "addressCountry": "IN"
+              }
+            },
+            "knowsAbout": [
+              "Enterprise networking",
+              "SD-WAN",
+              "Network security",
+              "SASE",
+              "Video conferencing",
+              "Data center architecture",
+              "Colocation",
+              "Disaster recovery",
+              "Network Operation Center"
+            ]
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://www.eptalayers.com/#website",
+            "url": "https://www.eptalayers.com/",
+            "name": "Epta Layers",
+            "publisher": { "@id": "https://www.eptalayers.com/#organization" },
+            "inLanguage": "en-IN"
+          }
+        ]
+      }
+    </script>
   </head>
   <body>
     <app-root></app-root>
+
+    <!--
+      Netlify Forms reads these at deploy time to register the two forms; the Angular forms post to them.
+      Field names must match the app. Hidden from people and never submitted directly.
+    -->
+    <form name="contact" netlify netlify-honeypot="bot-field" hidden>
+      <input name="bot-field" />
+      <input name="name" />
+      <input name="email" />
+      <input name="phone" />
+      <input name="company" />
+      <input name="service" />
+      <textarea name="message"></textarea>
+    </form>
+    <form name="careers" netlify netlify-honeypot="bot-field" enctype="multipart/form-data" hidden>
+      <input name="bot-field" />
+      <input name="role" />
+      <input name="name" />
+      <input name="email" />
+      <input name="phone" />
+      <input name="location" />
+      <input name="experience" />
+      <input name="current-company" />
+      <input name="notice-period" />
+      <input name="current-ctc" />
+      <input name="expected-ctc" />
+      <input name="linkedin" />
+      <input name="resume" type="file" />
+      <textarea name="cover-letter"></textarea>
+    </form>
   </body>
 </html>

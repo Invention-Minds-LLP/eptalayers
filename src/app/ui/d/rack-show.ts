@@ -19,6 +19,9 @@ import { InView } from '../in-view';
   styles: `
     :host {
       display: block;
+      /* the rack's parts wait far to the side before they fly in */
+      overflow: clip;
+      overflow-clip-margin: 40px;
     }
     .show {
       --p: 0;

@@ -1,0 +1,206 @@
+<app-page-hero
+  eyebrow="Careers at Epta Layers"
+  heading="Shape the Connected World with Us"
+  [accent]="3"
+  photo="photos/case-campus.webp"
+  lede="We build the networks enterprises run on. Join a Bangalore team working on real infrastructure projects with world-leading technology brands."
+>
+  <a ctas class="d-pill d-pill--fill" href="#openings">See open roles <app-icon name="arrow" /></a>
+  <a ctas class="d-pill d-pill--line" href="#apply">Apply now</a>
+</app-page-hero>
+
+<!-- openings, from the client's Google Sheet -->
+<section id="openings" class="d-band d-band--light" aria-labelledby="op-title">
+  <div class="wrap">
+    <div class="d-head d-reveal" appInView>
+      <div>
+        <p class="d-eyebrow">Open roles</p>
+        <h2 id="op-title" class="d-h2">Current Openings</h2>
+        <p class="d-lede">
+          Ready to build your career on something foundational? Pick a role below, or send a general application and we
+          will reach out when something fits.
+        </p>
+      </div>
+    </div>
+
+    @if (openings(); as list) {
+      @if (list.length) {
+        <ul class="jobs d-stagger" appInView>
+          @for (o of list; track o.role) {
+            <li class="job">
+              <div>
+                <h3 class="d-h3">{{ o.role }}</h3>
+                <p class="meta">
+                  @for (m of [o.department, o.location, o.experience, o.type]; track $index) {
+                    @if (m) {
+                      <span>{{ m }}</span>
+                    }
+                  }
+                </p>
+                @if (o.description) {
+                  <p class="desc">{{ o.description }}</p>
+                }
+              </div>
+              <button type="button" class="d-pill d-pill--line" (click)="apply(o)">Apply <app-icon name="arrow" /></button>
+            </li>
+          }
+        </ul>
+      } @else {
+        <div class="none d-reveal" appInView>
+          <p class="d-h3">No open roles are listed right now.</p>
+          <p>
+            We are always happy to hear from good engineers. Send a general application below and we will keep your
+            resume on file.
+          </p>
+        </div>
+      }
+    } @else {
+      <ul class="jobs" aria-busy="true">
+        @for (k of [1, 2]; track k) {
+          <li class="job skeleton"><span></span><span></span></li>
+        }
+      </ul>
+    }
+  </div>
+</section>
+
+<!-- application -->
+<section id="apply" class="d-band d-band--deep" aria-labelledby="ap-title">
+  <div class="wrap d-split">
+    <div class="d-reveal" appInView>
+      <p class="d-eyebrow">Apply</p>
+      <h2 id="ap-title" class="d-h2">Send Your <span class="d-em">Application</span></h2>
+      <p class="d-lede">It takes about three minutes. Your application goes straight to our HR team.</p>
+      <ol class="steps">
+        <li><b>1</b><span>Fill in your details and attach your resume.</span></li>
+        <li><b>2</b><span>HR reviews every application and contacts shortlisted candidates.</span></li>
+        <li><b>3</b><span>Technical conversation with the team, then an offer.</span></li>
+      </ol>
+      <p class="alt">Prefer email? Send your resume and cover letter to <a [href]="'mailto:' + hr">{{ hr }}</a></p>
+    </div>
+
+    <div class="panel d-reveal" appInView style="--i: 1" #formEl>
+      @switch (state()) {
+        @case ('sent') {
+          <div class="done" role="status">
+            <span class="tick" aria-hidden="true"><app-icon name="check" /></span>
+            <p class="d-h3">Application received. Thank you!</p>
+            <p>Our HR team will review it and get in touch if your profile matches a role.</p>
+            <button type="button" class="d-pill d-pill--line" (click)="reset()">Send another application</button>
+          </div>
+        }
+        @default {
+          <form [formGroup]="form" (ngSubmit)="submit()" novalidate>
+            <label class="full">
+              <span>Position</span>
+              <select formControlName="role">
+                <option value="General application">General application</option>
+                @for (o of openings() ?? []; track o.role) {
+                  <option [value]="o.role">{{ o.role }}</option>
+                }
+              </select>
+            </label>
+            <label>
+              <span>Full name *</span>
+              <input formControlName="name" autocomplete="name" [attr.aria-invalid]="bad('name')" />
+              @if (bad('name')) {
+                <small>Please add your name.</small>
+              }
+            </label>
+            <label>
+              <span>Email *</span>
+              <input type="email" formControlName="email" autocomplete="email" [attr.aria-invalid]="bad('email')" />
+              @if (bad('email')) {
+                <small>Enter an email like name&#64;example.com.</small>
+              }
+            </label>
+            <label>
+              <span>Phone *</span>
+              <input type="tel" formControlName="phone" autocomplete="tel" placeholder="+91" [attr.aria-invalid]="bad('phone')" />
+              @if (bad('phone')) {
+                <small>Enter a phone number we can call.</small>
+              }
+            </label>
+            <label>
+              <span>Current location *</span>
+              <input formControlName="location" autocomplete="address-level2" placeholder="e.g. Bangalore" [attr.aria-invalid]="bad('location')" />
+              @if (bad('location')) {
+                <small>Where are you based?</small>
+              }
+            </label>
+            <label>
+              <span>Total experience *</span>
+              <select formControlName="experience" [attr.aria-invalid]="bad('experience')">
+                <option value="" disabled>Select</option>
+                @for (e of experience; track e) {
+                  <option [value]="e">{{ e }}</option>
+                }
+              </select>
+              @if (bad('experience')) {
+                <small>Select your experience.</small>
+              }
+            </label>
+            <label>
+              <span>Notice period</span>
+              <select formControlName="notice">
+                <option value="">Select</option>
+                @for (n of notice; track n) {
+                  <option [value]="n">{{ n }}</option>
+                }
+              </select>
+            </label>
+            <label>
+              <span>Current company</span>
+              <input formControlName="currentCompany" autocomplete="organization" />
+            </label>
+            <label>
+              <span>LinkedIn profile</span>
+              <input type="url" formControlName="linkedin" placeholder="https://linkedin.com/in/…" />
+            </label>
+            <label>
+              <span>Current CTC (optional)</span>
+              <input formControlName="currentCtc" placeholder="e.g. 6 LPA" />
+            </label>
+            <label>
+              <span>Expected CTC (optional)</span>
+              <input formControlName="expectedCtc" placeholder="e.g. 8 LPA" />
+            </label>
+            <label class="full file">
+              <span>Resume * (PDF or Word, up to 5 MB)</span>
+              <input type="file" accept=".pdf,.doc,.docx" (change)="pick($event)" [attr.aria-invalid]="fileError() ? true : null" />
+              @if (fileName()) {
+                <em>{{ fileName() }}</em>
+              }
+              @if (fileError()) {
+                <small>{{ fileError() }}</small>
+              }
+            </label>
+            <label class="full">
+              <span>Cover letter</span>
+              <textarea formControlName="cover" rows="5" placeholder="A few lines about you and the work you want to do."></textarea>
+            </label>
+            <label class="full check">
+              <input type="checkbox" formControlName="consent" [attr.aria-invalid]="bad('consent')" />
+              <span>
+                I agree that Epta Layers may store my details to process this application, as described in the
+                <a routerLink="/privacy">privacy policy</a>. *
+              </span>
+            </label>
+            @if (bad('consent')) {
+              <small class="full">Please tick to continue.</small>
+            }
+            @if (state() === 'error') {
+              <p class="full err" role="alert">
+                We could not send your application. Please try again, or email it to
+                <a [href]="'mailto:' + hr">{{ hr }}</a>.
+              </p>
+            }
+            <button class="d-pill d-pill--fill full-btn" type="submit" [disabled]="state() === 'sending'">
+              {{ state() === 'sending' ? 'Sending…' : 'Submit application' }} <app-icon name="arrow" />
+            </button>
+          </form>
+        }
+      }
+    </div>
+  </div>
+</section>

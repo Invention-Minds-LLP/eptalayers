@@ -4,10 +4,28 @@
     <img src="photos/d-hero-engineer.webp" alt="" fetchpriority="high" />
     <span class="h-scan"></span>
     <ul class="h-words">
-      @for (l of osi; track l.n; let i = $index) {
-        <li [style.--i]="i">{{ l.name }}</li>
+      @for (l of layersTop; track l.n; let i = $index) {
+        <li [style.--i]="i" [class.on]="hero() === l.n - 1">{{ l.name }}</li>
       }
     </ul>
+  </div>
+  <!-- the lit layer, at work -->
+  <div class="h-layer" aria-hidden="true">
+    @let hl = layers[hero()];
+    @for (k of [hero()]; track k) {
+      <div class="hl-card">
+        <div class="hl-glyph"><app-layer-glyph [n]="hl.n" /></div>
+        <div class="hl-text">
+          <p class="hl-of">Layer {{ hl.n }} · {{ hl.name }}</p>
+          <p class="hl-is">{{ hl.is }}</p>
+        </div>
+      </div>
+    }
+    <ol class="hl-dots">
+      @for (l of layers; track l.n) {
+        <li [class.on]="hero() === l.n - 1"></li>
+      }
+    </ol>
   </div>
   <div class="wrap h-copy">
     <p class="eyebrow">A Single-Point Enterprise Solutions Provider</p>
@@ -17,21 +35,21 @@
       }
     </h1>
     <p class="lede">
-      Epta Layers works with world-leading OEMs to design, supply, implement and run your network and communication
-      infrastructure, so your business operations never see the stop sign.
+      We design, supply, install and run your network, security and data center, with world-leading OEMs, so your
+      business keeps running without interruption.
     </p>
     <div class="ctas">
       <a class="pill pill--fill" routerLink="/solutions">Explore Our Solutions <app-icon name="arrow" /></a>
       <a class="play" href="#approach">
         <span class="play-btn" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 7 L17 12 L9 17 Z" /></svg></span>
-        <span>How Epta works<br />through the seven layers</span>
+        <span>See how we work<br />through the seven layers</span>
       </a>
     </div>
   </div>
 </section>
 
 <!-- Stats strip -->
-<section class="stats" aria-label="Epta in numbers" #statsEl>
+<section class="stats" aria-label="Epta Layers in numbers" #statsEl>
   <div class="wrap stats-row">
     @for (s of stats(); track s.label) {
       <p class="stat"><b>{{ s.value }}</b><span>{{ s.label }}</span></p>
@@ -50,6 +68,9 @@
       </div>
       <a class="more" routerLink="/solutions">View All Solutions <app-icon name="arrow" /></a>
     </div>
+    <p class="sec-lede">
+      Everything your IT infrastructure needs, from the cabling to the cloud, planned and supported by one team.
+    </p>
     <ul class="sol-grid">
       @for (s of solutions; track s.slug; let i = $index) {
         <li appInView [style.--i]="i">
@@ -95,51 +116,8 @@
   </div>
 </section>
 
-<!-- Approach: a rack assembled by scrolling, one unit of hardware per OSI layer (the section pins) -->
-<section id="approach" class="approach" aria-labelledby="ap-title" #approachEl>
-  <div class="ap-pin">
-    <div class="ap-bg" aria-hidden="true">
-      <span class="bg-glow g1"></span>
-      <span class="bg-glow g2"></span>
-      <span class="bg-floor"></span>
-      <span class="bg-dots d1"></span>
-      <span class="bg-dots d2"></span>
-      <p class="bg-words">Physical · Data Link · Network · Transport · Session · Presentation · Application</p>
-    </div>
-    <div class="wrap ap-grid">
-      <div class="ap-visual" aria-hidden="true">
-        <ol class="ap-labels">
-          @for (l of osi; track l.n; let i = $index) {
-            <li [class.on]="lit() === i" [class.in]="6 - i < built()" (mouseenter)="hover.set(i)" (mouseleave)="hover.set(-1)">
-              <b>L{{ l.n }}</b> {{ l.name }}
-            </li>
-          }
-        </ol>
-        <app-osi-rack [lit]="lit()" [live]="built() >= 7" />
-      </div>
-      <div class="ap-copy">
-        <p class="eyebrow">Our approach</p>
-        <h2 id="ap-title">Built on the Seven Layers of the <em>OSI Model</em></h2>
-        <p class="ap-intro">
-          “Epta” is Greek for seven. We work through the layers to understand your line of business before designing a
-          solution, focusing on problem areas without losing sight of your business KPIs.
-        </p>
-        <div class="ap-live" aria-live="polite">
-          <span class="ap-meter" aria-hidden="true"><i [style.--b]="built()"></i></span>
-          @if (lit() >= 0) {
-            @let ll = osi[lit()];
-            @for (k of [ll.n]; track k) {
-              <p class="ap-layer"><b>Layer {{ ll.n }} · {{ ll.name }}</b><span>{{ ll.verify }}</span><small>{{ ll.covered }}</small></p>
-            }
-          } @else {
-            <p class="ap-layer"><b>Scroll to build the stack</b><span>From the cabling up to the applications your people use.</span></p>
-          }
-        </div>
-        <a class="pill pill--line" routerLink="/story">The Epta Story <app-icon name="arrow" /></a>
-      </div>
-    </div>
-  </div>
-</section>
+<!-- Approach: the seven layers, one per scroll step -->
+<app-layer-journey />
 
 <!-- Lifecycle: one partner, assessment to renewal -->
 <section class="cycle" aria-labelledby="cy-title" appInView>
@@ -147,7 +125,7 @@
     <div class="sec-head">
       <div>
         <p class="eyebrow">One partner, whole lifecycle</p>
-        <h2 id="cy-title">From Assessment to <em>24x7 Operations</em></h2>
+        <h2 id="cy-title">From Assessment to <em>24/7* Operations</em></h2>
       </div>
     </div>
     <ol class="cy-track">

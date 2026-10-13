@@ -14,11 +14,11 @@ import { useThemeD } from '../../ui/d/theme';
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <app-page-hero
-      eyebrow="Epta Solutions"
+      eyebrow="Enterprise IT & Network Solutions"
       heading="Tailored IT Infrastructure for Your Business"
       [accent]="2"
       photo="photos/l3-routes.webp"
-      lede="Epta assists in visualizing and communicating how IT Networks operate, with a keen focus on network architecture. As a single-point enterprise solutions provider, we work with IT world leaders to deliver tailor-made solutions that address your problem areas and align with your business KPIs."
+      lede="One partner for your whole IT infrastructure: networks, security, meetings, data centers and round-the-clock support, built around your business goals."
     >
       <a ctas class="d-pill d-pill--fill" href="#offerings">Our solution offerings <app-icon name="arrow" /></a>
     </app-page-hero>
@@ -26,16 +26,15 @@ import { useThemeD } from '../../ui/d/theme';
     <section class="d-band d-band--deep" aria-labelledby="fw-title">
       <div class="wrap d-split">
         <div class="d-reveal" appInView>
-          <p class="d-eyebrow">Our service framework</p>
-          <h2 id="fw-title" class="d-h2">Rooted in the <span class="d-em">7 layers of the OSI model</span></h2>
+          <p class="d-eyebrow">How we work</p>
+          <h2 id="fw-title" class="d-h2">We Understand Your Business <span class="d-em">Before We Design</span></h2>
         </div>
         <div class="d-reveal" appInView style="--i: 1">
           <div class="d-prose">
             <p>
-              Our comprehensive service framework is rooted in the 7 layers of the OSI model, ensuring we understand your
-              unique needs based on your line of business before designing a customized networking solution. As a part
-              of our service delivery model, our expert team develops a preliminary blueprint of your business to assist
-              in hardware supply, implementation, and post-implementation support.
+              Every network works in seven layers (the OSI model). We look at each one, and at how your business runs,
+              before we recommend anything. Then our team draws up a blueprint and stays with you through supply,
+              installation and support.
             </p>
           </div>
           <ol class="flow d-stagger" appInView>
@@ -73,7 +72,7 @@ import { useThemeD } from '../../ui/d/theme';
     </section>
 
     <app-cta-band
-      text="Talk to an Epta engineer about your network, security, collaboration and data center needs."
+      text="Not sure where to start? Tell us what is slowing your business down and an Epta Layers engineer will point you to the right solution."
       label="Talk to an Engineer"
     />
   `,
@@ -161,7 +160,7 @@ import { useThemeD } from '../../ui/d/theme';
 export class SolutionsIndex {
   protected readonly pages = SOLUTION_PAGES;
   protected readonly overview = SOLUTION_OVERVIEW;
-  protected readonly flow = ['Preliminary blueprint of your business', 'Hardware supply', 'Implementation', 'Post-implementation support'];
+  protected readonly flow = ['A blueprint of your business', 'Hardware supply', 'Installation', 'Support after go-live'];
 
   constructor() {
     useThemeD();
